@@ -141,6 +141,13 @@
   color: var(--color-verde);
 }
 
+@utility btn-picante {
+  @apply btn-base;
+  background-color: var(--color-picante-naranja);
+  color: #f9f6e3;
+}
+
+
 @utility btn-sm {
   padding: 12px 28px;
   font-size: 14px;
