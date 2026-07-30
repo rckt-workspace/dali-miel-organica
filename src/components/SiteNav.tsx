@@ -52,7 +52,7 @@ export function SiteNav() {
             onClick={() => setOpen((v) => !v)}
             aria-label="Menú"
           >
-            {open ? <Menu className="size-6" /> : <Menu className="size-6" />}
+            {open ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
         </div>
       </nav>
