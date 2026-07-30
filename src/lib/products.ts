@@ -1,6 +1,10 @@
 import acacia from "@/assets/miel-acacia.jpg";
 import multifloral from "@/assets/miel-multifloral.jpg";
 import caucho from "@/assets/miel-caucho.jpg";
+import morita from "@/assets/chile-morita.jpg.asset.json";
+import arbol from "@/assets/chile-arbol.jpg.asset.json";
+
+export type ProductLine = "pura" | "picante";
 
 export type Product = {
   slug: string;
@@ -10,7 +14,9 @@ export type Product = {
   price: string;
   sizes: string[];
   image: string;
+  line: ProductLine;
 };
+
 
 export const products: Product[] = [
   {
