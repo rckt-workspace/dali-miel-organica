@@ -28,9 +28,13 @@ function Producto() {
   const { add } = useCart();
   const [size, setSize] = useState(product.sizes[0]);
   const [added, setAdded] = useState(false);
+  const picante = product.line === "picante";
+  const accent = picante ? "text-picante-naranja" : "text-verde";
 
   return (
-    <section className="px-6 py-[60px] md:px-[120px] md:py-[96px]">
+    <section
+      className={`px-6 py-[60px] md:px-[120px] md:py-[96px] ${picante ? "bg-picante-arena" : ""}`}
+    >
       <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-2">
         <div className="flex flex-col gap-4">
           <img
@@ -56,10 +60,11 @@ function Producto() {
         </div>
 
         <div className="flex flex-col gap-5 md:py-4">
-          <p className="eyebrow text-verde">Miel orgánica</p>
+          <p className={`eyebrow ${accent}`}>{picante ? "Dalí Picante" : "Miel orgánica"}</p>
           <h1 className="h2-display text-verde">{product.name}</h1>
           <p className="text-[16px] text-verde">{product.tasting}</p>
-          <p className="text-[24px] font-semibold text-verde">{product.price}</p>
+          <p className={`text-[24px] font-semibold ${accent}`}>{product.price}</p>
+
 
           <div>
             <span className="field-label">Presentación</span>
@@ -70,7 +75,9 @@ function Producto() {
                   onClick={() => setSize(s)}
                   className={`rounded-full border px-5 py-2 text-[15px] transition-colors ${
                     size === s
-                      ? "border-verde bg-verde text-crema"
+                      ? picante
+                        ? "border-picante-naranja bg-picante-naranja text-crema"
+                        : "border-verde bg-verde text-crema"
                       : "border-verde/25 text-verde hover:border-verde"
                   }`}
                 >
@@ -81,7 +88,7 @@ function Producto() {
           </div>
 
           <button
-            className="btn-primary self-start"
+            className={`self-start ${picante ? "btn-picante" : "btn-primary"}`}
             onClick={() => {
               add({
                 slug: product.slug,
@@ -101,12 +108,15 @@ function Producto() {
             {product.benefits.map((b: string) => (
               <li
                 key={b}
-                className="rounded-full bg-salvia px-4 py-2 text-[14px] text-verde"
+                className={`rounded-full px-4 py-2 text-[14px] text-verde ${
+                  picante ? "bg-crema" : "bg-salvia"
+                }`}
               >
                 {b}
               </li>
             ))}
           </ul>
+
 
           <p className="body-light border-t border-verde/15 pt-6 text-[15px] text-verde/85">
             {longDescription}

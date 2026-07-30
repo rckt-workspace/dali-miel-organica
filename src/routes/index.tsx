@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ProductCard } from "@/components/ProductCard";
-import { products } from "@/lib/products";
+import { pureProducts, spicyProducts } from "@/lib/products";
+
 import bosque from "@/assets/bosque-sonora.jpg";
 
 export const Route = createFileRoute("/")({
@@ -50,12 +51,34 @@ function Index() {
             <h2 className="h2-display text-verde">Tres variedades, un mismo origen</h2>
           </div>
           <div className="mt-14 grid gap-8 md:grid-cols-3">
-            {products.map((p) => (
+            {pureProducts.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
           </div>
         </div>
       </section>
+
+      <section className="bg-picante-naranja px-6 py-[60px] md:px-[120px] md:py-[100px]">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <p className="eyebrow text-crema">Dalí Picante</p>
+            <h2 className="h2-display text-crema">
+              Miel con carácter, para quien le gusta que las cosas piquen
+            </h2>
+          </div>
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            {spicyProducts.map((p) => (
+              <ProductCard key={p.slug} product={p} />
+            ))}
+          </div>
+          <div className="mt-12 flex justify-center">
+            <Link to="/tienda" search={{ linea: "picante" }} className="btn-secondary">
+              Ver la línea picante
+            </Link>
+          </div>
+        </div>
+      </section>
+
 
       <section className="grid bg-verde md:grid-cols-2">
         <img

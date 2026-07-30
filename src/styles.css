@@ -9,6 +9,11 @@
   --color-salvia-dark: #a5cc96;
   --color-crema: #f9f6e3;
   --color-coral: #fcb7ca;
+  --color-picante-naranja: #eb5b39;
+  --color-picante-naranja-dark: #d44d2d;
+  --color-picante-arena: #e8c7a6;
+  --color-picante-verde: #265a4d;
+
 
   --color-background: #f9f6e3;
   --color-foreground: #265a4d;
@@ -136,6 +141,13 @@
   color: var(--color-verde);
 }
 
+@utility btn-picante {
+  @apply btn-base;
+  background-color: var(--color-picante-naranja);
+  color: #f9f6e3;
+}
+
+
 @utility btn-sm {
   padding: 12px 28px;
   font-size: 14px;
@@ -166,6 +178,10 @@
   .btn-secondary:hover {
     background-color: var(--color-salvia-dark);
   }
+  .btn-picante:hover {
+    background-color: var(--color-picante-naranja-dark);
+  }
+
   .field:focus {
     border-color: var(--color-verde);
   }
