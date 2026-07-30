@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ProductCard } from "@/components/ProductCard";
-import { products } from "@/lib/products";
+import { pureProducts, spicyProducts } from "@/lib/products";
+
 import bosque from "@/assets/bosque-sonora.jpg";
 
 export const Route = createFileRoute("/")({
