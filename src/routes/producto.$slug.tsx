@@ -75,7 +75,9 @@ function Producto() {
                   onClick={() => setSize(s)}
                   className={`rounded-full border px-5 py-2 text-[15px] transition-colors ${
                     size === s
-                      ? "border-verde bg-verde text-crema"
+                      ? picante
+                        ? "border-picante-naranja bg-picante-naranja text-crema"
+                        : "border-verde bg-verde text-crema"
                       : "border-verde/25 text-verde hover:border-verde"
                   }`}
                 >
@@ -86,7 +88,7 @@ function Producto() {
           </div>
 
           <button
-            className="btn-primary self-start"
+            className={`self-start ${picante ? "btn-picante" : "btn-primary"}`}
             onClick={() => {
               add({
                 slug: product.slug,
@@ -106,12 +108,15 @@ function Producto() {
             {product.benefits.map((b: string) => (
               <li
                 key={b}
-                className="rounded-full bg-salvia px-4 py-2 text-[14px] text-verde"
+                className={`rounded-full px-4 py-2 text-[14px] text-verde ${
+                  picante ? "bg-crema" : "bg-salvia"
+                }`}
               >
                 {b}
               </li>
             ))}
           </ul>
+
 
           <p className="body-light border-t border-verde/15 pt-6 text-[15px] text-verde/85">
             {longDescription}
