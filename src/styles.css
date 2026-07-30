@@ -178,6 +178,10 @@
   .btn-secondary:hover {
     background-color: var(--color-salvia-dark);
   }
+  .btn-picante:hover {
+    background-color: var(--color-picante-naranja-dark);
+  }
+
   .field:focus {
     border-color: var(--color-verde);
   }
