@@ -64,7 +64,7 @@ function Producto() {
           <div>
             <span className="field-label">Presentación</span>
             <div className="flex gap-3">
-              {product.sizes.map((s) => (
+              {product.sizes.map((s: string) => (
                 <button
                   key={s}
                   onClick={() => setSize(s)}
@@ -98,7 +98,7 @@ function Producto() {
           </button>
 
           <ul className="flex flex-wrap gap-2 pt-2">
-            {product.benefits.map((b) => (
+            {product.benefits.map((b: string) => (
               <li
                 key={b}
                 className="rounded-full bg-salvia px-4 py-2 text-[14px] text-verde"
