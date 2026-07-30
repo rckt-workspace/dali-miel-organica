@@ -4,9 +4,14 @@ import { useCart } from "@/lib/cart";
 
 export function ProductCard({ product, shop = false }: { product: Product; shop?: boolean }) {
   const { add } = useCart();
+  const picante = product.line === "picante";
 
   return (
-    <article className="flex flex-col gap-4 rounded-2xl bg-salvia p-8">
+    <article
+      className={`flex flex-col gap-4 rounded-2xl p-8 ${
+        picante ? "bg-picante-arena" : "bg-salvia"
+      }`}
+    >
       <Link to="/producto/$slug" params={{ slug: product.slug }}>
         <img
           src={product.image}
@@ -21,7 +26,7 @@ export function ProductCard({ product, shop = false }: { product: Product; shop?
       <Link
         to="/producto/$slug"
         params={{ slug: product.slug }}
-        className="h3-display text-verde"
+        className={`h3-display ${picante ? "text-picante-naranja" : "text-verde"}`}
       >
         {product.name}
       </Link>
@@ -34,9 +39,15 @@ export function ProductCard({ product, shop = false }: { product: Product; shop?
 
       {shop && (
         <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
-          <span className="text-[15px] font-semibold text-verde">{product.price}</span>
+          <span
+            className={`text-[15px] font-semibold ${
+              picante ? "text-picante-naranja" : "text-verde"
+            }`}
+          >
+            {product.price}
+          </span>
           <button
-            className="btn-primary btn-sm"
+            className={`btn-sm ${picante ? "btn-picante" : "btn-primary"}`}
             onClick={() =>
               add({
                 slug: product.slug,
