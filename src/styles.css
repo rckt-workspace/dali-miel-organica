@@ -18,8 +18,8 @@
   --color-salvia-dark: #a5cc96;
   --color-crema: #f9f6e4;
   --color-coral: #feaebb;
-  --color-picante-naranja: #eb5b39;
-  --color-picante-naranja-dark: #d44d2d;
+  --color-picante-naranja: #d98c6b;
+  --color-picante-naranja-dark: #c4785a;
   --color-picante-arena: #e8c7a6;
   --color-picante-verde: #235b4e;
 
@@ -114,9 +114,19 @@
 }
 
 @utility caption {
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
   line-height: 130%;
-  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+@utility body-text {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
 }
 
 @utility body-light {

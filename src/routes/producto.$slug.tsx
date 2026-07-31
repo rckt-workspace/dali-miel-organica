@@ -77,13 +77,13 @@ function Producto() {
 
         <div className="flex flex-col gap-5 md:py-4">
           <p className={`eyebrow ${accentText}`}>{picante ? "Dalí Picante" : "Miel orgánica"}</p>
-          <h1 className="h2-display text-verde">{product.name}</h1>
-          <p className="text-[16px] text-verde">{product.tasting}</p>
-          <p className={`text-[24px] font-semibold ${accentText}`}>{product.price}</p>
+          <h1 className="h1-display text-verde">{product.name}</h1>
+          <p className="body-text text-verde">{product.tasting}</p>
+          <p className={`h3-display ${accentText}`}>{product.price}</p>
 
 
           <div>
-            <span className="field-label">Presentación</span>
+            <span className="field-label caption">Presentación</span>
             <div className="flex gap-3">
               {product.sizes.map((s: string) => (
                 <button
@@ -125,7 +125,7 @@ function Producto() {
           </div>
 
 
-          <p className="body-light border-t border-verde/15 pt-6 text-[15px] text-verde/85">
+          <p className="body-text border-t border-verde/15 pt-6 text-verde/85">
             {longDescription}
           </p>
         </div>

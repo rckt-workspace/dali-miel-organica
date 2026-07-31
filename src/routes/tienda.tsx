@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { ProductCard } from "@/components/ProductCard";
 import { pureProducts, spicyProducts } from "@/lib/products";
+import formas from "@/assets/formas-organicas.png.asset.json";
+import perezoso from "@/assets/perezoso.png.asset.json";
+import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 
 const searchSchema = z.object({
   linea: z.enum(["pura", "picante"]).catch("pura"),
@@ -34,14 +37,37 @@ function Tienda() {
   const list = picante ? spicyProducts : pureProducts;
 
   return (
-    <section
-      className={`px-6 py-[60px] md:px-[120px] md:py-[96px] ${picante ? "bg-picante-arena" : ""}`}
-    >
-      <div className="mx-auto max-w-[1200px]">
+    <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[96px]">
+      <div
+        className="deco-bg absolute inset-0 opacity-[0.12]"
+        style={{ backgroundImage: `url(${formas.url})` }}
+        aria-hidden="true"
+      />
+      <img
+        src={perezoso.url}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="pointer-events-none absolute -left-6 top-[45%] hidden w-[130px] opacity-80 mix-blend-multiply lg:block"
+      />
+      <img
+        src={osoHormiguero.url}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="pointer-events-none absolute bottom-8 right-2 hidden w-[180px] mix-blend-multiply lg:block"
+      />
+
+      <div className="relative mx-auto max-w-[1200px]">
         <p className={`eyebrow ${picante ? "text-picante-naranja" : "text-verde"}`}>Tienda</p>
-        <h1 className="h2-display mt-3 text-verde">
+        <h1 className="h1-display mt-3 text-verde">
           {picante ? "Dalí Picante" : "Nuestra colección de miel"}
         </h1>
+        <p className="body-text mt-4 max-w-[640px] text-verde/80">
+          {picante
+            ? "Miel orgánica infusionada con chile: el mismo origen, con carácter."
+            : "Tres variedades de miel cruda, cosechadas en los bosques de la altillanura colombiana."}
+        </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
           {(
