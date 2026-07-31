@@ -8,7 +8,7 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import mielGoteo from "@/assets/miel-goteo.jpg.asset.json";
+import acacia from "@/assets/acacia.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,36 +32,58 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="bg-verde">
-        <div className="flex flex-col md:flex-row md:items-stretch">
-          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 py-[60px] text-center md:order-1 md:w-[55%] md:items-start md:pb-[100px] md:pl-[120px] md:pr-[80px] md:pt-[100px] md:text-left">
-            <p className="eyebrow text-salvia">De los bosques tropicales de Colombia</p>
-            <h1 className="h1-display text-crema">
+      <section className="overflow-hidden bg-crema">
+        <div className="mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
+          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 pb-[64px] pt-[32px] text-center md:order-1 md:w-[55%] md:items-start md:py-[96px] md:pl-[120px] md:pr-[64px] md:text-left">
+            <p className="eyebrow text-verde/70">De los bosques tropicales de Colombia</p>
+            <h1 className="h1-display text-verde">
               Miel cruda orgánica,
               <br />
               cultivada por la naturaleza misma
             </h1>
-            <p className="max-w-[600px] text-[18px] text-crema/85">
+            <p className="max-w-[600px] text-[18px] text-verde/80">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
-              sabiduría y bienestar en cada cosecha.
+              sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
             </p>
-            <Link to="/tienda" className="btn-secondary mt-2">
+            <Link to="/tienda" className="btn-primary mt-2">
               Descubre nuestra miel
             </Link>
           </div>
 
-          <div className="order-1 flex items-center justify-center px-6 pt-[40px] md:order-2 md:w-[45%] md:p-[40px]">
-            <img
-              src={mielGoteo.url}
-              alt="Miel cruda Dalí goteando sobre la tapa del frasco con un cucharón de madera"
-              width={1280}
-              height={1920}
-              className="h-auto w-full max-w-[320px] rounded-[24px] object-contain md:max-w-[600px]"
-              style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.25)" }}
-            />
+          <div className="order-1 flex items-center justify-center px-6 pt-[48px] md:order-2 md:w-[45%] md:p-[48px]">
+            <div className="relative flex w-full max-w-[280px] items-center justify-center md:max-w-[420px]">
+              <div
+                className="absolute inset-[-9%] bg-salvia"
+                aria-hidden="true"
+                style={{ borderRadius: "58% 42% 47% 53% / 45% 52% 48% 55%" }}
+              />
+              <img
+                src={acacia.url}
+                alt="Frasco de miel de Acacia de Dalí sobre fondo orgánico"
+                width={1024}
+                height={1280}
+                className="relative h-auto w-full object-contain mix-blend-multiply"
+              />
+
+              <img
+                src={perezoso.url}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="pointer-events-none absolute -top-3 right-1 mix-blend-multiply w-[70px] md:w-[92px]"
+              />
+              <img
+                src={osoHormiguero.url}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="pointer-events-none absolute -bottom-3 left-1 mix-blend-multiply w-[62px] md:w-[80px]"
+              />
+            </div>
           </div>
         </div>
       </section>
+
 
 
       <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[120px]">
@@ -75,14 +97,14 @@ function Index() {
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="pointer-events-none absolute left-2 top-6 hidden w-[160px] mix-blend-multiply lg:block"
+          className="pointer-events-none absolute left-2 top-6 hidden mix-blend-multiply w-[160px] lg:block"
         />
         <img
           src={osoHormiguero.url}
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="pointer-events-none absolute bottom-6 right-2 hidden w-[200px] mix-blend-multiply lg:block"
+          className="pointer-events-none absolute bottom-6 right-2 hidden mix-blend-multiply w-[200px] lg:block"
         />
 
         <div className="relative mx-auto max-w-[1200px]">

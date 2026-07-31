@@ -6,16 +6,18 @@ export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-verde px-6 py-16 text-crema md:px-[120px]">
       <div
-        className="deco-bg absolute inset-0 opacity-[0.12]"
+        className="deco-bg absolute inset-0 opacity-[0.13]"
         style={{ backgroundImage: `url(${colibries.url})` }}
         aria-hidden="true"
       />
+
       <div className="relative mx-auto grid max-w-[1200px] gap-12 md:grid-cols-4">
         <div>
           <span className="inline-flex rounded-xl bg-crema px-4 py-3">
             <img src={logo.url} alt="Dalí Miel Orgánica" className="h-12 w-auto" />
           </span>
         </div>
+
 
 
         <div>
