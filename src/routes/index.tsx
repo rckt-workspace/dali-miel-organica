@@ -32,54 +32,37 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
-        <div
-          className="absolute inset-0 -z-30 bg-cover bg-[center_35%]"
-          style={{ backgroundImage: `url(${acacia.url})` }}
-          aria-hidden="true"
-        />
-        {/* Vertical: solid jade at top/bottom, translucent through the middle */}
-        <div
-          className="absolute inset-0 -z-20"
-          aria-hidden="true"
-          style={{
-            background:
-              "linear-gradient(to bottom, #235B4E 0%, rgba(35,91,78,0.92) 14%, rgba(35,91,78,0.60) 42%, rgba(35,91,78,0.60) 68%, rgba(35,91,78,0.95) 90%, #235B4E 100%)",
-          }}
-        />
-        {/* Horizontal: solid on the left, photo showing through the right half */}
-        <div
-          className="absolute inset-0 -z-20"
-          aria-hidden="true"
-          style={{
-            background:
-              "linear-gradient(to right, #235B4E 0%, rgba(35,91,78,0.85) 30%, rgba(35,91,78,0.25) 55%, rgba(35,91,78,0.10) 100%)",
-          }}
-        />
-        <div
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px]"
-          aria-hidden="true"
-          style={{ backgroundColor: "rgba(183,216,170,0.15)" }}
-        />
+      <section className="bg-verde">
+        <div className="flex flex-col md:flex-row md:items-stretch">
+          <div className="order-2 flex flex-col items-center gap-6 px-6 py-[60px] text-center md:order-1 md:w-[55%] md:items-start md:pb-[100px] md:pl-[120px] md:pr-[80px] md:pt-[100px] md:text-left">
+            <p className="eyebrow text-salvia">De los bosques tropicales de Colombia</p>
+            <h1 className="h1-display text-crema">
+              Miel cruda orgánica,
+              <br />
+              cultivada por la naturaleza misma
+            </h1>
+            <p className="max-w-[600px] text-[18px] text-crema/85">
+              Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
+              sabiduría y bienestar en cada cosecha.
+            </p>
+            <Link to="/tienda" className="btn-secondary mt-2">
+              Descubre nuestra miel
+            </Link>
+          </div>
 
-
-
-        <div className="relative mx-auto flex max-w-[900px] flex-col items-center gap-6 text-center">
-          <p className="eyebrow text-salvia">De los bosques tropicales de Colombia</p>
-          <h1 className="h1-display text-crema">
-            Miel cruda orgánica,
-            <br />
-            cultivada por la naturaleza misma
-          </h1>
-          <p className="max-w-[600px] text-[18px] text-crema/85">
-            Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
-            sabiduría y bienestar en cada cosecha.
-          </p>
-          <Link to="/tienda" className="btn-secondary mt-2">
-            Descubre nuestra miel
-          </Link>
+          <div className="order-1 flex items-center justify-center px-6 pt-[40px] md:order-2 md:w-[45%] md:p-[40px]">
+            <img
+              src={mielGoteo.url}
+              alt="Miel cruda Dalí goteando sobre la tapa del frasco con un cucharón de madera"
+              width={1280}
+              height={1920}
+              className="h-auto w-full max-w-[320px] rounded-[24px] object-contain md:max-w-[600px]"
+              style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.25)" }}
+            />
+          </div>
         </div>
       </section>
+
 
       <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[120px]">
         <div
