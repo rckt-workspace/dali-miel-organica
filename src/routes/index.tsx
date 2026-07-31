@@ -51,7 +51,7 @@ function Index() {
 
       <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[120px]">
         <div
-          className="deco-bg absolute inset-0 opacity-[0.14]"
+          className="deco-bg absolute inset-0 opacity-[0.12]"
           style={{ backgroundImage: `url(${formas.url})` }}
           aria-hidden="true"
         />
@@ -60,14 +60,14 @@ function Index() {
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="pointer-events-none absolute left-2 top-6 hidden w-[160px] lg:block"
+          className="pointer-events-none absolute left-2 top-6 hidden w-[160px] mix-blend-multiply lg:block"
         />
         <img
           src={osoHormiguero.url}
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="pointer-events-none absolute bottom-6 right-2 hidden w-[200px] lg:block"
+          className="pointer-events-none absolute bottom-6 right-2 hidden w-[200px] mix-blend-multiply lg:block"
         />
 
         <div className="relative mx-auto max-w-[1200px]">
