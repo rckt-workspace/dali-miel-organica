@@ -34,24 +34,26 @@ function Index() {
     <>
       <section className="relative isolate overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
         <div
-          className="absolute inset-0 -z-30 bg-cover bg-center"
+          className="absolute inset-0 -z-30 bg-cover bg-[center_35%]"
           style={{ backgroundImage: `url(${acacia.url})` }}
           aria-hidden="true"
         />
+        {/* Vertical: solid jade at top/bottom, translucent through the middle */}
         <div
           className="absolute inset-0 -z-20"
           aria-hidden="true"
           style={{
             background:
-              "linear-gradient(to bottom, #235B4E 0%, #235B4E 28%, rgba(35,91,78,0.62) 55%, #235B4E 88%, #235B4E 100%)",
+              "linear-gradient(to bottom, #235B4E 0%, rgba(35,91,78,0.92) 14%, rgba(35,91,78,0.60) 42%, rgba(35,91,78,0.60) 68%, rgba(35,91,78,0.95) 90%, #235B4E 100%)",
           }}
         />
+        {/* Horizontal: solid on the left, photo showing through the right half */}
         <div
           className="absolute inset-0 -z-20"
           aria-hidden="true"
           style={{
             background:
-              "linear-gradient(300deg, rgba(35,91,78,0.45) 0%, rgba(35,91,78,0.8) 32%, #235B4E 62%)",
+              "linear-gradient(to right, #235B4E 0%, rgba(35,91,78,0.85) 30%, rgba(35,91,78,0.25) 55%, rgba(35,91,78,0.10) 100%)",
           }}
         />
         <div
@@ -59,6 +61,8 @@ function Index() {
           aria-hidden="true"
           style={{ backgroundColor: "rgba(183,216,170,0.15)" }}
         />
+
+
 
         <div className="relative mx-auto flex max-w-[900px] flex-col items-center gap-6 text-center">
           <p className="eyebrow text-salvia">De los bosques tropicales de Colombia</p>
