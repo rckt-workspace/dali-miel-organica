@@ -3,7 +3,7 @@ import bosque from "@/assets/apicultores.png.asset.json";
 import panalApicultor from "@/assets/panal-apicultor.png.asset.json";
 import panalAbejas from "@/assets/panal-abejas.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
-import ocelote from "@/assets/ocelote.png.asset.json";
+
 
 export const Route = createFileRoute("/historia")({
   head: () => ({
