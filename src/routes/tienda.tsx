@@ -48,7 +48,7 @@ function Tienda() {
         alt=""
         aria-hidden="true"
         loading="lazy"
-        className="pointer-events-none absolute left-2 top-10 hidden w-[150px] mix-blend-multiply lg:block"
+        className="pointer-events-none absolute -left-6 top-[45%] hidden w-[130px] opacity-80 mix-blend-multiply lg:block"
       />
       <img
         src={osoHormiguero.url}
