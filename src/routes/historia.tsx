@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import bosque from "@/assets/apicultores.png.asset.json";
-import logo from "@/assets/dali-logo.png.asset.json";
+import panalApicultor from "@/assets/panal-apicultor.png.asset.json";
+import panalAbejas from "@/assets/panal-abejas.png.asset.json";
+import formas from "@/assets/formas-organicas.png.asset.json";
+import ocelote from "@/assets/ocelote.png.asset.json";
 
 export const Route = createFileRoute("/historia")({
   head: () => ({
@@ -21,16 +24,30 @@ export const Route = createFileRoute("/historia")({
   component: Historia,
 });
 
+const galeria = [
+  {
+    src: bosque.url,
+    alt: "Apicultores de Dalí revisando un panal en el bosque tropical de la hacienda La Sonora",
+  },
+  { src: panalApicultor.url, alt: "Apicultor sosteniendo un marco de panal lleno de miel" },
+  { src: panalAbejas.url, alt: "Primer plano de abejas trabajando sobre un panal" },
+];
+
 function Historia() {
   return (
     <>
-      <section className="bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
-        <div className="mx-auto flex max-w-[820px] flex-col gap-5">
+      <section className="relative overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
+        <div
+          className="deco-bg absolute inset-0 opacity-[0.14]"
+          style={{ backgroundImage: `url(${ocelote.url})` }}
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto flex max-w-[820px] flex-col gap-5">
           <p className="eyebrow text-salvia">Somos</p>
-          <h1 className="h2-display text-crema">
+          <h1 className="h1-display text-crema">
             Una marca de miel cruda originada en la altillanura colombiana
           </h1>
-          <p className="text-[16px] text-crema/85">
+          <p className="body-text text-crema/85">
             El hogar de nuestros apiarios son los bosques tropicales de Colombia, en la Orinoquia.
             Nuestra misión es llevar miel y otros productos a todo el país y a diferentes partes
             del mundo. La idea es que estos, además de representar a Colombia, a su fauna y flora,
@@ -43,13 +60,18 @@ function Historia() {
         </div>
       </section>
 
-      <section className="px-6 py-[60px] md:px-[120px] md:py-[100px]">
-        <div className="mx-auto flex max-w-[820px] flex-col gap-5">
+      <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[100px]">
+        <div
+          className="deco-bg absolute inset-0 opacity-[0.12]"
+          style={{ backgroundImage: `url(${formas.url})` }}
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto flex max-w-[820px] flex-col gap-5">
           <p className="eyebrow text-verde">Nuestra filosofía</p>
           <h2 className="h2-display text-verde">
             Parte del respeto, la humildad y la conservación de la tierra
           </h2>
-          <p className="text-[16px] text-verde">
+          <p className="body-text text-verde">
             Donde nos es posible realizar este proyecto. Esta marca nace en la hacienda La Sonora,
             en la que hace más de diez años nos alejamos de las prácticas comunes de ganadería para
             regenerar la vida y ser ejemplo de coexistencia con la naturaleza, agradeciendo a
@@ -67,28 +89,24 @@ function Historia() {
         </div>
       </section>
 
-      <div className="relative">
-        <img
-          src={bosque.url}
-          alt="Apicultores de Dalí revisando un panal en el bosque tropical de la hacienda La Sonora"
-          loading="lazy"
-          width={1024}
-          height={1400}
-          className="h-[420px] w-full object-cover object-[center_45%] md:h-[560px]"
-        />
-        <div
-          className="pointer-events-none absolute inset-0"
-          aria-hidden="true"
-          style={{
-            background:
-              "linear-gradient(to top right, rgba(35,91,78,0.25) 0%, rgba(35,91,78,0.12) 35%, rgba(35,91,78,0) 60%)",
-          }}
-        />
-        <span className="absolute bottom-6 left-6 inline-flex rounded-lg bg-crema p-2">
-          <img src={logo.url} alt="" className="h-8 w-auto" />
-        </span>
-      </div>
-
+      <section className="px-6 pb-[80px] md:px-[120px] md:pb-[110px]">
+        <div className="mx-auto max-w-[1200px]">
+          <h3 className="h3-display text-verde">Los bosques de La Sonora</h3>
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {galeria.map((g) => (
+              <img
+                key={g.src}
+                src={g.src}
+                alt={g.alt}
+                loading="lazy"
+                width={800}
+                height={600}
+                className="aspect-[4/3] w-full rounded-xl object-cover"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   );
 }

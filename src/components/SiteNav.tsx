@@ -16,7 +16,10 @@ export function SiteNav() {
   const { count } = useCart();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-verde/100 bg-crema" style={{ borderBottomWidth: 1, borderBottomColor: "var(--color-verde)" }}>
+    <header
+      className="sticky top-0 z-50 w-full bg-crema"
+      style={{ borderBottom: "1px solid var(--color-verde)" }}
+    >
       <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-8 md:px-[120px] md:py-10">
         <Link to="/" aria-label="Dalí Miel Orgánica — inicio">
           <img src={logo.url} alt="Dalí Miel Orgánica" className="h-11 w-auto md:h-12" />
