@@ -1,8 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/dali-logo.png.asset.json";
 import colibries from "@/assets/colibries.png.asset.json";
-import perezoso from "@/assets/perezoso.png.asset.json";
-import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 
 export function SiteFooter() {
   return (
@@ -12,20 +10,7 @@ export function SiteFooter() {
         style={{ backgroundImage: `url(${colibries.url})` }}
         aria-hidden="true"
       />
-      <img
-        src={perezoso.url}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        className="pointer-events-none absolute left-[220px] top-2 hidden w-[92px] opacity-70 invert lg:block"
-      />
-      <img
-        src={osoHormiguero.url}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        className="pointer-events-none absolute bottom-2 right-4 hidden w-[110px] opacity-70 invert lg:block"
-      />
+
       <div className="relative mx-auto grid max-w-[1200px] gap-12 md:grid-cols-4">
         <div>
           <span className="inline-flex rounded-xl bg-crema px-4 py-3">
