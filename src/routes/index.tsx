@@ -114,26 +114,32 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-picante-naranja px-6 py-[60px] md:px-[120px] md:py-[100px]">
-        <div className="mx-auto max-w-[1200px]">
+      <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
+        <div
+          className="deco-bg absolute inset-0 opacity-[0.12]"
+          style={{ backgroundImage: `url(${formas.url})` }}
+          aria-hidden="true"
+        />
+        <div className="relative mx-auto max-w-[1200px]">
           <div className="flex flex-col items-center gap-3 text-center">
-            <p className="eyebrow text-crema">Dalí Picante</p>
-            <h2 className="h2-display text-crema">
+            <p className="eyebrow text-picante-naranja">Dalí Picante</p>
+            <h2 className="h2-display text-verde">
               Miel con carácter, para quien le gusta que las cosas piquen
             </h2>
           </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-2">
+          <div className="mt-14 grid gap-8 md:grid-cols-3">
             {spicyProducts.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
           </div>
           <div className="mt-12 flex justify-center">
-            <Link to="/tienda" search={{ linea: "picante" }} className="btn-secondary">
+            <Link to="/tienda" search={{ linea: "picante" }} className="btn-picante">
               Ver la línea picante
             </Link>
           </div>
         </div>
       </section>
+
 
       <section className="relative grid overflow-hidden bg-verde md:grid-cols-2">
         <div
