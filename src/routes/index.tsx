@@ -8,7 +8,7 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import acacia from "@/assets/acacia.png.asset.json";
+import acaciaV2 from "@/assets/producto-acacia-v2.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,26 +58,11 @@ function Index() {
                 style={{ borderRadius: "58% 42% 47% 53% / 45% 52% 48% 55%" }}
               />
               <img
-                src={acacia.url}
-                alt="Frasco de miel de Acacia de Dalí sobre fondo orgánico"
-                width={1024}
-                height={1280}
-                className="relative h-auto w-full object-contain mix-blend-multiply"
-              />
-
-              <img
-                src={perezoso.url}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="pointer-events-none absolute -top-3 right-1 mix-blend-multiply w-[70px] md:w-[92px]"
-              />
-              <img
-                src={osoHormiguero.url}
-                alt=""
-                aria-hidden="true"
-                loading="lazy"
-                className="pointer-events-none absolute -bottom-3 left-1 mix-blend-multiply w-[62px] md:w-[80px]"
+                src={acaciaV2.url}
+                alt="Frasco de miel de Acacia de Dalí con goterones de miel"
+                width={417}
+                height={569}
+                className="relative h-auto w-full object-contain"
               />
             </div>
           </div>
