@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { getProduct, longDescription } from "@/lib/products";
 import { useCart } from "@/lib/cart";
+import { ProductBadges } from "@/components/ProductBadges";
 
 export const Route = createFileRoute("/producto/$slug")({
   loader: ({ params }) => {
@@ -29,11 +30,12 @@ function Producto() {
   const [size, setSize] = useState(product.sizes[0]);
   const [added, setAdded] = useState(false);
   const picante = product.line === "picante";
-  const accent = picante ? "text-picante-naranja" : "text-verde";
+  const accentText = picante ? "text-picante-naranja" : "text-verde";
 
   return (
     <section
-      className={`px-6 py-[60px] md:px-[120px] md:py-[96px] ${picante ? "bg-picante-arena" : ""}`}
+      className="px-6 py-[60px] md:px-[120px] md:py-[96px]"
+      style={{ borderTop: `6px solid ${product.accent}` }}
     >
       <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-2">
         <div className="flex flex-col gap-4">
@@ -42,7 +44,8 @@ function Producto() {
             alt={`Miel ${product.name} de Dalí`}
             width={1024}
             height={832}
-            className="aspect-square w-full rounded-2xl object-cover"
+            className="aspect-square w-full rounded-2xl object-contain"
+            style={{ backgroundColor: `${product.accent}26` }}
           />
           <div className="flex gap-4">
             {[0, 1, 2].map((i) => (
@@ -53,17 +56,18 @@ function Producto() {
                 loading="lazy"
                 width={120}
                 height={120}
-                className="size-[120px] rounded-xl object-cover"
+                className="size-[120px] rounded-xl object-contain"
+                style={{ backgroundColor: `${product.accent}26` }}
               />
             ))}
           </div>
         </div>
 
         <div className="flex flex-col gap-5 md:py-4">
-          <p className={`eyebrow ${accent}`}>{picante ? "Dalí Picante" : "Miel orgánica"}</p>
+          <p className={`eyebrow ${accentText}`}>{picante ? "Dalí Picante" : "Miel orgánica"}</p>
           <h1 className="h2-display text-verde">{product.name}</h1>
           <p className="text-[16px] text-verde">{product.tasting}</p>
-          <p className={`text-[24px] font-semibold ${accent}`}>{product.price}</p>
+          <p className={`text-[24px] font-semibold ${accentText}`}>{product.price}</p>
 
 
           <div>
@@ -104,18 +108,9 @@ function Producto() {
             {added ? "Añadido ✓" : "Añadir al carrito"}
           </button>
 
-          <ul className="flex flex-wrap gap-2 pt-2">
-            {product.benefits.map((b: string) => (
-              <li
-                key={b}
-                className={`rounded-full px-4 py-2 text-[14px] text-verde ${
-                  picante ? "bg-crema" : "bg-salvia"
-                }`}
-              >
-                {b}
-              </li>
-            ))}
-          </ul>
+          <div className="max-w-[420px] pt-2">
+            <ProductBadges badges={product.badges} accent={product.accent} size="md" />
+          </div>
 
 
           <p className="body-light border-t border-verde/15 pt-6 text-[15px] text-verde/85">
