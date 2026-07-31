@@ -34,7 +34,7 @@ function Index() {
     <>
       <section className="bg-verde">
         <div className="flex flex-col md:flex-row md:items-stretch">
-          <div className="order-2 flex flex-col items-center gap-6 px-6 py-[60px] text-center md:order-1 md:w-[55%] md:items-start md:pb-[100px] md:pl-[120px] md:pr-[80px] md:pt-[100px] md:text-left">
+          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 py-[60px] text-center md:order-1 md:w-[55%] md:items-start md:pb-[100px] md:pl-[120px] md:pr-[80px] md:pt-[100px] md:text-left">
             <p className="eyebrow text-salvia">De los bosques tropicales de Colombia</p>
             <h1 className="h1-display text-crema">
               Miel cruda orgánica,
