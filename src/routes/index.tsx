@@ -8,6 +8,7 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
+import acacia from "@/assets/acacia.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,8 +32,35 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
-        <div className="mx-auto flex max-w-[900px] flex-col items-center gap-6 text-center">
+      <section className="relative isolate overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
+        <div
+          className="absolute inset-0 -z-30 bg-cover bg-center"
+          style={{ backgroundImage: `url(${acacia.url})` }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 -z-20"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(to bottom, #235B4E 0%, #235B4E 28%, rgba(35,91,78,0.62) 55%, #235B4E 88%, #235B4E 100%)",
+          }}
+        />
+        <div
+          className="absolute inset-0 -z-20"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(300deg, rgba(35,91,78,0.45) 0%, rgba(35,91,78,0.8) 32%, #235B4E 62%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px]"
+          aria-hidden="true"
+          style={{ backgroundColor: "rgba(183,216,170,0.15)" }}
+        />
+
+        <div className="relative mx-auto flex max-w-[900px] flex-col items-center gap-6 text-center">
           <p className="eyebrow text-salvia">De los bosques tropicales de Colombia</p>
           <h1 className="h1-display text-crema">
             Miel cruda orgánica,
