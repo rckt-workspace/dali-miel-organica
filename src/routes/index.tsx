@@ -91,16 +91,17 @@ function Index() {
                 alt="Frasco de miel de Acacia de Dalí"
                 width={417}
                 height={569}
-                className="relative h-auto w-full object-contain"
-                style={{ filter: "drop-shadow(0 26px 34px rgba(35,91,78,0.20))" }}
+                className="relative z-10 h-auto w-full object-contain"
+                style={{ filter: "drop-shadow(0 14px 30px rgba(35,91,78,0.35))" }}
               />
 
-              {/* sombra de apoyo suave bajo el frasco */}
+              {/* sombra de apoyo bajo el frasco */}
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-[18%] -bottom-1 h-[16px] rounded-[50%]"
-                style={{ background: "rgba(35,91,78,0.18)", filter: "blur(10px)" }}
+                className="pointer-events-none absolute inset-x-[8%] bottom-[6px] z-0 h-[42px] rounded-[50%]"
+                style={{ background: "rgba(35,91,78,0.45)", filter: "blur(28px)" }}
               />
+
             </div>
           </div>
 
