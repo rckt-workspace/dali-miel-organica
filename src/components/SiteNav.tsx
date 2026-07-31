@@ -20,9 +20,9 @@ export function SiteNav() {
       className="sticky top-0 z-50 w-full bg-crema"
       style={{ borderBottom: "1px solid var(--color-verde)" }}
     >
-      <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-9 md:px-[120px] md:py-12">
+      <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-4 md:px-[120px]">
         <Link to="/" aria-label="Dalí Miel Orgánica — inicio">
-          <img src={logo.url} alt="Dalí Miel Orgánica" className="h-[48px] w-auto" />
+          <img src={logo.url} alt="Dalí Miel Orgánica" className="h-[52px] w-auto" />
         </Link>
 
 
@@ -40,7 +40,7 @@ export function SiteNav() {
 
         <div className="flex items-center gap-5">
           <Link to="/carrito" className="relative text-verde" aria-label="Carrito">
-            <ShoppingBag className="size-7" strokeWidth={1.5} />
+            <ShoppingBag className="size-6" strokeWidth={1.5} />
             {count > 0 && (
               <span className="absolute -right-2 -top-2 flex size-[18px] items-center justify-center rounded-full bg-coral text-[11px] font-semibold text-verde">
                 {count}
@@ -49,7 +49,7 @@ export function SiteNav() {
           </Link>
           <Link
             to="/tienda"
-            className="btn-primary px-8 py-[14px] text-[16px] hidden sm:inline-flex"
+            className="btn-primary px-6 py-[10px] text-[15px] hidden sm:inline-flex"
           >
             Comprar
           </Link>
