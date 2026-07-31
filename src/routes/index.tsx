@@ -8,7 +8,7 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import acaciaV2 from "@/assets/producto-acacia-v2.png.asset.json";
+import acaciaSinDrips from "@/assets/producto-acacia-sin-drips.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,39 +32,48 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="overflow-hidden bg-crema">
-        <div className="mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
-          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 pb-[64px] pt-[32px] text-center md:order-1 md:w-[55%] md:items-start md:py-[96px] md:pl-[120px] md:pr-[64px] md:text-left">
-            <p className="eyebrow text-verde/70">De los bosques tropicales de Colombia</p>
-            <h1 className="h1-display text-verde">
+      <section className="relative overflow-hidden bg-verde">
+        {/* Curva orgánica: bone entra por la esquina inferior derecha (desktop) */}
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
+          viewBox="0 0 1440 700"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M1440,700 L1440,210 C1230,250 1160,430 940,540 C790,615 620,620 430,700 Z"
+            fill="var(--color-crema)"
+          />
+        </svg>
+        {/* Mobile: división horizontal simple */}
+        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-crema md:hidden" aria-hidden="true" />
+
+        <div className="relative mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
+          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 pb-[48px] pt-[32px] text-center md:order-1 md:w-[55%] md:items-start md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
+            <p className="eyebrow text-crema">De los bosques tropicales de Colombia</p>
+            <h1 className="h1-display text-crema">
               Miel cruda orgánica,
               <br />
               cultivada por la naturaleza misma
             </h1>
-            <p className="max-w-[600px] text-[18px] text-verde/80">
+            <p className="max-w-[600px] text-[18px] text-crema/85">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
               sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
             </p>
-            <Link to="/tienda" className="btn-primary mt-2">
+            <Link to="/tienda" className="btn-secondary mt-2">
               Descubre nuestra miel
             </Link>
           </div>
 
-          <div className="order-1 flex items-center justify-center px-6 pt-[48px] md:order-2 md:w-[45%] md:p-[48px]">
-            <div className="relative flex w-full max-w-[280px] items-center justify-center md:max-w-[420px]">
-              <div
-                className="absolute inset-[-9%] bg-salvia"
-                aria-hidden="true"
-                style={{ borderRadius: "58% 42% 47% 53% / 45% 52% 48% 55%" }}
-              />
-              <img
-                src={acaciaV2.url}
-                alt="Frasco de miel de Acacia de Dalí con goterones de miel"
-                width={417}
-                height={569}
-                className="relative h-auto w-full object-contain"
-              />
-            </div>
+          <div className="order-1 flex items-end justify-center px-6 pt-[40px] md:order-2 md:w-[45%] md:p-[48px]">
+            <img
+              src={acaciaSinDrips.url}
+              alt="Frasco de miel de Acacia de Dalí"
+              width={417}
+              height={569}
+              className="h-auto w-full max-w-[240px] object-contain md:max-w-[360px] md:translate-y-[26px]"
+              style={{ filter: "drop-shadow(0 26px 34px rgba(35,91,78,0.20))" }}
+            />
           </div>
         </div>
       </section>
