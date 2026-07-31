@@ -16,37 +16,37 @@ export function SiteNav() {
   const { count } = useCart();
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-crema">
-      <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-6 md:px-[120px]">
+    <header className="sticky top-0 z-50 w-full border-b border-verde/100 bg-crema" style={{ borderBottomWidth: 1, borderBottomColor: "var(--color-verde)" }}>
+      <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-8 md:px-[120px] md:py-10">
         <Link to="/" aria-label="Dalí Miel Orgánica — inicio">
-          <img src={logo.url} alt="Dalí Miel Orgánica" className="h-8 w-auto" />
+          <img src={logo.url} alt="Dalí Miel Orgánica" className="h-11 w-auto md:h-12" />
         </Link>
 
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-10 md:flex">
           {links.map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className="text-[15px] text-verde transition-opacity hover:opacity-70"
+              className="text-[17px] text-verde transition-opacity hover:opacity-70"
             >
               {l.label}
             </Link>
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-5">
           <Link to="/carrito" className="relative text-verde" aria-label="Carrito">
-            <ShoppingBag className="size-5" strokeWidth={1.5} />
+            <ShoppingBag className="size-6" strokeWidth={1.5} />
             {count > 0 && (
-              <span className="absolute -right-2 -top-2 flex size-4 items-center justify-center rounded-full bg-coral text-[10px] font-semibold text-verde">
+              <span className="absolute -right-2 -top-2 flex size-[18px] items-center justify-center rounded-full bg-coral text-[11px] font-semibold text-verde">
                 {count}
               </span>
             )}
           </Link>
           <Link
             to="/tienda"
-            className="btn-primary px-6 py-[10px] text-[14px] hidden sm:inline-flex"
+            className="btn-primary px-8 py-[14px] text-[16px] hidden sm:inline-flex"
           >
             Comprar
           </Link>
@@ -55,7 +55,7 @@ export function SiteNav() {
             onClick={() => setOpen((v) => !v)}
             aria-label="Menú"
           >
-            {open ? <X className="size-6" /> : <Menu className="size-6" />}
+            {open ? <X className="size-7" /> : <Menu className="size-7" />}
           </button>
         </div>
       </nav>
