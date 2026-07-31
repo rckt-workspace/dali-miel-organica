@@ -34,11 +34,34 @@ function Index() {
     <>
       <section className="relative isolate overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
         <div
-          className="absolute inset-0 -z-30 bg-cover bg-center"
+          className="absolute inset-0 -z-30 bg-cover bg-[center_35%]"
           style={{ backgroundImage: `url(${acacia.url})` }}
           aria-hidden="true"
         />
-        {/* STEP1-DEBUG: overlays temporarily disabled */}
+        {/* Vertical: solid jade at top/bottom, translucent through the middle */}
+        <div
+          className="absolute inset-0 -z-20"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(to bottom, #235B4E 0%, rgba(35,91,78,0.92) 14%, rgba(35,91,78,0.60) 42%, rgba(35,91,78,0.60) 68%, rgba(35,91,78,0.95) 90%, #235B4E 100%)",
+          }}
+        />
+        {/* Horizontal: solid on the left, photo showing through the right half */}
+        <div
+          className="absolute inset-0 -z-20"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(to right, #235B4E 0%, rgba(35,91,78,0.85) 30%, rgba(35,91,78,0.25) 55%, rgba(35,91,78,0.10) 100%)",
+          }}
+        />
+        <div
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[420px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[110px]"
+          aria-hidden="true"
+          style={{ backgroundColor: "rgba(183,216,170,0.15)" }}
+        />
+
 
 
         <div className="relative mx-auto flex max-w-[900px] flex-col items-center gap-6 text-center">
