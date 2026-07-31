@@ -66,15 +66,44 @@ function Index() {
           </div>
 
           <div className="order-1 flex items-end justify-center px-6 pt-[40px] md:order-2 md:w-[45%] md:p-[48px]">
-            <img
-              src={acaciaSinDrips.url}
-              alt="Frasco de miel de Acacia de Dalí"
-              width={417}
-              height={569}
-              className="h-auto w-full max-w-[240px] object-contain md:max-w-[360px] md:translate-y-[26px]"
-              style={{ filter: "drop-shadow(0 26px 34px rgba(35,91,78,0.20))" }}
-            />
+            <div className="relative w-full max-w-[240px] md:max-w-[360px] md:translate-y-[26px]">
+              {/* gotas de miel sueltas — detalle cálido junto a la base */}
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 120 80"
+                className="pointer-events-none absolute -right-4 bottom-6 w-[64px] md:-right-8 md:bottom-8 md:w-[92px]"
+              >
+                <path
+                  d="M30 10c6 9 10 14 10 19a10 10 0 1 1-20 0c0-5 4-10 10-19Z"
+                  fill="var(--color-honey)"
+                  opacity="0.85"
+                />
+                <path
+                  d="M66 34c4.5 6.8 7.5 10.5 7.5 14.2a7.5 7.5 0 1 1-15 0c0-3.7 3-7.4 7.5-14.2Z"
+                  fill="var(--color-honey)"
+                  opacity="0.7"
+                />
+                <circle cx="94" cy="62" r="4" fill="var(--color-honey)" opacity="0.55" />
+              </svg>
+
+              <img
+                src={acaciaSinDrips.url}
+                alt="Frasco de miel de Acacia de Dalí"
+                width={417}
+                height={569}
+                className="relative h-auto w-full object-contain"
+                style={{ filter: "drop-shadow(0 26px 34px rgba(35,91,78,0.20))" }}
+              />
+
+              {/* sombra de apoyo suave bajo el frasco */}
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-[18%] -bottom-1 h-[16px] rounded-[50%]"
+                style={{ background: "rgba(35,91,78,0.18)", filter: "blur(10px)" }}
+              />
+            </div>
           </div>
+
         </div>
       </section>
 
