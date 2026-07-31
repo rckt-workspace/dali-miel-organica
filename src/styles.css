@@ -3,16 +3,26 @@
 @import "tw-animate-css";
 
 @theme inline {
-  --color-verde: #265a4d;
-  --color-verde-dark: #1d4a3f;
-  --color-salvia: #b7d8ab;
+  /* Paleta oficial Dalí (ficha de marca Salmón, 2022) */
+  --color-jade: #235b4e;
+  --color-bone: #f9f6e4;
+  --color-sage: #b7d8aa;
+  --color-pink: #feaebb;
+  --color-honey: #fcd672;
+  --color-baby-blue: #9cdced;
+  --color-lilac: #c0ade7;
+
+  --color-verde: #235b4e;
+  --color-verde-dark: #1a4539;
+  --color-salvia: #b7d8aa;
   --color-salvia-dark: #a5cc96;
-  --color-crema: #f9f6e3;
-  --color-coral: #fcb7ca;
+  --color-crema: #f9f6e4;
+  --color-coral: #feaebb;
   --color-picante-naranja: #eb5b39;
   --color-picante-naranja-dark: #d44d2d;
   --color-picante-arena: #e8c7a6;
-  --color-picante-verde: #265a4d;
+  --color-picante-verde: #235b4e;
+
 
 
   --color-background: #f9f6e3;
