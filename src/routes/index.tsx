@@ -51,9 +51,9 @@ function Index() {
           </div>
 
           <div className="order-1 flex items-center justify-center px-6 pt-[48px] md:order-2 md:w-[45%] md:p-[48px]">
-            <div className="relative flex w-full max-w-[280px] items-center justify-center md:max-w-[480px]">
+            <div className="relative flex w-full max-w-[280px] items-center justify-center md:max-w-[420px]">
               <div
-                className="absolute inset-x-[-6%] top-[6%] bottom-[6%] bg-salvia"
+                className="absolute inset-[-14%] bg-salvia"
                 aria-hidden="true"
                 style={{ borderRadius: "58% 42% 47% 53% / 45% 52% 48% 55%" }}
               />
@@ -62,8 +62,9 @@ function Index() {
                 alt="Frasco de miel de Acacia de Dalí sobre fondo orgánico"
                 width={1024}
                 height={1280}
-                className="relative h-auto w-full object-contain"
+                className="relative h-auto w-full object-contain mix-blend-multiply"
               />
+
               <img
                 src={perezoso.url}
                 alt=""
