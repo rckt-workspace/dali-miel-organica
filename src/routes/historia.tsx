@@ -74,7 +74,7 @@ function Historia() {
           loading="lazy"
           width={1024}
           height={1400}
-          className="h-[420px] w-full object-cover object-[center_25%] md:h-[560px]"
+          className="h-[420px] w-full object-cover object-[center_45%] md:h-[560px]"
         />
         <div
           className="pointer-events-none absolute inset-0"
