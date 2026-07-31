@@ -25,16 +25,16 @@
 
 
 
-  --color-background: #f9f6e3;
-  --color-foreground: #265a4d;
-  --color-border: rgb(38 90 77 / 0.15);
-  --color-input: rgb(38 90 77 / 0.2);
-  --color-ring: #265a4d;
-  --color-muted-foreground: rgb(38 90 77 / 0.7);
-  --color-primary: #265a4d;
-  --color-primary-foreground: #f9f6e3;
+  --color-background: #f9f6e4;
+  --color-foreground: #235b4e;
+  --color-border: rgb(35 91 78 / 0.15);
+  --color-input: rgb(35 91 78 / 0.2);
+  --color-ring: #235b4e;
+  --color-muted-foreground: rgb(35 91 78 / 0.7);
+  --color-primary: #235b4e;
+  --color-primary-foreground: #f9f6e4;
   --color-accent: #b7d8ab;
-  --color-accent-foreground: #265a4d;
+  --color-accent-foreground: #235b4e;
   --color-destructive: oklch(0.577 0.245 27.325);
 
   --font-display: "Tenor Sans", Georgia, serif;
@@ -154,7 +154,7 @@
 @utility btn-picante {
   @apply btn-base;
   background-color: var(--color-picante-naranja);
-  color: #f9f6e3;
+  color: #f9f6e4;
 }
 
 
@@ -166,7 +166,7 @@
 @utility field {
   width: 100%;
   background-color: #ffffff;
-  border: 1px solid rgb(38 90 77 / 0.2);
+  border: 1px solid rgb(35 91 78 / 0.2);
   border-radius: 8px;
   padding: 12px 16px;
   font-size: 15px;
@@ -196,6 +196,6 @@
     border-color: var(--color-verde);
   }
   .field::placeholder {
-    color: rgb(38 90 77 / 0.4);
+    color: rgb(35 91 78 / 0.4);
   }
 }
