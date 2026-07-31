@@ -37,35 +37,23 @@ function Historia() {
   return (
     <>
       <section className="relative overflow-hidden bg-verde">
-        <div className="relative">
-          <img
-            src={bosque.url}
-            alt="Apicultores de Dalí revisando un panal en los bosques tropicales de la hacienda La Sonora"
-            width={1600}
-            height={900}
-            className="h-[360px] w-full object-cover object-[center_30%] md:h-[560px]"
-            style={{ boxShadow: "0 15px 40px rgba(35,91,78,0.35)" }}
+        {/* Curva orgánica: bone entra por la esquina inferior derecha (desktop) */}
+        <svg
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
+          viewBox="0 0 1440 700"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M1440,700 L1440,210 C1230,250 1160,430 940,540 C790,615 620,620 430,700 Z"
+            fill="var(--color-crema)"
           />
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden="true"
-            style={{
-              background:
-                "linear-gradient(to top right, rgba(35,91,78,0.92) 0%, rgba(35,91,78,0.55) 45%, rgba(35,91,78,0.15) 100%)",
-            }}
-          />
-          <div className="absolute inset-0 flex items-end">
-            <div className="flex max-w-[820px] flex-col gap-4 px-6 pb-10 md:px-[120px] md:pb-16">
-              <p className="eyebrow text-salvia">Somos</p>
-              <h1 className="h1-display text-crema">
-                Una marca de miel cruda originada en la altillanura colombiana
-              </h1>
-            </div>
-          </div>
-        </div>
+        </svg>
 
-        <div className="mx-auto max-w-[820px] px-6 py-12 md:px-0 md:py-16">
-          <p className="body-text text-crema/85">
+        <div className="relative mx-auto flex max-w-[1440px] flex-col gap-6 px-6 py-[60px] md:px-[120px] md:py-[110px]">
+          <p className="eyebrow text-crema">Nuestra historia</p>
+          <h1 className="h1-display max-w-[900px] text-crema">Del panal a tu mesa</h1>
+          <p className="body-text max-w-[760px] text-crema/85">
             El hogar de nuestros apiarios son los bosques tropicales de Colombia, en la Orinoquia.
             Nuestra misión es llevar miel y otros productos a todo el país y a diferentes partes
             del mundo. La idea es que estos, además de representar a Colombia, a su fauna y flora,
@@ -78,18 +66,13 @@ function Historia() {
         </div>
       </section>
 
-
       <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[100px]">
         <div
           className="deco-bg absolute inset-0 opacity-[0.12]"
           style={{ backgroundImage: `url(${formas.url})` }}
           aria-hidden="true"
         />
-        <div
-          className="deco-bg absolute inset-0 opacity-[0.13]"
-          style={{ backgroundImage: `url(${ocelote.url})` }}
-          aria-hidden="true"
-        />
+
 
         <div className="relative mx-auto flex max-w-[820px] flex-col gap-5">
           <p className="eyebrow text-verde">Nuestra filosofía</p>
