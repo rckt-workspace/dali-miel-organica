@@ -185,7 +185,9 @@ function Index() {
             width={1024}
             height={1400}
             className="h-[420px] w-full object-cover object-[center_25%] md:h-full md:max-h-[640px]"
+            style={{ boxShadow: "0 15px 40px rgba(35,91,78,0.35)" }}
           />
+
           <div
             className="pointer-events-none absolute inset-0"
             aria-hidden="true"

@@ -22,7 +22,11 @@ function Contacto() {
   const [sent, setSent] = useState(false);
 
   return (
-    <section className="relative overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]">
+    <section
+      className="relative overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]"
+      style={{ borderBottom: "1px solid rgb(183 216 170 / 0.4)" }}
+    >
+
       <div
         className="deco-bg absolute inset-0 opacity-[0.12]"
         style={{ backgroundImage: `url(${colibries.url})` }}

@@ -22,7 +22,7 @@ export function SiteNav() {
     >
       <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-8 md:px-[120px] md:py-10">
         <Link to="/" aria-label="Dalí Miel Orgánica — inicio">
-          <img src={logo.url} alt="Dalí Miel Orgánica" className="h-11 w-auto md:h-12" />
+          <img src={logo.url} alt="Dalí Miel Orgánica" className="h-[44px] w-auto" />
         </Link>
 
 
