@@ -85,6 +85,12 @@ function Historia() {
           style={{ backgroundImage: `url(${formas.url})` }}
           aria-hidden="true"
         />
+        <div
+          className="deco-bg absolute inset-0 opacity-[0.13]"
+          style={{ backgroundImage: `url(${ocelote.url})` }}
+          aria-hidden="true"
+        />
+
         <div className="relative mx-auto flex max-w-[820px] flex-col gap-5">
           <p className="eyebrow text-verde">Nuestra filosofía</p>
           <h2 className="h2-display text-verde">
