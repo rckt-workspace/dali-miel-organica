@@ -18,9 +18,10 @@ export function SiteNav() {
   return (
     <header className="sticky top-0 z-50 w-full bg-crema">
       <nav className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-6 md:px-[120px]">
-        <Link to="/" className="font-display text-[22px] leading-none text-verde">
-          DALÍ
+        <Link to="/" aria-label="Dalí Miel Orgánica — inicio">
+          <img src={logo.url} alt="Dalí Miel Orgánica" className="h-8 w-auto" />
         </Link>
+
 
         <div className="hidden items-center gap-8 md:flex">
           {links.map((l) => (
