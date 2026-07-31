@@ -4,7 +4,10 @@ import { pureProducts, spicyProducts } from "@/lib/products";
 
 import bosque from "@/assets/apicultores.png.asset.json";
 import logo from "@/assets/dali-logo.png.asset.json";
-
+import perezoso from "@/assets/perezoso.png.asset.json";
+import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
+import formas from "@/assets/formas-organicas.png.asset.json";
+import ocelote from "@/assets/ocelote.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,8 +49,28 @@ function Index() {
         </div>
       </section>
 
-      <section className="px-6 py-[60px] md:px-[120px] md:py-[120px]">
-        <div className="mx-auto max-w-[1200px]">
+      <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[120px]">
+        <div
+          className="deco-bg absolute inset-0 opacity-[0.14]"
+          style={{ backgroundImage: `url(${formas.url})` }}
+          aria-hidden="true"
+        />
+        <img
+          src={perezoso.url}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute left-2 top-6 hidden w-[160px] lg:block"
+        />
+        <img
+          src={osoHormiguero.url}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute bottom-6 right-2 hidden w-[200px] lg:block"
+        />
+
+        <div className="relative mx-auto max-w-[1200px]">
           <div className="flex flex-col items-center gap-3 text-center">
             <p className="eyebrow text-verde">Nuestra miel</p>
             <h2 className="h2-display text-verde">Tres variedades, un mismo origen</h2>
@@ -81,8 +104,13 @@ function Index() {
         </div>
       </section>
 
+      <section className="relative grid overflow-hidden bg-verde md:grid-cols-2">
+        <div
+          className="deco-bg absolute inset-0 opacity-[0.16]"
+          style={{ backgroundImage: `url(${ocelote.url})` }}
+          aria-hidden="true"
+        />
 
-      <section className="grid bg-verde md:grid-cols-2">
         <div className="relative">
           <img
             src={bosque.url}
@@ -90,14 +118,22 @@ function Index() {
             loading="lazy"
             width={1024}
             height={1400}
-            className="h-full w-full object-cover md:max-h-[640px]"
+            className="h-[420px] w-full object-cover object-[center_25%] md:h-full md:max-h-[640px]"
           />
-          <span className="absolute bottom-5 right-5 inline-flex rounded-lg bg-crema/90 px-3 py-2 backdrop-blur-sm">
+          <div
+            className="pointer-events-none absolute inset-0"
+            aria-hidden="true"
+            style={{
+              background:
+                "linear-gradient(to top right, rgba(35,91,78,0.25) 0%, rgba(35,91,78,0.12) 35%, rgba(35,91,78,0) 60%)",
+            }}
+          />
+          <span className="absolute bottom-5 left-5 inline-flex rounded-lg bg-crema p-2">
             <img src={logo.url} alt="" className="h-6 w-auto" />
           </span>
         </div>
 
-        <div className="flex flex-col justify-center gap-5 px-6 py-14 md:px-[100px] md:py-20">
+        <div className="relative flex flex-col justify-center gap-5 px-6 py-14 md:px-[100px] md:py-20">
           <p className="eyebrow text-salvia">Nuestra filosofía</p>
           <h2 className="h2-display text-crema">
             Parte del respeto, la humildad
