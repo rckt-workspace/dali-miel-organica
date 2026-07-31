@@ -1,14 +1,30 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/dali-logo.png.asset.json";
 import colibries from "@/assets/colibries.png.asset.json";
+import perezoso from "@/assets/perezoso.png.asset.json";
+import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 
 export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-verde px-6 py-16 text-crema md:px-[120px]">
       <div
-        className="deco-bg absolute inset-0 opacity-[0.12]"
+        className="deco-bg absolute inset-0 opacity-[0.13]"
         style={{ backgroundImage: `url(${colibries.url})` }}
         aria-hidden="true"
+      />
+      <img
+        src={perezoso.url}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="pointer-events-none absolute left-[220px] top-2 hidden w-[92px] opacity-70 invert lg:block"
+      />
+      <img
+        src={osoHormiguero.url}
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        className="pointer-events-none absolute bottom-2 right-4 hidden w-[110px] opacity-70 invert lg:block"
       />
       <div className="relative mx-auto grid max-w-[1200px] gap-12 md:grid-cols-4">
         <div>
@@ -16,6 +32,7 @@ export function SiteFooter() {
             <img src={logo.url} alt="Dalí Miel Orgánica" className="h-12 w-auto" />
           </span>
         </div>
+
 
 
         <div>
