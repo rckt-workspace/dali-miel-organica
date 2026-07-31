@@ -32,36 +32,57 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="bg-verde">
-        <div className="flex flex-col md:flex-row md:items-stretch">
-          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 py-[60px] text-center md:order-1 md:w-[55%] md:items-start md:pb-[100px] md:pl-[120px] md:pr-[80px] md:pt-[100px] md:text-left">
-            <p className="eyebrow text-salvia">De los bosques tropicales de Colombia</p>
-            <h1 className="h1-display text-crema">
+      <section className="bg-crema">
+        <div className="mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
+          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 pb-[64px] pt-[32px] text-center md:order-1 md:w-[55%] md:items-start md:py-[96px] md:pl-[120px] md:pr-[64px] md:text-left">
+            <p className="eyebrow text-verde/70">De los bosques tropicales de Colombia</p>
+            <h1 className="h1-display text-verde">
               Miel cruda orgánica,
               <br />
               cultivada por la naturaleza misma
             </h1>
-            <p className="max-w-[600px] text-[18px] text-crema/85">
+            <p className="max-w-[600px] text-[18px] text-verde/80">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
-              sabiduría y bienestar en cada cosecha.
+              sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
             </p>
-            <Link to="/tienda" className="btn-secondary mt-2">
+            <Link to="/tienda" className="btn-primary mt-2">
               Descubre nuestra miel
             </Link>
           </div>
 
-          <div className="order-1 flex items-center justify-center px-6 pt-[40px] md:order-2 md:w-[45%] md:p-[40px]">
-            <img
-              src={mielGoteo.url}
-              alt="Miel cruda Dalí goteando sobre la tapa del frasco con un cucharón de madera"
-              width={1280}
-              height={1920}
-              className="h-auto w-full max-w-[320px] rounded-[24px] object-contain md:max-w-[600px]"
-              style={{ boxShadow: "0 20px 60px rgba(0,0,0,0.25)" }}
-            />
+          <div className="order-1 flex items-center justify-center px-6 pt-[48px] md:order-2 md:w-[45%] md:p-[48px]">
+            <div className="relative flex w-full max-w-[280px] items-center justify-center md:max-w-[480px]">
+              <div
+                className="absolute inset-x-[-6%] top-[6%] bottom-[6%] bg-salvia"
+                aria-hidden="true"
+                style={{ borderRadius: "58% 42% 47% 53% / 45% 52% 48% 55%" }}
+              />
+              <img
+                src={acacia.url}
+                alt="Frasco de miel de Acacia de Dalí sobre fondo orgánico"
+                width={1024}
+                height={1280}
+                className="relative h-auto w-full object-contain"
+              />
+              <img
+                src={perezoso.url}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="pointer-events-none absolute -top-2 right-0 w-[62px] md:w-[80px]"
+              />
+              <img
+                src={osoHormiguero.url}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                className="pointer-events-none absolute -bottom-2 left-0 w-[56px] md:w-[70px]"
+              />
+            </div>
           </div>
         </div>
       </section>
+
 
 
       <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[120px]">
