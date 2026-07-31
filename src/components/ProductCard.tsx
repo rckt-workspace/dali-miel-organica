@@ -9,18 +9,21 @@ export function ProductCard({ product, shop = false }: { product: Product; shop?
 
   return (
     <article
-      className="flex flex-col gap-4 overflow-hidden rounded-2xl border border-verde/10 bg-crema p-8 pt-7"
+      className="card-soft flex flex-col gap-4 overflow-hidden bg-crema p-8 pt-7"
       style={{ borderTop: `6px solid ${product.accent}` }}
     >
-      <Link to="/producto/$slug" params={{ slug: product.slug }}>
+      <Link
+        to="/producto/$slug"
+        params={{ slug: product.slug }}
+        className="block aspect-[4/5] w-full overflow-hidden bg-crema"
+      >
         <img
           src={product.image}
           alt={`Frasco de miel ${product.name} de Dalí`}
           loading="lazy"
           width={1024}
-          height={832}
-          className="h-[260px] w-full rounded-xl object-contain"
-          style={{ backgroundColor: `${product.accent}26` }}
+          height={1280}
+          className="size-full object-contain"
         />
       </Link>
 

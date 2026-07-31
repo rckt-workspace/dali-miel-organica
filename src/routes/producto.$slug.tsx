@@ -39,26 +39,38 @@ function Producto() {
     >
       <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-2">
         <div className="flex flex-col gap-4">
-          <img
-            src={product.image}
-            alt={`Miel ${product.name} de Dalí`}
-            width={1024}
-            height={832}
-            className="aspect-square w-full rounded-2xl object-contain"
-            style={{ backgroundColor: `${product.accent}26` }}
-          />
+          <div
+            className="card-soft flex aspect-[4/5] w-full max-w-[560px] items-center justify-center overflow-hidden p-6"
+            style={{
+              backgroundColor: `color-mix(in srgb, ${product.accent} 15%, var(--color-crema))`,
+            }}
+          >
+            <img
+              src={product.image}
+              alt={`Miel ${product.name} de Dalí`}
+              width={1024}
+              height={1280}
+              className="size-full object-contain"
+            />
+          </div>
           <div className="flex gap-4">
             {[0, 1, 2].map((i) => (
-              <img
+              <div
                 key={i}
-                src={product.image}
-                alt={`Miel ${product.name}, vista ${i + 1}`}
-                loading="lazy"
-                width={120}
-                height={120}
-                className="size-[120px] rounded-xl object-contain"
-                style={{ backgroundColor: `${product.accent}26` }}
-              />
+                className="size-[120px] overflow-hidden rounded-2xl p-2"
+                style={{
+                  backgroundColor: `color-mix(in srgb, ${product.accent} 15%, var(--color-crema))`,
+                }}
+              >
+                <img
+                  src={product.image}
+                  alt={`Miel ${product.name}, vista ${i + 1}`}
+                  loading="lazy"
+                  width={120}
+                  height={150}
+                  className="size-full object-contain"
+                />
+              </div>
             ))}
           </div>
         </div>
