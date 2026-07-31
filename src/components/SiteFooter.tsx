@@ -1,10 +1,16 @@
 import { Link } from "@tanstack/react-router";
+import logo from "@/assets/dali-logo.png.asset.json";
 
 export function SiteFooter() {
   return (
     <footer className="bg-verde px-6 py-16 text-crema md:px-[120px]">
       <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-4">
-        <div className="font-display text-[22px]">DALÍ</div>
+        <div>
+          <span className="inline-flex rounded-xl bg-crema px-4 py-3">
+            <img src={logo.url} alt="Dalí Miel Orgánica" className="h-12 w-auto" />
+          </span>
+        </div>
+
 
         <div>
           <p className="eyebrow mb-4 text-salvia">Tienda</p>
