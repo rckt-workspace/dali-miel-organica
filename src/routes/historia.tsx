@@ -53,7 +53,7 @@ function Historia() {
         <div className="relative mx-auto flex max-w-[1440px] flex-col gap-6 px-6 py-[60px] md:px-[120px] md:py-[110px]">
           <p className="eyebrow text-crema">Nuestra historia</p>
           <h1 className="h1-display max-w-[900px] text-crema">Del panal a tu mesa</h1>
-          <p className="body-text max-w-[760px] text-crema/85">
+          <p className="body-text max-w-[620px] text-crema/85">
             El hogar de nuestros apiarios son los bosques tropicales de Colombia, en la Orinoquia.
             Nuestra misión es llevar miel y otros productos a todo el país y a diferentes partes
             del mundo. La idea es que estos, además de representar a Colombia, a su fauna y flora,
