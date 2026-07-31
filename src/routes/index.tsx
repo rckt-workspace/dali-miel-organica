@@ -32,7 +32,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="bg-crema">
+      <section className="overflow-hidden bg-crema">
         <div className="mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
           <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 pb-[64px] pt-[32px] text-center md:order-1 md:w-[55%] md:items-start md:py-[96px] md:pl-[120px] md:pr-[64px] md:text-left">
             <p className="eyebrow text-verde/70">De los bosques tropicales de Colombia</p>
@@ -53,7 +53,7 @@ function Index() {
           <div className="order-1 flex items-center justify-center px-6 pt-[48px] md:order-2 md:w-[45%] md:p-[48px]">
             <div className="relative flex w-full max-w-[280px] items-center justify-center md:max-w-[420px]">
               <div
-                className="absolute inset-[-14%] bg-salvia"
+                className="absolute inset-[-9%] bg-salvia"
                 aria-hidden="true"
                 style={{ borderRadius: "58% 42% 47% 53% / 45% 52% 48% 55%" }}
               />
@@ -70,14 +70,14 @@ function Index() {
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
-                className="pointer-events-none absolute -top-2 right-0 mix-blend-multiply w-[62px] md:w-[80px]"
+                className="pointer-events-none absolute -top-3 right-1 mix-blend-multiply w-[70px] md:w-[92px]"
               />
               <img
                 src={osoHormiguero.url}
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
-                className="pointer-events-none absolute -bottom-2 left-0 mix-blend-multiply w-[56px] md:w-[70px]"
+                className="pointer-events-none absolute -bottom-3 left-1 mix-blend-multiply w-[62px] md:w-[80px]"
               />
             </div>
           </div>
