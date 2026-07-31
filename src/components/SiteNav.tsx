@@ -71,7 +71,7 @@ export function SiteNav() {
                 key={l.to}
                 to={l.to}
                 onClick={() => setOpen(false)}
-                className="text-[15px] text-verde"
+                className="text-[17px] text-verde"
               >
                 {l.label}
               </Link>
