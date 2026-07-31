@@ -40,7 +40,7 @@ export function SiteNav() {
 
         <div className="flex items-center gap-5">
           <Link to="/carrito" className="relative text-verde" aria-label="Carrito">
-            <ShoppingBag className="size-7" strokeWidth={1.5} />
+            <ShoppingBag className="size-6" strokeWidth={1.5} />
             {count > 0 && (
               <span className="absolute -right-2 -top-2 flex size-[18px] items-center justify-center rounded-full bg-coral text-[11px] font-semibold text-verde">
                 {count}
@@ -49,7 +49,7 @@ export function SiteNav() {
           </Link>
           <Link
             to="/tienda"
-            className="btn-primary px-8 py-[14px] text-[16px] hidden sm:inline-flex"
+            className="btn-primary px-6 py-[10px] text-[15px] hidden sm:inline-flex"
           >
             Comprar
           </Link>
