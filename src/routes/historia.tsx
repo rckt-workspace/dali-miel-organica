@@ -74,12 +74,21 @@ function Historia() {
           loading="lazy"
           width={1024}
           height={1400}
-          className="h-[420px] w-full object-cover"
+          className="h-[420px] w-full object-cover object-[center_25%] md:h-[560px]"
         />
-        <span className="absolute bottom-6 right-6 inline-flex rounded-lg bg-crema/90 px-3 py-2 backdrop-blur-sm">
+        <div
+          className="pointer-events-none absolute inset-0"
+          aria-hidden="true"
+          style={{
+            background:
+              "linear-gradient(to top right, rgba(35,91,78,0.25) 0%, rgba(35,91,78,0.12) 35%, rgba(35,91,78,0) 60%)",
+          }}
+        />
+        <span className="absolute bottom-6 left-6 inline-flex rounded-lg bg-crema p-2">
           <img src={logo.url} alt="" className="h-8 w-auto" />
         </span>
       </div>
+
     </>
   );
 }
