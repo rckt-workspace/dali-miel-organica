@@ -8,7 +8,7 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import mielGoteo from "@/assets/miel-goteo.jpg.asset.json";
+import acacia from "@/assets/acacia.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
