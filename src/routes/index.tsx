@@ -4,8 +4,8 @@ import { pureProducts, spicyProducts } from "@/lib/products";
 
 import bosque from "@/assets/apicultores.png.asset.json";
 import logo from "@/assets/dali-logo.png.asset.json";
-import perezoso from "@/assets/perezoso.png.asset.json";
-import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
+import perezoso from "@/assets/perezoso-t.png.asset.json";
+import osoHormiguero from "@/assets/oso-hormiguero-t.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
 import acacia from "@/assets/acacia.png.asset.json";
@@ -96,14 +96,14 @@ function Index() {
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="pointer-events-none absolute left-2 top-6 hidden w-[160px] mix-blend-multiply lg:block"
+          className="pointer-events-none absolute left-2 top-6 hidden w-[160px] lg:block"
         />
         <img
           src={osoHormiguero.url}
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="pointer-events-none absolute bottom-6 right-2 hidden w-[200px] mix-blend-multiply lg:block"
+          className="pointer-events-none absolute bottom-6 right-2 hidden w-[200px] lg:block"
         />
 
         <div className="relative mx-auto max-w-[1200px]">

@@ -1,8 +1,8 @@
 import { Link } from "@tanstack/react-router";
 import logo from "@/assets/dali-logo.png.asset.json";
 import colibries from "@/assets/colibries.png.asset.json";
-import perezoso from "@/assets/perezoso.png.asset.json";
-import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
+import perezoso from "@/assets/perezoso-t.png.asset.json";
+import osoHormiguero from "@/assets/oso-hormiguero-t.png.asset.json";
 
 export function SiteFooter() {
   return (
