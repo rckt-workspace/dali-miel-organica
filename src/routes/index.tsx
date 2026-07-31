@@ -56,7 +56,7 @@ function Index() {
               <br />
               cultivada por la naturaleza misma
             </h1>
-            <p className="max-w-[600px] text-[18px] text-crema/85">
+            <p className="body-text max-w-[600px] text-crema/85">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
               sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
             </p>
@@ -205,7 +205,7 @@ function Index() {
             Parte del respeto, la humildad
             <br className="hidden md:block" /> y la conservación de la tierra
           </h2>
-          <p className="text-[16px] text-crema/85">
+          <p className="body-text text-crema/85">
             Nuestros apiarios están en tres bosques que hoy forman parte de un sistema
             silvopastoril en la hacienda La Sonora. Animales como el oso de palma, el tigrillo y el
             oso perezoso han vuelto a habitar estos bosques gracias a nuestro modelo sostenible de

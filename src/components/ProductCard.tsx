@@ -35,14 +35,14 @@ export function ProductCard({ product, shop = false }: { product: Product; shop?
         {product.name}
       </Link>
 
-      <p className="text-[15px] text-verde">{product.tasting}</p>
+      <p className="body-text text-verde">{product.tasting}</p>
       <p className="caption text-verde/60">{product.sizes[0]}</p>
 
       <ProductBadges badges={product.badges} accent={product.accent} />
 
       {shop && (
         <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
-          <span className="text-[15px] font-semibold text-verde">{product.price}</span>
+          <span className="body-text font-semibold text-verde">{product.price}</span>
           <button
             className={`btn-sm ${picante ? "btn-picante" : "btn-primary"}`}
             onClick={() =>

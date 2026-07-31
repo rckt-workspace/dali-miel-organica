@@ -30,7 +30,7 @@ function Checkout() {
   return (
     <section className="px-6 py-[60px] md:px-[120px] md:py-[96px]">
       <div className="mx-auto max-w-[1100px]">
-        <h1 className="font-display text-[32px] text-verde">Checkout</h1>
+        <h1 className="h1-display text-verde">Checkout</h1>
 
         <div className="mt-10 grid gap-10 md:grid-cols-[65fr_35fr]">
           <form
@@ -42,7 +42,7 @@ function Checkout() {
           >
             {fields.map((f) => (
               <div key={f.id} className={f.id === "direccion" ? "sm:col-span-2" : ""}>
-                <label className="field-label" htmlFor={f.id}>
+                <label className="field-label caption" htmlFor={f.id}>
                   {f.label}
                 </label>
                 <input id={f.id} type={f.type} required className="field" />
@@ -51,7 +51,7 @@ function Checkout() {
 
             <div className="sm:col-span-2 rounded-xl border border-dashed border-verde/30 p-6">
               <p className="eyebrow text-verde">Método de pago</p>
-              <p className="mt-2 text-[15px] text-verde/70">
+              <p className="mt-2 body-text text-verde/70">
                 Pasarela de pago pendiente de definir. Este bloque es intercambiable.
               </p>
             </div>
@@ -65,12 +65,12 @@ function Checkout() {
             <p className="eyebrow text-verde">Resumen del pedido</p>
             <ul className="mt-6 space-y-4">
               {items.length === 0 && (
-                <li className="text-[15px] text-verde/70">No hay productos en el carrito.</li>
+                <li className="body-text text-verde/70">No hay productos en el carrito.</li>
               )}
               {items.map((i) => (
                 <li
                   key={`${i.slug}-${i.size}`}
-                  className="flex items-center justify-between gap-4 text-[15px] text-verde"
+                  className="flex items-center justify-between gap-4 body-text text-verde"
                 >
                   <span>
                     {i.name} · {i.size} × {i.qty}

@@ -20,11 +20,11 @@ function Carrito() {
   return (
     <section className="px-6 py-[60px] md:px-[120px] md:py-[96px]">
       <div className="mx-auto max-w-[1000px]">
-        <h1 className="font-display text-[32px] text-verde">Tu carrito</h1>
+        <h1 className="h1-display text-verde">Tu carrito</h1>
 
         {items.length === 0 ? (
           <div className="mt-8 flex flex-col items-start gap-6">
-            <p className="text-[15px] text-verde/70">Tu carrito está vacío por ahora.</p>
+            <p className="body-text text-verde/70">Tu carrito está vacío por ahora.</p>
             <Link to="/tienda" className="btn-primary">
               Ir a la tienda
             </Link>
@@ -46,8 +46,8 @@ function Carrito() {
                     className="size-20 rounded-lg object-cover"
                   />
                   <div className="flex-1">
-                    <p className="text-[15px] font-semibold text-verde">{i.name}</p>
-                    <p className="text-[13px] text-verde/60">{i.size}</p>
+                    <p className="body-text font-semibold text-verde">{i.name}</p>
+                    <p className="caption text-verde/60">{i.size}</p>
                   </div>
                   <div className="flex items-center gap-3 text-verde">
                     <button
@@ -84,7 +84,7 @@ function Carrito() {
                 <span>Subtotal</span>
                 <span>$XX.XXX COP</span>
               </div>
-              <p className="mt-2 text-[13px] text-verde/70">
+              <p className="mt-2 body-text text-verde/70">
                 Envío calculado en el siguiente paso.
               </p>
               <Link to="/checkout" className="btn-primary mt-6 w-full">
