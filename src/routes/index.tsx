@@ -2,7 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ProductCard } from "@/components/ProductCard";
 import { pureProducts, spicyProducts } from "@/lib/products";
 
-import bosque from "@/assets/bosque-sonora.jpg";
+import bosque from "@/assets/apicultores.png.asset.json";
+import logo from "@/assets/dali-logo.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -81,14 +83,20 @@ function Index() {
 
 
       <section className="grid bg-verde md:grid-cols-2">
-        <img
-          src={bosque}
-          alt="Apiarios de Dalí en los bosques de la hacienda La Sonora"
-          loading="lazy"
-          width={1024}
-          height={1024}
-          className="h-full w-full object-cover md:max-h-[640px]"
-        />
+        <div className="relative">
+          <img
+            src={bosque.url}
+            alt="Apicultores de Dalí revisando un panal en los bosques de la hacienda La Sonora"
+            loading="lazy"
+            width={1024}
+            height={1400}
+            className="h-full w-full object-cover md:max-h-[640px]"
+          />
+          <span className="absolute bottom-5 right-5 inline-flex rounded-lg bg-crema/90 px-3 py-2 backdrop-blur-sm">
+            <img src={logo.url} alt="" className="h-6 w-auto" />
+          </span>
+        </div>
+
         <div className="flex flex-col justify-center gap-5 px-6 py-14 md:px-[100px] md:py-20">
           <p className="eyebrow text-salvia">Nuestra filosofía</p>
           <h2 className="h2-display text-crema">

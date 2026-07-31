@@ -1,62 +1,75 @@
-import acacia from "@/assets/miel-acacia.jpg";
-import multifloral from "@/assets/miel-multifloral.jpg";
-import caucho from "@/assets/miel-caucho.jpg";
+import acacia from "@/assets/acacia.png.asset.json";
+import multifloral from "@/assets/multifloral.png.asset.json";
+import caucho from "@/assets/caucho.png.asset.json";
 import morita from "@/assets/chile-morita.jpg.asset.json";
 import arbol from "@/assets/chile-arbol.jpg.asset.json";
 
 export type ProductLine = "pura" | "picante";
 
+export type BadgeIcon = "leaf" | "minerals" | "glycemic" | "pressure" | "sleep" | "shield" | "flame";
+
+export type Badge = { icon: BadgeIcon; label: string };
+
 export type Product = {
   slug: string;
   name: string;
   tasting: string;
+  badges: Badge[];
   benefits: string[];
   price: string;
   sizes: string[];
   image: string;
+  accent: string;
   line: ProductLine;
 };
-
 
 export const products: Product[] = [
   {
     slug: "acacia",
     name: "Acacia",
     tasting: "Notas maderosas y robustas al paladar.",
-    benefits: [
-      "Reduce la ansiedad",
-      "Facilita la digestión",
-      "Ayuda al sueño",
-      "Mejora la circulación",
+    badges: [
+      { icon: "leaf", label: "Natural no procesada" },
+      { icon: "minerals", label: "Rica en sales minerales" },
+      { icon: "glycemic", label: "Bajo glicémico" },
     ],
+    benefits: ["Natural no procesada", "Rica en sales minerales", "Bajo glicémico"],
     price: "$XX.XXX COP",
-    sizes: ["280g"],
-    image: acacia,
+    sizes: ["500 GR"],
+    image: acacia.url,
+    accent: "#FEAEBB",
     line: "pura",
   },
   {
     slug: "multifloral",
     name: "Multifloral",
     tasting: "Notas frutales y florales al paladar.",
-    benefits: ["Antiinflamatorio", "Rica en proteínas", "Mejora el sueño"],
+    badges: [
+      { icon: "leaf", label: "Natural no procesada" },
+      { icon: "pressure", label: "Reduce presión arterial" },
+      { icon: "sleep", label: "Mejora calidad del sueño" },
+    ],
+    benefits: ["Natural no procesada", "Reduce presión arterial", "Mejora calidad del sueño"],
     price: "$XX.XXX COP",
-    sizes: ["280g"],
-    image: multifloral,
+    sizes: ["500 GR"],
+    image: multifloral.url,
+    accent: "#9CDCED",
     line: "pura",
   },
   {
     slug: "caucho",
     name: "Caucho",
     tasting: "Notas cítricas y suaves al paladar.",
-    benefits: [
-      "Reduce el colesterol malo",
-      "Protege el corazón",
-      "Antibacterial",
-      "Rica en antioxidantes",
+    badges: [
+      { icon: "leaf", label: "Natural no procesada" },
+      { icon: "shield", label: "Potencial antibacteriano" },
+      { icon: "glycemic", label: "Potencial antiinflamatorio" },
     ],
+    benefits: ["Natural no procesada", "Potencial antibacteriano", "Potencial antiinflamatorio"],
     price: "$XX.XXX COP",
-    sizes: ["280g"],
-    image: caucho,
+    sizes: ["500 GR"],
+    image: caucho.url,
+    accent: "#C0ADE7",
     line: "pura",
   },
   {
@@ -64,10 +77,16 @@ export const products: Product[] = [
     name: "Chile Morita",
     tasting:
       "Miel orgánica infusionada con chile morita — un toque ahumado y picante para romper la rutina de tu mesa.",
+    badges: [
+      { icon: "leaf", label: "Natural no procesada" },
+      { icon: "flame", label: "Picor medio ahumado" },
+      { icon: "shield", label: "Ideal para quesos" },
+    ],
     benefits: ["Ahumado", "Picor medio", "Ideal para quesos"],
     price: "$XX.XXX COP",
     sizes: ["300g"],
     image: morita.url,
+    accent: "#EB5B39",
     line: "picante",
   },
   {
@@ -75,10 +94,16 @@ export const products: Product[] = [
     name: "Chile de Árbol",
     tasting:
       "Miel orgánica infusionada con chile de árbol — picor vivo y directo, ideal para maridar con quesos y carnes.",
+    badges: [
+      { icon: "leaf", label: "Natural no procesada" },
+      { icon: "flame", label: "Picor intenso" },
+      { icon: "shield", label: "Para quesos y carnes" },
+    ],
     benefits: ["Picor intenso", "100% colombiana", "Para quesos y carnes"],
     price: "$XX.XXX COP",
     sizes: ["300g"],
     image: arbol.url,
+    accent: "#EB5B39",
     line: "picante",
   },
 ];
@@ -87,7 +112,6 @@ export const pureProducts = products.filter((p) => p.line === "pura");
 export const spicyProducts = products.filter((p) => p.line === "picante");
 
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
-
 
 export const longDescription =
   "El hogar de nuestros apiarios son los bosques tropicales de Colombia, en la Orinoquia. Al ser una marca con denominación de origen expresamos vida, sabiduría y bienestar en cada cosecha, pilares de la comunidad y la región donde trabajamos. Dalí es una marca orgullosamente colombiana y llanera, miel cultivada y cosechada en nuestro país, pulmón del mundo.";

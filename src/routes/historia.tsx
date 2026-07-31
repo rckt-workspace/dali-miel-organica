@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import bosque from "@/assets/bosque-sonora.jpg";
+import bosque from "@/assets/apicultores.png.asset.json";
+import logo from "@/assets/dali-logo.png.asset.json";
 
 export const Route = createFileRoute("/historia")({
   head: () => ({
@@ -66,14 +67,19 @@ function Historia() {
         </div>
       </section>
 
-      <img
-        src={bosque}
-        alt="Bosque tropical y apiarios de la hacienda La Sonora"
-        loading="lazy"
-        width={1024}
-        height={1024}
-        className="h-[420px] w-full object-cover"
-      />
+      <div className="relative">
+        <img
+          src={bosque.url}
+          alt="Apicultores de Dalí revisando un panal en el bosque tropical de la hacienda La Sonora"
+          loading="lazy"
+          width={1024}
+          height={1400}
+          className="h-[420px] w-full object-cover"
+        />
+        <span className="absolute bottom-6 right-6 inline-flex rounded-lg bg-crema/90 px-3 py-2 backdrop-blur-sm">
+          <img src={logo.url} alt="" className="h-8 w-auto" />
+        </span>
+      </div>
     </>
   );
 }
