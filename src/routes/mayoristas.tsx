@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Package, Tag, Leaf } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import formas from "@/assets/formas-organicas.png.asset.json";
+import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 
 export const Route = createFileRoute("/mayoristas")({
   head: () => ({
