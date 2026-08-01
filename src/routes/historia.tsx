@@ -71,7 +71,7 @@ function Historia() {
             src={bosque.url}
             alt="Apicultores de Dalí revisando un panal en el bosque tropical"
             loading="lazy"
-            className="mt-10 w-full max-w-[280px] rounded-2xl object-cover md:absolute md:right-[120px] md:bottom-[70px] md:mt-0 md:w-[300px] md:max-w-none"
+            className="mt-8 w-full max-w-[260px] rounded-2xl object-cover md:absolute md:right-[120px] md:bottom-[70px] md:mt-0 md:w-[300px] md:max-w-none"
             style={{ aspectRatio: "4 / 3", boxShadow: "0 18px 45px rgba(35,91,78,0.28)" }}
           />
         </div>
@@ -112,7 +112,7 @@ function Historia() {
       <section className="px-6 pb-12 md:px-[120px] md:pb-[110px]">
         <div className="mx-auto max-w-[1200px]">
           <h3 className="h3-display text-verde">Los bosques de La Sonora</h3>
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
             {galeria.map((g) => (
               <img
                 key={g.src}
