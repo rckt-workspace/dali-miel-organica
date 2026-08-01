@@ -179,15 +179,19 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-verde px-6 py-12 md:px-[120px]">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-start gap-5 md:items-center">
-            <Store className="size-12 shrink-0 text-salvia" strokeWidth={1.4} aria-hidden="true" />
-            <div className="max-w-[640px]">
-              <h3 className="font-display text-[28px] leading-tight text-crema">
+      <section className="bg-verde px-6 py-12 md:px-[120px] md:py-[80px]">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-8">
+          <div className="flex items-start gap-4 md:items-center md:gap-5">
+            <Store
+              className="size-9 shrink-0 text-salvia md:size-12"
+              strokeWidth={1.4}
+              aria-hidden="true"
+            />
+            <div className="min-w-0 max-w-[640px]">
+              <h3 className="font-display text-[22px] leading-tight text-crema md:text-[28px]">
                 ¿Tienes un negocio?
               </h3>
-              <p className="body-text mt-3 text-crema/85">
+              <p className="body-text mt-2 text-crema/85 md:mt-3">
                 Lleva Dalí a tu restaurante, tienda o empresa con condiciones especiales para
                 compras al por mayor.
               </p>
@@ -195,10 +199,11 @@ function Index() {
           </div>
           <Link
             to="/mayoristas"
-            className="shrink-0 rounded-full bg-salvia px-8 py-4 text-[16px] font-semibold text-verde transition-colors hover:bg-salvia-dark"
+            className="w-full shrink-0 rounded-full bg-salvia px-8 py-4 text-center text-[15px] font-semibold text-verde transition-colors hover:bg-salvia-dark sm:w-auto md:text-[16px]"
           >
             Conoce nuestras condiciones
           </Link>
+
         </div>
       </section>
 
