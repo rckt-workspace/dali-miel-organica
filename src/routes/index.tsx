@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { Store } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 import { pureProducts, spicyProducts } from "@/lib/products";
 
