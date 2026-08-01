@@ -8,6 +8,7 @@ import logo from "@/assets/dali-logo.png.asset.json";
 const links = [
   { to: "/tienda", label: "Tienda" },
   { to: "/historia", label: "Nuestra Historia" },
+  { to: "/mayoristas", label: "Empresas" },
   { to: "/contacto", label: "Contacto" },
 ] as const;
 
