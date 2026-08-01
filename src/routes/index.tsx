@@ -145,7 +145,7 @@ function Index() {
             <p className="eyebrow text-verde">Nuestra miel</p>
             <h2 className="h2-display text-verde">Tres variedades, un mismo origen</h2>
           </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 grid gap-8 md:mt-14 md:grid-cols-3">
             {pureProducts.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
@@ -166,12 +166,12 @@ function Index() {
               Miel con carácter, para quien le gusta que las cosas piquen
             </h2>
           </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 grid gap-8 md:mt-14 md:grid-cols-3">
             {spicyProducts.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
           </div>
-          <div className="mt-12 flex justify-center">
+          <div className="mt-8 flex justify-center md:mt-12">
             <Link to="/tienda" search={{ linea: "picante" }} className="btn-picante">
               Ver la línea picante
             </Link>
@@ -219,7 +219,7 @@ function Index() {
             loading="lazy"
             width={1024}
             height={1400}
-            className="h-[420px] w-full object-cover object-[center_25%] md:h-full md:max-h-[640px]"
+            className="h-[300px] w-full object-cover object-[center_25%] sm:h-[420px] md:h-full md:max-h-[640px]"
             style={{ boxShadow: "0 15px 40px rgba(35,91,78,0.35)" }}
           />
 
@@ -236,7 +236,7 @@ function Index() {
           </span>
         </div>
 
-        <div className="relative flex flex-col justify-center gap-5 px-6 py-14 md:px-[100px] md:py-20">
+        <div className="relative flex flex-col justify-center gap-5 px-6 py-12 md:px-[100px] md:py-20">
           <p className="eyebrow text-salvia">Nuestra filosofía</p>
           <h2 className="h2-display text-crema">
             Parte del respeto, la humildad
@@ -253,7 +253,7 @@ function Index() {
 
 
 
-      <section className="flex flex-col items-center gap-6 px-6 py-14 text-center">
+      <section className="flex flex-col items-center gap-6 px-6 py-14 text-center md:py-[100px]">
         <h2 className="h2-display text-verde">Lleva Dalí a tu mesa</h2>
         <Link to="/tienda" className="btn-primary">
           Ir a la tienda

@@ -95,7 +95,7 @@ function Tienda() {
           })}
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-8 grid gap-8 md:mt-12 md:grid-cols-3">
           {list.map((p) => (
             <ProductCard key={p.slug} product={p} shop />
           ))}
