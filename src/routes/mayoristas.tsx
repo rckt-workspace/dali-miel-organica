@@ -102,8 +102,13 @@ function Mayoristas() {
       {/* Beneficios */}
       <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
         <div
-          className="deco-bg absolute inset-0 opacity-[0.12]"
-          style={{ backgroundImage: `url(${formas.url})` }}
+          className="pointer-events-none absolute inset-0 opacity-[0.22]"
+          style={{
+            backgroundImage: `url(${formas.url})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
           aria-hidden="true"
         />
         <img
@@ -111,7 +116,7 @@ function Mayoristas() {
           alt=""
           aria-hidden="true"
           loading="lazy"
-          className="pointer-events-none absolute bottom-4 right-4 hidden w-[170px] mix-blend-multiply opacity-[0.9] lg:block"
+          className="pointer-events-none absolute -bottom-2 right-4 hidden w-[190px] opacity-90 mix-blend-multiply lg:block"
         />
         <div className="relative mx-auto grid max-w-[1100px] gap-10 md:grid-cols-3 md:gap-16">
           {beneficios.map(({ Icon, title, text }) => (
