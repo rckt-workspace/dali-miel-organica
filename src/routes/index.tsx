@@ -46,33 +46,30 @@ function Index() {
             fill="var(--color-crema)"
           />
         </svg>
-        {/* Mobile: división horizontal simple */}
-        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-crema md:hidden" aria-hidden="true" />
 
         <div className="relative mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
-          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 pb-[48px] pt-[32px] text-center md:order-1 md:w-[55%] md:items-start md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
+          <div className="order-2 flex flex-col items-center justify-center gap-4 px-6 pb-12 pt-6 text-center md:order-1 md:w-[55%] md:items-start md:gap-6 md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
             <p className="eyebrow text-crema">De los bosques tropicales de Colombia</p>
             <h1 className="h1-display text-crema">
               Miel cruda orgánica,
-              <br />
-              cultivada por la naturaleza misma
+              <br className="hidden md:block" /> cultivada por la naturaleza misma
             </h1>
             <p className="body-text max-w-[600px] text-crema/85">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
               sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
             </p>
-            <Link to="/tienda" className="btn-secondary mt-2">
+            <Link to="/tienda" className="btn-secondary btn-sm mt-2 md:btn-base">
               Descubre nuestra miel
             </Link>
           </div>
 
-          <div className="order-1 flex items-end justify-center px-6 pt-[40px] md:order-2 md:w-[45%] md:p-[48px]">
-            <div className="relative w-full max-w-[240px] md:max-w-[360px] md:translate-y-[26px]">
+          <div className="order-1 flex items-end justify-center px-6 pt-8 md:order-2 md:w-[45%] md:p-[48px] md:pt-[48px]">
+            <div className="relative w-full max-w-[210px] md:max-w-[360px] md:translate-y-[26px]">
               {/* gotas de miel sueltas — detalle cálido junto a la base */}
               <svg
                 aria-hidden="true"
                 viewBox="0 0 120 80"
-                className="pointer-events-none absolute -right-4 bottom-6 w-[64px] md:-right-8 md:bottom-8 md:w-[92px]"
+                className="pointer-events-none absolute -right-3 bottom-6 w-[52px] md:-right-8 md:bottom-8 md:w-[92px]"
               >
                 <path
                   d="M30 10c6 9 10 14 10 19a10 10 0 1 1-20 0c0-5 4-10 10-19Z"
@@ -107,7 +104,18 @@ function Index() {
           </div>
 
         </div>
+
+        {/* Mobile: curva bone de cierre */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 390 48"
+          preserveAspectRatio="none"
+          className="relative block h-[40px] w-full md:hidden"
+        >
+          <path d="M0,48 L0,26 C120,0 260,58 390,14 L390,48 Z" fill="var(--color-crema)" />
+        </svg>
       </section>
+
 
 
 
