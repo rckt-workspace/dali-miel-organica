@@ -14,6 +14,7 @@ import { Route as CarritoRouteImport } from './routes/carrito'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactoRouteImport } from './routes/contacto'
 import { Route as HistoriaRouteImport } from './routes/historia'
+import { Route as MayoristasRouteImport } from './routes/mayoristas'
 import { Route as TiendaRouteImport } from './routes/tienda'
 import { Route as ProductoSlugRouteImport } from './routes/producto.$slug'
 
@@ -42,6 +43,11 @@ const HistoriaRoute = HistoriaRouteImport.update({
   path: '/historia',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MayoristasRoute = MayoristasRouteImport.update({
+  id: '/mayoristas',
+  path: '/mayoristas',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TiendaRoute = TiendaRouteImport.update({
   id: '/tienda',
   path: '/tienda',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/historia': typeof HistoriaRoute
+  '/mayoristas': typeof MayoristasRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/historia': typeof HistoriaRoute
+  '/mayoristas': typeof MayoristasRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
   '/historia': typeof HistoriaRoute
+  '/mayoristas': typeof MayoristasRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contacto'
     | '/historia'
+    | '/mayoristas'
     | '/tienda'
     | '/producto/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contacto'
     | '/historia'
+    | '/mayoristas'
     | '/tienda'
     | '/producto/$slug'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/checkout'
     | '/contacto'
     | '/historia'
+    | '/mayoristas'
     | '/tienda'
     | '/producto/$slug'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   CheckoutRoute: typeof CheckoutRoute
   ContactoRoute: typeof ContactoRoute
   HistoriaRoute: typeof HistoriaRoute
+  MayoristasRoute: typeof MayoristasRoute
   TiendaRoute: typeof TiendaRoute
   ProductoSlugRoute: typeof ProductoSlugRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HistoriaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mayoristas': {
+      id: '/mayoristas'
+      path: '/mayoristas'
+      fullPath: '/mayoristas'
+      preLoaderRoute: typeof MayoristasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tienda': {
       id: '/tienda'
       path: '/tienda'
@@ -181,19 +201,10 @@ const rootRouteChildren: RootRouteChildren = {
   CheckoutRoute: CheckoutRoute,
   ContactoRoute: ContactoRoute,
   HistoriaRoute: HistoriaRoute,
+  MayoristasRoute: MayoristasRoute,
   TiendaRoute: TiendaRoute,
   ProductoSlugRoute: ProductoSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

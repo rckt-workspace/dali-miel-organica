@@ -78,7 +78,15 @@ export function SiteFooter() {
               <Link to="/contacto">Contacto</Link>
             </li>
           </ul>
+
+          <p className="eyebrow mt-6 mb-4 text-salvia">Empresas</p>
+          <ul className="space-y-2 text-[14px] text-crema/80">
+            <li>
+              <Link to="/mayoristas">Compras al por mayor</Link>
+            </li>
+          </ul>
         </div>
+
 
         <div>
           <p className="eyebrow mb-4 text-salvia">Legal</p>
