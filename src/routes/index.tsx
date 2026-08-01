@@ -217,20 +217,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-salvia px-6 py-[48px] md:px-[120px]">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-[720px]">
-            <p className="eyebrow mb-2 text-verde">Para negocios</p>
-            <p className="body-text text-verde">
-              ¿Tienes un restaurante, tienda o empresa de alimentos? Conoce nuestras condiciones
-              para compras al por mayor.
-            </p>
-          </div>
-          <Link to="/mayoristas" className="btn-primary shrink-0">
-            Conoce más
-          </Link>
-        </div>
-      </section>
+
 
       <section className="flex flex-col items-center gap-6 px-6 py-[100px] text-center">
         <h2 className="h2-display text-verde">Lleva Dalí a tu mesa</h2>
