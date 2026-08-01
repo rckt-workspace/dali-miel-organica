@@ -102,7 +102,7 @@ function Mayoristas() {
       {/* Beneficios */}
       <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.22]"
+          className="pointer-events-none absolute inset-0 opacity-[0.15]"
           style={{
             backgroundImage: `url(${formas.url})`,
             backgroundRepeat: "no-repeat",
