@@ -48,7 +48,7 @@ function Index() {
         </svg>
 
         <div className="relative mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
-          <div className="order-2 flex flex-col items-center justify-center gap-4 px-6 pb-12 pt-6 text-center md:order-1 md:w-[55%] md:items-start md:gap-6 md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
+          <div className="order-1 flex flex-col items-center justify-center gap-4 px-6 pb-6 pt-8 text-center md:order-1 md:w-[55%] md:items-start md:gap-6 md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
             <p className="eyebrow text-crema">De los bosques tropicales de Colombia</p>
             <h1 className="h1-display text-crema">
               Miel cruda orgánica,
@@ -58,12 +58,12 @@ function Index() {
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
               sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
             </p>
-            <Link to="/tienda" className="btn-secondary btn-sm mt-2 md:btn-base">
+            <Link to="/tienda" className="btn-secondary btn-base mt-2 hidden md:inline-flex">
               Descubre nuestra miel
             </Link>
           </div>
 
-          <div className="order-1 flex items-end justify-center px-6 pt-8 md:order-2 md:w-[45%] md:p-[48px] md:pt-[48px]">
+          <div className="order-2 flex items-end justify-center px-6 pt-2 md:order-2 md:w-[45%] md:p-[48px] md:pt-[48px]">
             <div className="relative w-full max-w-[210px] md:max-w-[360px] md:translate-y-[26px]">
               {/* gotas de miel sueltas — detalle cálido junto a la base */}
               <svg
