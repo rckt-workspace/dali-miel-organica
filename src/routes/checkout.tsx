@@ -28,7 +28,7 @@ function Checkout() {
   const [done, setDone] = useState(false);
 
   return (
-    <section className="px-6 py-[60px] md:px-[120px] md:py-[96px]">
+    <section className="px-6 py-12 md:px-[120px] md:py-[96px]">
       <div className="mx-auto max-w-[1100px]">
         <h1 className="h1-display text-verde">Checkout</h1>
 

@@ -34,7 +34,7 @@ function Producto() {
 
   return (
     <section
-      className="px-6 py-[60px] md:px-[120px] md:py-[96px]"
+      className="px-6 py-12 md:px-[120px] md:py-[96px]"
       style={{ borderTop: `6px solid ${product.accent}` }}
     >
       <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-2">
@@ -53,11 +53,11 @@ function Producto() {
               className="size-full object-contain"
             />
           </div>
-          <div className="flex gap-4">
+          <div className="grid grid-cols-3 gap-3 md:gap-4">
             {[0, 1, 2].map((i) => (
               <div
                 key={i}
-                className="size-[120px] overflow-hidden rounded-2xl p-2"
+                className="aspect-square w-full overflow-hidden rounded-2xl p-2"
                 style={{
                   backgroundColor: `color-mix(in srgb, ${product.accent} 15%, var(--color-crema))`,
                 }}

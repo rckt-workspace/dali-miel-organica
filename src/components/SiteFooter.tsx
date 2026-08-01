@@ -11,15 +11,15 @@ const socials = [
 
 export function SiteFooter() {
   return (
-    <footer className="relative overflow-hidden bg-verde px-6 py-16 text-crema md:px-[120px]">
+    <footer className="relative overflow-hidden bg-verde px-6 py-12 text-crema md:px-[120px] md:py-16">
       <div
         className="deco-bg absolute inset-0 opacity-[0.13]"
         style={{ backgroundImage: `url(${colibries.url})` }}
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto grid max-w-[1200px] gap-12 md:grid-cols-4">
-        <div className="flex flex-col gap-6">
+      <div className="relative mx-auto grid max-w-[1200px] grid-cols-2 gap-8 md:grid-cols-4 md:gap-12">
+        <div className="col-span-2 flex flex-col gap-6 md:col-span-1">
           <span className="inline-flex w-fit rounded-xl bg-crema px-4 py-3">
             <img src={logo.url} alt="Dalí Miel Orgánica" className="h-12 w-auto" />
           </span>
@@ -99,7 +99,7 @@ export function SiteFooter() {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-12 max-w-[1200px] border-t border-crema/15 pt-6 text-[12px] text-crema/50">
+      <div className="relative mx-auto mt-10 max-w-[1200px] border-t border-crema/15 pt-6 text-[12px] text-crema/50">
         © 2026 Dalí Miel Orgánica. Todos los derechos reservados.
       </div>
     </footer>

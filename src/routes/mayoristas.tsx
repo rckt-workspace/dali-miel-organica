@@ -87,7 +87,7 @@ function Mayoristas() {
           />
         </svg>
 
-        <div className="relative mx-auto max-w-[1440px] px-6 py-[60px] md:px-[120px] md:py-[110px]">
+        <div className="relative mx-auto max-w-[1440px] px-6 py-12 md:px-[120px] md:py-[110px]">
           <div className="flex flex-col gap-6 md:max-w-[720px]">
             <p className="eyebrow text-salvia">Para empresas</p>
             <h1 className="h1-display text-crema">Lleva Dalí a tu negocio</h1>
@@ -100,7 +100,7 @@ function Mayoristas() {
       </section>
 
       {/* Beneficios */}
-      <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
+      <section className="relative overflow-hidden bg-crema px-6 py-12 md:px-[120px] md:py-[100px]">
         <div
           className="pointer-events-none absolute inset-0 opacity-[0.15]"
           style={{
@@ -133,7 +133,7 @@ function Mayoristas() {
 
       {/* Formulario */}
       <section
-        className="bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]"
+        className="bg-verde px-6 py-12 md:px-[120px] md:py-[100px]"
         style={{ borderBottom: "1px solid rgb(183 216 170 / 0.4)" }}
       >
         <div className="mx-auto w-full max-w-[560px] rounded-2xl bg-crema p-6 md:p-10">

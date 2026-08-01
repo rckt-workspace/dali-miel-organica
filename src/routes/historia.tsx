@@ -50,7 +50,7 @@ function Historia() {
           />
         </svg>
 
-        <div className="relative mx-auto max-w-[1440px] px-6 py-[60px] md:px-[120px] md:py-[110px]">
+        <div className="relative mx-auto max-w-[1440px] px-6 pb-14 pt-12 md:px-[120px] md:py-[110px]">
           <div className="flex flex-col gap-6 md:max-w-[720px]">
             <p className="eyebrow text-crema">Nuestra historia</p>
             <h1 className="h1-display max-w-[900px] text-crema">Del panal a tu mesa</h1>
@@ -71,14 +71,14 @@ function Historia() {
             src={bosque.url}
             alt="Apicultores de Dalí revisando un panal en el bosque tropical"
             loading="lazy"
-            className="mt-10 w-full max-w-[280px] rounded-2xl object-cover md:absolute md:right-[120px] md:bottom-[70px] md:mt-0 md:w-[300px] md:max-w-none"
+            className="mt-8 w-full max-w-[260px] rounded-2xl object-cover md:absolute md:right-[120px] md:bottom-[70px] md:mt-0 md:w-[300px] md:max-w-none"
             style={{ aspectRatio: "4 / 3", boxShadow: "0 18px 45px rgba(35,91,78,0.28)" }}
           />
         </div>
       </section>
 
 
-      <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[100px]">
+      <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[100px]">
         <div
           className="deco-bg absolute inset-0 opacity-[0.12]"
           style={{ backgroundImage: `url(${formas.url})` }}
@@ -109,10 +109,10 @@ function Historia() {
         </div>
       </section>
 
-      <section className="px-6 pb-[80px] md:px-[120px] md:pb-[110px]">
+      <section className="px-6 pb-12 pt-2 md:px-[120px] md:pb-[110px] md:pt-0">
         <div className="mx-auto max-w-[1200px]">
           <h3 className="h3-display text-verde">Los bosques de La Sonora</h3>
-          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
             {galeria.map((g) => (
               <img
                 key={g.src}

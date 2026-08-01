@@ -46,33 +46,30 @@ function Index() {
             fill="var(--color-crema)"
           />
         </svg>
-        {/* Mobile: división horizontal simple */}
-        <div className="absolute inset-x-0 bottom-0 h-[42%] bg-crema md:hidden" aria-hidden="true" />
 
         <div className="relative mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
-          <div className="order-2 flex flex-col items-center justify-center gap-6 px-6 pb-[48px] pt-[32px] text-center md:order-1 md:w-[55%] md:items-start md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
+          <div className="order-2 flex flex-col items-center justify-center gap-4 px-6 pb-12 pt-6 text-center md:order-1 md:w-[55%] md:items-start md:gap-6 md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
             <p className="eyebrow text-crema">De los bosques tropicales de Colombia</p>
             <h1 className="h1-display text-crema">
               Miel cruda orgánica,
-              <br />
-              cultivada por la naturaleza misma
+              <br className="hidden md:block" /> cultivada por la naturaleza misma
             </h1>
             <p className="body-text max-w-[600px] text-crema/85">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
               sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
             </p>
-            <Link to="/tienda" className="btn-secondary mt-2">
+            <Link to="/tienda" className="btn-secondary btn-sm mt-2 md:btn-base">
               Descubre nuestra miel
             </Link>
           </div>
 
-          <div className="order-1 flex items-end justify-center px-6 pt-[40px] md:order-2 md:w-[45%] md:p-[48px]">
-            <div className="relative w-full max-w-[240px] md:max-w-[360px] md:translate-y-[26px]">
+          <div className="order-1 flex items-end justify-center px-6 pt-8 md:order-2 md:w-[45%] md:p-[48px] md:pt-[48px]">
+            <div className="relative w-full max-w-[210px] md:max-w-[360px] md:translate-y-[26px]">
               {/* gotas de miel sueltas — detalle cálido junto a la base */}
               <svg
                 aria-hidden="true"
                 viewBox="0 0 120 80"
-                className="pointer-events-none absolute -right-4 bottom-6 w-[64px] md:-right-8 md:bottom-8 md:w-[92px]"
+                className="pointer-events-none absolute -right-3 bottom-6 w-[52px] md:-right-8 md:bottom-8 md:w-[92px]"
               >
                 <path
                   d="M30 10c6 9 10 14 10 19a10 10 0 1 1-20 0c0-5 4-10 10-19Z"
@@ -107,11 +104,22 @@ function Index() {
           </div>
 
         </div>
+
+        {/* Mobile: curva bone de cierre */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 390 48"
+          preserveAspectRatio="none"
+          className="relative block h-[40px] w-full md:hidden"
+        >
+          <path d="M0,48 L0,26 C120,0 260,58 390,14 L390,48 Z" fill="var(--color-crema)" />
+        </svg>
       </section>
 
 
 
-      <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[120px]">
+
+      <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[120px]">
         <div
           className="deco-bg absolute inset-0 opacity-[0.12]"
           style={{ backgroundImage: `url(${formas.url})` }}
@@ -137,7 +145,7 @@ function Index() {
             <p className="eyebrow text-verde">Nuestra miel</p>
             <h2 className="h2-display text-verde">Tres variedades, un mismo origen</h2>
           </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 grid gap-8 md:mt-14 md:grid-cols-3">
             {pureProducts.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
@@ -145,7 +153,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
+      <section className="relative overflow-hidden bg-crema px-6 py-12 md:px-[120px] md:py-[100px]">
         <div
           className="deco-bg absolute inset-0 opacity-[0.12]"
           style={{ backgroundImage: `url(${formas.url})` }}
@@ -158,12 +166,12 @@ function Index() {
               Miel con carácter, para quien le gusta que las cosas piquen
             </h2>
           </div>
-          <div className="mt-14 grid gap-8 md:grid-cols-3">
+          <div className="mt-8 grid gap-8 md:mt-14 md:grid-cols-3">
             {spicyProducts.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}
           </div>
-          <div className="mt-12 flex justify-center">
+          <div className="mt-8 flex justify-center md:mt-12">
             <Link to="/tienda" search={{ linea: "picante" }} className="btn-picante">
               Ver la línea picante
             </Link>
@@ -171,15 +179,19 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-verde px-6 py-[80px] md:px-[120px]">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-start gap-5 md:items-center">
-            <Store className="size-12 shrink-0 text-salvia" strokeWidth={1.4} aria-hidden="true" />
-            <div className="max-w-[640px]">
-              <h3 className="font-display text-[28px] leading-tight text-crema">
+      <section className="bg-verde px-6 py-12 md:px-[120px] md:py-[80px]">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-6 md:flex-row md:items-center md:justify-between md:gap-8">
+          <div className="flex items-start gap-4 md:items-center md:gap-5">
+            <Store
+              className="size-9 shrink-0 text-salvia md:size-12"
+              strokeWidth={1.4}
+              aria-hidden="true"
+            />
+            <div className="min-w-0 max-w-[640px]">
+              <h3 className="font-display text-[22px] leading-tight text-crema md:text-[28px]">
                 ¿Tienes un negocio?
               </h3>
-              <p className="body-text mt-3 text-crema/85">
+              <p className="body-text mt-2 text-crema/85 md:mt-3">
                 Lleva Dalí a tu restaurante, tienda o empresa con condiciones especiales para
                 compras al por mayor.
               </p>
@@ -187,10 +199,11 @@ function Index() {
           </div>
           <Link
             to="/mayoristas"
-            className="shrink-0 rounded-full bg-salvia px-8 py-4 text-[16px] font-semibold text-verde transition-colors hover:bg-salvia-dark"
+            className="w-full shrink-0 rounded-full bg-salvia px-8 py-4 text-center text-[15px] font-semibold text-verde transition-colors hover:bg-salvia-dark sm:w-auto md:text-[16px]"
           >
             Conoce nuestras condiciones
           </Link>
+
         </div>
       </section>
 
@@ -211,7 +224,7 @@ function Index() {
             loading="lazy"
             width={1024}
             height={1400}
-            className="h-[420px] w-full object-cover object-[center_25%] md:h-full md:max-h-[640px]"
+            className="h-[300px] w-full object-cover object-[center_25%] sm:h-[420px] md:h-full md:max-h-[640px]"
             style={{ boxShadow: "0 15px 40px rgba(35,91,78,0.35)" }}
           />
 
@@ -228,7 +241,7 @@ function Index() {
           </span>
         </div>
 
-        <div className="relative flex flex-col justify-center gap-5 px-6 py-14 md:px-[100px] md:py-20">
+        <div className="relative flex flex-col justify-center gap-5 px-6 py-12 md:px-[100px] md:py-20">
           <p className="eyebrow text-salvia">Nuestra filosofía</p>
           <h2 className="h2-display text-crema">
             Parte del respeto, la humildad
@@ -245,7 +258,7 @@ function Index() {
 
 
 
-      <section className="flex flex-col items-center gap-6 px-6 py-[100px] text-center">
+      <section className="flex flex-col items-center gap-6 px-6 py-14 text-center md:py-[100px]">
         <h2 className="h2-display text-verde">Lleva Dalí a tu mesa</h2>
         <Link to="/tienda" className="btn-primary">
           Ir a la tienda

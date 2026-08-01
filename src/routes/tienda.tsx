@@ -37,7 +37,7 @@ function Tienda() {
   const list = picante ? spicyProducts : pureProducts;
 
   return (
-    <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[96px]">
+    <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[96px]">
       <div
         className="deco-bg absolute inset-0 opacity-[0.12]"
         style={{ backgroundImage: `url(${formas.url})` }}
@@ -95,7 +95,7 @@ function Tienda() {
           })}
         </div>
 
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        <div className="mt-8 grid gap-8 md:mt-12 md:grid-cols-3">
           {list.map((p) => (
             <ProductCard key={p.slug} product={p} shop />
           ))}

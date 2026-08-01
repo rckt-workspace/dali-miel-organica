@@ -18,7 +18,7 @@ function Carrito() {
   const { items, setQty, remove } = useCart();
 
   return (
-    <section className="px-6 py-[60px] md:px-[120px] md:py-[96px]">
+    <section className="px-6 py-12 md:px-[120px] md:py-[96px]">
       <div className="mx-auto max-w-[1000px]">
         <h1 className="h1-display text-verde">Tu carrito</h1>
 

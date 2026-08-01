@@ -23,7 +23,7 @@ function Contacto() {
 
   return (
     <section
-      className="relative overflow-hidden bg-verde px-6 py-[60px] md:px-[120px] md:py-[100px]"
+      className="relative overflow-hidden bg-verde px-6 py-12 md:px-[120px] md:py-[100px]"
       style={{ borderBottom: "1px solid rgb(183 216 170 / 0.4)" }}
     >
 
