@@ -119,7 +119,7 @@ function Index() {
 
 
 
-      <section className="relative overflow-hidden px-6 py-[60px] md:px-[120px] md:py-[120px]">
+      <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[120px]">
         <div
           className="deco-bg absolute inset-0 opacity-[0.12]"
           style={{ backgroundImage: `url(${formas.url})` }}
@@ -153,7 +153,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
+      <section className="relative overflow-hidden bg-crema px-6 py-12 md:px-[120px] md:py-[100px]">
         <div
           className="deco-bg absolute inset-0 opacity-[0.12]"
           style={{ backgroundImage: `url(${formas.url})` }}
@@ -179,7 +179,7 @@ function Index() {
         </div>
       </section>
 
-      <section className="bg-verde px-6 py-[80px] md:px-[120px]">
+      <section className="bg-verde px-6 py-12 md:px-[120px]">
         <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
           <div className="flex items-start gap-5 md:items-center">
             <Store className="size-12 shrink-0 text-salvia" strokeWidth={1.4} aria-hidden="true" />
@@ -253,7 +253,7 @@ function Index() {
 
 
 
-      <section className="flex flex-col items-center gap-6 px-6 py-[100px] text-center">
+      <section className="flex flex-col items-center gap-6 px-6 py-14 text-center">
         <h2 className="h2-display text-verde">Lleva Dalí a tu mesa</h2>
         <Link to="/tienda" className="btn-primary">
           Ir a la tienda

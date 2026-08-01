@@ -34,7 +34,7 @@ function Producto() {
 
   return (
     <section
-      className="px-6 py-[60px] md:px-[120px] md:py-[96px]"
+      className="px-6 py-12 md:px-[120px] md:py-[96px]"
       style={{ borderTop: `6px solid ${product.accent}` }}
     >
       <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-2">
