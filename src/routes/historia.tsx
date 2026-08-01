@@ -50,7 +50,7 @@ function Historia() {
           />
         </svg>
 
-        <div className="relative mx-auto max-w-[1440px] px-6 py-12 md:px-[120px] md:py-[110px]">
+        <div className="relative mx-auto max-w-[1440px] px-6 pb-14 pt-12 md:px-[120px] md:py-[110px]">
           <div className="flex flex-col gap-6 md:max-w-[720px]">
             <p className="eyebrow text-crema">Nuestra historia</p>
             <h1 className="h1-display max-w-[900px] text-crema">Del panal a tu mesa</h1>
@@ -109,7 +109,7 @@ function Historia() {
         </div>
       </section>
 
-      <section className="px-6 pb-12 md:px-[120px] md:pb-[110px]">
+      <section className="px-6 pb-12 pt-2 md:px-[120px] md:pb-[110px] md:pt-0">
         <div className="mx-auto max-w-[1200px]">
           <h3 className="h3-display text-verde">Los bosques de La Sonora</h3>
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
