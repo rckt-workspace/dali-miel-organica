@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      leads_b2b: {
+        Row: {
+          contacto: string
+          created_at: string
+          email: string
+          empresa: string
+          id: string
+          mensaje: string | null
+          telefono: string
+          tipo_negocio: string
+          volumen: string | null
+        }
+        Insert: {
+          contacto: string
+          created_at?: string
+          email: string
+          empresa: string
+          id?: string
+          mensaje?: string | null
+          telefono: string
+          tipo_negocio: string
+          volumen?: string | null
+        }
+        Update: {
+          contacto?: string
+          created_at?: string
+          email?: string
+          empresa?: string
+          id?: string
+          mensaje?: string | null
+          telefono?: string
+          tipo_negocio?: string
+          volumen?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
