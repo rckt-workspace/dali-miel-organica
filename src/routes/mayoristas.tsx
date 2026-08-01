@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Package, Tag, Leaf } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import formas from "@/assets/formas-organicas.png.asset.json";
+import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 
 export const Route = createFileRoute("/mayoristas")({
   head: () => ({
@@ -98,8 +100,20 @@ function Mayoristas() {
       </section>
 
       {/* Beneficios */}
-      <section className="bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
-        <div className="mx-auto grid max-w-[1100px] gap-10 md:grid-cols-3 md:gap-16">
+      <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
+        <div
+          className="deco-bg absolute inset-0 opacity-[0.12]"
+          style={{ backgroundImage: `url(${formas.url})` }}
+          aria-hidden="true"
+        />
+        <img
+          src={osoHormiguero.url}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute bottom-4 right-4 hidden w-[170px] mix-blend-multiply opacity-[0.9] lg:block"
+        />
+        <div className="relative mx-auto grid max-w-[1100px] gap-10 md:grid-cols-3 md:gap-16">
           {beneficios.map(({ Icon, title, text }) => (
             <div key={title} className="flex flex-col gap-4">
               <span className="flex size-12 items-center justify-center rounded-full bg-salvia text-verde">
