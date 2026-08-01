@@ -144,6 +144,31 @@ function Index() {
         </div>
       </section>
 
+      <section className="bg-verde px-6 py-[80px] md:px-[120px]">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-8 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-start gap-5 md:items-center">
+            <Store className="size-12 shrink-0 text-salvia" strokeWidth={1.4} aria-hidden="true" />
+            <div className="max-w-[640px]">
+              <h3 className="font-display text-[28px] leading-tight text-crema">
+                ¿Tienes un negocio?
+              </h3>
+              <p className="body-text mt-3 text-crema/85">
+                Lleva Dalí a tu restaurante, tienda o empresa con condiciones especiales para
+                compras al por mayor.
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/mayoristas"
+            className="shrink-0 rounded-full bg-salvia px-8 py-4 text-[16px] font-semibold text-verde transition-colors hover:bg-salvia-dark"
+          >
+            Conoce nuestras condiciones
+          </Link>
+        </div>
+      </section>
+
+
+
       <section className="relative overflow-hidden bg-crema px-6 py-[60px] md:px-[120px] md:py-[100px]">
         <div
           className="deco-bg absolute inset-0 opacity-[0.12]"
