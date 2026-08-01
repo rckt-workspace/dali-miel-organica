@@ -103,6 +103,12 @@ function Index() {
             </div>
           </div>
 
+          <div className="order-3 flex justify-center px-6 pb-12 pt-4 md:hidden">
+            <Link to="/tienda" className="btn-secondary btn-sm">
+              Descubre nuestra miel
+            </Link>
+          </div>
+
         </div>
 
         {/* Mobile: curva bone de cierre */}
