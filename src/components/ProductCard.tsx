@@ -3,7 +3,7 @@ import type { Product } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductBadges } from "@/components/ProductBadges";
 
-export function ProductCard({ product, shop = false }: { product: Product; shop?: boolean }) {
+export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
   const picante = product.line === "picante";
 
