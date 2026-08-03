@@ -8,7 +8,7 @@ export type ProductLine = "pura" | "picante";
 
 export type BadgeIcon = "leaf" | "minerals" | "glycemic" | "pressure" | "sleep" | "shield" | "flame";
 
-export type Badge = { icon: BadgeIcon; label: string };
+export type Badge = { icon: BadgeIcon; label: string; description?: string };
 
 export type Product = {
   slug: string;
@@ -31,9 +31,21 @@ export const products: Product[] = [
     name: "Acacia",
     tasting: "Notas maderosas y robustas al paladar.",
     badges: [
-      { icon: "leaf", label: "Natural no procesada" },
-      { icon: "minerals", label: "Rica en sales minerales" },
-      { icon: "glycemic", label: "Bajo glicémico" },
+      {
+        icon: "leaf",
+        label: "Natural no procesada",
+        description: "Miel 100% natural, sin procesos industriales ni aditivos.",
+      },
+      {
+        icon: "minerals",
+        label: "Rica en sales minerales",
+        description: "Un aporte natural de minerales esenciales en cada cucharada.",
+      },
+      {
+        icon: "glycemic",
+        label: "Bajo glicémico",
+        description: "Ideal para quienes cuidan sus niveles de azúcar en sangre.",
+      },
     ],
     benefits: ["Natural no procesada", "Rica en sales minerales", "Bajo glicémico"],
     price: "$XX.XXX COP",
@@ -48,9 +60,21 @@ export const products: Product[] = [
     name: "Multifloral",
     tasting: "Notas frutales y florales al paladar.",
     badges: [
-      { icon: "leaf", label: "Natural no procesada" },
-      { icon: "pressure", label: "Reduce presión arterial" },
-      { icon: "sleep", label: "Mejora calidad del sueño" },
+      {
+        icon: "leaf",
+        label: "Natural no procesada",
+        description: "Miel 100% natural, sin procesos industriales ni aditivos.",
+      },
+      {
+        icon: "pressure",
+        label: "Reduce presión arterial",
+        description: "Aporta beneficios cardiovasculares como parte de una dieta balanceada.",
+      },
+      {
+        icon: "sleep",
+        label: "Mejora calidad del sueño",
+        description: "Un aliado natural para conciliar un sueño más reparador.",
+      },
     ],
     benefits: ["Natural no procesada", "Reduce presión arterial", "Mejora calidad del sueño"],
     price: "$XX.XXX COP",
@@ -65,9 +89,21 @@ export const products: Product[] = [
     name: "Caucho",
     tasting: "Notas cítricas y suaves al paladar.",
     badges: [
-      { icon: "leaf", label: "Natural no procesada" },
-      { icon: "shield", label: "Potencial antibacteriano" },
-      { icon: "glycemic", label: "Potencial antiinflamatorio" },
+      {
+        icon: "leaf",
+        label: "Natural no procesada",
+        description: "Miel 100% natural, sin procesos industriales ni aditivos.",
+      },
+      {
+        icon: "shield",
+        label: "Potencial antibacteriano",
+        description: "Propiedades naturales que apoyan las defensas del cuerpo.",
+      },
+      {
+        icon: "glycemic",
+        label: "Potencial antiinflamatorio",
+        description: "Contribuye a reducir procesos inflamatorios de forma natural.",
+      },
     ],
     benefits: ["Natural no procesada", "Potencial antibacteriano", "Potencial antiinflamatorio"],
     price: "$XX.XXX COP",
