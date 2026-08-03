@@ -124,10 +124,11 @@ function Producto() {
             <ProductBadges badges={product.badges} accent={product.accent} size="md" />
           </div>
 
+          <div className="border-t border-verde/15 pt-6">
+            <h2 className="h3-display text-verde">Beneficios</h2>
+            <p className="body-text mt-3 text-verde/85">{product.detailedBenefits}</p>
+          </div>
 
-          <p className="body-text border-t border-verde/15 pt-6 text-verde/85">
-            {longDescription}
-          </p>
         </div>
       </div>
     </section>
