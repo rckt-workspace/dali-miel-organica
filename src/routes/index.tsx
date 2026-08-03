@@ -51,9 +51,10 @@ function Index() {
           <div className="order-1 flex flex-col items-center justify-center gap-4 px-6 pb-6 pt-8 text-center md:order-1 md:w-[55%] md:items-start md:gap-6 md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
             <p className="eyebrow text-crema">De los bosques tropicales de Colombia</p>
             <h1 className="h1-display text-crema">
-              Miel cruda orgánica,
-              <br className="hidden md:block" /> cultivada por la naturaleza misma
+              Miel que nace
+              <br className="hidden md:block" /> donde Colombia respira
             </h1>
+
             <p className="body-text max-w-[600px] text-crema/85">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
               sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
