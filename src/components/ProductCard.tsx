@@ -40,25 +40,27 @@ export function ProductCard({ product, shop = false }: { product: Product; shop?
 
       <ProductBadges badges={product.badges} accent={product.accent} />
 
-      {shop && (
-        <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+      <div className="mt-auto flex flex-col gap-3 pt-2">
+        <div>
           <span className="body-text font-semibold text-verde">{product.price}</span>
-          <button
-            className={`btn-sm ${picante ? "btn-picante" : "btn-primary"}`}
-            onClick={() =>
-              add({
-                slug: product.slug,
-                name: product.name,
-                size: product.sizes[0],
-                image: product.image,
-                price: product.price,
-              })
-            }
-          >
-            Añadir al carrito
-          </button>
+          <span className="caption block text-verde/50">Precio de referencia — próximamente</span>
         </div>
-      )}
+        <button
+          className={`w-full ${picante ? "btn-picante" : "btn-primary"} btn-sm`}
+          onClick={() =>
+            add({
+              slug: product.slug,
+              name: product.name,
+              size: product.sizes[0],
+              image: product.image,
+              price: product.price,
+            })
+          }
+        >
+          Comprar
+        </button>
+      </div>
+
     </article>
   );
 }
