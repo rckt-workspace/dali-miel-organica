@@ -146,7 +146,7 @@ function Historia() {
         </div>
       </section>
 
-      <section className="px-6 pb-12 pt-2 md:px-[120px] md:pb-[110px] md:pt-0">
+      <section className="px-6 pb-12 pt-12 md:px-[120px] md:pb-[110px] md:pt-[80px]">
         <div className="mx-auto max-w-[1200px]">
           <h3 className="h3-display text-verde">Los bosques de La Sonora</h3>
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3 md:gap-4">
