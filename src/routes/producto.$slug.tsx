@@ -1,6 +1,7 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { getProduct } from "@/lib/products";
+import { Sun } from "lucide-react";
+import { getProduct, pureProducts } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductBadges } from "@/components/ProductBadges";
 
@@ -120,7 +121,7 @@ function Producto() {
             {added ? "Añadido ✓" : "Añadir al carrito"}
           </button>
 
-          <div className="max-w-[420px] pt-2">
+          <div className="max-w-[460px] pt-2">
             <ProductBadges badges={product.badges} accent={product.accent} size="md" />
           </div>
 
@@ -129,6 +130,61 @@ function Producto() {
             <p className="body-text mt-3 text-verde/85">{product.detailedBenefits}</p>
           </div>
 
+          <div className="border-t border-verde/15 pt-6">
+            <h2 className="h3-display text-verde">Ficha técnica</h2>
+            <dl className="mt-4 divide-y divide-verde/10">
+              {[
+                ["Presentación", product.sizes.join(" · ")],
+                ["Origen", "Bosques tropicales de Colombia — Orinoquía (Hacienda La Sonora)"],
+                ["Tipo", "Miel cruda, no procesada"],
+                ["Certificación", "100% Colombiana — denominación de origen"],
+              ].map(([k, v]) => (
+                <div key={k} className="grid grid-cols-[110px_1fr] gap-4 py-3">
+                  <dt className="caption text-verde/60">{k}</dt>
+                  <dd className="text-[15px] leading-snug text-verde">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div
+            className="flex items-start gap-3 rounded-2xl p-5"
+            style={{ backgroundColor: `color-mix(in srgb, ${product.accent} 20%, var(--color-crema))` }}
+          >
+            <Sun className="mt-0.5 size-5 shrink-0 text-verde" strokeWidth={1.5} aria-hidden="true" />
+            <div>
+              <h3 className="text-[15px] font-medium text-verde">Cuidado y conservación</h3>
+              <p className="mt-1 text-[14px] leading-snug text-verde/80">
+                Mantener en un lugar fresco, alejado de la luz solar directa.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="mx-auto mt-16 max-w-[1200px] border-t border-verde/15 pt-10 md:mt-24">
+        <h2 className="h3-display text-verde">¿Cuál llevar?</h2>
+        <p className="body-text mt-2 text-verde/70">
+          Compara nuestras tres variedades puras y elige la que más te acompañe.
+        </p>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {pureProducts.map((p) => (
+            <Link
+              key={p.slug}
+              to="/producto/$slug"
+              params={{ slug: p.slug }}
+              className="card-soft flex flex-col gap-2 p-6 transition-transform hover:scale-[1.02]"
+              style={{ borderTop: `6px solid ${p.accent}` }}
+            >
+              <span className="h3-display text-verde">{p.name}</span>
+              <span className="text-[14px] leading-snug text-verde/80">{p.tasting}</span>
+              <span className="caption mt-2 text-verde/60">Beneficio principal</span>
+              <span className="text-[15px] leading-snug text-verde">{p.badges[1]?.label}</span>
+              <span className="mt-3 text-[14px] underline text-verde/70">
+                {p.slug === product.slug ? "Estás viendo esta" : "Ver esta miel"}
+              </span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
