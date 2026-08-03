@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { HeartHandshake, Leaf, Award } from "lucide-react";
 import bosque from "@/assets/apicultores.png.asset.json";
 import panalApicultor from "@/assets/panal-apicultor.png.asset.json";
 import panalAbejas from "@/assets/panal-abejas.png.asset.json";
@@ -106,6 +107,42 @@ function Historia() {
             la huella humana, hoy vuelven a habitar nuestros bosques. Dalí es vida, regeneración,
             educación y santuario de la llanura colombiana.
           </p>
+        </div>
+      </section>
+
+      <section className="bg-verde px-6 py-12 md:px-[120px] md:py-[100px]">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="flex flex-col gap-3">
+            <p className="eyebrow text-salvia">Lo que nos mueve</p>
+            <h2 className="h2-display text-crema">Nuestros Principios</h2>
+          </div>
+          <div className="mt-8 grid gap-8 md:mt-12 md:grid-cols-3 md:gap-10">
+            {[
+              {
+                Icon: HeartHandshake,
+                title: "Honesta y transparente",
+                text: "Hablamos claro y directo sobre nuestros productos. Nuestra miel es orgánica, directamente de los bosques tropicales de Colombia, sin químicos ni procesos industriales, del panal a la mesa.",
+              },
+              {
+                Icon: Leaf,
+                title: "Apicultura responsable",
+                text: "Contamos con apiarios sostenibles y procesos 100% orgánicos, sin sobrecargar la tierra ni usar métodos agresivos de producción. Generamos vida y empleo, anteponiendo el bienestar de nuestro ecosistema.",
+              },
+              {
+                Icon: Award,
+                title: "Calidad excepcional",
+                text: "Nuestros apicultores tienen experiencia y se capacitan día a día para brindar lo mejor, porque la única forma de tener un producto de calidad es con compromiso.",
+              },
+            ].map(({ Icon, title, text }) => (
+              <div key={title} className="flex flex-col gap-3">
+                <Icon className="size-9 text-salvia" strokeWidth={1.4} aria-hidden="true" />
+                <h3 className="font-display text-[22px] leading-tight text-crema md:text-[24px]">
+                  {title}
+                </h3>
+                <p className="body-text text-crema/85">{text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 

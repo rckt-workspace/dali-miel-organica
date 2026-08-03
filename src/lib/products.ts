@@ -17,6 +17,7 @@ export type Product = {
   badges: Badge[];
   benefits: string[];
   price: string;
+  detailedBenefits: string;
   sizes: string[];
   image: string;
   accent: string;
@@ -26,6 +27,7 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "acacia",
+    detailedBenefits: "Notas maderosas y robustas. Reduce la ansiedad, facilita la digestión, ayuda a conciliar el sueño y mejora la circulación. Contiene 90% en sales minerales.",
     name: "Acacia",
     tasting: "Notas maderosas y robustas al paladar.",
     badges: [
@@ -42,6 +44,7 @@ export const products: Product[] = [
   },
   {
     slug: "multifloral",
+    detailedBenefits: "Notas frutales y florales. Antiinflamatorio y rico en proteínas. Ideal como endulzante primario — ayuda a mejorar la calidad del sueño y puede apoyar procesos de sustitución de azúcar.",
     name: "Multifloral",
     tasting: "Notas frutales y florales al paladar.",
     badges: [
@@ -58,6 +61,7 @@ export const products: Product[] = [
   },
   {
     slug: "caucho",
+    detailedBenefits: "Notas cítricas y suaves. Ayuda a reducir el colesterol malo, protege el corazón, tiene potencial antibacterial y es rico en antioxidantes.",
     name: "Caucho",
     tasting: "Notas cítricas y suaves al paladar.",
     badges: [
@@ -74,6 +78,7 @@ export const products: Product[] = [
   },
   {
     slug: "chile-morita",
+    detailedBenefits: "Miel orgánica infusionada con chile morita. Toque ahumado con picor medio, ideal para maridar con quesos, pizzas y carnes.",
     name: "Chile Morita",
     tasting:
       "Miel orgánica infusionada con chile morita — un toque ahumado y picante para romper la rutina de tu mesa.",
@@ -91,6 +96,7 @@ export const products: Product[] = [
   },
   {
     slug: "chile-de-arbol",
+    detailedBenefits: "Miel orgánica infusionada con chile de árbol. Picor vivo y directo, ideal para maridar con quesos y carnes.",
     name: "Chile de Árbol",
     tasting:
       "Miel orgánica infusionada con chile de árbol — picor vivo y directo, ideal para maridar con quesos y carnes.",

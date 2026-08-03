@@ -1,5 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Store } from "lucide-react";
+import { Store, Star } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { ProductCard } from "@/components/ProductCard";
 import { pureProducts, spicyProducts } from "@/lib/products";
 
@@ -51,9 +57,10 @@ function Index() {
           <div className="order-1 flex flex-col items-center justify-center gap-4 px-6 pb-6 pt-8 text-center md:order-1 md:w-[55%] md:items-start md:gap-6 md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
             <p className="eyebrow text-crema">De los bosques tropicales de Colombia</p>
             <h1 className="h1-display text-crema">
-              Miel cruda orgánica,
-              <br className="hidden md:block" /> cultivada por la naturaleza misma
+              Miel que nace
+              <br className="hidden md:block" /> donde Colombia respira
             </h1>
+
             <p className="body-text max-w-[600px] text-crema/85">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
               sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
@@ -263,6 +270,74 @@ function Index() {
       </section>
 
 
+
+      {/* Testimonios — placeholder temporal hasta tener reseñas reales de clientes */}
+      <section className="bg-crema px-6 py-12 md:px-[120px] md:py-[100px]">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <p className="eyebrow text-verde">Lo que dicen</p>
+            <h2 className="h2-display text-verde">Miel que se recomienda sola</h2>
+          </div>
+          <div className="mt-8 grid gap-6 md:mt-12 md:grid-cols-3">
+            {[
+              "La mejor miel que he probado, se nota que es 100% natural.",
+              "Me encanta que puedo saber exactamente de dónde viene mi miel.",
+              "Calidad excepcional, ya es parte de mi desayuno todos los días.",
+            ].map((quote) => (
+              <figure key={quote} className="card-soft flex flex-col gap-4 bg-crema p-7">
+                <div className="flex gap-1" aria-label="5 de 5 estrellas">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star
+                      key={i}
+                      className="size-4"
+                      style={{ color: "var(--color-honey)", fill: "var(--color-honey)" }}
+                      aria-hidden="true"
+                    />
+                  ))}
+                </div>
+                <blockquote className="body-text text-verde">“{quote}”</blockquote>
+                <figcaption className="caption text-verde/60">Cliente verificado</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 py-12 md:px-[120px] md:py-[100px]">
+        <div className="mx-auto max-w-[820px]">
+          <div className="flex flex-col items-center gap-3 text-center">
+            <p className="eyebrow text-verde">Preguntas frecuentes</p>
+            <h2 className="h2-display text-verde">Lo que nos preguntan seguido</h2>
+          </div>
+          <Accordion type="single" collapsible className="mt-8 md:mt-12">
+            {[
+              {
+                q: "¿La miel de Dalí es orgánica?",
+                a: "Sí, es 100% orgánica — sin químicos ni procesos industriales, del panal a la mesa.",
+              },
+              {
+                q: "¿La miel es procesada o cruda?",
+                a: "Es miel cruda, no procesada — así aparece certificado directamente en la etiqueta de cada producto.",
+              },
+              {
+                q: "¿Cómo debo almacenar la miel?",
+                a: "Mantener en un lugar fresco, alejado de la luz solar — instrucción que viene impresa en la etiqueta del producto.",
+              },
+              {
+                q: "¿De dónde viene la miel Dalí?",
+                a: "De los bosques tropicales de Colombia, en la Orinoquia, específicamente de la hacienda La Sonora — con denominación de origen colombiana.",
+              },
+            ].map((item) => (
+              <AccordionItem key={item.q} value={item.q} className="border-verde/15">
+                <AccordionTrigger className="text-left font-display text-[18px] text-verde md:text-[20px]">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="body-text text-verde/85">{item.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
 
       <section className="flex flex-col items-center gap-6 px-6 py-14 text-center md:py-[100px]">
         <h2 className="h2-display text-verde">Lleva Dalí a tu mesa</h2>
