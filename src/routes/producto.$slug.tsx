@@ -4,6 +4,7 @@ import { Sun } from "lucide-react";
 import { getProduct, pureProducts } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductBadges } from "@/components/ProductBadges";
+import { ProductGallery } from "@/components/ProductGallery";
 
 export const Route = createFileRoute("/producto/$slug")({
   loader: ({ params }) => {
@@ -39,42 +40,12 @@ function Producto() {
       style={{ borderTop: `6px solid ${product.accent}` }}
     >
       <div className="mx-auto grid max-w-[1200px] gap-12 md:grid-cols-2">
-        <div className="flex flex-col gap-4">
-          <div
-            className="card-soft flex aspect-[4/5] w-full max-w-[560px] items-center justify-center overflow-hidden p-6"
-            style={{
-              backgroundColor: `color-mix(in srgb, ${product.accent} 15%, var(--color-crema))`,
-            }}
-          >
-            <img
-              src={product.image}
-              alt={`Miel ${product.name} de Dalí`}
-              width={1024}
-              height={1280}
-              className="size-full object-contain"
-            />
-          </div>
-          <div className="grid grid-cols-3 gap-3 md:gap-4">
-            {[0, 1, 2].map((i) => (
-              <div
-                key={i}
-                className="aspect-square w-full overflow-hidden rounded-2xl p-2"
-                style={{
-                  backgroundColor: `color-mix(in srgb, ${product.accent} 15%, var(--color-crema))`,
-                }}
-              >
-                <img
-                  src={product.image}
-                  alt={`Miel ${product.name}, vista ${i + 1}`}
-                  loading="lazy"
-                  width={120}
-                  height={150}
-                  className="size-full object-contain"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        <ProductGallery
+          images={product.gallery?.length ? product.gallery : [product.image]}
+          name={product.name}
+          accent={product.accent}
+        />
+
 
         <div className="flex flex-col gap-5 md:py-4">
           <p className={`eyebrow ${accentText}`}>{picante ? "Dalí Picante" : "Miel orgánica"}</p>

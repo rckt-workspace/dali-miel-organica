@@ -1,4 +1,7 @@
 import acacia from "@/assets/acacia.png.asset.json";
+import acaciaG1 from "@/assets/acacia-galeria-18.png.asset.json";
+import acaciaG2 from "@/assets/acacia-galeria-19.png.asset.json";
+import acaciaG3 from "@/assets/acacia-galeria-20.png.asset.json";
 import multifloral from "@/assets/multifloral.png.asset.json";
 import caucho from "@/assets/caucho.png.asset.json";
 import morita from "@/assets/chile-morita.jpg.asset.json";
@@ -20,6 +23,7 @@ export type Product = {
   detailedBenefits: string;
   sizes: string[];
   image: string;
+  gallery?: string[];
   accent: string;
   line: ProductLine;
 };
@@ -51,6 +55,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["500 GR"],
     image: acacia.url,
+    gallery: [acaciaG1.url, acaciaG2.url, acaciaG3.url],
     accent: "#FEAEBB",
     line: "pura",
   },
