@@ -31,6 +31,7 @@ function Producto() {
   const { add } = useCart();
   const [size, setSize] = useState(product.sizes[0]);
   const [added, setAdded] = useState(false);
+  const [showMore, setShowMore] = useState(false);
   const picante = product.line === "picante";
   const accentText = picante ? "text-picante-naranja" : "text-verde";
 
