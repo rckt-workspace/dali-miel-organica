@@ -88,6 +88,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["500 GR"],
     image: multifloral.url,
+    gallery: [multiG1.url, multiG2.url, multiG3.url],
     accent: "#9CDCED",
     line: "pura",
   },
