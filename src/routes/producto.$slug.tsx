@@ -4,6 +4,7 @@ import { Sun } from "lucide-react";
 import { getProduct, pureProducts } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductBadges } from "@/components/ProductBadges";
+import { ProductGallery } from "@/components/ProductGallery";
 
 export const Route = createFileRoute("/producto/$slug")({
   loader: ({ params }) => {
