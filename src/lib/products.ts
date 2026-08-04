@@ -15,6 +15,9 @@ import moritaG1 from "@/assets/morita-g1.png.asset.json";
 import moritaG2 from "@/assets/morita-g2.png.asset.json";
 import moritaG3 from "@/assets/morita-g3.png.asset.json";
 import arbol from "@/assets/chile-arbol.jpg.asset.json";
+import arbolG1 from "@/assets/arbol-g1.png.asset.json";
+import arbolG2 from "@/assets/arbol-g2.png.asset.json";
+import arbolG3 from "@/assets/arbol-g3.png.asset.json";
 
 export type ProductLine = "pura" | "picante";
 
@@ -162,6 +165,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["300g"],
     image: arbol.url,
+    gallery: [arbolG1.url, arbolG2.url, arbolG3.url],
     accent: "#D98C6B",
     line: "picante",
   },
