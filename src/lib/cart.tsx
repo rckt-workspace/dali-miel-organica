@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 export type CartItem = {
@@ -41,7 +42,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items]);
 
-  const add: CartCtx["add"] = (item, qty = 1) =>
+  const add: CartCtx["add"] = (item, qty = 1) => {
+    toast.success("Producto agregado al carrito", { description: `${item.name} — ${item.size}` });
     setItems((prev) => {
       const found = prev.find((i) => i.slug === item.slug && i.size === item.size);
       if (found) {
@@ -49,6 +51,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       }
       return [...prev, { ...item, qty }];
     });
+  };
 
   const setQty: CartCtx["setQty"] = (slug, size, qty) =>
     setItems((prev) =>
