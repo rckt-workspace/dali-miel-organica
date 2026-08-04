@@ -23,6 +23,7 @@ export type Product = {
   detailedBenefits: string;
   sizes: string[];
   image: string;
+  gallery?: string[];
   accent: string;
   line: ProductLine;
 };
