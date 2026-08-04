@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Sun } from "lucide-react";
+import { Sun, ChevronDown } from "lucide-react";
 import { getProduct, pureProducts } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductBadges } from "@/components/ProductBadges";
@@ -31,6 +31,7 @@ function Producto() {
   const { add } = useCart();
   const [size, setSize] = useState(product.sizes[0]);
   const [added, setAdded] = useState(false);
+  const [showMore, setShowMore] = useState(false);
   const picante = product.line === "picante";
   const accentText = picante ? "text-picante-naranja" : "text-verde";
 
@@ -101,35 +102,62 @@ function Producto() {
             <p className="body-text mt-3 text-verde/85">{product.detailedBenefits}</p>
           </div>
 
-          <div className="border-t border-verde/15 pt-6">
-            <h2 className="h3-display text-verde">Ficha técnica</h2>
-            <dl className="mt-4 divide-y divide-verde/10">
-              {[
-                ["Presentación", product.sizes.join(" · ")],
-                ["Origen", "Bosques tropicales de Colombia — Orinoquía (Hacienda La Sonora)"],
-                ["Tipo", "Miel cruda, no procesada"],
-                ["Certificación", "100% Colombiana — denominación de origen"],
-              ].map(([k, v]) => (
-                <div key={k} className="grid grid-cols-[110px_1fr] gap-4 py-3">
-                  <dt className="caption text-verde/60">{k}</dt>
-                  <dd className="text-[15px] leading-snug text-verde">{v}</dd>
-                </div>
-              ))}
-            </dl>
+          <div>
+            <button
+              type="button"
+              onClick={() => setShowMore((v) => !v)}
+              aria-expanded={showMore}
+              className="inline-flex items-center gap-2 text-[15px] font-medium text-verde underline-offset-4 transition-opacity hover:opacity-70"
+            >
+              {showMore ? "Ver menos" : "Ver más"}
+              <ChevronDown
+                className={`size-4 transition-transform duration-300 ${showMore ? "rotate-180" : ""}`}
+                strokeWidth={1.75}
+                aria-hidden="true"
+              />
+            </button>
           </div>
 
           <div
-            className="flex items-start gap-3 rounded-2xl p-5"
-            style={{ backgroundColor: `color-mix(in srgb, ${product.accent} 20%, var(--color-crema))` }}
+            className={`grid transition-all duration-500 ease-out ${
+              showMore ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+            }`}
           >
-            <Sun className="mt-0.5 size-5 shrink-0 text-verde" strokeWidth={1.5} aria-hidden="true" />
-            <div>
-              <h3 className="text-[15px] font-medium text-verde">Cuidado y conservación</h3>
-              <p className="mt-1 text-[14px] leading-snug text-verde/80">
-                Mantener en un lugar fresco, alejado de la luz solar directa.
-              </p>
+            <div className="overflow-hidden">
+              <div className="flex flex-col gap-8">
+                <div className="border-t border-verde/15 pt-6">
+                  <h2 className="h3-display text-verde">Ficha técnica</h2>
+                  <dl className="mt-4 divide-y divide-verde/10">
+                    {[
+                      ["Presentación", product.sizes.join(" · ")],
+                      ["Origen", "Bosques tropicales de Colombia — Orinoquía (Hacienda La Sonora)"],
+                      ["Tipo", "Miel cruda, no procesada"],
+                      ["Certificación", "100% Colombiana — denominación de origen"],
+                    ].map(([k, v]) => (
+                      <div key={k} className="grid grid-cols-[110px_1fr] gap-4 py-3">
+                        <dt className="caption text-verde/60">{k}</dt>
+                        <dd className="text-[15px] leading-snug text-verde">{v}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+
+                <div
+                  className="flex items-start gap-3 rounded-2xl p-5"
+                  style={{ backgroundColor: `color-mix(in srgb, ${product.accent} 20%, var(--color-crema))` }}
+                >
+                  <Sun className="mt-0.5 size-5 shrink-0 text-verde" strokeWidth={1.5} aria-hidden="true" />
+                  <div>
+                    <h3 className="text-[15px] font-medium text-verde">Cuidado y conservación</h3>
+                    <p className="mt-1 text-[14px] leading-snug text-verde/80">
+                      Mantener en un lugar fresco, alejado de la luz solar directa.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
 
