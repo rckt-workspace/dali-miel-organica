@@ -16,7 +16,7 @@ export function ProductCard({ product }: { product: Product }) {
       <Link
         to="/producto/$slug"
         params={{ slug: product.slug }}
-        className="block aspect-[4/5] w-full overflow-hidden bg-crema"
+        className="block h-[260px] w-full overflow-hidden rounded-2xl bg-crema"
       >
         <img
           src={cover}
@@ -24,7 +24,7 @@ export function ProductCard({ product }: { product: Product }) {
           loading="lazy"
           width={1024}
           height={1280}
-          className="size-full object-contain"
+          className="size-full object-cover object-center"
         />
       </Link>
 
