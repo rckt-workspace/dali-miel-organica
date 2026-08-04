@@ -230,3 +230,14 @@
     color: rgb(35 91 78 / 0.4);
   }
 }
+
+@layer base {
+  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+    outline: 3px solid var(--color-verde);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .on-jade :where(a, button, input, textarea, select, [tabindex]):focus-visible {
+    outline-color: var(--color-crema);
+  }
+}
