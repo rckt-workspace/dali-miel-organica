@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CarritoRouteImport } from './routes/carrito'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as HistoriaRouteImport } from './routes/historia'
 import { Route as MayoristasRouteImport } from './routes/mayoristas'
 import { Route as TiendaRouteImport } from './routes/tienda'
@@ -36,6 +37,11 @@ const CheckoutRoute = CheckoutRouteImport.update({
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnviosRoute = EnviosRouteImport.update({
+  id: '/envios',
+  path: '/envios',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HistoriaRoute = HistoriaRouteImport.update({
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
   '/tienda': typeof TiendaRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
   '/tienda': typeof TiendaRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
   '/tienda': typeof TiendaRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/envios'
     | '/historia'
     | '/mayoristas'
     | '/tienda'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/envios'
     | '/historia'
     | '/mayoristas'
     | '/tienda'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/envios'
     | '/historia'
     | '/mayoristas'
     | '/tienda'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   CarritoRoute: typeof CarritoRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactoRoute: typeof ContactoRoute
+  EnviosRoute: typeof EnviosRoute
   HistoriaRoute: typeof HistoriaRoute
   MayoristasRoute: typeof MayoristasRoute
   TiendaRoute: typeof TiendaRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/contacto'
       fullPath: '/contacto'
       preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/envios': {
+      id: '/envios'
+      path: '/envios'
+      fullPath: '/envios'
+      preLoaderRoute: typeof EnviosRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/historia': {
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   CarritoRoute: CarritoRoute,
   CheckoutRoute: CheckoutRoute,
   ContactoRoute: ContactoRoute,
+  EnviosRoute: EnviosRoute,
   HistoriaRoute: HistoriaRoute,
   MayoristasRoute: MayoristasRoute,
   TiendaRoute: TiendaRoute,
@@ -208,13 +229,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
