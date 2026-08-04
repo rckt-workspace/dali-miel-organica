@@ -13,8 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CarritoRouteImport } from './routes/carrito'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as DevolucionesRouteImport } from './routes/devoluciones'
+import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as HistoriaRouteImport } from './routes/historia'
 import { Route as MayoristasRouteImport } from './routes/mayoristas'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
+import { Route as TerminosYCondicionesRouteImport } from './routes/terminos-y-condiciones'
 import { Route as TiendaRouteImport } from './routes/tienda'
 import { Route as ProductoSlugRouteImport } from './routes/producto.$slug'
 
@@ -38,6 +42,16 @@ const ContactoRoute = ContactoRouteImport.update({
   path: '/contacto',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DevolucionesRoute = DevolucionesRouteImport.update({
+  id: '/devoluciones',
+  path: '/devoluciones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnviosRoute = EnviosRouteImport.update({
+  id: '/envios',
+  path: '/envios',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HistoriaRoute = HistoriaRouteImport.update({
   id: '/historia',
   path: '/historia',
@@ -46,6 +60,16 @@ const HistoriaRoute = HistoriaRouteImport.update({
 const MayoristasRoute = MayoristasRouteImport.update({
   id: '/mayoristas',
   path: '/mayoristas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TerminosYCondicionesRoute = TerminosYCondicionesRouteImport.update({
+  id: '/terminos-y-condiciones',
+  path: '/terminos-y-condiciones',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TiendaRoute = TiendaRouteImport.update({
@@ -64,8 +88,12 @@ export interface FileRoutesByFullPath {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -74,8 +102,12 @@ export interface FileRoutesByTo {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -85,8 +117,12 @@ export interface FileRoutesById {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
+  '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/privacidad': typeof PrivacidadRoute
+  '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -97,8 +133,12 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/devoluciones'
+    | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/privacidad'
+    | '/terminos-y-condiciones'
     | '/tienda'
     | '/producto/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -107,8 +147,12 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/devoluciones'
+    | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/privacidad'
+    | '/terminos-y-condiciones'
     | '/tienda'
     | '/producto/$slug'
   id:
@@ -117,8 +161,12 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/devoluciones'
+    | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/privacidad'
+    | '/terminos-y-condiciones'
     | '/tienda'
     | '/producto/$slug'
   fileRoutesById: FileRoutesById
@@ -128,8 +176,12 @@ export interface RootRouteChildren {
   CarritoRoute: typeof CarritoRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactoRoute: typeof ContactoRoute
+  DevolucionesRoute: typeof DevolucionesRoute
+  EnviosRoute: typeof EnviosRoute
   HistoriaRoute: typeof HistoriaRoute
   MayoristasRoute: typeof MayoristasRoute
+  PrivacidadRoute: typeof PrivacidadRoute
+  TerminosYCondicionesRoute: typeof TerminosYCondicionesRoute
   TiendaRoute: typeof TiendaRoute
   ProductoSlugRoute: typeof ProductoSlugRoute
 }
@@ -164,6 +216,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/devoluciones': {
+      id: '/devoluciones'
+      path: '/devoluciones'
+      fullPath: '/devoluciones'
+      preLoaderRoute: typeof DevolucionesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/envios': {
+      id: '/envios'
+      path: '/envios'
+      fullPath: '/envios'
+      preLoaderRoute: typeof EnviosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/historia': {
       id: '/historia'
       path: '/historia'
@@ -176,6 +242,20 @@ declare module '@tanstack/react-router' {
       path: '/mayoristas'
       fullPath: '/mayoristas'
       preLoaderRoute: typeof MayoristasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terminos-y-condiciones': {
+      id: '/terminos-y-condiciones'
+      path: '/terminos-y-condiciones'
+      fullPath: '/terminos-y-condiciones'
+      preLoaderRoute: typeof TerminosYCondicionesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tienda': {
@@ -200,8 +280,12 @@ const rootRouteChildren: RootRouteChildren = {
   CarritoRoute: CarritoRoute,
   CheckoutRoute: CheckoutRoute,
   ContactoRoute: ContactoRoute,
+  DevolucionesRoute: DevolucionesRoute,
+  EnviosRoute: EnviosRoute,
   HistoriaRoute: HistoriaRoute,
   MayoristasRoute: MayoristasRoute,
+  PrivacidadRoute: PrivacidadRoute,
+  TerminosYCondicionesRoute: TerminosYCondicionesRoute,
   TiendaRoute: TiendaRoute,
   ProductoSlugRoute: ProductoSlugRoute,
 }

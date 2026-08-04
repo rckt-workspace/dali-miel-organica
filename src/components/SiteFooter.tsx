@@ -91,11 +91,20 @@ export function SiteFooter() {
         <div>
           <p className="eyebrow mb-4 text-salvia">Legal</p>
           <ul className="space-y-2 text-[14px] text-crema/80">
-            <li>Envíos</li>
-            <li>Devoluciones</li>
-            <li>Términos y condiciones</li>
-            <li>Privacidad</li>
+            <li>
+              <Link to="/envios">Envíos</Link>
+            </li>
+            <li>
+              <Link to="/devoluciones">Devoluciones</Link>
+            </li>
+            <li>
+              <Link to="/terminos-y-condiciones">Términos y condiciones</Link>
+            </li>
+            <li>
+              <Link to="/privacidad">Privacidad</Link>
+            </li>
           </ul>
+
         </div>
       </div>
 
