@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
 type Props = {
@@ -11,7 +11,20 @@ export function ProductGallery({ images, name, accent }: Props) {
   const [open, setOpen] = useState<number | null>(null);
   const bg = { backgroundColor: `color-mix(in srgb, ${accent} 15%, var(--color-crema))` };
 
-  const close = useCallback(() => setOpen(null), []);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+
+  const openAt = useCallback((i: number, e: React.MouseEvent<HTMLButtonElement>) => {
+    triggerRef.current = e.currentTarget;
+    setOpen(i);
+  }, []);
+
+  const close = useCallback(() => {
+    setOpen(null);
+    triggerRef.current?.focus();
+  }, []);
+
   const move = useCallback(
     (dir: number) =>
       setOpen((i) => (i === null ? i : (i + dir + images.length) % images.length)),
@@ -20,14 +33,35 @@ export function ProductGallery({ images, name, accent }: Props) {
 
   useEffect(() => {
     if (open === null) return;
+    closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") close();
+      if (e.key === "Escape") {
+        close();
+        return;
+      }
       if (e.key === "ArrowRight") move(1);
       if (e.key === "ArrowLeft") move(-1);
+      if (e.key === "Tab") {
+        // Focus trap: cycle only through the lightbox controls.
+        const nodes = dialogRef.current?.querySelectorAll<HTMLElement>("button");
+        if (!nodes || nodes.length === 0) return;
+        const list = Array.from(nodes);
+        const first = list[0];
+        const last = list[list.length - 1];
+        const active = document.activeElement as HTMLElement | null;
+        if (e.shiftKey && (active === first || !dialogRef.current?.contains(active))) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [open, close, move]);
+
 
   const [main, ...rest] = images;
 
