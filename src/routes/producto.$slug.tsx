@@ -1,6 +1,6 @@
 import { createFileRoute, notFound, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Sun } from "lucide-react";
+import { Sun, ChevronDown } from "lucide-react";
 import { getProduct, pureProducts } from "@/lib/products";
 import { useCart } from "@/lib/cart";
 import { ProductBadges } from "@/components/ProductBadges";
