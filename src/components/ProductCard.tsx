@@ -6,6 +6,7 @@ import { ProductBadges } from "@/components/ProductBadges";
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
   const picante = product.line === "picante";
+  const cover = product.gallery?.[0] ?? product.image;
 
   return (
     <article
@@ -18,7 +19,7 @@ export function ProductCard({ product }: { product: Product }) {
         className="block aspect-[4/5] w-full overflow-hidden bg-crema"
       >
         <img
-          src={product.image}
+          src={cover}
           alt={`Frasco de miel ${product.name} de Dalí`}
           loading="lazy"
           width={1024}
