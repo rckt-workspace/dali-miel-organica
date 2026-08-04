@@ -7,6 +7,9 @@ import multiG1 from "@/assets/multifloral-g1.png.asset.json";
 import multiG2 from "@/assets/multifloral-g2.png.asset.json";
 import multiG3 from "@/assets/multifloral-g3.png.asset.json";
 import caucho from "@/assets/caucho.png.asset.json";
+import cauchoG1 from "@/assets/caucho-g1.png.asset.json";
+import cauchoG2 from "@/assets/caucho-g2.png.asset.json";
+import cauchoG3 from "@/assets/caucho-g3.png.asset.json";
 import morita from "@/assets/chile-morita.jpg.asset.json";
 import arbol from "@/assets/chile-arbol.jpg.asset.json";
 
