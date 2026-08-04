@@ -3,6 +3,9 @@ import acaciaG1 from "@/assets/acacia-galeria-18.png.asset.json";
 import acaciaG2 from "@/assets/acacia-galeria-19.png.asset.json";
 import acaciaG3 from "@/assets/acacia-galeria-20.png.asset.json";
 import multifloral from "@/assets/multifloral.png.asset.json";
+import multiG1 from "@/assets/multifloral-g1.png.asset.json";
+import multiG2 from "@/assets/multifloral-g2.png.asset.json";
+import multiG3 from "@/assets/multifloral-g3.png.asset.json";
 import caucho from "@/assets/caucho.png.asset.json";
 import morita from "@/assets/chile-morita.jpg.asset.json";
 import arbol from "@/assets/chile-arbol.jpg.asset.json";
@@ -85,6 +88,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["500 GR"],
     image: multifloral.url,
+    gallery: [multiG1.url, multiG2.url, multiG3.url],
     accent: "#9CDCED",
     line: "pura",
   },
