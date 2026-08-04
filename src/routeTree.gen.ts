@@ -17,6 +17,7 @@ import { Route as DevolucionesRouteImport } from './routes/devoluciones'
 import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as HistoriaRouteImport } from './routes/historia'
 import { Route as MayoristasRouteImport } from './routes/mayoristas'
+import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as TerminosYCondicionesRouteImport } from './routes/terminos-y-condiciones'
 import { Route as TiendaRouteImport } from './routes/tienda'
 import { Route as ProductoSlugRouteImport } from './routes/producto.$slug'
@@ -61,6 +62,11 @@ const MayoristasRoute = MayoristasRouteImport.update({
   path: '/mayoristas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacidadRoute = PrivacidadRouteImport.update({
+  id: '/privacidad',
+  path: '/privacidad',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TerminosYCondicionesRoute = TerminosYCondicionesRouteImport.update({
   id: '/terminos-y-condiciones',
   path: '/terminos-y-condiciones',
@@ -86,6 +92,7 @@ export interface FileRoutesByFullPath {
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByTo {
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/producto/$slug': typeof ProductoSlugRoute
@@ -128,6 +137,7 @@ export interface FileRouteTypes {
     | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
     | '/producto/$slug'
@@ -141,6 +151,7 @@ export interface FileRouteTypes {
     | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
     | '/producto/$slug'
@@ -154,6 +165,7 @@ export interface FileRouteTypes {
     | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
     | '/producto/$slug'
@@ -168,6 +180,7 @@ export interface RootRouteChildren {
   EnviosRoute: typeof EnviosRoute
   HistoriaRoute: typeof HistoriaRoute
   MayoristasRoute: typeof MayoristasRoute
+  PrivacidadRoute: typeof PrivacidadRoute
   TerminosYCondicionesRoute: typeof TerminosYCondicionesRoute
   TiendaRoute: typeof TiendaRoute
   ProductoSlugRoute: typeof ProductoSlugRoute
@@ -231,6 +244,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MayoristasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacidad': {
+      id: '/privacidad'
+      path: '/privacidad'
+      fullPath: '/privacidad'
+      preLoaderRoute: typeof PrivacidadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terminos-y-condiciones': {
       id: '/terminos-y-condiciones'
       path: '/terminos-y-condiciones'
@@ -264,6 +284,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnviosRoute: EnviosRoute,
   HistoriaRoute: HistoriaRoute,
   MayoristasRoute: MayoristasRoute,
+  PrivacidadRoute: PrivacidadRoute,
   TerminosYCondicionesRoute: TerminosYCondicionesRoute,
   TiendaRoute: TiendaRoute,
   ProductoSlugRoute: ProductoSlugRoute,
