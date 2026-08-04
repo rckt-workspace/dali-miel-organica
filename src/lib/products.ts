@@ -55,6 +55,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["500 GR"],
     image: acacia.url,
+    gallery: [acaciaG1.url, acaciaG2.url, acaciaG3.url],
     accent: "#FEAEBB",
     line: "pura",
   },
