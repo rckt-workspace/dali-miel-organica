@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Menu, ShoppingBag, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
 import logo from "@/assets/dali-logo.png.asset.json";
 
@@ -15,6 +15,17 @@ const links = [
 export function SiteNav() {
   const [open, setOpen] = useState(false);
   const { count } = useCart();
+  const [bump, setBump] = useState(false);
+  const prev = useRef(count);
+  useEffect(() => {
+    if (count > prev.current) {
+      setBump(true);
+      const t = setTimeout(() => setBump(false), 350);
+      prev.current = count;
+      return () => clearTimeout(t);
+    }
+    prev.current = count;
+  }, [count]);
 
   return (
     <header
@@ -41,7 +52,10 @@ export function SiteNav() {
 
         <div className="flex items-center gap-5">
           <Link to="/carrito" className="relative text-verde" aria-label="Carrito">
-            <ShoppingBag className="size-6" strokeWidth={1.5} />
+            <ShoppingBag
+              className={`size-6 transition-transform duration-300 ${bump ? "scale-125" : "scale-100"}`}
+              strokeWidth={1.5}
+            />
             {count > 0 && (
               <span className="absolute -right-2 -top-2 flex size-[18px] items-center justify-center rounded-full bg-coral text-[11px] font-semibold text-verde">
                 {count}
