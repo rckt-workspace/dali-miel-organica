@@ -11,6 +11,9 @@ import cauchoG1 from "@/assets/caucho-g1.png.asset.json";
 import cauchoG2 from "@/assets/caucho-g2.png.asset.json";
 import cauchoG3 from "@/assets/caucho-g3.png.asset.json";
 import morita from "@/assets/chile-morita.jpg.asset.json";
+import moritaG1 from "@/assets/morita-g1.png.asset.json";
+import moritaG2 from "@/assets/morita-g2.png.asset.json";
+import moritaG3 from "@/assets/morita-g3.png.asset.json";
 import arbol from "@/assets/chile-arbol.jpg.asset.json";
 
 export type ProductLine = "pura" | "picante";
@@ -140,6 +143,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["300g"],
     image: morita.url,
+    gallery: [moritaG1.url, moritaG2.url, moritaG3.url],
     accent: "#D98C6B",
     line: "picante",
   },
