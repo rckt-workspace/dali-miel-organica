@@ -165,6 +165,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["300g"],
     image: arbol.url,
+    gallery: [arbolG1.url, arbolG2.url, arbolG3.url],
     accent: "#D98C6B",
     line: "picante",
   },
