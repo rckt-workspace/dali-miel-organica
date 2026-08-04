@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as CarritoRouteImport } from './routes/carrito'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as ContactoRouteImport } from './routes/contacto'
+import { Route as DevolucionesRouteImport } from './routes/devoluciones'
 import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as HistoriaRouteImport } from './routes/historia'
 import { Route as MayoristasRouteImport } from './routes/mayoristas'
@@ -37,6 +38,11 @@ const CheckoutRoute = CheckoutRouteImport.update({
 const ContactoRoute = ContactoRouteImport.update({
   id: '/contacto',
   path: '/contacto',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DevolucionesRoute = DevolucionesRouteImport.update({
+  id: '/devoluciones',
+  path: '/devoluciones',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EnviosRoute = EnviosRouteImport.update({
@@ -70,6 +76,7 @@ export interface FileRoutesByFullPath {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
@@ -81,6 +88,7 @@ export interface FileRoutesByTo {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
@@ -93,6 +101,7 @@ export interface FileRoutesById {
   '/carrito': typeof CarritoRoute
   '/checkout': typeof CheckoutRoute
   '/contacto': typeof ContactoRoute
+  '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
@@ -106,6 +115,7 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/devoluciones'
     | '/envios'
     | '/historia'
     | '/mayoristas'
@@ -117,6 +127,7 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/devoluciones'
     | '/envios'
     | '/historia'
     | '/mayoristas'
@@ -128,6 +139,7 @@ export interface FileRouteTypes {
     | '/carrito'
     | '/checkout'
     | '/contacto'
+    | '/devoluciones'
     | '/envios'
     | '/historia'
     | '/mayoristas'
@@ -140,6 +152,7 @@ export interface RootRouteChildren {
   CarritoRoute: typeof CarritoRoute
   CheckoutRoute: typeof CheckoutRoute
   ContactoRoute: typeof ContactoRoute
+  DevolucionesRoute: typeof DevolucionesRoute
   EnviosRoute: typeof EnviosRoute
   HistoriaRoute: typeof HistoriaRoute
   MayoristasRoute: typeof MayoristasRoute
@@ -175,6 +188,13 @@ declare module '@tanstack/react-router' {
       path: '/contacto'
       fullPath: '/contacto'
       preLoaderRoute: typeof ContactoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/devoluciones': {
+      id: '/devoluciones'
+      path: '/devoluciones'
+      fullPath: '/devoluciones'
+      preLoaderRoute: typeof DevolucionesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/envios': {
@@ -220,6 +240,7 @@ const rootRouteChildren: RootRouteChildren = {
   CarritoRoute: CarritoRoute,
   CheckoutRoute: CheckoutRoute,
   ContactoRoute: ContactoRoute,
+  DevolucionesRoute: DevolucionesRoute,
   EnviosRoute: EnviosRoute,
   HistoriaRoute: HistoriaRoute,
   MayoristasRoute: MayoristasRoute,
