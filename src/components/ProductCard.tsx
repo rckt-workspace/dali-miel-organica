@@ -53,7 +53,7 @@ export function ProductCard({ product }: { product: Product }) {
               slug: product.slug,
               name: product.name,
               size: product.sizes[0],
-              image: product.image,
+              image: cover,
               price: product.price,
             })
           }
