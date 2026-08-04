@@ -121,6 +121,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["500 GR"],
     image: caucho.url,
+    gallery: [cauchoG1.url, cauchoG2.url, cauchoG3.url],
     accent: "#C0ADE7",
     line: "pura",
   },
