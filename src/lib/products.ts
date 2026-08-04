@@ -143,6 +143,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["300g"],
     image: morita.url,
+    gallery: [moritaG1.url, moritaG2.url, moritaG3.url],
     accent: "#D98C6B",
     line: "picante",
   },
