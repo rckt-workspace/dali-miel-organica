@@ -1,5 +1,4 @@
-import acacia from "@/assets/acacia.png.asset.json";
-import acaciaG1 from "@/assets/acacia-galeria-18.png.asset.json";
+import acacia from "@/assets/acacia-portada.png.asset.json";
 import acaciaG2 from "@/assets/acacia-galeria-19.png.asset.json";
 import acaciaG3 from "@/assets/acacia-galeria-20.png.asset.json";
 import multifloral from "@/assets/multifloral.png.asset.json";
@@ -67,7 +66,7 @@ export const products: Product[] = [
     price: "$XX.XXX COP",
     sizes: ["500 GR"],
     image: acacia.url,
-    gallery: [acaciaG1.url, acaciaG2.url, acaciaG3.url],
+    gallery: [acacia.url, acaciaG2.url, acaciaG3.url],
     accent: "#FEAEBB",
     line: "pura",
   },
