@@ -1,5 +1,6 @@
 import acacia from "@/assets/acacia-portada.png.asset.json";
 import acaciaG1 from "@/assets/acacia-portada.png.asset.json";
+import acaciaG0 from "@/assets/acacia-galeria-18.png.asset.json";
 import acaciaG2 from "@/assets/acacia-galeria-19.png.asset.json";
 import acaciaG3 from "@/assets/acacia-galeria-20.png.asset.json";
 import multifloral from "@/assets/multifloral.png.asset.json";
