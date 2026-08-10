@@ -92,18 +92,19 @@ export function ProductGallery({ images, name, accent }: Props) {
                 type="button"
                 onClick={(e) => openAt(i + 1, e)}
                 aria-label={`Ampliar imagen ${i + 2} de ${name}`}
-                className="aspect-square w-full overflow-hidden rounded-2xl p-3 transition-transform hover:scale-[1.02]"
+                className="h-[220px] w-full overflow-hidden rounded-2xl transition-transform hover:scale-[1.02]"
                 style={bg}
               >
                 <img
                   src={src}
                   alt={`Miel ${name}, vista ${i + 2}`}
                   loading="lazy"
-                  className="size-full object-contain"
+                  className="size-full object-cover object-center"
                 />
               </button>
             ))}
           </div>
+
         )}
       </div>
 
