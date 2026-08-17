@@ -53,8 +53,7 @@ function Index() {
             className="pointer-events-none col-start-1 row-start-1 self-start h-full w-full"
             style={{
               background:
-                "linear-gradient(180deg, rgba(249,246,228,0.94) 0%, rgba(249,246,228,0.78) 40%, rgba(249,246,228,0.15) 78%, rgba(249,246,228,0) 100%)",
-            }}
+                "linear-gradient(180deg, rgba(249,246,228,0.82) 0%, rgba(249,246,228,0.55) 45%, rgba(249,246,228,0.1) 82%, rgba(249,246,228,0) 100%)",
           />
           <div
             className="col-start-1 row-start-1 flex flex-col gap-3 self-start px-6 pb-8 pt-7"
