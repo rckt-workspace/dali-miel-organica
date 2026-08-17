@@ -46,7 +46,7 @@ function Index() {
           <img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco de miel Caucho"
-            className="absolute inset-0 h-full w-full object-cover object-[58%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[85%_center]"
           />
           <div
             aria-hidden="true"
