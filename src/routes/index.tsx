@@ -45,7 +45,7 @@ function Index() {
           <img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco"
-            className="absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-[70%_center]"
+            className="absolute inset-0 h-full w-full bg-crema object-contain object-bottom md:object-cover md:object-[70%_center]"
           />
 
           {/* Velo para legibilidad: vertical en mobile, lateral en desktop */}
@@ -54,9 +54,10 @@ function Index() {
             className="pointer-events-none absolute inset-0 md:hidden"
             style={{
               background:
-                "linear-gradient(180deg, rgba(249,246,228,0.92) 0%, rgba(249,246,228,0.78) 38%, rgba(249,246,228,0.25) 62%, rgba(249,246,228,0) 85%)",
+                "linear-gradient(180deg, var(--color-crema) 0%, rgba(249,246,228,0.95) 45%, rgba(249,246,228,0.6) 60%, rgba(249,246,228,0) 74%)",
             }}
           />
+
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 hidden md:block"
