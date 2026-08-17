@@ -41,26 +41,36 @@ function Index() {
   return (
     <>
       <section className="relative overflow-hidden bg-crema">
-        {/* Desktop / tablet: foto completa de fondo con texto encima */}
-        <div className="relative min-h-[520px] md:min-h-[640px]">
+        <div className="relative min-h-[560px] md:min-h-[640px]">
           <img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco"
-            className="absolute inset-0 h-full w-full object-cover object-[78%_center] md:object-[70%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[68%_center] md:object-[70%_center]"
           />
 
-          {/* Velo claro sobre el costado izquierdo para legibilidad */}
+          {/* Velo para legibilidad: vertical en mobile, lateral en desktop */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0"
+            className="pointer-events-none absolute inset-0 md:hidden"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(249,246,228,0.92) 0%, rgba(249,246,228,0.78) 38%, rgba(249,246,228,0.25) 62%, rgba(249,246,228,0) 85%)",
+            }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 hidden md:block"
             style={{
               background:
                 "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.85) 32%, rgba(249,246,228,0.35) 55%, rgba(249,246,228,0) 72%)",
             }}
           />
 
-          <div className="relative mx-auto flex max-w-[1440px] items-center px-6 py-14 md:min-h-[640px] md:px-[120px] md:py-[110px]">
-            <div className="hidden flex-col gap-6 md:flex md:max-w-[560px]">
+          <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] items-start px-6 py-12 md:min-h-[640px] md:items-center md:px-[120px] md:py-[110px]">
+            <div
+              className="flex flex-col gap-5 md:max-w-[560px] md:gap-6"
+              style={{ textShadow: "0 1px 12px rgba(249,246,228,0.75)" }}
+            >
               <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
               <h1 className="h1-display text-verde">
                 Miel que nace
@@ -70,26 +80,14 @@ function Index() {
                 Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
                 sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
               </p>
-              <Link to="/tienda" className="btn-primary btn-base mt-2 self-start">
+              <Link to="/tienda" className="btn-primary btn-sm mt-1 self-start md:btn-base">
                 Descubre nuestra miel
               </Link>
             </div>
           </div>
         </div>
-
-        {/* Mobile: bloque bone sólido debajo de la foto */}
-        <div className="flex flex-col gap-4 bg-crema px-6 pb-12 pt-8 text-center md:hidden">
-          <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
-          <h1 className="h1-display text-verde">Miel que nace donde Colombia respira</h1>
-          <p className="body-text text-verde/85">
-            Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
-            sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
-          </p>
-          <Link to="/tienda" className="btn-primary btn-sm mx-auto mt-2">
-            Descubre nuestra miel
-          </Link>
-        </div>
       </section>
+
 
 
 
