@@ -41,29 +41,21 @@ function Index() {
   return (
     <>
       <section className="relative overflow-hidden bg-crema">
-        {/* Mobile: imagen completa (width 100% / height auto), texto superpuesto */}
-        <div className="grid bg-crema md:hidden">
+        {/* Mobile: foto recortada a color pleno, texto contenido dentro del bloque */}
+        <div className="relative h-[540px] w-full overflow-hidden bg-crema md:hidden">
           <img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco de miel Caucho"
-            className="col-start-1 row-start-1 block h-auto w-full self-start"
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none col-start-1 row-start-1 self-start h-full w-full"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(249,246,228,0.82) 0%, rgba(249,246,228,0.55) 45%, rgba(249,246,228,0.1) 82%, rgba(249,246,228,0) 100%)",
-            }}
+            className="absolute inset-0 h-full w-full object-cover object-[72%_center]"
           />
 
           <div
-            className="col-start-1 row-start-1 flex flex-col gap-3 self-start px-6 pb-8 pt-7"
-            style={{ textShadow: "0 1px 12px rgba(249,246,228,0.85)" }}
+            className="absolute inset-x-0 top-0 flex w-full max-w-full flex-col gap-3 px-6 pt-8"
+            style={{ textShadow: "0 2px 10px rgba(249,246,228,0.95), 0 1px 3px rgba(249,246,228,0.9)" }}
           >
             <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
-            <h1 className="h1-display text-verde">Miel que nace donde Colombia respira</h1>
-            <p className="body-text text-verde/85">
+            <h1 className="h1-display max-w-full text-verde">Miel que nace donde Colombia respira</h1>
+            <p className="body-text max-w-[92%] text-verde/90">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen.
             </p>
             <Link to="/tienda" className="btn-primary btn-sm mt-1 self-start">
@@ -71,6 +63,7 @@ function Index() {
             </Link>
           </div>
         </div>
+
 
 
         {/* Desktop / tablet */}
