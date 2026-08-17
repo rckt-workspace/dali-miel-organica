@@ -80,7 +80,7 @@ function Index() {
                 Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
                 sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
               </p>
-              <Link to="/tienda" className="btn-primary btn-sm mt-1 self-start md:btn-base">
+              <Link to="/tienda" className="btn-primary btn-sm mt-1 self-start">
                 Descubre nuestra miel
               </Link>
             </div>
