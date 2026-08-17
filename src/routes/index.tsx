@@ -85,10 +85,8 @@ function Index() {
             }}
           />
           <div className="relative mx-auto flex min-h-[640px] max-w-[1440px] items-center px-[120px] py-[110px]">
-            <div
-              className="flex max-w-[560px] flex-col gap-6"
-              style={{ textShadow: "0 1px 12px rgba(249,246,228,0.75)" }}
-            >
+            <div className="flex max-w-[560px] flex-col gap-6">
+
               <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
               <h1 className="h1-display text-verde">
                 Miel que nace
