@@ -41,23 +41,23 @@ function Index() {
   return (
     <>
       <section className="relative overflow-hidden bg-crema">
-        {/* Mobile: imagen completa (width 100% / height auto), texto absoluto encima */}
-        <div className="relative md:hidden">
+        {/* Mobile: imagen completa (width 100% / height auto), texto superpuesto */}
+        <div className="grid bg-crema md:hidden">
           <img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco de miel Caucho"
-            className="block h-auto w-full"
+            className="col-start-1 row-start-1 block h-auto w-full self-start"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 top-0 h-[85%]"
+            className="pointer-events-none col-start-1 row-start-1 self-start h-full w-full"
             style={{
               background:
-                "linear-gradient(180deg, rgba(249,246,228,0.92) 0%, rgba(249,246,228,0.72) 45%, rgba(249,246,228,0) 100%)",
+                "linear-gradient(180deg, rgba(249,246,228,0.94) 0%, rgba(249,246,228,0.78) 40%, rgba(249,246,228,0.15) 78%, rgba(249,246,228,0) 100%)",
             }}
           />
           <div
-            className="absolute inset-x-0 top-0 flex flex-col gap-3 px-6 pt-6"
+            className="col-start-1 row-start-1 flex flex-col gap-3 self-start px-6 pb-8 pt-7"
             style={{ textShadow: "0 1px 12px rgba(249,246,228,0.85)" }}
           >
             <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
@@ -70,6 +70,7 @@ function Index() {
             </Link>
           </div>
         </div>
+
 
         {/* Desktop / tablet */}
         <div className="relative hidden min-h-[640px] md:block">
