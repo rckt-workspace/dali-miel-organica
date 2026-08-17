@@ -16,6 +16,7 @@ import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
 import acaciaSinDrips from "@/assets/producto-acacia-sin-drips.png.asset.json";
+import heroFoto from "@/assets/hero-pan-caucho.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
