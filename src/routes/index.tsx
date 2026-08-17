@@ -54,7 +54,9 @@ function Index() {
             style={{
               background:
                 "linear-gradient(180deg, rgba(249,246,228,0.82) 0%, rgba(249,246,228,0.55) 45%, rgba(249,246,228,0.1) 82%, rgba(249,246,228,0) 100%)",
+            }}
           />
+
           <div
             className="col-start-1 row-start-1 flex flex-col gap-3 self-start px-6 pb-8 pt-7"
             style={{ textShadow: "0 1px 12px rgba(249,246,228,0.85)" }}
