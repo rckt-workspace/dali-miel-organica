@@ -41,53 +41,73 @@ function Index() {
   return (
     <>
       <section className="relative overflow-hidden bg-crema">
-        <div className="relative min-h-[560px] md:min-h-[640px]">
+        {/* Mobile: imagen completa (width 100% / height auto), texto absoluto encima */}
+        <div className="relative md:hidden">
+          <img
+            src={heroFoto.url}
+            alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco de miel Caucho"
+            className="block h-auto w-full"
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-[85%]"
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(249,246,228,0.92) 0%, rgba(249,246,228,0.72) 45%, rgba(249,246,228,0) 100%)",
+            }}
+          />
+          <div
+            className="absolute inset-x-0 top-0 flex flex-col gap-3 px-6 pt-6"
+            style={{ textShadow: "0 1px 12px rgba(249,246,228,0.85)" }}
+          >
+            <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
+            <h1 className="h1-display text-verde">Miel que nace donde Colombia respira</h1>
+            <p className="body-text text-verde/85">
+              Miel 100% orgánica de la altillanura colombiana, con denominación de origen.
+            </p>
+            <Link to="/tienda" className="btn-primary btn-sm mt-1 self-start">
+              Descubre nuestra miel
+            </Link>
+          </div>
+        </div>
+
+        {/* Desktop / tablet */}
+        <div className="relative hidden min-h-[640px] md:block">
           <img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco"
-            className="absolute inset-0 h-full w-full bg-crema object-contain object-bottom md:object-cover md:object-[70%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
           />
-
-          {/* Velo para legibilidad: vertical en mobile, lateral en desktop */}
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 md:hidden"
-            style={{
-              background:
-                "linear-gradient(180deg, var(--color-crema) 0%, rgba(249,246,228,0.95) 45%, rgba(249,246,228,0.6) 60%, rgba(249,246,228,0) 74%)",
-            }}
-          />
-
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 hidden md:block"
+            className="pointer-events-none absolute inset-0"
             style={{
               background:
                 "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.85) 32%, rgba(249,246,228,0.35) 55%, rgba(249,246,228,0) 72%)",
             }}
           />
-
-          <div className="relative mx-auto flex min-h-[560px] max-w-[1440px] items-start px-6 py-12 md:min-h-[640px] md:items-center md:px-[120px] md:py-[110px]">
+          <div className="relative mx-auto flex min-h-[640px] max-w-[1440px] items-center px-[120px] py-[110px]">
             <div
-              className="flex flex-col gap-5 md:max-w-[560px] md:gap-6"
+              className="flex max-w-[560px] flex-col gap-6"
               style={{ textShadow: "0 1px 12px rgba(249,246,228,0.75)" }}
             >
               <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
               <h1 className="h1-display text-verde">
                 Miel que nace
-                <br className="hidden md:block" /> donde Colombia respira
+                <br /> donde Colombia respira
               </h1>
-              <p className="body-text max-w-[560px] text-verde/85">
+              <p className="body-text text-verde/85">
                 Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
                 sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
               </p>
-              <Link to="/tienda" className="btn-primary btn-sm mt-1 self-start">
+              <Link to="/tienda" className="btn-primary btn-base mt-2 self-start">
                 Descubre nuestra miel
               </Link>
             </div>
           </div>
         </div>
       </section>
+
 
 
 
