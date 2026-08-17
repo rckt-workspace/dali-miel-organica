@@ -15,7 +15,8 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import acaciaSinDrips from "@/assets/producto-acacia-sin-drips.png.asset.json";
+
+import heroFoto from "@/assets/hero-pan-caucho.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -39,95 +40,57 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <section className="relative overflow-hidden bg-verde">
-        {/* Curva orgánica: bone entra por la esquina inferior derecha (desktop) */}
-        <svg
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
-          viewBox="0 0 1440 700"
-          preserveAspectRatio="none"
-        >
-          <path
-            d="M1440,700 L1440,210 C1230,250 1160,430 940,540 C790,615 620,620 430,700 Z"
-            fill="var(--color-crema)"
+      <section className="relative overflow-hidden bg-crema">
+        {/* Desktop / tablet: foto completa de fondo con texto encima */}
+        <div className="relative min-h-[520px] md:min-h-[640px]">
+          <img
+            src={heroFoto.url}
+            alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco"
+            className="absolute inset-0 h-full w-full object-cover object-[78%_center] md:object-[70%_center]"
           />
-        </svg>
 
-        <div className="relative mx-auto flex max-w-[1440px] flex-col md:flex-row md:items-center">
-          <div className="order-1 flex flex-col items-center justify-center gap-4 px-6 pb-6 pt-8 text-center md:order-1 md:w-[55%] md:items-start md:gap-6 md:py-[110px] md:pl-[120px] md:pr-[64px] md:text-left">
-            <p className="eyebrow text-crema">De los bosques tropicales de Colombia</p>
-            <h1 className="h1-display text-crema">
-              Miel que nace
-              <br className="hidden md:block" /> donde Colombia respira
-            </h1>
+          {/* Velo claro sobre el costado izquierdo para legibilidad */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.85) 32%, rgba(249,246,228,0.35) 55%, rgba(249,246,228,0) 72%)",
+            }}
+          />
 
-            <p className="body-text max-w-[600px] text-crema/85">
-              Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
-              sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
-            </p>
-            <Link to="/tienda" className="btn-secondary btn-base mt-2 hidden md:inline-flex">
-              Descubre nuestra miel
-            </Link>
-          </div>
-
-          <div className="order-2 flex items-end justify-center px-6 pt-2 md:order-2 md:w-[45%] md:p-[48px] md:pt-[48px]">
-            <div className="relative w-full max-w-[210px] md:max-w-[360px] md:translate-y-[26px]">
-              {/* gotas de miel sueltas — detalle cálido junto a la base */}
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 120 80"
-                className="pointer-events-none absolute -right-3 bottom-6 w-[52px] md:-right-8 md:bottom-8 md:w-[92px]"
-              >
-                <path
-                  d="M30 10c6 9 10 14 10 19a10 10 0 1 1-20 0c0-5 4-10 10-19Z"
-                  fill="var(--color-honey)"
-                  opacity="0.85"
-                />
-                <path
-                  d="M66 34c4.5 6.8 7.5 10.5 7.5 14.2a7.5 7.5 0 1 1-15 0c0-3.7 3-7.4 7.5-14.2Z"
-                  fill="var(--color-honey)"
-                  opacity="0.7"
-                />
-                <circle cx="94" cy="62" r="4" fill="var(--color-honey)" opacity="0.55" />
-              </svg>
-
-              <img
-                src={acaciaSinDrips.url}
-                alt="Frasco de miel de Acacia de Dalí"
-                width={417}
-                height={569}
-                className="relative z-10 h-auto w-full object-contain"
-                style={{ filter: "drop-shadow(0 14px 30px rgba(35,91,78,0.35))" }}
-              />
-
-              {/* sombra de apoyo bajo el frasco */}
-              <span
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-[8%] bottom-[6px] z-0 h-[42px] rounded-[50%]"
-                style={{ background: "rgba(35,91,78,0.45)", filter: "blur(28px)" }}
-              />
-
+          <div className="relative mx-auto flex max-w-[1440px] items-center px-6 py-14 md:min-h-[640px] md:px-[120px] md:py-[110px]">
+            <div className="hidden flex-col gap-6 md:flex md:max-w-[560px]">
+              <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
+              <h1 className="h1-display text-verde">
+                Miel que nace
+                <br className="hidden md:block" /> donde Colombia respira
+              </h1>
+              <p className="body-text max-w-[560px] text-verde/85">
+                Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
+                sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
+              </p>
+              <Link to="/tienda" className="btn-primary btn-base mt-2 self-start">
+                Descubre nuestra miel
+              </Link>
             </div>
           </div>
-
-          <div className="order-3 flex justify-center px-6 pb-12 pt-4 md:hidden">
-            <Link to="/tienda" className="btn-secondary btn-sm">
-              Descubre nuestra miel
-            </Link>
-          </div>
-
         </div>
 
-        {/* Mobile: curva bone de cierre */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 390 48"
-          preserveAspectRatio="none"
-          className="relative block h-[40px] w-full md:hidden"
-        >
-          <path d="M0,48 L0,26 C120,0 260,58 390,14 L390,48 Z" fill="var(--color-crema)" />
-        </svg>
+        {/* Mobile: bloque bone sólido debajo de la foto */}
+        <div className="flex flex-col gap-4 bg-crema px-6 pb-12 pt-8 text-center md:hidden">
+          <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
+          <h1 className="h1-display text-verde">Miel que nace donde Colombia respira</h1>
+          <p className="body-text text-verde/85">
+            Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
+            sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
+          </p>
+          <Link to="/tienda" className="btn-primary btn-sm mx-auto mt-2">
+            Descubre nuestra miel
+          </Link>
+        </div>
       </section>
+
 
 
 
