@@ -91,11 +91,14 @@ function Index() {
                 "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.85) 32%, rgba(249,246,228,0.35) 55%, rgba(249,246,228,0) 72%)",
             }}
           />
-          <div className="relative mx-auto flex min-h-[640px] max-w-[1440px] items-center px-[120px] py-[110px]">
-            <div className="flex max-w-[560px] flex-col gap-6">
+          <div className="relative mx-auto flex min-h-[640px] max-w-[1440px] items-center px-8 py-[110px] lg:px-[72px]">
+            <div className="flex max-w-[620px] flex-col gap-5">
 
               <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
-              <h1 className="h1-display text-verde">
+              <h1
+                className="h1-display whitespace-nowrap text-verde"
+                style={{ fontSize: "clamp(34px, 4vw, 56px)", lineHeight: "105%" }}
+              >
                 Miel que nace donde
                 <br />
                 Colombia respira
