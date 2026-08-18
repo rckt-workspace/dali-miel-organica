@@ -54,22 +54,23 @@ function Index() {
             style={{ backgroundColor: "rgba(35,91,78,0.12)" }}
           />
 
-          <div className="absolute inset-x-0 top-0 flex w-full max-w-full flex-col gap-1.5 px-6 pt-4">
+          <div className="absolute inset-x-0 top-0 flex w-full max-w-full flex-col px-6 pt-4">
             <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
             <h1
-              className="h1-display max-w-full text-verde"
+              className="h1-display mt-5 max-w-full text-verde"
               style={{ fontSize: "31px", lineHeight: "105%" }}
             >
               Miel que nace donde
               <br />
               Colombia respira
             </h1>
-            <p className="body-text max-w-[92%] text-verde/90">
+            <p className="body-text mt-6 max-w-[68%] text-verde/90">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen.
             </p>
-            <Link to="/tienda" className="btn-primary btn-sm mt-1 self-start">
+            <Link to="/tienda" className="btn-primary btn-sm mt-7 self-start">
               Descubre nuestra miel
             </Link>
+
           </div>
         </div>
 
