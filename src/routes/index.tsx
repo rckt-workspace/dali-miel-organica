@@ -93,8 +93,9 @@ function Index() {
 
               <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
               <h1 className="h1-display text-verde">
-                Miel que nace
-                <br /> donde Colombia respira
+                Miel que nace donde
+                <br />
+                Colombia respira
               </h1>
               <p className="body-text text-verde/85">
                 Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
