@@ -57,17 +57,17 @@ function Index() {
           <div className="absolute inset-x-0 top-0 flex w-full max-w-full flex-col px-6 pt-4">
             <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
             <h1
-              className="h1-display mt-5 max-w-full text-verde"
+              className="h1-display mt-8 max-w-full text-verde"
               style={{ fontSize: "31px", lineHeight: "105%" }}
             >
               Miel que nace donde
               <br />
               Colombia respira
             </h1>
-            <p className="body-text mt-6 max-w-[68%] text-verde/90">
+            <p className="body-text mt-10 max-w-[68%] text-verde/90">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen.
             </p>
-            <Link to="/tienda" className="btn-primary btn-sm mt-7 self-start">
+            <Link to="/tienda" className="btn-primary btn-sm mt-10 self-start">
               Descubre nuestra miel
             </Link>
 
@@ -97,18 +97,18 @@ function Index() {
 
               <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
               <h1
-                className="h1-display mt-7 whitespace-nowrap text-verde"
+                className="h1-display mt-10 whitespace-nowrap text-verde"
                 style={{ fontSize: "clamp(34px, 4vw, 56px)", lineHeight: "105%" }}
               >
                 Miel que nace donde
                 <br />
                 Colombia respira
               </h1>
-              <p className="body-text mt-8 max-w-[440px] text-verde/85">
+              <p className="body-text mt-12 max-w-[440px] text-verde/85">
                 Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
                 sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
               </p>
-              <Link to="/tienda" className="btn-primary btn-base mt-9 self-start">
+              <Link to="/tienda" className="btn-primary btn-base mt-12 self-start">
                 Descubre nuestra miel
               </Link>
 
