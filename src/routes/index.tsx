@@ -91,7 +91,7 @@ function Index() {
                 "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.85) 32%, rgba(249,246,228,0.35) 55%, rgba(249,246,228,0) 72%)",
             }}
           />
-          <div className="relative mx-auto flex min-h-[640px] max-w-[1440px] items-center px-8 py-[110px] lg:px-[72px]">
+          <div className="relative mx-auto flex min-h-[640px] max-w-[1440px] items-start px-8 pb-[110px] pt-[48px] lg:px-[72px]">
             <div className="flex max-w-[620px] flex-col gap-5">
 
               <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
