@@ -16,7 +16,7 @@ import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
 
-import heroFoto from "@/assets/hero-pan-caucho.png.asset.json";
+import heroFoto from "@/assets/hero-banner-dali.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,7 +46,7 @@ function Index() {
           <img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco de miel Caucho"
-            className="absolute inset-0 h-full w-full object-cover object-[85%_center]"
+            className="absolute inset-0 h-full w-full object-cover object-[88%_center]"
           />
           <div
             aria-hidden="true"
@@ -54,9 +54,13 @@ function Index() {
             style={{ backgroundColor: "rgba(35,91,78,0.12)" }}
           />
 
-          <div className="absolute inset-x-0 top-0 flex w-full max-w-full flex-col gap-3 px-6 pt-8">
+          <div className="absolute inset-x-0 top-0 flex w-full max-w-full flex-col gap-1.5 px-6 pt-4">
             <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
-            <h1 className="h1-display max-w-full text-verde">Miel que nace donde Colombia respira</h1>
+            <h1 className="h1-display max-w-full text-verde">
+              Miel que nace donde
+              <br />
+              Colombia respira
+            </h1>
             <p className="body-text max-w-[92%] text-verde/90">
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen.
             </p>
