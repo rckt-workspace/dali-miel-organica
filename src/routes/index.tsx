@@ -56,7 +56,10 @@ function Index() {
 
           <div className="absolute inset-x-0 top-0 flex w-full max-w-full flex-col gap-1.5 px-6 pt-4">
             <p className="eyebrow text-verde">De los bosques tropicales de Colombia</p>
-            <h1 className="h1-display max-w-full text-verde">
+            <h1
+              className="h1-display max-w-full text-verde"
+              style={{ fontSize: "31px", lineHeight: "105%" }}
+            >
               Miel que nace donde
               <br />
               Colombia respira
