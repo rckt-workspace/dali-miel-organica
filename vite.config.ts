@@ -4,6 +4,9 @@
 //     nitro (build-only using cloudflare as a default target), VITE_* env injection, @ path alias,
 //     React/TanStack dedupe, error logger plugins, and sandbox detection (port/host/strictPort).
 // You can pass additional config via defineConfig({ vite: { ... }, etc... }) if needed.
+process.env.LOVABLE_PREVIEW_HOST =
+  process.env.LOVABLE_PREVIEW_HOST || "dali-miel-organica.lovable.app";
+
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
@@ -11,5 +14,15 @@ export default defineConfig({
     // Redirect TanStack Start's bundled server entry to src/server.ts (our SSR error wrapper).
     // nitro/vite builds from this
     server: { entry: "server" },
+  },
+  vite: {
+    server: {
+      proxy: {
+        "/__l5e": {
+          target: "https://dali-miel-organica.lovable.app",
+          changeOrigin: true,
+        },
+      },
+    },
   },
 });
