@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Arquitectura C4 propuesta para DALI Miel Orgánica" />
+  <title>DALI Miel Orgánica — Arquitectura C4</title>
+  <style>
+    :root{
+      --bg:#0d1714;
+      --panel:#12211d;
+      --panel-2:#172a25;
+      --line:#315247;
+      --text:#eef6f2;
+      --muted:#a9bbb3;
+      --forest:#1f684f;
+      --forest-2:#2b8165;
+      --honey:#e9ab37;
+      --cream:#fff7df;
+      --danger:#d66b5d;
+      --info:#7db7ff;
+      --shadow:0 18px 50px rgba(0,0,0,.24);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(233,171,55,.08), transparent 28rem),
+        radial-gradient(circle at 90% 20%, rgba(43,129,101,.10), transparent 26rem),
+        var(--bg);
+      color:var(--text);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height:1.55;
+    }
+    a{color:inherit}
+    .shell{max-width:1440px;margin:auto;padding:0 24px 56px}
+    header{
+      padding:54px 0 28px;
+      display:flex;
+      gap:28px;
+      align-items:flex-end;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+      color:#dcece5;font-weight:800;
+    }
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--honey);box-shadow:0 0 18px rgba(233,171,55,.65)}
+    h1{font-size:clamp(34px,5vw,72px);line-height:.98;margin:10px 0 12px;letter-spacing:-.04em}
+    .lead{color:var(--muted);font-size:18px;max-width:900px;margin:0}
+    .meta{
+      display:grid;grid-template-columns:repeat(2,minmax(120px,1fr));gap:10px;
+      min-width:min(100%,360px);
+    }
+    .meta .mini{
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--line);border-radius:14px;padding:12px 14px;
+    }
+    .mini b{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .mini span{font-weight:800}
+    nav{
+      position:sticky;top:0;z-index:50;
+      margin:0 -24px 36px;padding:12px 24px;
+      backdrop-filter:blur(14px);
+      background:rgba(13,23,20,.78);
+      border-top:1px solid rgba(255,255,255,.04);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      overflow:auto;white-space:nowrap;
+    }
+    nav a{
+      display:inline-block;text-decoration:none;
+      padding:8px 12px;border-radius:999px;color:var(--muted);font-weight:700;font-size:14px;
+    }
+    nav a:hover{background:rgba(255,255,255,.06);color:var(--text)}
+    section{margin:0 0 42px}
+    .section-head{display:flex;gap:20px;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}
+    .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--honey);font-weight:900}
+    h2{font-size:clamp(26px,3vw,42px);line-height:1.1;margin:4px 0}
+    h3{margin:0 0 8px;font-size:18px}
+    .section-note{color:var(--muted);max-width:720px;margin:0}
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.018));
+      border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);
+      padding:24px;
+    }
+    .diagram{
+      overflow:auto;
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px),
+        rgba(0,0,0,.10);
+      background-size:28px 28px;
+    }
+    .row{
+      display:flex;align-items:stretch;justify-content:center;gap:16px;
+      min-width:1060px;margin:16px 0;
+    }
+    .row.tight{gap:10px}
+    .box{
+      position:relative;flex:1;min-width:190px;max-width:320px;
+      background:var(--panel);border:1px solid #365f52;border-radius:16px;padding:17px;
+      box-shadow:0 10px 30px rgba(0,0,0,.16);
+    }
+    .box.person{border-color:#5b7fb3;background:#15243a}
+    .box.system{border:2px solid var(--honey);background:linear-gradient(180deg,#1f3a31,#173128)}
+    .box.external{border-color:#77684b;background:#2a241a}
+    .box.data{border-color:#5b7fb3;background:#16263d}
+    .box.security{border-color:#9e6259;background:#321e1a}
+    .box.devops{border-color:#7c6bb4;background:#221f3a}
+    .box .type{
+      font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:900;margin-bottom:5px
+    }
+    .box .title{font-size:17px;font-weight:900;line-height:1.15}
+    .box .desc{color:var(--muted);font-size:13px;margin-top:8px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+    .tag{
+      font-size:10px;font-weight:800;padding:4px 7px;border-radius:999px;
+      background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.08);color:#dceae4
+    }
+    .arrow{
+      align-self:center;min-width:54px;text-align:center;color:var(--honey);font-size:28px;font-weight:500;
+    }
+    .arrow.vertical{display:block;min-width:auto;text-align:center;margin:2px 0;color:var(--honey);font-size:28px}
+    .relationship{
+      text-align:center;color:var(--muted);font-size:12px;margin:-9px 0 7px;
+      min-width:1060px;
+    }
+    .boundary{
+      border:1px dashed #416c5d;border-radius:20px;padding:18px;margin:15px 0 0;
+    }
+    .boundary-label{
+      display:inline-block;margin:-31px 0 12px;background:var(--bg);padding:0 8px;
+      color:#a8c2b8;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.13em;
+    }
+    .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+    .card{
+      background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;
+    }
+    .card p{margin:0;color:var(--muted)}
+    .flow{
+      display:grid;grid-template-columns:repeat(7,minmax(130px,1fr));gap:10px;align-items:stretch;overflow:auto;padding-bottom:4px;
+    }
+    .step{
+      min-width:145px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;position:relative;
+    }
+    .step:not(:last-child)::after{
+      content:"→";position:absolute;right:-17px;top:50%;transform:translateY(-50%);color:var(--honey);font-size:22px;z-index:2
+    }
+    .step b{display:block;margin-bottom:6px}
+    .step small{color:var(--muted)}
+    table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;overflow:hidden}
+    th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+    th{color:#d9e7e1;background:rgba(255,255,255,.035);font-size:12px;text-transform:uppercase;letter-spacing:.08em}
+    td{color:var(--muted)}
+    tr:last-child td{border-bottom:none}
+    code{background:rgba(255,255,255,.07);padding:2px 6px;border-radius:6px;color:#fff0bf}
+    .decision{display:flex;gap:12px}
+    .decision .n{
+      flex:0 0 34px;height:34px;border-radius:10px;background:rgba(233,171,55,.13);
+      border:1px solid rgba(233,171,55,.35);color:var(--honey);display:grid;place-items:center;font-weight:900
+    }
+    .decision strong{display:block;margin-bottom:3px}
+    .decision span{color:var(--muted);font-size:14px}
+    .warning{
+      border:1px solid rgba(214,107,93,.45);
+      background:rgba(214,107,93,.08);border-radius:15px;padding:16px;
+    }
+    .warning strong{color:#ffc4ba}
+    footer{color:var(--muted);font-size:13px;text-align:center;padding-top:12px}
+    @media(max-width:900px){
+      .grid2,.grid3{grid-template-columns:1fr}
+      .shell{padding-left:16px;padding-right:16px}
+      nav{margin-left:-16px;margin-right:-16px;padding-left:16px;padding-right:16px}
+    }
+    @media print{
+      body{background:white;color:#111}
+      nav{display:none}
+      .panel,.card,.box,.step{box-shadow:none}
+      section{break-inside:avoid}
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <div>
+        <div class="eyebrow"><span class="dot"></span> Arquitectura objetivo · C4 Model</div>
+        <h1>DALI Miel Orgánica</h1>
+        <p class="lead">Arquitectura propuesta para una tienda e-commerce sencilla, potente y controlable: Lovable para iteración, GitHub como fuente de verdad, Render para despliegue, Supabase como backend y una capa desacoplada de pagos preparada para Sandbox y producción.</p>
+      </div>
+      <div class="meta">
+        <div class="mini"><b>Dominio</b><span>mieldali.co</span></div>
+        <div class="mini"><b>Versión</b><span>Architecture v1.0</span></div>
+        <div class="mini"><b>Estado</b><span>Propuesta / baseline</span></div>
+        <div class="mini"><b>Enfoque</b><span>Simple · Seguro · Evolutivo</span></div>
+      </div>
+    </header>
+
+    <nav>
+      <a href="#context">C4 · Contexto</a>
+      <a href="#containers">C4 · Contenedores</a>
+      <a href="#components">C4 · Componentes</a>
+      <a href="#deployment">Deployment</a>
+      <a href="#stack">Tecnologías</a>
+      <a href="#decisions">Decisiones</a>
+    </nav>
+
+    <section id="context">
+      <div class="section-head">
+        <div>
+          <div class="kicker">C4 · Level 1</div>
+          <h2>System Context</h2>
+        </div>
+        <p class="section-note">Quién usa DALI, qué sistema estamos construyendo y con qué sistemas externos se relaciona.</p>
+      </div>
+
+      <div class="panel diagram">
+        <div class="row">
+          <div class="box person">
+            <div class="type">Person</div>
+            <div class="title">Cliente / Comprador</div>
+            <div class="desc">Explora productos, agrega al carrito, compra como invitado y consulta confirmación del pedido.</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="box system">
+            <div class="type">Software System</div>
+            <div class="title">DALI E‑commerce</div>
+            <div class="desc">Catálogo, carrito, checkout, pedidos, pagos, administración, SEO y analítica comercial.</div>
+            <div class="tags"><span class="tag">mieldali.co</span><span class="tag">HTTPS</span><span class="tag">Responsive</span></div>
+          </div>
+          <div class="arrow">←</div>
+          <div class="box person">
+            <div class="type">Person</div>
+            <div class="title">Administrador DALI</div>
+            <div class="desc">Gestiona productos, precios, inventario y estado operativo de los pedidos.</div>
+          </div>
+        </div>
+
+        <div class="relationship">El cliente compra · El administrador opera el negocio</div>
+        <div class="arrow vertical">↓</div>
+
+        <div class="row">
+          <div class="box external">
+            <div class="type">External System</div>
+            <div class="title">Proveedor de pagos</div>
+            <div class="desc">Sandbox inicialmente. Wompi como candidato principal; proveedor final reemplazable.</div>
+            <div class="tags"><span class="tag">Wompi Sandbox</span><span class="tag">Webhooks</span></div>
+          </div>
+          <div class="box external">
+            <div class="type">External System</div>
+            <div class="title">WhatsApp</div>
+            <div class="desc">Canal de soporte y acompañamiento al comprador. No reemplaza el checkout.</div>
+          </div>
+          <div class="box external">
+            <div class="type">External System</div>
+            <div class="title">Google Marketing</div>
+            <div class="desc">GTM + GA4 para eventos de e‑commerce, embudo y conversiones.</div>
+          </div>
+          <div class="box external">
+            <div class="type">External System</div>
+            <div class="title">DNS / Registrar</div>
+            <div class="desc">Registro de <b>mieldali.co</b>. El hosting vive en Render; el proveedor del dominio solo administra DNS.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="containers">
+      <div class="section-head">
+        <div>
+          <div class="kicker">C4 · Level 2</div>
+          <h2>Container Diagram</h2>
+        </div>
+        <p class="section-note">Separación de responsabilidades en runtime. La tienda evita un backend monolítico innecesario y delega persistencia, seguridad y funciones de servidor a Supabase.</p>
+      </div>
+
+      <div class="panel diagram">
+        <div class="boundary">
+          <div class="boundary-label">DALI E‑commerce · Runtime Boundary</div>
+
+          <div class="row">
+            <div class="box system">
+              <div class="type">Container · Web Application</div>
+              <div class="title">DALI Web</div>
+              <div class="desc">UI pública, catálogo, detalle de producto, carrito, checkout, SEO y área administrativa.</div>
+              <div class="tags"><span class="tag">React</span><span class="tag">TypeScript</span><span class="tag">Lovable</span><span class="tag">Render</span></div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="box">
+              <div class="type">Container · Server-side API</div>
+              <div class="title">Supabase Edge Functions</div>
+              <div class="desc">Cálculo seguro de totales, creación de pagos, webhooks, validación de firmas y operaciones privilegiadas.</div>
+              <div class="tags"><span class="tag">Deno/TS</span><span class="tag">Secrets</span><span class="tag">Server only</span></div>
+            </div>
+            <div class="arrow">→</div>
+            <div class="box data">
+              <div class="type">Container · Database</div>
+              <div class="title">PostgreSQL</div>
+              <div class="desc">Productos, variantes, inventario, pedidos, items, clientes, pagos y cupones.</div>
+              <div class="tags"><span class="tag">Supabase</span><span class="tag">RLS</span><span class="tag">SQL</span></div>
+            </div>
+          </div>
+
+          <div class="relationship">HTTPS / SDK público · Operaciones críticas solo en servidor · Persistencia transaccional</div>
+
+          <div class="row tight">
+            <div class="box data">
+              <div class="type">Container · Object Storage</div>
+              <div class="title">Supabase Storage</div>
+              <div class="desc">Fotos de productos, logos, banners y activos editables del catálogo.</div>
+            </div>
+            <div class="box data">
+              <div class="type">Container · Authentication</div>
+              <div class="title">Supabase Auth</div>
+              <div class="desc">Protección de <code>/admin</code>. La compra pública no obliga a crear cuenta.</div>
+            </div>
+            <div class="box">
+              <div class="type">Container · Client State</div>
+              <div class="title">Cart State</div>
+              <div class="desc">Carrito persistido localmente. El servidor vuelve a consultar precios y stock al pagar.</div>
+              <div class="tags"><span class="tag">localStorage</span></div>
+            </div>
+            <div class="box security">
+              <div class="type">Container · Payment Boundary</div>
+              <div class="title">Payment Adapter</div>
+              <div class="desc">Interfaz estable que desacopla la aplicación de Wompi, Mercado Pago u otro proveedor.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="arrow vertical">↓</div>
+        <div class="row">
+          <div class="box external">
+            <div class="type">External System</div>
+            <div class="title">Wompi Sandbox / Payment Provider</div>
+            <div class="desc">Procesa la transacción y confirma el resultado mediante webhook firmado.</div>
+          </div>
+          <div class="box external">
+            <div class="type">External System</div>
+            <div class="title">GTM / GA4</div>
+            <div class="desc">Recibe eventos: <code>view_item</code>, <code>add_to_cart</code>, <code>begin_checkout</code>, <code>purchase</code>.</div>
+          </div>
+          <div class="box external">
+            <div class="type">External System</div>
+            <div class="title">WhatsApp</div>
+            <div class="desc">Atención al cliente y recuperación comercial asistida.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="components">
+      <div class="section-head">
+        <div>
+          <div class="kicker">C4 · Level 3</div>
+          <h2>Componentes críticos</h2>
+        </div>
+        <p class="section-note">Vista enfocada en compra y pago. El punto clave es que precio, total y estado pagado nunca dependan de datos confiados al navegador.</p>
+      </div>
+
+      <div class="panel diagram">
+        <div class="row tight">
+          <div class="box">
+            <div class="type">Component</div>
+            <div class="title">Catalog UI</div>
+            <div class="desc">Lee productos activos, precio visible, fotos, stock y variantes.</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="box">
+            <div class="type">Component</div>
+            <div class="title">Cart</div>
+            <div class="desc">Items + cantidad en cliente. Nunca es autoridad sobre el precio final.</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="box">
+            <div class="type">Component</div>
+            <div class="title">Checkout UI</div>
+            <div class="desc">Datos de comprador, entrega y método de pago.</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="box security">
+            <div class="type">Component · Server</div>
+            <div class="title">Order Service</div>
+            <div class="desc">Reconsulta producto/stock, calcula el total real y crea el pedido <code>payment_pending</code>.</div>
+          </div>
+        </div>
+
+        <div class="arrow vertical">↓</div>
+
+        <div class="row tight">
+          <div class="box security">
+            <div class="type">Component · Server</div>
+            <div class="title">Payment Provider Adapter</div>
+            <div class="desc"><code>createPayment()</code> · <code>getStatus()</code> · <code>verifyWebhook()</code> · <code>refund()</code></div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="box external">
+            <div class="type">External</div>
+            <div class="title">Wompi Sandbox</div>
+            <div class="desc">Simula aprobaciones, rechazos y eventos sin mover dinero real.</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="box security">
+            <div class="type">Component · Server</div>
+            <div class="title">Webhook Handler</div>
+            <div class="desc">Verifica firma, referencia y monto. Solo entonces cambia el pedido a <code>paid</code>.</div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="box data">
+            <div class="type">Database</div>
+            <div class="title">Orders / Payments</div>
+            <div class="desc">Fuente de verdad del estado comercial y financiero del pedido.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="deployment">
+      <div class="section-head">
+        <div>
+          <div class="kicker">C4 · Deployment / DevOps View</div>
+          <h2>Flujo de desarrollo y producción</h2>
+        </div>
+        <p class="section-note">Lovable acelera la construcción; GitHub controla qué entra a producción. Render despliega únicamente lo aprobado.</p>
+      </div>
+
+      <div class="panel">
+        <div class="flow">
+          <div class="step"><b>1. Lovable</b><small>Iteración visual y generación de código.</small></div>
+          <div class="step"><b>2. <code>develop</code></b><small>Rama conectada a Lovable para desarrollo.</small></div>
+          <div class="step"><b>3. Pull Request</b><small>Revisión humana de diff y cambios.</small></div>
+          <div class="step"><b>4. CI</b><small>Lint · Typecheck · Tests · Build.</small></div>
+          <div class="step"><b>5. <code>main</code></b><small>Única rama autorizada para producción.</small></div>
+          <div class="step"><b>6. Render</b><small>Auto deploy después de checks correctos.</small></div>
+          <div class="step"><b>7. mieldali.co</b><small>HTTPS + custom domain + producción.</small></div>
+        </div>
+
+        <div class="grid3" style="margin-top:18px">
+          <div class="card">
+            <h3>Preview</h3>
+            <p>Los Pull Requests deben poder validarse en una URL temporal antes del merge.</p>
+          </div>
+          <div class="card">
+            <h3>Database changes</h3>
+            <p>Migraciones de Supabase versionadas en GitHub. Evitar cambios manuales irrepetibles en producción.</p>
+          </div>
+          <div class="card">
+            <h3>Rollback</h3>
+            <p>Git + historial de deploys permiten volver a una versión estable si una liberación falla.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="warning" style="margin-top:16px">
+        <strong>Checkpoint técnico antes de elegir el tipo de servicio en Render:</strong>
+        confirmar <code>package.json</code> y el modo de build real. Si el proyecto termina como SPA/estático → <b>Render Static Site</b>. Si el template actual usa SSR/server runtime (por ejemplo TanStack Start en modo servidor) → <b>Render Web Service</b>. La arquitectura de negocio no cambia; cambia únicamente el runtime de despliegue.
+      </div>
+    </section>
+
+    <section id="stack">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Technology Map</div>
+          <h2>Tecnologías y responsabilidad</h2>
+        </div>
+        <p class="section-note">Cada tecnología tiene una función concreta. Nada entra “porque sí”.</p>
+      </div>
+
+      <div class="panel" style="overflow:auto">
+        <table>
+          <thead>
+            <tr><th>Capa</th><th>Tecnología</th><th>Responsabilidad</th><th>Entorno / notas</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Diseño / desarrollo</td><td><b>Lovable</b></td><td>Iteración visual y generación/modificación de frontend</td><td>Trabaja contra <code>develop</code></td></tr>
+            <tr><td>Frontend</td><td><b>React + TypeScript</b></td><td>UI, catálogo, carrito, checkout y admin</td><td>Confirmar runtime exacto desde <code>package.json</code></td></tr>
+            <tr><td>Versionado</td><td><b>GitHub</b></td><td>Fuente de verdad, PR, reviews, ramas y trazabilidad</td><td><code>develop</code> → PR → <code>main</code></td></tr>
+            <tr><td>CI</td><td><b>GitHub Actions</b></td><td>Lint, typecheck, tests, build</td><td>Debe bloquear merge si falla</td></tr>
+            <tr><td>Hosting</td><td><b>Render</b></td><td>Deploy, HTTPS, custom domain, previews</td><td>Static Site o Web Service según runtime</td></tr>
+            <tr><td>Dominio</td><td><b>mieldali.co</b></td><td>Identidad pública y DNS</td><td>Registrar independiente; sin hosting tradicional</td></tr>
+            <tr><td>Backend</td><td><b>Supabase Edge Functions</b></td><td>Operaciones seguras y lógica server-side</td><td>Secrets solo servidor</td></tr>
+            <tr><td>Datos</td><td><b>Supabase PostgreSQL</b></td><td>Catálogo, inventario, pedidos, pagos</td><td>RLS + constraints + migrations</td></tr>
+            <tr><td>Archivos</td><td><b>Supabase Storage</b></td><td>Imágenes y assets gestionables</td><td>Policies de lectura/escritura</td></tr>
+            <tr><td>Auth</td><td><b>Supabase Auth</b></td><td>Acceso al panel administrativo</td><td>Checkout invitado por defecto</td></tr>
+            <tr><td>Pagos</td><td><b>Payment Adapter + Wompi Sandbox</b></td><td>Pruebas de checkout sin acoplarse al proveedor final</td><td>Proveedor reemplazable</td></tr>
+            <tr><td>Analítica</td><td><b>GTM + GA4</b></td><td>Embudo, e-commerce y conversiones</td><td>Eventos estructurados</td></tr>
+            <tr><td>Soporte</td><td><b>WhatsApp</b></td><td>Atención y acompañamiento comercial</td><td>No sustituye checkout</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="decisions">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Architecture Decisions</div>
+          <h2>Principios que no queremos romper</h2>
+        </div>
+        <p class="section-note">Estas decisiones funcionan como mini ADRs y ayudan a que el proyecto no pierda dirección cuando crezca.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card decision"><div class="n">01</div><div><strong>GitHub manda en producción</strong><span>Lovable no publica directamente a <code>main</code>. Todo cambio pasa por PR y CI.</span></div></div>
+        <div class="card decision"><div class="n">02</div><div><strong>Backend mínimo, no backend inexistente</strong><span>La UI puede ser ligera, pero pagos y totales siempre se validan server-side.</span></div></div>
+        <div class="card decision"><div class="n">03</div><div><strong>Productos fuera del código</strong><span>Precio, stock, SKU y estado viven en PostgreSQL, no hardcodeados en componentes React.</span></div></div>
+        <div class="card decision"><div class="n">04</div><div><strong>Checkout como invitado</strong><span>No bloquear conversión obligando a crear una cuenta. Auth se reserva inicialmente para administración.</span></div></div>
+        <div class="card decision"><div class="n">05</div><div><strong>Pasarela desacoplada</strong><span>Wompi sirve para Sandbox, pero el dominio de pagos expone una interfaz propia para cambiar proveedor sin rehacer la tienda.</span></div></div>
+        <div class="card decision"><div class="n">06</div><div><strong>Webhook = autoridad de pago</strong><span>La redirección del navegador no marca pedidos como pagados; solo un evento verificado del proveedor.</span></div></div>
+        <div class="card decision"><div class="n">07</div><div><strong>Secrets nunca en frontend</strong><span><code>service_role</code>, llaves privadas y secretos de eventos viven en Supabase Secrets/entorno servidor.</span></div></div>
+        <div class="card decision"><div class="n">08</div><div><strong>Infraestructura proporcional</strong><span>Render + Supabase cubren el caso actual. No introducir microservicios, colas o Kubernetes hasta que exista un problema real que los justifique.</span></div></div>
+      </div>
+    </section>
+
+    <footer>
+      DALI Miel Orgánica · Arquitectura C4 v1.0 · Baseline técnico para desarrollo, revisión y evolución del producto.
+    </footer>
+  </div>
+</body>
+</html>
