@@ -15,6 +15,7 @@ import { CartProvider } from "../lib/cart";
 import { SiteNav } from "../components/SiteNav";
 import { SiteFooter } from "../components/SiteFooter";
 import { Toaster } from "../components/ui/sonner";
+import { ChatAssistant } from "../components/chat/ChatAssistant";
 
 function NotFoundComponent() {
   return (
@@ -128,6 +129,7 @@ function RootComponent() {
           </main>
           <SiteFooter />
           <Toaster position="bottom-right" />
+          <ChatAssistant />
         </div>
       </CartProvider>
     </QueryClientProvider>

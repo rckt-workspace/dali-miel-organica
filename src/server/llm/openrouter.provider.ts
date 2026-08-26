@@ -38,18 +38,24 @@ export class OpenRouterProvider implements LLMProvider {
   private readonly apiKey: string;
   private readonly defaultModel: string;
   private readonly defaultTimeoutMs: number;
+  private readonly refererUrl: string;
 
   constructor(options?: {
     baseUrl?: string;
     apiKey?: string;
     defaultModel?: string;
     defaultTimeoutMs?: number;
+    refererUrl?: string;
   }) {
     const config = getServerConfig();
     this.baseUrl = (options?.baseUrl ?? config.openRouter.baseUrl).replace(/\/+$/, "");
     this.apiKey = options?.apiKey ?? config.openRouter.apiKey;
     this.defaultModel = options?.defaultModel ?? config.chat.primaryLlm;
     this.defaultTimeoutMs = options?.defaultTimeoutMs ?? config.chat.timeoutMs;
+    this.refererUrl =
+      options?.refererUrl ??
+      config.appPublicUrl ??
+      "https://dali-miel-organica.lovable.app";
   }
 
   async complete(
@@ -97,7 +103,7 @@ export class OpenRouterProvider implements LLMProvider {
         headers: {
           Authorization: `Bearer ${this.apiKey}`,
           "Content-Type": "application/json",
-          "HTTP-Referer": "https://dali-miel-organica.lovable.app",
+          "HTTP-Referer": this.refererUrl,
           "X-Title": "Dali Miel Organica",
         },
         body: JSON.stringify({

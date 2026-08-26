@@ -20,6 +20,9 @@ const numberFromString = (defaultValue: number) =>
     });
 
 const serverEnvSchema = z.object({
+  // Application URL
+  APP_PUBLIC_URL: z.string().url().optional(),
+
   // Supabase (Server-side)
   SUPABASE_URL: z.string().url().optional(),
   SUPABASE_SERVICE_ROLE_KEY: z.string().optional(),
@@ -50,6 +53,7 @@ const serverEnvSchema = z.object({
 });
 
 export type ServerConfig = {
+  appPublicUrl?: string;
   supabase: {
     url?: string;
     serviceRoleKey?: string;
@@ -82,6 +86,7 @@ function parseServerConfig(
   const parsed = serverEnvSchema.parse(envSource);
 
   return {
+    appPublicUrl: parsed.APP_PUBLIC_URL,
     supabase: {
       url: parsed.SUPABASE_URL,
       serviceRoleKey: parsed.SUPABASE_SERVICE_ROLE_KEY,
@@ -123,11 +128,13 @@ export function getServerConfig(): ServerConfig {
  * ensuring secret keys are never exposed.
  */
 export function getSafeServerConfig(): Omit<ServerConfig, "openRouter" | "supabase"> & {
+  appPublicUrl?: string;
   openRouter: { baseUrl: string; hasApiKey: boolean };
   supabase: { url?: string; hasServiceRoleKey: boolean };
 } {
   const cfg = getServerConfig();
   return {
+    appPublicUrl: cfg.appPublicUrl,
     ...cfg,
     openRouter: {
       baseUrl: cfg.openRouter.baseUrl,

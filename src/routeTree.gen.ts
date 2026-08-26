@@ -20,6 +20,7 @@ import { Route as MayoristasRouteImport } from './routes/mayoristas'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as TerminosYCondicionesRouteImport } from './routes/terminos-y-condiciones'
 import { Route as TiendaRouteImport } from './routes/tienda'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ProductoSlugRouteImport } from './routes/producto.$slug'
 
@@ -78,6 +79,11 @@ const TiendaRoute = TiendaRouteImport.update({
   path: '/tienda',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
   id: '/api/health',
   path: '/api/health',
@@ -101,6 +107,7 @@ export interface FileRoutesByFullPath {
   '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
+  '/api/chat': typeof ApiChatRoute
   '/api/health': typeof ApiHealthRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -116,6 +123,7 @@ export interface FileRoutesByTo {
   '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
+  '/api/chat': typeof ApiChatRoute
   '/api/health': typeof ApiHealthRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -132,6 +140,7 @@ export interface FileRoutesById {
   '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
+  '/api/chat': typeof ApiChatRoute
   '/api/health': typeof ApiHealthRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -149,6 +158,7 @@ export interface FileRouteTypes {
     | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
+    | '/api/chat'
     | '/api/health'
     | '/producto/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -164,6 +174,7 @@ export interface FileRouteTypes {
     | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
+    | '/api/chat'
     | '/api/health'
     | '/producto/$slug'
   id:
@@ -179,6 +190,7 @@ export interface FileRouteTypes {
     | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
+    | '/api/chat'
     | '/api/health'
     | '/producto/$slug'
   fileRoutesById: FileRoutesById
@@ -195,6 +207,7 @@ export interface RootRouteChildren {
   PrivacidadRoute: typeof PrivacidadRoute
   TerminosYCondicionesRoute: typeof TerminosYCondicionesRoute
   TiendaRoute: typeof TiendaRoute
+  ApiChatRoute: typeof ApiChatRoute
   ApiHealthRoute: typeof ApiHealthRoute
   ProductoSlugRoute: typeof ProductoSlugRoute
 }
@@ -278,6 +291,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TiendaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/health': {
       id: '/api/health'
       path: '/api/health'
@@ -307,6 +327,7 @@ const rootRouteChildren: RootRouteChildren = {
   PrivacidadRoute: PrivacidadRoute,
   TerminosYCondicionesRoute: TerminosYCondicionesRoute,
   TiendaRoute: TiendaRoute,
+  ApiChatRoute: ApiChatRoute,
   ApiHealthRoute: ApiHealthRoute,
   ProductoSlugRoute: ProductoSlugRoute,
 }
