@@ -50,7 +50,7 @@ export function MagneticButton({ children, className = "", onClick }: MagneticBu
         x: offset.x,
         y: offset.y,
       }}
-      transition={{ type: "spring", stiffness: 400, damping: 40 }}
+      transition={{ type: "spring", stiffness: 350, damping: 35 }}
     >
       {children}
     </motion.button>

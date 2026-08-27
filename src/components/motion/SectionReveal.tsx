@@ -29,7 +29,15 @@ export function SectionReveal({
       ref={ref}
       initial={variants[direction].initial}
       animate={isInView ? variants[direction].animate : variants[direction].initial}
-      transition={{ duration, delay }}
+      transition={{
+        duration,
+        delay,
+        ease: "easeOut",
+        type: "spring",
+        stiffness: 100,
+        damping: 15,
+        mass: 1,
+      }}
     >
       {children}
     </motion.div>

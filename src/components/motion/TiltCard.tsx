@@ -51,12 +51,12 @@ export function TiltCard({ children, className = "", style }: TiltCardProps) {
       animate={{
         rotateX: rotation.x,
         rotateY: rotation.y,
-        y: isHovering ? -6 : 0,
+        y: isHovering ? -8 : 0,
         boxShadow: isHovering
-          ? "0 12px 28px rgba(0,0,0,0.08)"
-          : "0 4px 12px rgba(0,0,0,0.04)",
+          ? "0 24px 48px rgba(35,91,78,0.12)"
+          : "0 6px 16px rgba(35,91,78,0.06)",
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 25 }}
+      transition={{ type: "spring", stiffness: 250, damping: 20 }}
     >
       {children}
     </motion.div>

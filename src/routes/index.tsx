@@ -173,8 +173,15 @@ function Index() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.65, duration: 0.4 }}
+                whileHover={{ y: -2 }}
               >
-                <Link to="/tienda" className="btn-primary btn-base mt-12 self-start">
+                <Link
+                  to="/tienda"
+                  className="btn-primary btn-base mt-12 self-start hover:shadow-lg transition-shadow"
+                  style={{
+                    boxShadow: "0 0 30px 15px rgba(252,214,114,0.08)"
+                  }}
+                >
                   Descubre nuestra miel
                 </Link>
               </motion.div>
