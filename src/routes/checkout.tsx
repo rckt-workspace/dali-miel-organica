@@ -1,91 +1,478 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { useCart } from "@/lib/cart";
+import {
+  createFileRoute,
+  Link,
+} from "@tanstack/react-router";
 
-export const Route = createFileRoute("/checkout")({
-  head: () => ({
-    meta: [
-      { title: "Checkout — Dalí Miel Orgánica" },
-      { name: "description", content: "Completa tus datos de envío y confirma tu pedido Dalí." },
-      { property: "og:title", content: "Checkout — Dalí" },
-      { property: "og:description", content: "Completa tu pedido de miel cruda orgánica." },
-    ],
-  }),
-  component: Checkout,
-});
+import {
+  ArrowLeft,
+  ArrowRight,
+  CreditCard,
+  LockKeyhole,
+  ShieldCheck,
+} from "lucide-react";
 
-const fields = [
-  { id: "nombre", label: "Nombre completo", type: "text" },
-  { id: "email", label: "Email", type: "email" },
-  { id: "telefono", label: "Teléfono", type: "tel" },
-  { id: "direccion", label: "Dirección", type: "text" },
-  { id: "ciudad", label: "Ciudad", type: "text" },
-  { id: "departamento", label: "Departamento", type: "text" },
-];
+import {
+  motion,
+} from "motion/react";
+
+import {
+  useState,
+} from "react";
+
+import {
+  useCart,
+} from "@/lib/cart";
+
+import {
+  formatCop,
+  getProductPriceCop,
+} from "@/lib/products";
+
+export const Route =
+  createFileRoute(
+    "/checkout",
+  )({
+    head: () => ({
+      meta: [
+        {
+          title:
+            "Pago seguro — Dalí Miel Orgánica",
+        },
+        {
+          name:
+            "description",
+          content:
+            "Revisa tu pedido y continúa al pago seguro con Stripe.",
+        },
+      ],
+    }),
+
+    component:
+      Checkout,
+  });
 
 function Checkout() {
-  const { items } = useCart();
-  const [done, setDone] = useState(false);
+  const {
+    items,
+    subtotalCop,
+    pricesConfigured,
+  } = useCart();
+
+  const [
+    loading,
+    setLoading,
+  ] =
+    useState(false);
+
+  const [
+    error,
+    setError,
+  ] =
+    useState<
+      string | null
+    >(null);
+
+  async function
+  beginCheckout() {
+    if (
+      loading ||
+      items.length === 0 ||
+      !pricesConfigured
+    ) {
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response =
+        await fetch(
+          "/api/checkout",
+          {
+            method:
+              "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body:
+              JSON.stringify(
+                {
+                  /*
+                   * No enviamos
+                   * precios.
+                   *
+                   * El servidor los
+                   * obtiene del
+                   * catálogo oficial.
+                   */
+                  items:
+                    items.map(
+                      (
+                        item,
+                      ) => ({
+                        slug:
+                          item.slug,
+
+                        size:
+                          item.size,
+
+                        qty:
+                          item.qty,
+                      }),
+                    ),
+                },
+              ),
+          },
+        );
+
+      const data =
+        (await response.json()) as {
+          url?: string;
+          error?: string;
+        };
+
+      if (
+        !response.ok
+      ) {
+        throw new Error(
+          data.error ??
+            "No pudimos iniciar el pago.",
+        );
+      }
+
+      if (!data.url) {
+        throw new Error(
+          "Stripe no devolvió una URL de pago.",
+        );
+      }
+
+      window.location.assign(
+        data.url,
+      );
+    } catch (checkoutError) {
+      setError(
+        checkoutError instanceof
+          Error
+          ? checkoutError.message
+          : "No pudimos iniciar el pago.",
+      );
+
+      setLoading(false);
+    }
+  }
+
+  if (
+    items.length === 0
+  ) {
+    return (
+      <section className="min-h-[65vh] bg-crema px-6 py-20 md:px-[120px]">
+        <div className="mx-auto max-w-[850px]">
+          <p className="eyebrow text-verde/55">
+            Pago seguro
+          </p>
+
+          <h1 className="mt-4 font-display text-[clamp(48px,6vw,78px)] leading-none text-verde">
+            No hay productos
+            en tu carrito.
+          </h1>
+
+          <Link
+            to="/tienda"
+            className="btn-primary mt-8"
+          >
+            Volver a la tienda
+          </Link>
+        </div>
+      </section>
+    );
+  }
 
   return (
-    <section className="px-6 py-12 md:px-[120px] md:py-[96px]">
-      <div className="mx-auto max-w-[1100px]">
-        <h1 className="h1-display text-verde">Checkout</h1>
+    <section className="relative overflow-hidden bg-crema px-6 py-14 md:px-[120px] md:py-[90px]">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute right-[-5vw] top-2 font-display text-[180px] leading-none text-verde/[0.025] md:text-[280px]"
+      >
+        PAGO
+      </div>
 
-        <div className="mt-10 grid gap-10 md:grid-cols-[65fr_35fr]">
-          <form
-            className="grid gap-6 sm:grid-cols-2"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setDone(true);
+      <div className="relative mx-auto max-w-[1120px]">
+        <Link
+          to="/carrito"
+          className="inline-flex items-center gap-2 text-[13px] font-semibold text-verde/55 transition-colors hover:text-verde"
+        >
+          <ArrowLeft className="size-4" />
+
+          Volver al carrito
+        </Link>
+
+        <div className="mt-9 grid gap-12 lg:grid-cols-[1fr_400px] lg:items-start">
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -25,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
             }}
           >
-            {fields.map((f) => (
-              <div key={f.id} className={f.id === "direccion" ? "sm:col-span-2" : ""}>
-                <label className="field-label caption" htmlFor={f.id}>
-                  {f.label}
-                </label>
-                <input id={f.id} type={f.type} required className="field" />
-              </div>
-            ))}
+            <p className="eyebrow text-verde/55">
+              Checkout
+            </p>
 
-            <div className="sm:col-span-2 rounded-xl border border-dashed border-verde/30 p-6">
-              <p className="eyebrow text-verde">Método de pago</p>
-              <p className="mt-2 body-text text-verde/70">
-                Pasarela de pago pendiente de definir. Este bloque es intercambiable.
+            <h1 className="mt-4 max-w-[650px] font-display text-[clamp(52px,6vw,82px)] leading-[0.94] tracking-[-0.045em] text-verde">
+              Tu pedido,
+              <br />
+              listo para pagar.
+            </h1>
+
+            <p className="body-text mt-6 max-w-[560px] text-verde/68">
+              En el siguiente
+              paso Stripe te
+              pedirá los datos
+              necesarios para
+              realizar el pago
+              y entregar tu
+              pedido.
+            </p>
+
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              <TrustItem
+                icon={
+                  LockKeyhole
+                }
+                title="Pago seguro"
+                text="Tus datos de tarjeta no pasan por nuestros servidores."
+              />
+
+              <TrustItem
+                icon={
+                  CreditCard
+                }
+                title="Stripe"
+                text="El cobro se realiza en la plataforma segura de Stripe."
+              />
+
+              <TrustItem
+                icon={
+                  ShieldCheck
+                }
+                title="Verificación"
+                text="Confirmamos el estado del pago antes de cerrar el pedido."
+              />
+            </div>
+          </motion.div>
+
+          <motion.aside
+            initial={{
+              opacity: 0,
+              x: 25,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+            }}
+            className="overflow-hidden rounded-[28px] border border-verde/10 bg-salvia/40 p-7 shadow-[0_25px_75px_rgba(35,91,78,0.09)] md:p-8"
+          >
+            <div className="flex items-center justify-between">
+              <p className="eyebrow text-verde/55">
+                Tu pedido
               </p>
+
+              <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-verde/35">
+                DALI
+              </span>
             </div>
 
-            <button type="submit" className="btn-primary sm:col-span-2 justify-self-start">
-              {done ? "Pedido confirmado ✓" : "Confirmar pedido"}
-            </button>
-          </form>
+            <ul className="mt-7 space-y-5">
+              {items.map(
+                (item) => {
+                  const unit =
+                    getProductPriceCop(
+                      item.slug,
+                      item.size,
+                    );
 
-          <aside className="h-fit rounded-2xl bg-salvia p-8">
-            <p className="eyebrow text-verde">Resumen del pedido</p>
-            <ul className="mt-6 space-y-4">
-              {items.length === 0 && (
-                <li className="body-text text-verde/70">No hay productos en el carrito.</li>
+                  return (
+                    <li
+                      key={`${item.slug}-${item.size}`}
+                      className="flex items-center gap-4 border-b border-verde/10 pb-5"
+                    >
+                      <img
+                        src={
+                          item.image
+                        }
+                        alt=""
+                        className="size-16 rounded-[14px] object-cover"
+                      />
+
+                      <div className="min-w-0 flex-1">
+                        <p className="font-display text-[18px] text-verde">
+                          {
+                            item.name
+                          }
+                        </p>
+
+                        <p className="mt-1 text-[11px] uppercase tracking-[0.12em] text-verde/45">
+                          {
+                            item.size
+                          }{" "}
+                          ×{" "}
+                          {
+                            item.qty
+                          }
+                        </p>
+                      </div>
+
+                      <span className="text-right text-[13px] font-semibold text-verde">
+                        {unit
+                          ? formatCop(
+                              unit *
+                                item.qty,
+                            )
+                          : "$XX.XXX"}
+                      </span>
+                    </li>
+                  );
+                },
               )}
-              {items.map((i) => (
-                <li
-                  key={`${i.slug}-${i.size}`}
-                  className="flex items-center justify-between gap-4 body-text text-verde"
-                >
-                  <span>
-                    {i.name} · {i.size} × {i.qty}
-                  </span>
-                  <span className="font-semibold">{i.price}</span>
-                </li>
-              ))}
             </ul>
-            <div className="mt-6 flex items-center justify-between border-t border-verde/20 pt-4 text-[18px] font-semibold text-verde">
-              <span>Total</span>
-              <span>$XX.XXX COP</span>
+
+            <div className="mt-7 flex items-end justify-between gap-5">
+              <span className="text-[15px] font-semibold text-verde">
+                Total productos
+              </span>
+
+              <span className="font-display text-[29px] leading-none text-verde">
+                {pricesConfigured
+                  ? formatCop(
+                      subtotalCop,
+                    )
+                  : "$XX.XXX COP"}
+              </span>
             </div>
-          </aside>
+
+            <p className="mt-3 text-[11px] leading-relaxed text-verde/50">
+              Cualquier valor
+              adicional de
+              envío deberá
+              definirse antes
+              de producción si
+              aplica.
+            </p>
+
+            {error && (
+              <motion.div
+                initial={{
+                  opacity:
+                    0,
+                  y: 8,
+                }}
+                animate={{
+                  opacity:
+                    1,
+                  y: 0,
+                }}
+                role="alert"
+                className="mt-5 rounded-2xl border border-red-300/40 bg-red-50 p-4 text-[13px] leading-relaxed text-red-800"
+              >
+                {error}
+              </motion.div>
+            )}
+
+            {!pricesConfigured && (
+              <div className="mt-5 rounded-2xl border border-amber-500/30 bg-amber-50/70 p-4 text-[13px] leading-relaxed text-amber-900">
+                Debes configurar
+                los cinco precios
+                comerciales en
+                products.ts antes
+                de poder cobrar.
+              </div>
+            )}
+
+            <motion.button
+              type="button"
+              disabled={
+                loading ||
+                !pricesConfigured
+              }
+              onClick={
+                beginCheckout
+              }
+              whileHover={
+                !loading &&
+                pricesConfigured
+                  ? {
+                      y: -3,
+                    }
+                  : undefined
+              }
+              whileTap={
+                !loading &&
+                pricesConfigured
+                  ? {
+                      scale:
+                        0.985,
+                    }
+                  : undefined
+              }
+              className="btn-primary mt-7 flex w-full items-center justify-center disabled:cursor-not-allowed disabled:opacity-45"
+            >
+              {loading
+                ? "Conectando con Stripe…"
+                : "Pagar de forma segura"}
+
+              {!loading && (
+                <ArrowRight className="ml-2 size-4" />
+              )}
+            </motion.button>
+
+            <div className="mt-5 flex items-center justify-center gap-2 text-verde/42">
+              <LockKeyhole className="size-3.5" />
+
+              <span className="text-[10px] uppercase tracking-[0.12em]">
+                Procesado por
+                Stripe
+              </span>
+            </div>
+          </motion.aside>
         </div>
       </div>
     </section>
+  );
+}
+
+function TrustItem({
+  icon: Icon,
+  title,
+  text,
+}: {
+  icon:
+    typeof ShieldCheck;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className="border-t border-verde/12 pt-5">
+      <Icon
+        className="size-5 text-verde"
+        strokeWidth={
+          1.4
+        }
+      />
+
+      <p className="mt-4 font-display text-[19px] text-verde">
+        {title}
+      </p>
+
+      <p className="mt-2 text-[12px] leading-relaxed text-verde/55">
+        {text}
+      </p>
+    </div>
   );
 }

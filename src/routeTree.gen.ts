@@ -21,7 +21,11 @@ import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as TerminosYCondicionesRouteImport } from './routes/terminos-y-condiciones'
 import { Route as TiendaRouteImport } from './routes/tienda'
 import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as ApiCheckoutRouteImport } from './routes/api/checkout'
+import { Route as ApiCheckoutSessionRouteImport } from './routes/api/checkout-session'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
+import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe-webhook'
+import { Route as CheckoutExitoRouteImport } from './routes/checkout.exito'
 import { Route as ProductoSlugRouteImport } from './routes/producto.$slug'
 
 const IndexRoute = IndexRouteImport.update({
@@ -84,10 +88,30 @@ const ApiChatRoute = ApiChatRouteImport.update({
   path: '/api/chat',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiCheckoutRoute = ApiCheckoutRouteImport.update({
+  id: '/api/checkout',
+  path: '/api/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCheckoutSessionRoute = ApiCheckoutSessionRouteImport.update({
+  id: '/api/checkout-session',
+  path: '/api/checkout-session',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiHealthRoute = ApiHealthRouteImport.update({
   id: '/api/health',
   path: '/api/health',
   getParentRoute: () => rootRouteImport,
+} as any)
+const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
+  id: '/api/stripe-webhook',
+  path: '/api/stripe-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutExitoRoute = CheckoutExitoRouteImport.update({
+  id: '/exito',
+  path: '/exito',
+  getParentRoute: () => CheckoutRoute,
 } as any)
 const ProductoSlugRoute = ProductoSlugRouteImport.update({
   id: '/producto/$slug',
@@ -98,7 +122,7 @@ const ProductoSlugRoute = ProductoSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/carrito': typeof CarritoRoute
-  '/checkout': typeof CheckoutRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contacto': typeof ContactoRoute
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
@@ -108,13 +132,17 @@ export interface FileRoutesByFullPath {
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/checkout': typeof ApiCheckoutRoute
+  '/api/checkout-session': typeof ApiCheckoutSessionRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/carrito': typeof CarritoRoute
-  '/checkout': typeof CheckoutRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contacto': typeof ContactoRoute
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
@@ -124,14 +152,18 @@ export interface FileRoutesByTo {
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/checkout': typeof ApiCheckoutRoute
+  '/api/checkout-session': typeof ApiCheckoutSessionRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/carrito': typeof CarritoRoute
-  '/checkout': typeof CheckoutRoute
+  '/checkout': typeof CheckoutRouteWithChildren
   '/contacto': typeof ContactoRoute
   '/devoluciones': typeof DevolucionesRoute
   '/envios': typeof EnviosRoute
@@ -141,7 +173,11 @@ export interface FileRoutesById {
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
   '/api/chat': typeof ApiChatRoute
+  '/api/checkout': typeof ApiCheckoutRoute
+  '/api/checkout-session': typeof ApiCheckoutSessionRoute
   '/api/health': typeof ApiHealthRoute
+  '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
 export interface FileRouteTypes {
@@ -159,7 +195,11 @@ export interface FileRouteTypes {
     | '/terminos-y-condiciones'
     | '/tienda'
     | '/api/chat'
+    | '/api/checkout'
+    | '/api/checkout-session'
     | '/api/health'
+    | '/api/stripe-webhook'
+    | '/checkout/exito'
     | '/producto/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -175,7 +215,11 @@ export interface FileRouteTypes {
     | '/terminos-y-condiciones'
     | '/tienda'
     | '/api/chat'
+    | '/api/checkout'
+    | '/api/checkout-session'
     | '/api/health'
+    | '/api/stripe-webhook'
+    | '/checkout/exito'
     | '/producto/$slug'
   id:
     | '__root__'
@@ -191,14 +235,18 @@ export interface FileRouteTypes {
     | '/terminos-y-condiciones'
     | '/tienda'
     | '/api/chat'
+    | '/api/checkout'
+    | '/api/checkout-session'
     | '/api/health'
+    | '/api/stripe-webhook'
+    | '/checkout/exito'
     | '/producto/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CarritoRoute: typeof CarritoRoute
-  CheckoutRoute: typeof CheckoutRoute
+  CheckoutRoute: typeof CheckoutRouteWithChildren
   ContactoRoute: typeof ContactoRoute
   DevolucionesRoute: typeof DevolucionesRoute
   EnviosRoute: typeof EnviosRoute
@@ -208,7 +256,10 @@ export interface RootRouteChildren {
   TerminosYCondicionesRoute: typeof TerminosYCondicionesRoute
   TiendaRoute: typeof TiendaRoute
   ApiChatRoute: typeof ApiChatRoute
+  ApiCheckoutRoute: typeof ApiCheckoutRoute
+  ApiCheckoutSessionRoute: typeof ApiCheckoutSessionRoute
   ApiHealthRoute: typeof ApiHealthRoute
+  ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   ProductoSlugRoute: typeof ProductoSlugRoute
 }
 
@@ -298,12 +349,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiChatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/checkout': {
+      id: '/api/checkout'
+      path: '/api/checkout'
+      fullPath: '/api/checkout'
+      preLoaderRoute: typeof ApiCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/checkout-session': {
+      id: '/api/checkout-session'
+      path: '/api/checkout-session'
+      fullPath: '/api/checkout-session'
+      preLoaderRoute: typeof ApiCheckoutSessionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/health': {
       id: '/api/health'
       path: '/api/health'
       fullPath: '/api/health'
       preLoaderRoute: typeof ApiHealthRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/api/stripe-webhook': {
+      id: '/api/stripe-webhook'
+      path: '/api/stripe-webhook'
+      fullPath: '/api/stripe-webhook'
+      preLoaderRoute: typeof ApiStripeWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/exito': {
+      id: '/checkout/exito'
+      path: '/exito'
+      fullPath: '/checkout/exito'
+      preLoaderRoute: typeof CheckoutExitoRouteImport
+      parentRoute: typeof CheckoutRoute
     }
     '/producto/$slug': {
       id: '/producto/$slug'
@@ -315,10 +394,22 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface CheckoutRouteChildren {
+  CheckoutExitoRoute: typeof CheckoutExitoRoute
+}
+
+const CheckoutRouteChildren: CheckoutRouteChildren = {
+  CheckoutExitoRoute: CheckoutExitoRoute,
+}
+
+const CheckoutRouteWithChildren = CheckoutRoute._addFileChildren(
+  CheckoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CarritoRoute: CarritoRoute,
-  CheckoutRoute: CheckoutRoute,
+  CheckoutRoute: CheckoutRouteWithChildren,
   ContactoRoute: ContactoRoute,
   DevolucionesRoute: DevolucionesRoute,
   EnviosRoute: EnviosRoute,
@@ -328,7 +419,10 @@ const rootRouteChildren: RootRouteChildren = {
   TerminosYCondicionesRoute: TerminosYCondicionesRoute,
   TiendaRoute: TiendaRoute,
   ApiChatRoute: ApiChatRoute,
+  ApiCheckoutRoute: ApiCheckoutRoute,
+  ApiCheckoutSessionRoute: ApiCheckoutSessionRoute,
   ApiHealthRoute: ApiHealthRoute,
+  ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   ProductoSlugRoute: ProductoSlugRoute,
 }
 export const routeTree = rootRouteImport
