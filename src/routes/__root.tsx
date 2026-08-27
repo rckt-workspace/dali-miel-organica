@@ -16,6 +16,7 @@ import { SiteNav } from "../components/SiteNav";
 import { SiteFooter } from "../components/SiteFooter";
 import { Toaster } from "../components/ui/sonner";
 import { ChatAssistant } from "../components/chat/ChatAssistant";
+import { PageTransition, ScrollProgress } from "../components/motion";
 
 function NotFoundComponent() {
   return (
@@ -122,10 +123,12 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <CartProvider>
         <div className="flex min-h-screen flex-col bg-crema">
+          <ScrollProgress />
           <SiteNav />
           <main className="flex-1">
-            {/* Required: nested routes render here. */}
-            <Outlet />
+            <PageTransition>
+              <Outlet />
+            </PageTransition>
           </main>
           <SiteFooter />
           <Toaster position="bottom-right" />
