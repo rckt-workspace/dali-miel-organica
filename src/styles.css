@@ -242,6 +242,15 @@
   }
 }
 
+/* Premium Visual Utilities */
+@utility honey-glow {
+  box-shadow: 0 0 60px 30px rgba(252, 214, 114, 0.1);
+}
+
+@utility honey-glow-sm {
+  box-shadow: 0 0 40px 20px rgba(252, 214, 114, 0.08);
+}
+
 /* Premium Motion & Accessibility */
 @layer base {
   @media (prefers-reduced-motion: reduce) {

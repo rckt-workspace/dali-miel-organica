@@ -15,7 +15,7 @@ export function SectionReveal({
   duration = 0.6,
 }: SectionRevealProps) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { margin: "-100px", amount: 0.15 });
 
   const variants = {
     left: { initial: { opacity: 0, x: -60 }, animate: { opacity: 1, x: 0 } },

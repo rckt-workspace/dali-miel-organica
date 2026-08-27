@@ -13,11 +13,15 @@ export function HoneyThread({ startOffset = 0, length = 200 }: HoneyThreadProps)
     offset: ["start center", "end center"],
   });
 
-  const pathLength = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 0.8, 0.8, 0]);
 
   return (
-    <div ref={ref} className="pointer-events-none relative w-full" style={{ height: length }}>
+    <div
+      ref={ref}
+      className="pointer-events-none relative w-full"
+      style={{ height: length }}
+    >
       <svg
         className="absolute left-1/2 top-0 w-1 overflow-visible"
         style={{ transform: "translateX(-50%)" }}

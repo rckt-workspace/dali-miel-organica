@@ -18,7 +18,7 @@ export function StaggerGroup({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ margin: "-80px", amount: 0.15 }}
       variants={{
         hidden: { opacity: 0 },
         visible: {

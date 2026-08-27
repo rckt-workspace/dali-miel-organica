@@ -8,3 +8,5 @@ export { ScrollProgress } from "./ScrollProgress";
 export { SectionReveal } from "./SectionReveal";
 export { StaggerGroup } from "./StaggerGroup";
 export { HoneyThread } from "./HoneyThread";
+export { BidirectionalReveal } from "./BidirectionalReveal";
+export { useScrollDirection } from "./useScrollDirection";

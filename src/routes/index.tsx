@@ -1,13 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Store, Star } from "lucide-react";
 import { motion } from "motion/react";
-import { ProductCard } from "@/components/ProductCard";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { ProductCard } from "@/components/ProductCard";
 import { pureProducts, spicyProducts } from "@/lib/products";
 import { SectionReveal, StaggerGroup, HoneyThread } from "@/components/motion";
 
@@ -17,7 +17,6 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import colibries from "@/assets/colibries.png.asset.json";
 
 import heroFoto from "@/assets/hero-banner-dali.png.asset.json";
 
@@ -50,7 +49,7 @@ function Index() {
           className="relative h-[540px] w-full overflow-hidden bg-crema md:hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
         >
           <img
             src={heroFoto.url}
@@ -68,16 +67,16 @@ function Index() {
               className="eyebrow text-verde"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.15, duration: 0.3 }}
             >
               De los bosques tropicales de Colombia
             </motion.p>
             <motion.h1
               className="h1-display mt-8 max-w-full text-verde"
               style={{ fontSize: "31px", lineHeight: "105%" }}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.25, duration: 0.3 }}
             >
               Miel que nace donde
               <br />
@@ -85,16 +84,16 @@ function Index() {
             </motion.h1>
             <motion.p
               className="body-text mt-10 max-w-[68%] text-verde/90"
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.35, duration: 0.3 }}
             >
               Miel 100% orgánica de la altillanura colombiana, con denominación de origen.
             </motion.p>
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.45, duration: 0.3 }}
             >
               <Link to="/tienda" className="btn-primary btn-sm mt-10 self-start">
                 Descubre nuestra miel
@@ -108,12 +107,16 @@ function Index() {
           className="relative hidden min-h-[640px] md:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <img
+          <motion.img
             src={heroFoto.url}
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco"
             className="absolute inset-0 h-full w-full object-cover object-[70%_center]"
+            initial={{ scale: 1 }}
+            whileInView={{ scale: 1.02 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            viewport={{ margin: "-100px", amount: 0.15 }}
           />
           <div
             aria-hidden="true"
@@ -123,6 +126,19 @@ function Index() {
                 "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.85) 32%, rgba(249,246,228,0.35) 55%, rgba(249,246,228,0) 72%)",
             }}
           />
+
+          {/* Editorial ORINOQUIA layer */}
+          <motion.div
+            className="pointer-events-none absolute inset-0 flex items-center justify-start pl-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+          >
+            <div className="text-crema font-display text-[120px] md:text-[180px] leading-none opacity-[0.08] whitespace-nowrap">
+              ORINOQUIA
+            </div>
+          </motion.div>
+
           <div className="relative mx-auto flex min-h-[640px] max-w-[1440px] items-start px-8 pb-[110px] pt-[92px] lg:px-[72px]">
             <div className="flex max-w-[560px] flex-col">
               <motion.p
@@ -138,7 +154,7 @@ function Index() {
                 style={{ fontSize: "clamp(34px, 4vw, 56px)", lineHeight: "105%" }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
+                transition={{ delay: 0.35, duration: 0.4 }}
               >
                 Miel que nace donde
                 <br />
@@ -148,7 +164,7 @@ function Index() {
                 className="body-text mt-12 max-w-[440px] text-verde/85"
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.4 }}
+                transition={{ delay: 0.5, duration: 0.4 }}
               >
                 Miel 100% orgánica de la altillanura colombiana, con denominación de origen. Vida,
                 sabiduría y bienestar en cada cosecha — sin atajos y sin pedir permiso.
@@ -156,7 +172,7 @@ function Index() {
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.4 }}
+                transition={{ delay: 0.65, duration: 0.4 }}
               >
                 <Link to="/tienda" className="btn-primary btn-base mt-12 self-start">
                   Descubre nuestra miel
@@ -167,126 +183,68 @@ function Index() {
         </motion.div>
       </section>
 
-      {/* PRODUCTS SECTION — PRESERVED STRUCTURE */}
+      {/* HONEY THREAD SEGMENT 1 */}
+      <HoneyThread length={120} />
+
+      {/* PURE PRODUCTS */}
       <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[120px]">
         <motion.div
-          className="deco-bg absolute inset-0 opacity-[0.08]"
+          className="deco-bg absolute inset-0 opacity-[0.04]"
           style={{ backgroundImage: `url(${formas.url})` }}
           aria-hidden="true"
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.08 }}
+          whileInView={{ opacity: 0.04 }}
           transition={{ duration: 0.8 }}
         />
+        <img
+          src={perezoso.url}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute left-2 top-6 hidden mix-blend-multiply w-[160px] lg:block"
+        />
+        <img
+          src={osoHormiguero.url}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute bottom-6 right-2 hidden mix-blend-multiply w-[200px] lg:block"
+        />
 
-        <div className="relative mx-auto max-w-[1400px]">
-          <SectionReveal direction="up" delay={0.2}>
+        <div className="relative mx-auto max-w-[1200px]">
+          <SectionReveal direction="up" delay={0.1}>
             <div className="flex flex-col items-center gap-3 text-center">
               <p className="eyebrow text-verde">Nuestra miel</p>
               <h2 className="h2-display text-verde">Tres variedades, un mismo origen</h2>
             </div>
           </SectionReveal>
 
-          {/* Product Grid — EXACT ORIGINAL STRUCTURE */}
           <motion.div
             className="mt-8 grid gap-8 md:mt-14 md:grid-cols-3"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ margin: "-100px", amount: 0.15 }}
             variants={{
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
                 transition: {
-                  staggerChildren: 0.15,
+                  staggerChildren: 0.12,
                   delayChildren: 0.2,
                 },
               },
             }}
           >
-            {pureProducts.map((product) => (
+            {pureProducts.map((p) => (
               <motion.div
-                key={product.slug}
+                key={p.slug}
                 variants={{
-                  hidden: { opacity: 0, y: 40 },
+                  hidden: { opacity: 0, y: 30 },
                   visible: { opacity: 1, y: 0 },
                 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
               >
-                <div
-                  className="group relative rounded-3xl bg-crema p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow"
-                  style={{ borderTop: `4px solid ${product.accent}` }}
-                >
-                  {/* Editorial Number */}
-                  <div className="text-xs font-semibold text-verde/30 mb-4 tracking-wider">
-                    {String(pureProducts.indexOf(product) + 1).padStart(2, "0")}
-                  </div>
-
-                  {/* Product Image */}
-                  <Link
-                    to="/producto/$slug"
-                    params={{ slug: product.slug }}
-                    className="block mb-6 transition-transform duration-300 h-[240px] flex items-center justify-center"
-                  >
-                    <img
-                      src={product.gallery?.[0] ?? product.image}
-                      alt={`Frasco de miel ${product.name} de Dalí`}
-                      loading="lazy"
-                      className="w-full h-full object-contain drop-shadow-md group-hover:scale-105 transition-transform duration-300"
-                    />
-                  </Link>
-
-                  {/* Product Name */}
-                  <Link
-                    to="/producto/$slug"
-                    params={{ slug: product.slug }}
-                    className="h3-display text-verde hover:opacity-70 transition-opacity mb-2"
-                  >
-                    {product.name}
-                  </Link>
-
-                  {/* Tasting Notes */}
-                  <p className="text-sm text-verde/75 mb-2">{product.tasting}</p>
-
-                  {/* Size */}
-                  <p className="caption text-verde/50 mb-4">{product.sizes[0]}</p>
-
-                  {/* Badges */}
-                  <div className="flex gap-2 mb-6 flex-wrap">
-                    {product.badges.map((badge) => (
-                      <span
-                        key={badge.label}
-                        className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs"
-                        style={{
-                          backgroundColor: `${product.accent}20`,
-                          color: product.accent,
-                        }}
-                      >
-                        {badge.label}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Price Section */}
-                  <div className="border-t border-verde/10 pt-4 mb-4">
-                    <span className="text-sm font-semibold text-verde">{product.price}</span>
-                    <p className="caption text-verde/40 text-xs mt-1">
-                      PRECIO DE REFERENCIA — PRÓXIMAMENTE
-                    </p>
-                  </div>
-
-                  {/* CTA */}
-                  <motion.button
-                    className="w-full py-3 px-4 rounded-full font-medium text-sm text-crema transition-all"
-                    style={{ backgroundColor: product.accent }}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => {
-                      window.location.href = `/producto/${product.slug}`;
-                    }}
-                  >
-                    Comprar
-                  </motion.button>
-                </div>
+                <ProductCard product={p} />
               </motion.div>
             ))}
           </motion.div>
@@ -296,7 +254,7 @@ function Index() {
       {/* DALI PICANTE */}
       <section className="relative overflow-hidden bg-crema px-6 py-12 md:px-[120px] md:py-[100px]">
         <motion.div
-          className="deco-bg absolute inset-0 opacity-[0.08]"
+          className="deco-bg absolute inset-0 opacity-[0.04]"
           style={{ backgroundImage: `url(${formas.url})` }}
           aria-hidden="true"
         />
@@ -314,87 +272,33 @@ function Index() {
             className="mt-8 grid gap-8 md:mt-14 md:grid-cols-3"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ margin: "-100px", amount: 0.15 }}
             variants={{
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
-                transition: { staggerChildren: 0.12, delayChildren: 0.1 },
+                transition: {
+                  staggerChildren: 0.12,
+                  delayChildren: 0.1,
+                },
               },
             }}
           >
-            {spicyProducts.map((product) => (
+            {spicyProducts.map((p) => (
               <motion.div
-                key={product.slug}
+                key={p.slug}
                 variants={{
-                  hidden: { opacity: 0, y: 40 },
+                  hidden: { opacity: 0, y: 30 },
                   visible: { opacity: 1, y: 0 },
                 }}
-                className="rounded-3xl bg-crema p-6 md:p-8 shadow-sm hover:shadow-md transition-shadow"
-                style={{ borderTop: `4px solid ${product.accent}` }}
+                transition={{ duration: 0.4 }}
               >
-                <Link
-                  to="/producto/$slug"
-                  params={{ slug: product.slug }}
-                  className="block mb-6 h-[240px] flex items-center justify-center"
-                >
-                  <img
-                    src={product.gallery?.[0] ?? product.image}
-                    alt={`Frasco de miel ${product.name} de Dalí`}
-                    loading="lazy"
-                    className="w-full h-full object-contain drop-shadow-md hover:scale-105 transition-transform duration-300"
-                  />
-                </Link>
-
-                <Link
-                  to="/producto/$slug"
-                  params={{ slug: product.slug }}
-                  className="h3-display text-verde hover:opacity-70 transition-opacity mb-2"
-                >
-                  {product.name}
-                </Link>
-
-                <p className="text-sm text-verde/75 mb-2">{product.tasting}</p>
-                <p className="caption text-verde/50 mb-4">{product.sizes[0]}</p>
-
-                <div className="flex gap-2 mb-6 flex-wrap">
-                  {product.badges.map((badge) => (
-                    <span
-                      key={badge.label}
-                      className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs"
-                      style={{
-                        backgroundColor: `${product.accent}20`,
-                        color: product.accent,
-                      }}
-                    >
-                      {badge.label}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="border-t border-verde/10 pt-4 mb-4">
-                  <span className="text-sm font-semibold text-verde">{product.price}</span>
-                  <p className="caption text-verde/40 text-xs mt-1">
-                    PRECIO DE REFERENCIA — PRÓXIMAMENTE
-                  </p>
-                </div>
-
-                <motion.button
-                  className="w-full py-3 px-4 rounded-full font-medium text-sm text-crema transition-all"
-                  style={{ backgroundColor: product.accent }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => {
-                    window.location.href = `/producto/${product.slug}`;
-                  }}
-                >
-                  Comprar
-                </motion.button>
+                <ProductCard product={p} />
               </motion.div>
             ))}
           </motion.div>
 
-          <SectionReveal direction="up" delay={0.4}>
+          <SectionReveal direction="up" delay={0.3}>
             <div className="mt-8 flex justify-center md:mt-12">
               <Link to="/tienda" search={{ linea: "picante" }} className="btn-picante">
                 Ver la línea picante
@@ -439,11 +343,11 @@ function Index() {
       {/* PHILOSOPHY */}
       <section className="relative grid overflow-hidden bg-verde md:grid-cols-2">
         <motion.div
-          className="deco-bg absolute inset-0 opacity-[0.12]"
+          className="deco-bg absolute inset-0 opacity-[0.08]"
           style={{ backgroundImage: `url(${ocelote.url})` }}
           aria-hidden="true"
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.12 }}
+          whileInView={{ opacity: 0.08 }}
           transition={{ duration: 0.8 }}
         />
 
@@ -456,9 +360,10 @@ function Index() {
             height={1400}
             className="h-[300px] w-full object-cover object-[center_25%] sm:h-[420px] md:h-full md:max-h-[640px]"
             style={{ boxShadow: "0 15px 40px rgba(35,91,78,0.35)" }}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
+            viewport={{ margin: "-100px", amount: 0.15 }}
           />
 
           <div
@@ -509,12 +414,15 @@ function Index() {
             className="mt-8 grid gap-6 md:mt-12 md:grid-cols-3"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ margin: "-100px", amount: 0.15 }}
             variants={{
               hidden: { opacity: 0 },
               visible: {
                 opacity: 1,
-                transition: { staggerChildren: 0.1, delayChildren: 0.2 },
+                transition: {
+                  staggerChildren: 0.1,
+                  delayChildren: 0.15,
+                },
               },
             }}
           >
@@ -589,7 +497,7 @@ function Index() {
         </div>
       </section>
 
-      {/* CLOSING CTA */}
+      {/* CLOSING */}
       <section className="flex flex-col items-center gap-6 px-6 py-14 text-center md:py-[100px]">
         <SectionReveal direction="up">
           <h2 className="h2-display text-verde">Lleva Dalí a tu mesa</h2>
