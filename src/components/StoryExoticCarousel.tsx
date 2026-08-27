@@ -12,7 +12,10 @@ import {
   useReducedMotion,
   useSpring,
 } from "motion/react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 import styles from "./StoryExoticCarousel.module.css";
 
@@ -32,56 +35,111 @@ function shortestOffset(
   activeIndex: number,
   length: number,
 ) {
-  let diff = itemIndex - activeIndex;
-  const half = length / 2;
+  let diff =
+    itemIndex - activeIndex;
 
-  if (diff > half) diff -= length;
-  if (diff < -half) diff += length;
+  const half =
+    length / 2;
+
+  if (diff > half) {
+    diff -= length;
+  }
+
+  if (diff < -half) {
+    diff += length;
+  }
 
   return diff;
 }
 
 export function StoryExoticCarousel({
   images,
-  interval = 5400,
+  interval = 4200,
   autoPlay = true,
 }: StoryExoticCarouselProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const [dragging, setDragging] = useState(false);
+  const [
+    activeIndex,
+    setActiveIndex,
+  ] = useState(0);
 
-  const reducedMotion = useReducedMotion();
+  const [
+    dragging,
+    setDragging,
+  ] = useState(false);
 
-  const pointerStartX = useRef<number | null>(null);
-  const pointerLastX = useRef<number | null>(null);
-  const pointerLastTime = useRef<number | null>(null);
-  const pointerVelocity = useRef(0);
+  const reducedMotion =
+    useReducedMotion();
 
-  const dragX = useMotionValue(0);
+  const pointerStartX =
+    useRef<number | null>(null);
 
-  const smoothDragX = useSpring(dragX, {
-    stiffness: 320,
-    damping: 32,
-    mass: 0.65,
-  });
+  const pointerLastX =
+    useRef<number | null>(null);
 
-  const length = images.length;
+  const pointerLastTime =
+    useRef<number | null>(null);
 
-  const go = useCallback(
-    (delta: number) => {
-      if (length <= 1) return;
+  const pointerVelocity =
+    useRef(0);
 
-      setActiveIndex(
-        (current) => (current + delta + length) % length,
-      );
-    },
-    [length],
-  );
+  /*
+   * Esto evita que un drag termine
+   * disparando accidentalmente el
+   * click de una fotografía.
+   */
+  const suppressClick =
+    useRef(false);
 
+  const dragX =
+    useMotionValue(0);
+
+  const smoothDragX =
+    useSpring(
+      dragX,
+      {
+        stiffness: 280,
+        damping: 30,
+        mass: 0.68,
+      },
+    );
+
+  const length =
+    images.length;
+
+  const go =
+    useCallback(
+      (delta: number) => {
+        if (
+          length <= 1
+        ) {
+          return;
+        }
+
+        setActiveIndex(
+          (current) =>
+            (
+              current +
+              delta +
+              length
+            ) %
+            length,
+        );
+      },
+      [length],
+    );
+
+  /*
+   * AUTOPLAY
+   *
+   * No se pausa simplemente
+   * porque el mouse esté encima.
+   *
+   * Solo se pausa durante
+   * un drag real.
+   */
   useEffect(() => {
     if (
       !autoPlay ||
-      paused ||
       dragging ||
       reducedMotion ||
       length <= 1
@@ -89,128 +147,226 @@ export function StoryExoticCarousel({
       return;
     }
 
-    const timer = window.setInterval(() => {
-      go(1);
-    }, interval);
+    const timer =
+      window.setInterval(
+        () => {
+          go(1);
+        },
+        interval,
+      );
 
-    return () => window.clearInterval(timer);
+    return () =>
+      window.clearInterval(
+        timer,
+      );
   }, [
     autoPlay,
     dragging,
     go,
     interval,
     length,
-    paused,
     reducedMotion,
   ]);
 
   function handleKeyDown(
-    event: React.KeyboardEvent<HTMLDivElement>,
+    event:
+      React.KeyboardEvent<HTMLDivElement>,
   ) {
-    if (event.key === "ArrowLeft") {
+    if (
+      event.key ===
+      "ArrowLeft"
+    ) {
       event.preventDefault();
       go(-1);
     }
 
-    if (event.key === "ArrowRight") {
+    if (
+      event.key ===
+      "ArrowRight"
+    ) {
       event.preventDefault();
       go(1);
     }
   }
 
   function handlePointerDown(
-    event: ReactPointerEvent<HTMLDivElement>,
+    event:
+      ReactPointerEvent<HTMLDivElement>,
   ) {
-    if (event.pointerType === "mouse" && event.button !== 0) {
+    if (
+      event.pointerType ===
+        "mouse" &&
+      event.button !== 0
+    ) {
       return;
     }
 
-    pointerStartX.current = event.clientX;
-    pointerLastX.current = event.clientX;
-    pointerLastTime.current = performance.now();
-    pointerVelocity.current = 0;
+    pointerStartX.current =
+      event.clientX;
+
+    pointerLastX.current =
+      event.clientX;
+
+    pointerLastTime.current =
+      performance.now();
+
+    pointerVelocity.current =
+      0;
+
+    suppressClick.current =
+      false;
 
     setDragging(true);
-    setPaused(true);
 
     dragX.set(0);
 
-    event.currentTarget.setPointerCapture(event.pointerId);
+    event.currentTarget
+      .setPointerCapture(
+        event.pointerId,
+      );
   }
 
   function handlePointerMove(
-    event: ReactPointerEvent<HTMLDivElement>,
+    event:
+      ReactPointerEvent<HTMLDivElement>,
   ) {
-    if (pointerStartX.current === null) return;
-
-    const delta = event.clientX - pointerStartX.current;
-
-    /*
-     * Seguimos al mouse/dedo, pero limitamos la amplitud para que
-     * la composición nunca se vaya violentamente de pantalla.
-     */
-    const resistance = 0.54;
-    const translated = Math.max(
-      -110,
-      Math.min(110, delta * resistance),
-    );
-
-    dragX.set(translated);
-
-    const now = performance.now();
-
     if (
-      pointerLastX.current !== null &&
-      pointerLastTime.current !== null
+      pointerStartX.current ===
+      null
     ) {
-      const dx = event.clientX - pointerLastX.current;
-      const dt = now - pointerLastTime.current;
-
-      if (dt > 0) {
-        pointerVelocity.current = dx / dt;
-      }
-    }
-
-    pointerLastX.current = event.clientX;
-    pointerLastTime.current = now;
-  }
-
-  function finishPointer(
-    event: ReactPointerEvent<HTMLDivElement>,
-  ) {
-    if (pointerStartX.current === null) {
-      setDragging(false);
-      dragX.set(0);
       return;
     }
 
-    const delta = event.clientX - pointerStartX.current;
-    const velocity = pointerVelocity.current;
+    const delta =
+      event.clientX -
+      pointerStartX.current;
+
+    if (
+      Math.abs(delta) >
+      7
+    ) {
+      suppressClick.current =
+        true;
+    }
 
     /*
-     * Swipe normal:
-     * izquierda = siguiente
-     * derecha   = anterior
+     * El carrusel acompaña al
+     * puntero, pero con resistencia.
      */
-    if (delta < -45 || velocity < -0.42) {
+    const resistance =
+      0.5;
+
+    const translated =
+      Math.max(
+        -115,
+        Math.min(
+          115,
+          delta *
+            resistance,
+        ),
+      );
+
+    dragX.set(
+      translated,
+    );
+
+    const now =
+      performance.now();
+
+    if (
+      pointerLastX.current !==
+        null &&
+      pointerLastTime.current !==
+        null
+    ) {
+      const dx =
+        event.clientX -
+        pointerLastX.current;
+
+      const dt =
+        now -
+        pointerLastTime.current;
+
+      if (
+        dt >
+        0
+      ) {
+        pointerVelocity.current =
+          dx / dt;
+      }
+    }
+
+    pointerLastX.current =
+      event.clientX;
+
+    pointerLastTime.current =
+      now;
+  }
+
+  function finishPointer(
+    event:
+      ReactPointerEvent<HTMLDivElement>,
+  ) {
+    if (
+      pointerStartX.current ===
+      null
+    ) {
+      setDragging(false);
+
+      dragX.set(0);
+
+      return;
+    }
+
+    const delta =
+      event.clientX -
+      pointerStartX.current;
+
+    const velocity =
+      pointerVelocity.current;
+
+    /*
+     * Swipe izquierda
+     * -> siguiente
+     *
+     * Swipe derecha
+     * -> anterior
+     */
+    if (
+      delta < -45 ||
+      velocity < -0.42
+    ) {
       go(1);
-    } else if (delta > 45 || velocity > 0.42) {
+    } else if (
+      delta > 45 ||
+      velocity > 0.42
+    ) {
       go(-1);
     }
 
     dragX.set(0);
 
-    pointerStartX.current = null;
-    pointerLastX.current = null;
-    pointerLastTime.current = null;
-    pointerVelocity.current = 0;
+    pointerStartX.current =
+      null;
+
+    pointerLastX.current =
+      null;
+
+    pointerLastTime.current =
+      null;
+
+    pointerVelocity.current =
+      0;
 
     setDragging(false);
 
     try {
-      event.currentTarget.releasePointerCapture(event.pointerId);
+      event.currentTarget
+        .releasePointerCapture(
+          event.pointerId,
+        );
     } catch {
-      // El navegador puede haber liberado el pointer previamente.
+      //
     }
   }
 
@@ -218,183 +374,318 @@ export function StoryExoticCarousel({
     index: number,
     active: boolean,
   ) {
-    if (dragging) return;
-    if (active) return;
+    if (
+      suppressClick.current
+    ) {
+      suppressClick.current =
+        false;
+
+      return;
+    }
+
+    if (active) {
+      return;
+    }
 
     setActiveIndex(index);
   }
 
-  if (length === 0) return null;
+  if (
+    length === 0
+  ) {
+    return null;
+  }
 
   return (
     <div
-      className={styles.outer}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => {
-        if (!dragging) setPaused(false);
-      }}
+      className={
+        styles.outer
+      }
     >
-      {/* Ambient DALI glow */}
+      {/* Ambient glow */}
       <span
-        className={styles.glowLeft}
-        aria-hidden="true"
-      />
-      <span
-        className={styles.glowRight}
+        className={
+          styles.glowLeft
+        }
         aria-hidden="true"
       />
 
-      {/* Línea/orbita orgánica */}
       <span
-        className={styles.orbit}
+        className={
+          styles.glowRight
+        }
         aria-hidden="true"
       />
+
+      <span
+        className={
+          styles.orbit
+        }
+        aria-hidden="true"
+      />
+
+      {/* ==========================
+          STAGE
+      ========================== */}
 
       <motion.div
         className={`${styles.stage} ${
-          dragging ? styles.stageDragging : ""
+          dragging
+            ? styles.stageDragging
+            : ""
         }`}
         role="group"
         aria-roledescription="carrusel"
         aria-label="Los bosques de La Sonora"
         tabIndex={0}
         style={{
-          x: reducedMotion ? 0 : smoothDragX,
+          x:
+            reducedMotion
+              ? 0
+              : smoothDragX,
         }}
-        onKeyDown={handleKeyDown}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={finishPointer}
-        onPointerCancel={finishPointer}
-        onFocus={() => setPaused(true)}
-        onBlur={() => setPaused(false)}
+        onKeyDown={
+          handleKeyDown
+        }
+        onPointerDown={
+          handlePointerDown
+        }
+        onPointerMove={
+          handlePointerMove
+        }
+        onPointerUp={
+          finishPointer
+        }
+        onPointerCancel={
+          finishPointer
+        }
       >
-        {images.map((image, index) => {
-          const offset = shortestOffset(
+        {images.map(
+          (
+            image,
             index,
-            activeIndex,
-            length,
-          );
+          ) => {
+            const offset =
+              shortestOffset(
+                index,
+                activeIndex,
+                length,
+              );
 
-          const abs = Math.abs(offset);
-          const active = offset === 0;
+            const abs =
+              Math.abs(
+                offset,
+              );
 
-          const cssVariables = {
-            "--offset": offset,
-            "--abs": abs,
-            zIndex: 20 - abs,
-          } as CSSProperties;
+            const active =
+              offset === 0;
 
-          return (
-            <button
-              key={image.src}
-              type="button"
-              className={`${styles.slide} ${
-                active ? styles.slideActive : ""
-              }`}
-              style={cssVariables}
-              onClick={() =>
-                handleSlideClick(index, active)
-              }
-              aria-label={
+            const style = {
+              "--offset":
+                offset,
+              "--abs": abs,
+              zIndex:
                 active
-                  ? `Imagen ${index + 1} de ${length}: ${image.alt}`
-                  : `Mostrar imagen ${index + 1}: ${image.alt}`
-              }
-              aria-current={active ? "true" : undefined}
-              tabIndex={active ? 0 : -1}
-            >
-              <span className={styles.slideInner}>
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading={index === 0 ? "eager" : "lazy"}
-                  draggable={false}
-                />
+                  ? 30
+                  : 20 -
+                    abs,
+            } as CSSProperties;
 
+            return (
+              <button
+                key={
+                  image.src
+                }
+                type="button"
+                className={`${styles.slide} ${
+                  active
+                    ? styles.slideActive
+                    : ""
+                }`}
+                style={
+                  style
+                }
+                onClick={() =>
+                  handleSlideClick(
+                    index,
+                    active,
+                  )
+                }
+                aria-label={
+                  active
+                    ? `Imagen ${index + 1} de ${length}: ${image.alt}`
+                    : `Mostrar imagen ${index + 1}: ${image.alt}`
+                }
+                aria-current={
+                  active
+                    ? "true"
+                    : undefined
+                }
+                tabIndex={
+                  active
+                    ? 0
+                    : -1
+                }
+              >
                 <span
-                  className={styles.imageSheen}
-                  aria-hidden="true"
-                />
-              </span>
-            </button>
-          );
-        })}
+                  className={
+                    styles.slideInner
+                  }
+                >
+                  <img
+                    src={
+                      image.src
+                    }
+                    alt={
+                      image.alt
+                    }
+                    loading={
+                      index ===
+                      0
+                        ? "eager"
+                        : "lazy"
+                    }
+                    draggable={
+                      false
+                    }
+                  />
 
-        {length > 1 && (
-          <>
-            <button
-              type="button"
-              className={`${styles.arrow} ${styles.arrowLeft}`}
-              onClick={(event) => {
-                event.stopPropagation();
-                go(-1);
-              }}
-              aria-label="Imagen anterior"
-            >
-              <ChevronLeft
-                className={styles.arrowIcon}
-                strokeWidth={1.6}
-              />
-            </button>
-
-            <button
-              type="button"
-              className={`${styles.arrow} ${styles.arrowRight}`}
-              onClick={(event) => {
-                event.stopPropagation();
-                go(1);
-              }}
-              aria-label="Imagen siguiente"
-            >
-              <ChevronRight
-                className={styles.arrowIcon}
-                strokeWidth={1.6}
-              />
-            </button>
-          </>
+                  <span
+                    aria-hidden="true"
+                    className={
+                      styles.imageSheen
+                    }
+                  />
+                </span>
+              </button>
+            );
+          },
         )}
       </motion.div>
 
+      {/* ==========================
+          CONTROLS
+
+          AHORA ESTÁN FUERA DEL
+          STAGE QUE CAPTURA DRAG.
+      ========================== */}
+
       {length > 1 && (
         <div
-          className={styles.dots}
-          aria-label="Seleccionar fotografía"
+          className={
+            styles.controls
+          }
         >
-          {images.map((image, index) => (
-            <button
-              key={image.src}
-              type="button"
-              aria-label={`Ir a fotografía ${index + 1}`}
-              aria-current={
-                index === activeIndex
-                  ? "true"
-                  : undefined
+          <button
+            type="button"
+            className={
+              styles.arrow
+            }
+            onClick={() =>
+              go(-1)
+            }
+            aria-label="Fotografía anterior"
+          >
+            <ChevronLeft
+              className={
+                styles.arrowIcon
               }
-              className={`${styles.dot} ${
-                index === activeIndex
-                  ? styles.dotActive
-                  : ""
-              }`}
-              onClick={() => setActiveIndex(index)}
+              strokeWidth={
+                1.7
+              }
             />
-          ))}
+          </button>
+
+          <div
+            className={
+              styles.dots
+            }
+            aria-label="Seleccionar fotografía"
+          >
+            {images.map(
+              (
+                image,
+                index,
+              ) => (
+                <button
+                  key={
+                    image.src
+                  }
+                  type="button"
+                  aria-label={`Ir a fotografía ${index + 1}`}
+                  aria-current={
+                    index ===
+                    activeIndex
+                      ? "true"
+                      : undefined
+                  }
+                  className={`${styles.dot} ${
+                    index ===
+                    activeIndex
+                      ? styles.dotActive
+                      : ""
+                  }`}
+                  onClick={() =>
+                    setActiveIndex(
+                      index,
+                    )
+                  }
+                />
+              ),
+            )}
+          </div>
+
+          <button
+            type="button"
+            className={
+              styles.arrow
+            }
+            onClick={() =>
+              go(1)
+            }
+            aria-label="Fotografía siguiente"
+          >
+            <ChevronRight
+              className={
+                styles.arrowIcon
+              }
+              strokeWidth={
+                1.7
+              }
+            />
+          </button>
         </div>
       )}
 
-      <div className={styles.helper}>
+      <div
+        className={
+          styles.counter
+        }
+        aria-hidden="true"
+      >
         <span>
-          {String(activeIndex + 1).padStart(2, "0")}
+          {String(
+            activeIndex +
+              1,
+          ).padStart(
+            2,
+            "0",
+          )}
         </span>
 
-        <span className={styles.helperLine} />
+        <span
+          className={
+            styles.counterLine
+          }
+        />
 
         <span>
-          {String(length).padStart(2, "0")}
-        </span>
-
-        <span className={styles.helperText}>
-          Arrastra para explorar
+          {String(
+            length,
+          ).padStart(
+            2,
+            "0",
+          )}
         </span>
       </div>
     </div>
