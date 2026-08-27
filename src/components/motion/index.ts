@@ -10,3 +10,5 @@ export { StaggerGroup } from "./StaggerGroup";
 export { HoneyThread } from "./HoneyThread";
 export { BidirectionalReveal } from "./BidirectionalReveal";
 export { useScrollDirection } from "./useScrollDirection";
+export { useHeroImageHover } from "./useHeroImageHover";
+export { useFloatingDecorative } from "./useFloatingDecorative";

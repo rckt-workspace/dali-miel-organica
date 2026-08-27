@@ -1,7 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
+import { useRef, useState } from "react";
 import { ProductCard } from "@/components/ProductCard";
+import { TiendaCategorySelector } from "@/components/TiendaCategorySelector";
 import { pureProducts, spicyProducts } from "@/lib/products";
+import { HoneyThread } from "@/components/motion";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
@@ -33,74 +37,191 @@ export const Route = createFileRoute("/tienda")({
 function Tienda() {
   const { linea } = Route.useSearch();
   const navigate = Route.useNavigate();
-  const picante = linea === "picante";
+  const [displayCategory, setDisplayCategory] = useState<"pura" | "picante">(
+    linea as "pura" | "picante"
+  );
+
+  const picante = displayCategory === "picante";
   const list = picante ? spicyProducts : pureProducts;
 
+  const handleCategoryChange = (category: "pura" | "picante") => {
+    setDisplayCategory(category);
+    navigate({ search: { linea: category } });
+  };
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+
+  // Scroll-linked background word movement
+  const backgroundWordX = useTransform(scrollY, [0, 800], [-50, 50]);
+
   return (
-    <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[96px]">
-      <div
-        className="deco-bg absolute inset-0 opacity-[0.12]"
-        style={{ backgroundImage: `url(${formas.url})` }}
-        aria-hidden="true"
-      />
-      <img
-        src={perezoso.url}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        className="pointer-events-none absolute -left-6 top-[45%] hidden w-[130px] opacity-80 mix-blend-multiply lg:block"
-      />
-      <img
-        src={osoHormiguero.url}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
-        className="pointer-events-none absolute bottom-8 right-2 hidden w-[180px] mix-blend-multiply lg:block"
-      />
+    <>
+      {/* HEADER */}
+      <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:pt-[64px] md:pb-[40px] bg-crema">
+        {/* Editorial background typography */}
+        <motion.div
+          className="pointer-events-none absolute inset-0 flex items-center justify-center"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+        >
+          <div className="text-crema font-display text-[140px] md:text-[220px] leading-none opacity-[0.035] whitespace-nowrap select-none">
+            {picante ? "PICANTE" : "MIEL"}
+          </div>
+        </motion.div>
 
-      <div className="relative mx-auto max-w-[1200px]">
-        <p className={`eyebrow ${picante ? "text-picante-naranja" : "text-verde"}`}>Tienda</p>
-        <h1 className="h1-display mt-3 text-verde">
-          {picante ? "Dalí Picante" : "Nuestra colección de miel"}
-        </h1>
-        <p className="body-text mt-4 max-w-[640px] text-verde/80">
-          {picante
-            ? "Miel orgánica infusionada con chile: el mismo origen, con carácter."
-            : "Tres variedades de miel cruda, cosechadas en los bosques de la altillanura colombiana."}
-        </p>
+        <div className="relative mx-auto max-w-[1200px] z-10">
+          <motion.p
+            className="eyebrow text-verde"
+            initial={{ opacity: 0, y: -18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            Nuestra miel
+          </motion.p>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          {(
-            [
-              { key: "pura", label: "Miel Pura" },
-              { key: "picante", label: "Miel Picante" },
-            ] as const
-          ).map((t) => {
-            const active = linea === t.key;
-            return (
-              <button
-                key={t.key}
-                onClick={() => navigate({ search: { linea: t.key } })}
-                className={`rounded-full border px-6 py-2 text-[15px] transition-colors ${
-                  active
-                    ? picante
-                      ? "border-picante-naranja bg-picante-naranja text-crema"
-                      : "border-verde bg-verde text-crema"
-                    : "border-verde/25 text-verde hover:border-verde"
-                }`}
-              >
-                {t.label}
-              </button>
-            );
-          })}
+          <motion.h1
+            className="h1-display mt-3 text-verde"
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            Cosechas con carácter propio
+          </motion.h1>
+
+          <motion.p
+            className="body-text mt-4 max-w-[640px] text-verde/80"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            {picante
+              ? "Miel orgánica infusionada con chile: el mismo origen, con carácter."
+              : "Tres variedades de miel cruda, cosechadas en los bosques de la altillanura colombiana."}
+          </motion.p>
+
+          <motion.div
+            className="mt-8"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.3, type: "spring", stiffness: 300 }}
+          >
+            <TiendaCategorySelector active={displayCategory} onChange={handleCategoryChange} />
+          </motion.div>
         </div>
+      </section>
 
-        <div className="mt-8 grid gap-8 md:mt-12 md:grid-cols-3">
-          {list.map((p) => (
-            <ProductCard key={p.slug} product={p} />
-          ))}
-        </div>
+      {/* HONEY THREAD SEGMENT — DECORATIVE BRIDGE */}
+      <div className="relative h-[40px] pointer-events-none">
+        <HoneyThread length={40} />
       </div>
-    </section>
+
+      {/* PRODUCTS SECTION */}
+      <section
+        ref={containerRef}
+        className="relative overflow-hidden px-6 py-12 md:px-[120px] md:pt-[48px] md:pb-[96px]"
+        style={{
+          backgroundColor: picante ? "rgba(249, 246, 228, 0.95)" : "rgba(249, 246, 228, 1)",
+        }}
+      >
+        {/* Decorative background */}
+        <motion.div
+          className="deco-bg absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage: `url(${formas.url})`,
+            backgroundPosition: "center",
+          }}
+          animate={{
+            y: [0, 4, 0],
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          aria-hidden="true"
+        />
+
+        {/* Scroll-linked background word */}
+        <motion.div
+          className="pointer-events-none absolute inset-0 flex items-center justify-end pr-12"
+          style={{
+            x: backgroundWordX,
+          }}
+          aria-hidden="true"
+        >
+          <div className="text-verde font-display text-[120px] md:text-[180px] leading-none opacity-[0.045] whitespace-nowrap">
+            {picante ? "PICANTE" : "COSECHA"}
+          </div>
+        </motion.div>
+
+        {/* Animals decorations */}
+        <motion.img
+          src={perezoso.url}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute -left-6 top-[20%] hidden w-[140px] opacity-70 mix-blend-multiply lg:block"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 0.7, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ margin: "-100px", amount: 0.15 }}
+          animate={{
+            y: [0, 8, 0],
+            rotate: [0, 1, 0],
+          }}
+        />
+
+        <motion.img
+          src={osoHormiguero.url}
+          alt=""
+          aria-hidden="true"
+          loading="lazy"
+          className="pointer-events-none absolute bottom-12 right-2 hidden w-[180px] mix-blend-multiply lg:block"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ margin: "-100px", amount: 0.15 }}
+          animate={{
+            y: [0, -6, 0],
+            rotate: [0, -0.8, 0],
+          }}
+        />
+
+        <div className="relative mx-auto max-w-[1200px] z-10">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={displayCategory}
+              className="grid gap-8 md:grid-cols-3"
+              initial={{ opacity: 0, x: displayCategory === "picante" ? 30 : -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: displayCategory === "picante" ? -30 : 30 }}
+              transition={{ duration: 0.4 }}
+            >
+              {list.map((product, index) => (
+                <motion.div
+                  key={product.slug}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1, duration: 0.4 }}
+                  viewport={{ margin: "-100px", amount: 0.15 }}
+                >
+                  {/* Editorial product index */}
+                  <div className="relative">
+                    <motion.div
+                      className="absolute -top-8 left-0 opacity-50"
+                      animate={{ x: [0, 2, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: index * 0.1 }}
+                    >
+                      <span className="text-[12px] font-semibold text-verde/40 font-display tracking-wider">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                    </motion.div>
+                    <ProductCard product={product} />
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </section>
+    </>
   );
 }

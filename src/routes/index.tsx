@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Store, Star } from "lucide-react";
 import { motion } from "motion/react";
+import { useRef } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -9,7 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { ProductCard } from "@/components/ProductCard";
 import { pureProducts, spicyProducts } from "@/lib/products";
-import { SectionReveal, StaggerGroup, HoneyThread } from "@/components/motion";
+import { SectionReveal, StaggerGroup, HoneyThread, useHeroImageHover, useFloatingDecorative } from "@/components/motion";
 
 import bosque from "@/assets/apicultores.png.asset.json";
 import logo from "@/assets/dali-logo.png.asset.json";
@@ -40,6 +41,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { transformX, transformY, transformScale } = useHeroImageHover(heroRef);
+
   return (
     <>
       {/* HERO */}
@@ -104,6 +108,7 @@ function Index() {
 
         {/* Desktop */}
         <motion.div
+          ref={heroRef}
           className="relative hidden min-h-[640px] md:block"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -117,6 +122,11 @@ function Index() {
             whileInView={{ scale: 1.02 }}
             transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ margin: "-100px", amount: 0.15 }}
+            style={{
+              scale: transformScale,
+              x: transformX,
+              y: transformY,
+            }}
           />
           <div
             aria-hidden="true"
@@ -197,25 +207,48 @@ function Index() {
       <section className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[120px]">
         <motion.div
           className="deco-bg absolute inset-0 opacity-[0.04]"
-          style={{ backgroundImage: `url(${formas.url})` }}
+          style={{
+            backgroundImage: `url(${formas.url})`,
+            backgroundPosition: "center",
+          }}
           aria-hidden="true"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.04 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 0.04, y: 0 }}
           transition={{ duration: 0.8 }}
+          viewport={{ margin: "-100px", amount: 0.15 }}
+          animate={{
+            y: [0, -6, 0],
+          }}
         />
-        <img
+        <motion.img
           src={perezoso.url}
           alt=""
           aria-hidden="true"
           loading="lazy"
           className="pointer-events-none absolute left-2 top-6 hidden mix-blend-multiply w-[160px] lg:block"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ margin: "-100px", amount: 0.15 }}
+          animate={{
+            y: [0, 8, 0],
+            rotate: [0, 1, 0],
+          }}
         />
-        <img
+        <motion.img
           src={osoHormiguero.url}
           alt=""
           aria-hidden="true"
           loading="lazy"
           className="pointer-events-none absolute bottom-6 right-2 hidden mix-blend-multiply w-[200px] lg:block"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ margin: "-100px", amount: 0.15 }}
+          animate={{
+            y: [0, -6, 0],
+            rotate: [0, -0.8, 0],
+          }}
         />
 
         <div className="relative mx-auto max-w-[1200px]">
@@ -262,8 +295,14 @@ function Index() {
       <section className="relative overflow-hidden bg-crema px-6 py-12 md:px-[120px] md:py-[100px]">
         <motion.div
           className="deco-bg absolute inset-0 opacity-[0.04]"
-          style={{ backgroundImage: `url(${formas.url})` }}
+          style={{
+            backgroundImage: `url(${formas.url})`,
+            backgroundPosition: "center",
+          }}
           aria-hidden="true"
+          animate={{
+            y: [0, 4, 0],
+          }}
         />
         <div className="relative mx-auto max-w-[1200px]">
           <SectionReveal direction="up">
@@ -351,11 +390,19 @@ function Index() {
       <section className="relative grid overflow-hidden bg-verde md:grid-cols-2">
         <motion.div
           className="deco-bg absolute inset-0 opacity-[0.08]"
-          style={{ backgroundImage: `url(${ocelote.url})` }}
+          style={{
+            backgroundImage: `url(${ocelote.url})`,
+            backgroundPosition: "center",
+          }}
           aria-hidden="true"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 0.08 }}
           transition={{ duration: 0.8 }}
+          viewport={{ margin: "-100px", amount: 0.15 }}
+          animate={{
+            y: [0, -8, 0],
+            rotate: [0, 0.5, 0],
+          }}
         />
 
         <div className="relative">
