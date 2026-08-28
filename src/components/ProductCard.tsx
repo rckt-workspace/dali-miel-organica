@@ -29,31 +29,36 @@ import {
   TiltCard,
 } from "@/components/motion";
 
+interface ProductCardProps {
+  product: Product;
+
+  /*
+   * Permite stagger sin envolver
+   * toda la grid en opacity: 0.
+   */
+  delay?: number;
+}
+
 export function ProductCard({
   product,
-}: {
-  product: Product;
-}) {
+  delay = 0,
+}: ProductCardProps) {
   const {
     add,
-  } =
-    useCart();
+  } = useCart();
 
   const picante =
     product.line ===
     "picante";
 
   const cover =
-    product.gallery?.[
-      0
-    ] ??
+    product.gallery?.[0] ??
     product.image;
 
   const [
     isHovering,
     setIsHovering,
-  ] =
-    useState(false);
+  ] = useState(false);
 
   const articleRef =
     useRef<HTMLElement>(
@@ -63,20 +68,18 @@ export function ProductCard({
   const reducedMotion =
     useReducedMotion();
 
-  /*
-   * Se activa ligeramente antes
-   * de que la tarjeta llegue al
-   * centro de la pantalla.
-   */
   const isInView =
     useInView(
       articleRef,
       {
-        amount:
-          0.02,
+        amount: 0.035,
 
+        /*
+         * Activa antes de que llegue
+         * completamente al viewport.
+         */
         margin:
-          "0px 0px 12% 0px",
+          "0px 0px 10% 0px",
       },
     );
 
@@ -87,51 +90,71 @@ export function ProductCard({
         min-w-0
         w-full
       "
-      initial={
-        false
+      initial={false}
+      animate={
+        reducedMotion
+          ? {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              rotateZ: 0,
+            }
+          : isInView
+            ? {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                rotateZ: 0,
+              }
+            : {
+                /*
+                 * No usamos opacity 0.
+                 *
+                 * Si el observer falla,
+                 * todavía hay contenido.
+                 */
+                opacity: 0.28,
+                y: 42,
+                scale: 0.965,
+                rotateZ: -0.35,
+              }
       }
-
-      /*
-       * CRÍTICO:
-       *
-       * opacity SIEMPRE es 1.
-       *
-       * Así un IntersectionObserver
-       * nunca puede dejar el producto
-       * invisible en dispositivos
-       * móviles.
-       */
-      animate={{
-        opacity: 1,
-
-        y:
-          reducedMotion
-            ? 0
-            : isInView
-              ? 0
-              : 18,
-      }}
       transition={{
-        duration:
-          0.5,
+        type:
+          "spring",
 
-        ease: [
-          0.22,
-          1,
-          0.36,
-          1,
-        ],
+        stiffness:
+          105,
+
+        damping:
+          18,
+
+        mass:
+          0.8,
+
+        delay:
+          isInView
+            ? delay
+            : 0,
+      }}
+      style={{
+        willChange:
+          "transform, opacity",
       }}
     >
       <TiltCard
         className="
           card-soft
+
           flex
           min-w-0
           w-full
           flex-col
+
           gap-4
+
           overflow-visible
+
           bg-crema
 
           p-5
@@ -153,6 +176,7 @@ export function ProductCard({
             flex
             min-w-0
             flex-col
+
             gap-4
           "
           onPointerEnter={(
@@ -173,7 +197,6 @@ export function ProductCard({
             );
           }}
         >
-          {/* PRODUCT IMAGE */}
           <Link
             to="/producto/$slug"
             params={{
@@ -181,10 +204,16 @@ export function ProductCard({
                 product.slug,
             }}
             className="
+              relative
+
               block
+
               w-full
+
               overflow-hidden
+
               rounded-2xl
+
               bg-crema
 
               h-[220px]
@@ -200,36 +229,70 @@ export function ProductCard({
               xl:h-[280px]
             "
           >
-            <img
+            <motion.img
               src={cover}
               alt={`Frasco de miel ${product.name} de Dalí`}
               loading="lazy"
               decoding="async"
-              width={
-                1024
-              }
-              height={
-                1280
-              }
+              width={1024}
+              height={1280}
               className="
                 size-full
+
                 object-cover
                 object-center
-
-                transition-transform
-                duration-500
               "
-              style={{
-                transform:
+              animate={{
+                scale:
                   isHovering &&
                   !reducedMotion
-                    ? "scale(1.055)"
-                    : "scale(1)",
+                    ? 1.075
+                    : 1,
+
+                x:
+                  isHovering &&
+                  !reducedMotion
+                    ? 3
+                    : 0,
+              }}
+              transition={{
+                type:
+                  "spring",
+
+                stiffness:
+                  125,
+
+                damping:
+                  18,
+              }}
+            />
+
+            {/* halo de producto */}
+            <motion.div
+              aria-hidden="true"
+              className="
+                pointer-events-none
+
+                absolute
+                inset-0
+              "
+              animate={{
+                opacity:
+                  isHovering
+                    ? 0.17
+                    : 0,
+              }}
+              transition={{
+                duration:
+                  0.3,
+              }}
+              style={{
+                background:
+                  `radial-gradient(circle at 50% 75%, ${product.accent}, transparent 65%)`,
               }}
             />
           </Link>
 
-          {/* NAME */}
           <Link
             to="/producto/$slug"
             params={{
@@ -238,41 +301,33 @@ export function ProductCard({
             }}
             className="
               h3-display
+
               break-words
+
               text-verde
             "
           >
-            {
-              product.name
-            }
+            {product.name}
           </Link>
 
-          {/* TASTING */}
           <p
             className="
               body-text
               text-verde
             "
           >
-            {
-              product.tasting
-            }
+            {product.tasting}
           </p>
 
-          {/* SIZE */}
           <p
             className="
               caption
               text-verde/60
             "
           >
-            {
-              product
-                .sizes[0]
-            }
+            {product.sizes[0]}
           </p>
 
-          {/* BADGES */}
           <ProductBadges
             badges={
               product.badges
@@ -282,13 +337,15 @@ export function ProductCard({
             }
           />
 
-          {/* PRICE + BUY */}
           <div
             className="
               mt-auto
+
               flex
               flex-col
+
               gap-3
+
               pt-2
             "
           >
@@ -296,29 +353,32 @@ export function ProductCard({
               <span
                 className="
                   body-text
+
                   font-semibold
+
                   text-verde
                 "
               >
-                {
-                  product.price
-                }
+                {product.price}
               </span>
 
               <span
                 className="
                   caption
+
                   mt-1
                   block
+
                   text-verde/50
                 "
               >
-                Precio de referencia
-                — próximamente
+                Precio de
+                referencia —
+                próximamente
               </span>
             </div>
 
-            <button
+            <motion.button
               type="button"
               className={`
                 w-full
@@ -331,6 +391,17 @@ export function ProductCard({
 
                 btn-sm
               `}
+              whileHover={
+                reducedMotion
+                  ? undefined
+                  : {
+                      y: -2,
+                      scale: 1.015,
+                    }
+              }
+              whileTap={{
+                scale: 0.98,
+              }}
               onClick={() =>
                 add({
                   slug:
@@ -352,7 +423,7 @@ export function ProductCard({
               }
             >
               Comprar
-            </button>
+            </motion.button>
           </div>
         </div>
       </TiltCard>

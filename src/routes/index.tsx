@@ -41,56 +41,42 @@ import {
 
 import bosque from "@/assets/apicultores.png.asset.json";
 import logo from "@/assets/dali-logo.png.asset.json";
-
 import perezoso from "@/assets/perezoso.png.asset.json";
-
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
-
 import formas from "@/assets/formas-organicas.png.asset.json";
-
 import ocelote from "@/assets/ocelote.png.asset.json";
-
 import heroFoto from "@/assets/hero-banner-dali.png.asset.json";
 
 export const Route =
-  createFileRoute(
-    "/",
-  )({
+  createFileRoute("/")({
     head: () => ({
       meta: [
         {
           title:
             "Dalí — Miel cruda orgánica de la altillanura colombiana",
         },
-
         {
           name:
             "description",
-
           content:
             "Miel 100% orgánica con denominación de origen, cosechada en los bosques tropicales de la Orinoquia. Acacia, Multifloral y Caucho.",
         },
-
         {
           property:
             "og:title",
-
           content:
             "Dalí — Miel cruda orgánica de Colombia",
         },
-
         {
           property:
             "og:description",
-
           content:
             "Vida, sabiduría y bienestar en cada cosecha. Miel cruda orgánica colombiana.",
         },
       ],
     }),
 
-    component:
-      Index,
+    component: Index,
   });
 
 function Index() {
@@ -144,16 +130,13 @@ function Index() {
             md:hidden
           "
           initial={{
-            opacity:
-              0,
+            opacity: 0,
           }}
           animate={{
-            opacity:
-              1,
+            opacity: 1,
           }}
           transition={{
-            duration:
-              0.4,
+            duration: 0.4,
           }}
         >
           <motion.img
@@ -164,17 +147,17 @@ function Index() {
             className="
               absolute
               inset-0
+
               h-full
               w-full
+
               object-cover
 
               object-[82%_center]
 
               min-[420px]:object-[85%_center]
             "
-            initial={
-              false
-            }
+            initial={false}
             animate={{
               scale:
                 reducedMotion
@@ -182,8 +165,7 @@ function Index() {
                   : 1.015,
             }}
             transition={{
-              duration:
-                1.1,
+              duration: 1.1,
             }}
           />
 
@@ -227,25 +209,16 @@ function Index() {
                 text-verde
               "
               initial={{
-                opacity:
-                  0,
-
-                y:
-                  10,
+                opacity: 0,
+                y: 10,
               }}
               animate={{
-                opacity:
-                  1,
-
-                y:
-                  0,
+                opacity: 1,
+                y: 0,
               }}
               transition={{
-                delay:
-                  0.15,
-
-                duration:
-                  0.3,
+                delay: 0.15,
+                duration: 0.3,
               }}
             >
               De los bosques
@@ -257,37 +230,28 @@ function Index() {
               className="
                 h1-display
                 mt-7
+
                 max-w-[94%]
+
                 text-verde
 
                 sm:max-w-[75%]
               "
               initial={{
-                opacity:
-                  0,
-
-                y:
-                  15,
+                opacity: 0,
+                y: 15,
               }}
               animate={{
-                opacity:
-                  1,
-
-                y:
-                  0,
+                opacity: 1,
+                y: 0,
               }}
               transition={{
-                delay:
-                  0.25,
-
-                duration:
-                  0.3,
+                delay: 0.25,
+                duration: 0.3,
               }}
             >
-              Miel que nace
-              donde
+              Miel que nace donde
               <br />
-
               Colombia respira
             </motion.h1>
 
@@ -295,7 +259,9 @@ function Index() {
               className="
                 body-text
                 mt-8
+
                 max-w-[70%]
+
                 text-verde/90
 
                 min-[420px]:max-w-[64%]
@@ -303,25 +269,16 @@ function Index() {
                 sm:max-w-[52%]
               "
               initial={{
-                opacity:
-                  0,
-
-                y:
-                  10,
+                opacity: 0,
+                y: 10,
               }}
               animate={{
-                opacity:
-                  1,
-
-                y:
-                  0,
+                opacity: 1,
+                y: 0,
               }}
               transition={{
-                delay:
-                  0.35,
-
-                duration:
-                  0.3,
+                delay: 0.35,
+                duration: 0.3,
               }}
             >
               Miel 100% orgánica
@@ -339,25 +296,16 @@ function Index() {
                 sm:mt-10
               "
               initial={{
-                opacity:
-                  0,
-
-                y:
-                  10,
+                opacity: 0,
+                y: 10,
               }}
               animate={{
-                opacity:
-                  1,
-
-                y:
-                  0,
+                opacity: 1,
+                y: 0,
               }}
               transition={{
-                delay:
-                  0.45,
-
-                duration:
-                  0.3,
+                delay: 0.45,
+                duration: 0.3,
               }}
             >
               <Link
@@ -367,8 +315,7 @@ function Index() {
                   btn-sm
                 "
               >
-                Descubre nuestra
-                miel
+                Descubre nuestra miel
               </Link>
             </motion.div>
           </div>
@@ -391,16 +338,13 @@ function Index() {
             lg:min-h-[640px]
           "
           initial={{
-            opacity:
-              0,
+            opacity: 0,
           }}
           animate={{
-            opacity:
-              1,
+            opacity: 1,
           }}
           transition={{
-            duration:
-              0.5,
+            duration: 0.5,
           }}
         >
           <motion.img
@@ -447,6 +391,7 @@ function Index() {
           />
 
           {/* ORINOQUIA */}
+
           <motion.div
             aria-hidden="true"
             className="
@@ -465,19 +410,14 @@ function Index() {
               lg:pl-12
             "
             initial={{
-              opacity:
-                0,
+              opacity: 0,
             }}
             animate={{
-              opacity:
-                1,
+              opacity: 1,
             }}
             transition={{
-              delay:
-                0.8,
-
-              duration:
-                0.5,
+              delay: 0.8,
+              duration: 0.5,
             }}
           >
             <div
@@ -487,7 +427,6 @@ function Index() {
                 font-display
 
                 text-[100px]
-
                 leading-none
 
                 text-crema
@@ -546,25 +485,16 @@ function Index() {
                   text-verde
                 "
                 initial={{
-                  opacity:
-                    0,
-
-                  y:
-                    10,
+                  opacity: 0,
+                  y: 10,
                 }}
                 animate={{
-                  opacity:
-                    1,
-
-                  y:
-                    0,
+                  opacity: 1,
+                  y: 0,
                 }}
                 transition={{
-                  delay:
-                    0.2,
-
-                  duration:
-                    0.4,
+                  delay: 0.2,
+                  duration: 0.4,
                 }}
               >
                 De los bosques
@@ -591,31 +521,20 @@ function Index() {
                     "105%",
                 }}
                 initial={{
-                  opacity:
-                    0,
-
-                  y:
-                    20,
+                  opacity: 0,
+                  y: 20,
                 }}
                 animate={{
-                  opacity:
-                    1,
-
-                  y:
-                    0,
+                  opacity: 1,
+                  y: 0,
                 }}
                 transition={{
-                  delay:
-                    0.35,
-
-                  duration:
-                    0.4,
+                  delay: 0.35,
+                  duration: 0.4,
                 }}
               >
-                Miel que nace
-                donde
+                Miel que nace donde
                 <br />
-
                 Colombia respira
               </motion.h1>
 
@@ -633,25 +552,16 @@ function Index() {
                   lg:max-w-[440px]
                 "
                 initial={{
-                  opacity:
-                    0,
-
-                  y:
-                    15,
+                  opacity: 0,
+                  y: 15,
                 }}
                 animate={{
-                  opacity:
-                    1,
-
-                  y:
-                    0,
+                  opacity: 1,
+                  y: 0,
                 }}
                 transition={{
-                  delay:
-                    0.5,
-
-                  duration:
-                    0.4,
+                  delay: 0.5,
+                  duration: 0.4,
                 }}
               >
                 Miel 100% orgánica
@@ -673,32 +583,22 @@ function Index() {
                   lg:mt-12
                 "
                 initial={{
-                  opacity:
-                    0,
-
-                  y:
-                    15,
+                  opacity: 0,
+                  y: 15,
                 }}
                 animate={{
-                  opacity:
-                    1,
-
-                  y:
-                    0,
+                  opacity: 1,
+                  y: 0,
                 }}
                 transition={{
-                  delay:
-                    0.65,
-
-                  duration:
-                    0.4,
+                  delay: 0.65,
+                  duration: 0.4,
                 }}
                 whileHover={
                   reducedMotion
                     ? undefined
                     : {
-                        y:
-                          -2,
+                        y: -2,
                       }
                 }
               >
@@ -706,7 +606,6 @@ function Index() {
                   to="/tienda"
                   className="
                     btn-primary
-
                     hover:shadow-lg
                   "
                   style={{
@@ -714,8 +613,7 @@ function Index() {
                       "0 0 30px 15px rgba(252,214,114,0.08)",
                   }}
                 >
-                  Descubre nuestra
-                  miel
+                  Descubre nuestra miel
                 </Link>
               </motion.div>
             </div>
@@ -728,9 +626,7 @@ function Index() {
       ====================================================== */}
 
       <HoneyThread
-        length={
-          120
-        }
+        length={120}
       />
 
       {/* =====================================================
@@ -784,12 +680,9 @@ function Index() {
                 }
           }
           transition={{
-            duration:
-              9,
-
+            duration: 9,
             repeat:
               Infinity,
-
             ease:
               "easeInOut",
           }}
@@ -838,12 +731,9 @@ function Index() {
                 }
           }
           transition={{
-            duration:
-              7,
-
+            duration: 7,
             repeat:
               Infinity,
-
             ease:
               "easeInOut",
           }}
@@ -892,12 +782,9 @@ function Index() {
                 }
           }
           transition={{
-            duration:
-              8,
-
+            duration: 8,
             repeat:
               Infinity,
-
             ease:
               "easeInOut",
           }}
@@ -906,17 +793,13 @@ function Index() {
         <div
           className="
             relative
-
             mx-auto
-
             max-w-[1200px]
           "
         >
           <SectionReveal
             direction="up"
-            delay={
-              0.05
-            }
+            delay={0.05}
           >
             <div
               className="
@@ -956,20 +839,16 @@ function Index() {
           {/*
            * IMPORTANTE:
            *
-           * Ya NO escondemos toda
-           * la grid con opacity:0.
-           *
-           * ProductCard se encarga
-           * del movimiento individual,
-           * pero siempre permanece
-           * visible.
+           * NO hay opacity:0 en toda la grid.
+           * Cada ProductCard maneja su propia
+           * entrada y su propio stagger.
            */}
+
           <div
             className="
               mt-9
 
               grid
-
               grid-cols-1
 
               gap-7
@@ -986,6 +865,7 @@ function Index() {
             {pureProducts.map(
               (
                 product,
+                index,
               ) => (
                 <ProductCard
                   key={
@@ -993,6 +873,10 @@ function Index() {
                   }
                   product={
                     product
+                  }
+                  delay={
+                    index *
+                    0.09
                   }
                 />
               ),
@@ -1052,12 +936,9 @@ function Index() {
                 }
           }
           transition={{
-            duration:
-              10,
-
+            duration: 10,
             repeat:
               Infinity,
-
             ease:
               "easeInOut",
           }}
@@ -1066,9 +947,7 @@ function Index() {
         <div
           className="
             relative
-
             mx-auto
-
             max-w-[1200px]
           "
         >
@@ -1089,7 +968,6 @@ function Index() {
               <p
                 className="
                   eyebrow
-
                   text-picante-naranja
                 "
               >
@@ -1137,6 +1015,7 @@ function Index() {
             {spicyProducts.map(
               (
                 product,
+                index,
               ) => (
                 <ProductCard
                   key={
@@ -1145,6 +1024,10 @@ function Index() {
                   product={
                     product
                   }
+                  delay={
+                    index *
+                    0.11
+                  }
                 />
               ),
             )}
@@ -1152,9 +1035,7 @@ function Index() {
 
           <SectionReveal
             direction="up"
-            delay={
-              0.1
-            }
+            delay={0.1}
           >
             <div
               className="
@@ -1174,12 +1055,10 @@ function Index() {
                 }}
                 className="
                   btn-picante
-
                   max-w-full
                 "
               >
-                Ver la línea
-                picante
+                Ver la línea picante
               </Link>
             </div>
           </SectionReveal>
@@ -1257,16 +1136,13 @@ function Index() {
 
                   lg:size-12
                 "
-                strokeWidth={
-                  1.4
-                }
+                strokeWidth={1.4}
                 aria-hidden="true"
               />
 
               <div
                 className="
                   min-w-0
-
                   max-w-[640px]
                 "
               >
@@ -1285,8 +1161,7 @@ function Index() {
                     lg:text-[28px]
                   "
                 >
-                  ¿Tienes un
-                  negocio?
+                  ¿Tienes un negocio?
                 </h3>
 
                 <p
@@ -1420,12 +1295,9 @@ function Index() {
                 }
           }
           transition={{
-            duration:
-              11,
-
+            duration: 11,
             repeat:
               Infinity,
-
             ease:
               "easeInOut",
           }}
@@ -1444,12 +1316,8 @@ function Index() {
             alt="Apicultores de Dalí revisando un panal en los bosques de la hacienda La Sonora"
             loading="lazy"
             decoding="async"
-            width={
-              1024
-            }
-            height={
-              1400
-            }
+            width={1024}
+            height={1400}
             className="
               h-[300px]
 
@@ -1466,9 +1334,7 @@ function Index() {
 
               lg:max-h-[640px]
             "
-            initial={
-              false
-            }
+            initial={false}
             whileInView={
               reducedMotion
                 ? undefined
@@ -1478,12 +1344,10 @@ function Index() {
                   }
             }
             viewport={{
-              amount:
-                0.05,
+              amount: 0.05,
             }}
             transition={{
-              duration:
-                0.8,
+              duration: 0.8,
 
               ease: [
                 0.22,
@@ -1572,14 +1436,11 @@ function Index() {
         >
           <SectionReveal
             direction="right"
-            delay={
-              0.05
-            }
+            delay={0.05}
           >
             <p
               className="
                 eyebrow
-
                 text-salvia
               "
             >
@@ -1589,14 +1450,11 @@ function Index() {
 
           <SectionReveal
             direction="right"
-            delay={
-              0.1
-            }
+            delay={0.1}
           >
             <h2
               className="
                 h2-display
-
                 text-crema
               "
             >
@@ -1606,7 +1464,6 @@ function Index() {
               <br
                 className="
                   hidden
-
                   lg:block
                 "
               />
@@ -1619,9 +1476,7 @@ function Index() {
 
           <SectionReveal
             direction="right"
-            delay={
-              0.15
-            }
+            delay={0.15}
           >
             <p
               className="
@@ -1672,7 +1527,6 @@ function Index() {
         <div
           className="
             mx-auto
-
             max-w-[1200px]
           "
         >
@@ -1693,7 +1547,6 @@ function Index() {
               <p
                 className="
                   eyebrow
-
                   text-verde
                 "
               >
@@ -1703,7 +1556,6 @@ function Index() {
               <h2
                 className="
                   h2-display
-
                   text-verde
                 "
               >
@@ -1718,7 +1570,6 @@ function Index() {
               mt-9
 
               grid
-
               grid-cols-1
 
               gap-6
@@ -1811,9 +1662,7 @@ function Index() {
                     <blockquote
                       className="
                         body-text
-
                         flex-1
-
                         text-verde
                       "
                     >
@@ -1823,12 +1672,10 @@ function Index() {
                     <figcaption
                       className="
                         caption
-
                         text-verde/60
                       "
                     >
-                      Cliente
-                      verificado
+                      Cliente verificado
                     </figcaption>
                   </figure>
                 </SectionReveal>
@@ -1856,7 +1703,6 @@ function Index() {
         <div
           className="
             mx-auto
-
             max-w-[820px]
           "
         >
@@ -1877,18 +1723,15 @@ function Index() {
               <p
                 className="
                   eyebrow
-
                   text-verde
                 "
               >
-                Preguntas
-                frecuentes
+                Preguntas frecuentes
               </p>
 
               <h2
                 className="
                   h2-display
-
                   text-verde
                 "
               >
@@ -1903,7 +1746,6 @@ function Index() {
             collapsible
             className="
               mt-8
-
               md:mt-12
             "
           >
@@ -1915,7 +1757,6 @@ function Index() {
                 a:
                   "Sí, es 100% orgánica — sin químicos ni procesos industriales, del panal a la mesa.",
               },
-
               {
                 q:
                   "¿La miel es procesada o cruda?",
@@ -1923,7 +1764,6 @@ function Index() {
                 a:
                   "Es miel cruda, no procesada — así aparece certificado directamente en la etiqueta de cada producto.",
               },
-
               {
                 q:
                   "¿Cómo debo almacenar la miel?",
@@ -1931,7 +1771,6 @@ function Index() {
                 a:
                   "Mantener en un lugar fresco, alejado de la luz solar — instrucción que viene impresa en la etiqueta del producto.",
               },
-
               {
                 q:
                   "¿De dónde viene la miel Dalí?",
@@ -1971,21 +1810,16 @@ function Index() {
                       md:text-[20px]
                     "
                   >
-                    {
-                      item.q
-                    }
+                    {item.q}
                   </AccordionTrigger>
 
                   <AccordionContent
                     className="
                       body-text
-
                       text-verde/85
                     "
                   >
-                    {
-                      item.a
-                    }
+                    {item.a}
                   </AccordionContent>
                 </AccordionItem>
               ),
@@ -2021,20 +1855,16 @@ function Index() {
           <h2
             className="
               h2-display
-
               text-verde
             "
           >
-            Lleva Dalí a tu
-            mesa
+            Lleva Dalí a tu mesa
           </h2>
         </SectionReveal>
 
         <SectionReveal
           direction="up"
-          delay={
-            0.05
-          }
+          delay={0.05}
         >
           <Link
             to="/tienda"
