@@ -1,9 +1,11 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @theme inline {
-  /* Paleta oficial Dalí (ficha de marca Salmón, 2022) */
+  /* =========================================================
+     DALI — PALETA OFICIAL
+  ========================================================= */
+
   --color-jade: #235b4e;
   --color-bone: #f9f6e4;
   --color-sage: #b7d8aa;
@@ -14,27 +16,33 @@
 
   --color-verde: #235b4e;
   --color-verde-dark: #1a4539;
+
   --color-salvia: #b7d8aa;
   --color-salvia-dark: #a5cc96;
+
   --color-crema: #f9f6e4;
   --color-coral: #feaebb;
+
   --color-picante-naranja: #d98c6b;
   --color-picante-naranja-dark: #c4785a;
   --color-picante-arena: #e8c7a6;
   --color-picante-verde: #235b4e;
 
-
-
   --color-background: #f9f6e4;
   --color-foreground: #235b4e;
+
   --color-border: rgb(35 91 78 / 0.15);
   --color-input: rgb(35 91 78 / 0.2);
   --color-ring: #235b4e;
+
   --color-muted-foreground: rgb(35 91 78 / 0.7);
+
   --color-primary: #235b4e;
   --color-primary-foreground: #f9f6e4;
+
   --color-accent: #b7d8ab;
   --color-accent-foreground: #235b4e;
+
   --color-destructive: oklch(0.577 0.245 27.325);
 
   --font-display: "Tenor Sans", Georgia, serif;
@@ -47,67 +55,151 @@
   --radius-xl: 1.25rem;
 }
 
+/* =========================================================
+   BASE
+========================================================= */
+
 @layer base {
   * {
     border-color: var(--color-border);
+    box-sizing: border-box;
   }
 
   html {
+    width: 100%;
+    max-width: 100%;
+
     scroll-behavior: smooth;
+
+    overflow-x: hidden;
+    overflow-x: clip;
+
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
+    width: 100%;
+    max-width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+
+    margin: 0;
+
+    overflow-x: hidden;
+    overflow-x: clip;
+
     background-color: var(--color-crema);
     color: var(--color-verde);
+
     font-family: var(--font-body);
     font-weight: 400;
+
     font-size: 16px;
     line-height: 150%;
+
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  img,
+  picture,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1,
   h2,
   h3 {
+    margin: 0;
+
     font-family: var(--font-display);
     font-weight: 400;
+
+    text-wrap: balance;
+  }
+
+  p {
+    overflow-wrap: break-word;
   }
 }
 
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+
 @utility h1-display {
   font-family: var(--font-display);
-  font-size: 36px;
+
+  font-size: clamp(34px, 9vw, 42px);
   line-height: 105%;
+
+  letter-spacing: -0.025em;
+
   @media (min-width: 768px) {
-    font-size: 56px;
+    font-size: clamp(44px, 5vw, 56px);
   }
 }
 
 @utility h2-display {
   font-family: var(--font-display);
-  font-size: 28px;
+
+  font-size: clamp(28px, 7vw, 34px);
   line-height: 110%;
+
+  letter-spacing: -0.02em;
+
   @media (min-width: 768px) {
-    font-size: 40px;
+    font-size: clamp(34px, 4vw, 40px);
   }
 }
 
 @utility h3-display {
   font-family: var(--font-display);
+
   font-size: 22px;
   line-height: 115%;
+
   @media (min-width: 768px) {
+    font-size: 26px;
+  }
+
+  @media (min-width: 1024px) {
     font-size: 28px;
   }
 }
 
 @utility eyebrow {
   font-family: var(--font-body);
+
   font-weight: 600;
-  font-size: 12px;
+
+  font-size: 11px;
   line-height: 130%;
+
   text-transform: uppercase;
+
   letter-spacing: 0.12em;
+
+  @media (min-width: 640px) {
+    font-size: 12px;
+  }
+
   @media (min-width: 768px) {
     font-size: 13px;
   }
@@ -115,110 +207,220 @@
 
 @utility caption {
   font-family: var(--font-body);
+
   font-weight: 600;
-  font-size: 12px;
-  line-height: 130%;
+
+  font-size: 11px;
+  line-height: 135%;
+
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+
+  letter-spacing: 0.1em;
+
+  @media (min-width: 640px) {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
 }
 
 @utility body-text {
   font-family: var(--font-body);
+
   font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
+
+  font-size: 15px;
+  line-height: 155%;
+
+  @media (min-width: 640px) {
+    font-size: 16px;
+    line-height: 150%;
+  }
 }
 
 @utility body-light {
   font-weight: 300;
 }
 
+/* =========================================================
+   RESPONSIVE GUTTER
+========================================================= */
+
+@utility page-gutter {
+  padding-inline: 20px;
+
+  @media (min-width: 640px) {
+    padding-inline: 24px;
+  }
+
+  @media (min-width: 768px) {
+    padding-inline: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    padding-inline: 72px;
+  }
+
+  @media (min-width: 1280px) {
+    padding-inline: 120px;
+  }
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
 @utility btn-base {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
+
+  width: auto;
+  max-width: 100%;
+  min-height: 44px;
+
   font-family: var(--font-body);
   font-weight: 600;
+
   font-size: 15px;
-  line-height: 1;
-  padding: 16px 36px;
+  line-height: 1.2;
+
+  text-align: center;
+
+  white-space: normal;
+
+  padding:
+    15px
+    clamp(22px, 3vw, 36px);
+
   border-radius: 100px;
+
   transition:
     background-color 200ms ease,
-    transform 200ms ease;
+    color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 @utility btn-primary {
   @apply btn-base;
+
   background-color: var(--color-verde);
   color: var(--color-crema);
 }
 
 @utility btn-secondary {
   @apply btn-base;
+
   background-color: var(--color-salvia);
   color: var(--color-verde);
 }
 
 @utility btn-picante {
   @apply btn-base;
+
   background-color: var(--color-picante-naranja);
   color: #f9f6e4;
 }
 
-
 @utility btn-sm {
-  padding: 12px 28px;
+  min-height: 42px;
+
+  padding: 12px 24px;
+
   font-size: 14px;
+
+  @media (min-width: 640px) {
+    padding-inline: 28px;
+  }
 }
 
+/* =========================================================
+   CARDS
+========================================================= */
+
 @utility card-soft {
+  min-width: 0;
+
   border-radius: 16px;
-  box-shadow: 0 12px 32px rgba(35, 91, 78, 0.12);
+
+  box-shadow:
+    0 12px 32px
+    rgba(35, 91, 78, 0.12);
+
   transition:
     transform 250ms ease-out,
     box-shadow 250ms ease-out;
-  &:hover {
-    transform: scale(1.02);
-    box-shadow: 0 18px 44px rgba(35, 91, 78, 0.18);
-  }
 }
+
+/* =========================================================
+   DECORATIVE BACKGROUNDS
+========================================================= */
 
 @utility deco-bg {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+
   background-attachment: fixed;
+
   pointer-events: none;
 }
 
+/* =========================================================
+   FORMS
+========================================================= */
+
 @utility field {
   width: 100%;
+  max-width: 100%;
+
+  min-height: 46px;
+
   background-color: #ffffff;
-  border: 1px solid rgb(35 91 78 / 0.2);
+
+  border:
+    1px solid
+    rgb(35 91 78 / 0.2);
+
   border-radius: 8px;
+
   padding: 12px 16px;
+
   font-size: 15px;
+
   color: var(--color-verde);
+
   outline: none;
 }
 
 @utility field-label {
   display: block;
+
   font-weight: 600;
+
   font-size: 13px;
+
   margin-bottom: 8px;
 }
 
+/* =========================================================
+   INTERACTION
+========================================================= */
 
 @layer components {
   .btn-primary:hover {
     background-color: var(--color-verde-dark);
   }
+
   .btn-secondary:hover {
     background-color: var(--color-salvia-dark);
   }
+
   .btn-picante:hover {
     background-color: var(--color-picante-naranja-dark);
   }
@@ -226,71 +428,235 @@
   .field:focus {
     border-color: var(--color-verde);
   }
+
   .field::placeholder {
-    color: rgb(35 91 78 / 0.4);
+    color:
+      rgb(35 91 78 / 0.4);
   }
 }
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
 
 @layer base {
-  :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-    outline: 3px solid var(--color-verde);
+  :where(
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    summary,
+    [tabindex]
+  ):focus-visible {
+    outline:
+      3px solid
+      var(--color-verde);
+
     outline-offset: 3px;
+
     border-radius: 6px;
   }
-  .on-jade :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-    outline-color: var(--color-crema);
+
+  .on-jade
+    :where(
+      a,
+      button,
+      input,
+      textarea,
+      select,
+      [tabindex]
+    ):focus-visible {
+    outline-color:
+      var(--color-crema);
   }
 }
 
-/* Premium Visual Utilities */
+/* =========================================================
+   PREMIUM VISUAL UTILITIES
+========================================================= */
+
 @utility honey-glow {
-  box-shadow: 0 0 60px 30px rgba(252, 214, 114, 0.1);
+  box-shadow:
+    0 0 60px 30px
+    rgba(
+      252,
+      214,
+      114,
+      0.1
+    );
 }
 
 @utility honey-glow-sm {
-  box-shadow: 0 0 40px 20px rgba(252, 214, 114, 0.08);
+  box-shadow:
+    0 0 40px 20px
+    rgba(
+      252,
+      214,
+      114,
+      0.08
+    );
 }
 
-/* Premium Motion & Accessibility */
-@layer base {
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-  }
-}
+/* =========================================================
+   MOTION UTILITIES
+========================================================= */
 
-/* Motion Utilities */
 @layer utilities {
   .motion-visible {
-    animation: motion-in 0.6s ease-out forwards;
+    animation:
+      motion-in
+      0.6s
+      ease-out
+      forwards;
   }
 
   .card-hover-lift {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+    @apply transition-all duration-300;
   }
 
   .card-premium {
     @apply rounded-2xl bg-crema shadow-lg transition-all duration-300;
+
     perspective: 1000px;
-    &:hover {
-      @apply shadow-2xl;
-      transform: translateY(-8px);
+  }
+}
+
+/* =========================================================
+   MOUSE / TRACKPAD ONLY
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .card-soft:hover {
+    transform:
+      scale(1.02);
+
+    box-shadow:
+      0 18px 44px
+      rgba(
+        35,
+        91,
+        78,
+        0.18
+      );
+  }
+
+  .card-hover-lift:hover {
+    transform:
+      translateY(-6px)
+      scale(1.015);
+
+    box-shadow:
+      0 24px 54px
+      rgba(
+        35,
+        91,
+        78,
+        0.15
+      );
+  }
+
+  .card-premium:hover {
+    transform:
+      translateY(-6px);
+
+    box-shadow:
+      0 24px 55px
+      rgba(
+        35,
+        91,
+        78,
+        0.14
+      );
+  }
+}
+
+/* =========================================================
+   TOUCH DEVICES
+========================================================= */
+
+@media (hover: none), (pointer: coarse) {
+  .card-soft:hover,
+  .card-hover-lift:hover,
+  .card-premium:hover {
+    transform: none;
+  }
+
+  .deco-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .deco-bg {
+    background-attachment: scroll;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 767px) {
+  .deco-bg {
+    background-attachment: scroll;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-picante {
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@layer base {
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration:
+        0.01ms !important;
+
+      animation-iteration-count:
+        1 !important;
+
+      transition-duration:
+        0.01ms !important;
+
+      scroll-behavior:
+        auto !important;
     }
   }
 }
 
+/* =========================================================
+   KEYFRAMES
+========================================================= */
+
 @keyframes motion-in {
   from {
     opacity: 0;
-    transform: translateY(30px);
+
+    transform:
+      translateY(24px);
   }
+
   to {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+      translateY(0);
   }
 }
