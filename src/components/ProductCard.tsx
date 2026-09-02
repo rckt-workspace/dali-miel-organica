@@ -1,5 +1,6 @@
 import {
   Link,
+  useNavigate,
 } from "@tanstack/react-router";
 
 import {
