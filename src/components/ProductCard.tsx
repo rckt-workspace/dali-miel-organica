@@ -48,6 +48,9 @@ export function ProductCard({
     add,
   } = useCart();
 
+  const navigate =
+    useNavigate();
+
   const picante =
     product.line ===
     "picante";
@@ -55,6 +58,15 @@ export function ProductCard({
   const cover =
     product.gallery?.[0] ??
     product.image;
+
+  const addToCart = () =>
+    add({
+      slug: product.slug,
+      name: product.name,
+      size: product.sizes[0],
+      image: cover,
+      price: product.price,
+    });
 
   const [
     isHovering,
