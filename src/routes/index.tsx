@@ -303,10 +303,7 @@ function Index() {
 
             <motion.div
               className="
-                mt-8
                 self-start
-
-                sm:mt-10
               "
               initial={{
                 opacity: 0,
