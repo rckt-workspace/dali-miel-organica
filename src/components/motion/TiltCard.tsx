@@ -87,6 +87,28 @@ export function TiltCard({
     event:
       React.MouseEvent<HTMLDivElement>,
   ) {
+    const target =
+      event.target;
+
+    if (
+      target instanceof
+        Element &&
+      target.closest(
+        "button, a, input, select, textarea, [data-no-tilt]",
+      )
+    ) {
+      setRotation({
+        x: 0,
+        y: 0,
+      });
+
+      setIsHovering(
+        false,
+      );
+
+      return;
+    }
+
     if (
       !canHover ||
       reducedMotion ||
@@ -210,13 +232,6 @@ export function TiltCard({
           canHover &&
           !reducedMotion
             ? rotation.y
-            : 0,
-
-        y:
-          canHover &&
-          isHovering &&
-          !reducedMotion
-            ? -6
             : 0,
 
         boxShadow:

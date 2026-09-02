@@ -178,6 +178,10 @@ function Producto() {
                   type="button"
                   className={`${picante ? "btn-picante" : "btn-primary"} py-3 px-8`}
                   onClick={() => {
+                    console.info(
+                      "[carrito] click en comprar ahora",
+                      product.slug,
+                    );
                     add({
                       slug: product.slug,
                       name: product.name,
@@ -197,6 +201,10 @@ function Producto() {
                   type="button"
                   className="btn-secondary py-3 px-8"
                   onClick={() => {
+                    console.info(
+                      "[carrito] click en añadir al carrito",
+                      product.slug,
+                    );
                     add({
                       slug: product.slug,
                       name: product.name,
