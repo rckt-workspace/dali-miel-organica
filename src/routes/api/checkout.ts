@@ -150,6 +150,13 @@ async function createCheckout(
         );
       }
 
+      if (!product.available) {
+        return jsonError(
+          `${product.name} no está disponible por ahora.`,
+          409,
+        );
+      }
+
       if (
         !product.sizes.includes(
           size,

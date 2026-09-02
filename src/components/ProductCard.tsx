@@ -394,77 +394,94 @@ export function ProductCard({
               </span>
             </div>
 
-            <div
-              className="relative z-10 flex flex-col gap-2"
-              data-no-tilt
-            >
-              <motion.button
-                type="button"
-                aria-label={`Comprar ahora ${product.name}`}
-                className={`
-                  w-full
-
-                  pointer-events-auto
-
-                  ${
-                    picante
-                      ? "btn-picante"
-                      : "btn-primary"
-                  }
-
-                  btn-sm
-                `}
-                whileTap={{
-                  scale: 0.98,
-                }}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  console.info(
-                    "[checkout] click en comprar ahora",
-                    product.slug,
-                  );
-                  navigate({
-                    to: "/checkout",
-                    search: {
-                      producto:
-                        product.slug,
-                      cantidad: 1,
-                      modo: "directo",
-                      presentacion:
-                        product.sizes[0],
-                    },
-                  });
-                }}
+            {product.available ? (
+              <div
+                className="relative z-10 flex flex-col gap-2"
+                data-no-tilt
               >
-                Comprar ahora
-              </motion.button>
+                <motion.button
+                  type="button"
+                  aria-label={`Comprar ahora ${product.name}`}
+                  className={`
+                    w-full
 
-              <motion.button
-                type="button"
-                aria-label={`Añadir ${product.name} al carrito`}
+                    pointer-events-auto
+
+                    ${
+                      picante
+                        ? "btn-picante"
+                        : "btn-primary"
+                    }
+
+                    btn-sm
+                  `}
+                  whileTap={{
+                    scale: 0.98,
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    console.info(
+                      "[checkout] click en comprar ahora",
+                      product.slug,
+                    );
+                    navigate({
+                      to: "/checkout",
+                      search: {
+                        producto:
+                          product.slug,
+                        cantidad: 1,
+                        modo: "directo",
+                        presentacion:
+                          product.sizes[0],
+                      },
+                    });
+                  }}
+                >
+                  Comprar ahora
+                </motion.button>
+
+                <motion.button
+                  type="button"
+                  aria-label={`Añadir ${product.name} al carrito`}
+                  className="
+                    btn-secondary
+                    btn-sm
+
+                    w-full
+
+                    pointer-events-auto
+                  "
+                  whileTap={{
+                    scale: 0.98,
+                  }}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    console.info(
+                      "[carrito] click en añadir al carrito",
+                      product.slug,
+                    );
+                    addToCart();
+                  }}
+                >
+                  Añadir al carrito
+                </motion.button>
+              </div>
+            ) : (
+              <p
                 className="
-                  btn-secondary
-                  btn-sm
-
-                  w-full
-
-                  pointer-events-auto
+                  caption
+                  rounded-full
+                  border
+                  border-verde/25
+                  px-4
+                  py-2
+                  text-center
+                  text-verde/60
                 "
-                whileTap={{
-                  scale: 0.98,
-                }}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  console.info(
-                    "[carrito] click en añadir al carrito",
-                    product.slug,
-                  );
-                  addToCart();
-                }}
               >
-                Añadir al carrito
-              </motion.button>
-            </div>
+                Próximamente
+              </p>
+            )}
           </div>
         </div>
       </TiltCard>
