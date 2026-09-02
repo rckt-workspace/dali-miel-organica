@@ -59,7 +59,7 @@ export const Route =
           name:
             "description",
           content:
-            "Miel 100% orgánica con denominación de origen, cosechada en los bosques tropicales de la Orinoquia. Acacia, Multifloral y Caucho.",
+            "Miel 100% orgánica con denominación de origen, cosechada en los bosques tropicales de la Orinoquia. Multifloral y Dalí Picante Chile Morita.",
         },
         {
           property:
