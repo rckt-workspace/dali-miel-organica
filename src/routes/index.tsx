@@ -179,7 +179,20 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(90deg, rgba(249,246,228,.93) 0%, rgba(249,246,228,.74) 42%, rgba(249,246,228,.15) 75%, transparent 100%)",
+                "linear-gradient(90deg, rgba(249,246,228,.97) 0%, rgba(249,246,228,.82) 38%, rgba(249,246,228,.35) 72%, transparent 100%)",
+            }}
+          />
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+            "
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(35,91,78,.12) 0%, rgba(35,91,78,.05) 60%, transparent 100%)",
             }}
           />
 
