@@ -82,11 +82,13 @@ export function FeaturedProductBlock({
 
           bg-crema
 
-          h-[280px]
+          aspect-[4/5]
 
-          sm:h-[380px]
+          max-h-[420px]
 
-          lg:h-[460px]
+          sm:max-h-[480px]
+
+          lg:max-h-[560px]
 
           ${reverse ? "lg:order-2" : ""}
         `}
