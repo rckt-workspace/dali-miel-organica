@@ -317,7 +317,6 @@ function Index() {
 
             <motion.div
               className="
-                mt-auto
                 self-start
               "
               initial={{
