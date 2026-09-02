@@ -531,12 +531,11 @@ function Checkout() {
             </div>
 
             <p className="mt-3 text-[11px] leading-relaxed text-verde/50">
-              Cualquier valor
-              adicional de
-              envío deberá
-              definirse antes
-              de producción si
-              aplica.
+              El total
+              corresponde solo
+              a los productos.
+              Por ahora no
+              cobramos envío.
             </p>
 
             {error && (
