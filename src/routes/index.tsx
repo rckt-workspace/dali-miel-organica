@@ -400,7 +400,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.88) 33%, rgba(249,246,228,0.42) 57%, rgba(249,246,228,0) 76%)",
+                "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.94) 28%, rgba(249,246,228,0.72) 46%, rgba(249,246,228,0.28) 68%, rgba(249,246,228,0) 84%)",
             }}
           />
 
