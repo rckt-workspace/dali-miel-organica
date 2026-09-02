@@ -142,7 +142,7 @@ function Index() {
         >
           <motion.img
             src={
-              heroFoto.url
+              heroMobile.url
             }
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco de miel Caucho"
             className="
