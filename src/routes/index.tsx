@@ -213,6 +213,7 @@ function Index() {
             className="
               absolute
               inset-0
+              z-10
 
               flex
               w-full
