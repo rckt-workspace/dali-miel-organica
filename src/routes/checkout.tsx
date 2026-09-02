@@ -86,9 +86,17 @@ function Checkout() {
     setError(null);
 
     try {
+      /*
+       * El servidor valida el
+       * carrito y calcula el
+       * total desde el catálogo
+       * oficial. Nunca enviamos
+       * precios desde el
+       * cliente.
+       */
       const response =
         await fetch(
-          "/api/checkout",
+          "/api/wompi-checkout",
           {
             method:
               "POST",
@@ -101,14 +109,6 @@ function Checkout() {
             body:
               JSON.stringify(
                 {
-                  /*
-                   * No enviamos
-                   * precios.
-                   *
-                   * El servidor los
-                   * obtiene del
-                   * catálogo oficial.
-                   */
                   items:
                     items.map(
                       (
@@ -131,7 +131,11 @@ function Checkout() {
 
       const data =
         (await response.json()) as {
-          url?: string;
+          publicKey?: string;
+          reference?: string;
+          amountInCents?: number;
+          currency?: string;
+          redirectUrl?: string;
           error?: string;
         };
 
@@ -144,15 +148,66 @@ function Checkout() {
         );
       }
 
-      if (!data.url) {
+      if (
+        !data.publicKey ||
+        !data.reference ||
+        !data.amountInCents ||
+        !data.redirectUrl
+      ) {
         throw new Error(
-          "Stripe no devolvió una URL de pago.",
+          "Wompi no devolvió los datos del pago.",
         );
       }
 
-      window.location.assign(
-        data.url,
+      const WidgetCheckout =
+        await loadWompiWidget();
+
+      const checkout =
+        new WidgetCheckout(
+          {
+            currency:
+              data.currency ??
+              "COP",
+
+            amountInCents:
+              data.amountInCents,
+
+            reference:
+              data.reference,
+
+            publicKey:
+              data.publicKey,
+
+            redirectUrl:
+              data.redirectUrl,
+          },
+        );
+
+      checkout.open(
+        (result: unknown) => {
+          /*
+           * Wompi redirige a
+           * /pedido-confirmado?id=...
+           * al cerrar el widget.
+           * Si el usuario cierra
+           * sin pagar, simplemente
+           * habilitamos el botón
+           * de nuevo.
+           */
+          setLoading(
+            false,
+          );
+
+          void result;
+        },
       );
+
+      /*
+       * Dejamos el botón activo
+       * por si el usuario cierra
+       * el widget sin pagar.
+       */
+      setLoading(false);
     } catch (checkoutError) {
       setError(
         checkoutError instanceof
