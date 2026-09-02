@@ -272,7 +272,6 @@ function Index() {
             <motion.p
               className="
                 body-text
-                mt-8
 
                 max-w-[70%]
 
