@@ -192,7 +192,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(180deg, rgba(35,91,78,.12) 0%, rgba(35,91,78,.05) 60%, transparent 100%)",
+                "linear-gradient(180deg, rgba(35,91,78,.08) 0%, rgba(35,91,78,.03) 60%, transparent 100%)",
             }}
           />
 
@@ -205,7 +205,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(0deg, rgba(249,246,228,.62) 0%, rgba(249,246,228,.28) 24%, transparent 58%)",
+                "linear-gradient(0deg, rgba(249,246,228,.40) 0%, rgba(249,246,228,.14) 22%, transparent 50%)",
             }}
           />
 
