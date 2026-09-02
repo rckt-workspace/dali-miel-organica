@@ -106,9 +106,9 @@ export function FeaturedProductBlock({
           decoding="async"
           width={1024}
           height={1280}
-          className="size-full object-contain object-center p-4"
+          className="size-full rounded-2xl object-contain object-center"
           animate={{
-            scale: isHovering && !reducedMotion ? 1.055 : 1,
+            scale: isHovering && !reducedMotion ? 1.04 : 1,
           }}
           transition={{ type: "spring", stiffness: 120, damping: 18 }}
         />
