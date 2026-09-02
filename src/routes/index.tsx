@@ -244,7 +244,6 @@ function Index() {
             <motion.h1
               className="
                 h1-display
-                mt-7
 
                 max-w-[94%]
 
