@@ -106,7 +106,7 @@ export function FeaturedProductBlock({
           decoding="async"
           width={1024}
           height={1280}
-          className="size-full object-cover object-center"
+          className="size-full object-contain object-center p-4"
           animate={{
             scale: isHovering && !reducedMotion ? 1.055 : 1,
           }}
