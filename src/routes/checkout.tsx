@@ -479,8 +479,8 @@ function Checkout() {
               className="btn-primary mt-7 flex w-full items-center justify-center disabled:cursor-not-allowed disabled:opacity-45"
             >
               {loading
-                ? "Conectando con Stripe…"
-                : "Pagar de forma segura"}
+                ? "Conectando con Wompi…"
+                : "Pagar con Wompi"}
 
               {!loading && (
                 <ArrowRight className="ml-2 size-4" />
@@ -492,7 +492,8 @@ function Checkout() {
 
               <span className="text-[10px] uppercase tracking-[0.12em]">
                 Procesado por
-                Stripe
+                Wompi — Tarjeta,
+                PSE, Nequi
               </span>
             </div>
           </motion.aside>
