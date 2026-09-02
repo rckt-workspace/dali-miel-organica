@@ -245,8 +245,10 @@ export function ProductCard({
               className="
                 size-full
 
-                object-cover
+                object-contain
                 object-center
+
+                p-4
               "
               animate={{
                 scale:
