@@ -664,10 +664,6 @@ function Contacto() {
               aria-hidden="true"
               className="relative mt-12 hidden h-24 lg:block"
             >
-              <span className="absolute left-2 top-0 font-display text-[78px] leading-none text-verde/[0.045]">
-                DALI
-              </span>
-
               <span className="absolute bottom-3 left-3 size-2.5 rounded-full bg-miel shadow-[0_0_24px_rgba(252,214,114,.65)]" />
 
               <svg

@@ -41,7 +41,6 @@ function Producto() {
   const { scrollY } = useScroll();
 
   const productIndex = pureProducts.findIndex((p) => p.slug === product.slug) + 1;
-  const backgroundWordX = useTransform(scrollY, [300, 1200], [-40, 40]);
 
   return (
     <>
@@ -51,17 +50,6 @@ function Producto() {
         className="relative overflow-hidden px-6 py-12 md:px-[120px] md:py-[80px]"
         style={{ backgroundColor: "rgba(249, 246, 228, 0.5)" }}
       >
-        {/* Scroll-linked background word */}
-        <motion.div
-          className="pointer-events-none absolute inset-0 flex items-center justify-center"
-          style={{ x: backgroundWordX }}
-          aria-hidden="true"
-        >
-          <div className="text-verde font-display text-[140px] md:text-[220px] leading-none opacity-[0.03] whitespace-nowrap">
-            {product.name.toUpperCase()}
-          </div>
-        </motion.div>
-
         <div className="relative mx-auto max-w-[1400px]">
           <div className="grid gap-12 md:gap-16 md:grid-cols-[55%_45%]">
             {/* GALLERY — Sticky desktop */}
@@ -262,15 +250,6 @@ function Producto() {
       {/* BENEFITS SECTION */}
       <SectionReveal direction="up">
         <section className="relative px-6 py-12 md:px-[120px] md:py-[80px]">
-          <motion.div
-            className="pointer-events-none absolute inset-0 flex items-center justify-end pr-12"
-            aria-hidden="true"
-          >
-            <div className="text-verde font-display text-[120px] md:text-[160px] leading-none opacity-[0.04] whitespace-nowrap">
-              {product.name.split(" ")[0].toUpperCase()}
-            </div>
-          </motion.div>
-
           <div className="relative mx-auto max-w-[1200px]">
             <div className="grid md:grid-cols-2 gap-12 items-start">
               <div>
