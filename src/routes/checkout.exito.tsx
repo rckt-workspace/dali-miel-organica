@@ -216,6 +216,120 @@ function CheckoutSuccess() {
   ) {
     return (
       <StatusLayout>
+        <motion.div
+          initial={{
+            scale:
+              0.45,
+            rotate:
+              -12,
+          }}
+          animate={{
+            scale:
+              1,
+            rotate:
+              0,
+          }}
+          transition={{
+            type:
+              "spring",
+            stiffness:
+              240,
+            damping:
+              16,
+          }}
+          className="grid size-20 place-items-center rounded-full bg-salvia/60 text-verde shadow-[0_18px_50px_rgba(35,91,78,.12)]"
+        >
+          <Check className="size-9" />
+        </motion.div>
+
+        <p className="eyebrow mt-8 text-verde/50">
+          Pago confirmado
+        </p>
+
+        <h1 className="mt-3 max-w-[800px] font-display text-[clamp(50px,7vw,88px)] leading-[0.94] tracking-[-0.045em] text-verde">
+          Gracias
+          {customerName
+            ? `, ${customerName}`
+            : ""}
+          .
+        </h1>
+
+        <p className="body-text mt-6 max-w-[600px] text-verde/68">
+          Tu pago fue
+          confirmado
+          correctamente.
+          Gracias por llevar
+          un pedacito de DALI
+          a tu mesa.
+        </p>
+
+        <Link
+          to="/tienda"
+          className="btn-primary mt-9"
+        >
+          <ShoppingBag className="mr-2 size-4" />
+
+          Seguir explorando
+        </Link>
+      </StatusLayout>
+    );
+  }
+
+  return (
+    <StatusLayout>
+      <div className="grid size-16 place-items-center rounded-full border border-verde/15 text-verde">
+        <ShoppingBag className="size-6" />
+      </div>
+
+      <p className="eyebrow mt-8 text-verde/50">
+        Estado del pago
+      </p>
+
+      <h1 className="mt-3 max-w-[760px] font-display text-[clamp(48px,6vw,78px)] leading-[0.96] text-verde">
+        No pudimos confirmar
+        el pago.
+      </h1>
+
+      <p className="body-text mt-6 max-w-[580px] text-verde/68">
+        Tu carrito sigue
+        intacto. Puedes volver
+        y comprobar el pedido
+        antes de intentarlo
+        nuevamente.
+      </p>
+
+      <Link
+        to="/carrito"
+        className="btn-primary mt-8"
+      >
+        Volver al carrito
+      </Link>
+    </StatusLayout>
+  );
+}
+
+function StatusLayout({
+  children,
+}: {
+  children:
+    React.ReactNode;
+}) {
+  return (
+    <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-crema px-6 py-20 md:px-[120px]">
+
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 24,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        className="relative mx-auto w-full max-w-[1100px]"
+      >
+        {children}
+      </motion.div>
     </section>
   );
 }
