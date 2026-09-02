@@ -1,8 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, MessageCircle } from "lucide-react";
 import { motion } from "motion/react";
-import logo from "@/assets/dali-logo.png.asset.json";
-import colibries from "@/assets/colibries.png.asset.json";
 import { StaggerGroup } from "./motion";
 
 const socials = [
