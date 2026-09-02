@@ -16,6 +16,7 @@ import {
 } from "motion/react";
 
 import {
+  useMemo,
   useState,
 } from "react";
 
@@ -25,6 +26,7 @@ import {
 
 import {
   formatCop,
+  getProduct,
   getProductPriceCop,
 } from "@/lib/products";
 
@@ -32,6 +34,27 @@ export const Route =
   createFileRoute(
     "/checkout",
   )({
+    validateSearch: (
+      search: Record<string, unknown>,
+    ) => ({
+      producto:
+        typeof search.producto === "string"
+          ? search.producto
+          : undefined,
+      cantidad:
+        typeof search.cantidad === "number"
+          ? search.cantidad
+          : undefined,
+      modo:
+        typeof search.modo === "string"
+          ? search.modo
+          : undefined,
+      presentacion:
+        typeof search.presentacion === "string"
+          ? search.presentacion
+          : undefined,
+    }),
+
     head: () => ({
       meta: [
         {
@@ -44,6 +67,26 @@ export const Route =
           content:
             "Revisa tu pedido y paga de forma segura con Wompi: tarjeta, PSE o Nequi.",
         },
+        {
+          property:
+            "og:title",
+          content:
+            "Pago seguro — Dalí Miel Orgánica",
+        },
+        {
+          property:
+            "og:description",
+          content:
+            "Revisa tu pedido y paga de forma segura con Wompi: tarjeta, PSE o Nequi.",
+        },
+        {
+          property: "og:type",
+          content: "website",
+        },
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
       ],
     }),
 
@@ -53,10 +96,91 @@ export const Route =
 
 function Checkout() {
   const {
-    items,
-    subtotalCop,
-    pricesConfigured,
+    items: cartItems,
+    subtotalCop: cartSubtotalCop,
+    pricesConfigured: cartPricesConfigured,
   } = useCart();
+
+  const {
+    producto,
+    cantidad,
+    modo,
+    presentacion,
+  } = Route.useSearch();
+
+  const isDirect =
+    modo === "directo";
+
+  const directItem =
+    useMemo(() => {
+      if (!isDirect) {
+        return null;
+      }
+
+      const product =
+        getProduct(
+          producto ?? "",
+        );
+
+      const qty =
+        typeof cantidad === "number"
+          ? Math.trunc(cantidad)
+          : 0;
+
+      if (
+        !product ||
+        !presentacion ||
+        !product.sizes.includes(
+          presentacion,
+        ) ||
+        qty < 1 ||
+        qty > 10
+      ) {
+        return null;
+      }
+
+      return {
+        slug: product.slug,
+        name: product.name,
+        size: presentacion,
+        image:
+          product.gallery?.[0] ??
+          product.image,
+        price: product.price,
+        qty,
+      };
+    }, [
+      cantidad,
+      isDirect,
+      presentacion,
+      producto,
+    ]);
+
+  const items =
+    isDirect
+      ? directItem
+        ? [directItem]
+        : []
+      : cartItems;
+
+  const directUnitPrice =
+    directItem
+      ? getProductPriceCop(
+          directItem.slug,
+          directItem.size,
+        )
+      : null;
+
+  const subtotalCop =
+    isDirect
+      ? (directUnitPrice ?? 0) *
+        (directItem?.qty ?? 0)
+      : cartSubtotalCop;
+
+  const pricesConfigured =
+    isDirect
+      ? directUnitPrice !== null
+      : cartPricesConfigured;
 
   const [
     loading,
@@ -109,6 +233,8 @@ function Checkout() {
             body:
               JSON.stringify(
                 {
+                   direct:
+                     isDirect,
                   items:
                     items.map(
                       (
@@ -220,9 +346,7 @@ function Checkout() {
     }
   }
 
-  if (
-    items.length === 0
-  ) {
+  if (items.length === 0) {
     return (
       <section className="min-h-[65vh] bg-crema px-6 py-20 md:px-[120px]">
         <div className="mx-auto max-w-[850px]">
@@ -231,8 +355,9 @@ function Checkout() {
           </p>
 
           <h1 className="mt-4 font-display text-[clamp(48px,6vw,78px)] leading-none text-verde">
-            No hay productos
-            en tu carrito.
+            {isDirect
+              ? "La compra directa no es válida."
+              : "No hay productos en tu carrito."}
           </h1>
 
           <Link

@@ -65,6 +65,7 @@ flowchart TD
   - `/mayoristas` (Captación B2B)
   - `/historia`, `/contacto`, páginas legales.
 - **Principio**: La interfaz de usuario es una capa de presentación. **No es autoridad de precios ni de pagos**.
+- **Compra directa**: `Comprar ahora` navega a `/checkout` con producto, presentación y cantidad en los parámetros de búsqueda. El checkout valida esos datos contra el catálogo y aísla esa selección del carrito persistente; el flujo normal desde `/carrito` continúa usando el contenido global. La confirmación de una compra directa no vacía el carrito guardado.
 
 ---
 
