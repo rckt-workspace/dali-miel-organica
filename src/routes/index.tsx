@@ -218,7 +218,6 @@ function Index() {
               w-full
               max-w-full
               flex-col
-              justify-between
 
               px-5
               py-6
