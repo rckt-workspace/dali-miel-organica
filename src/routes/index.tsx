@@ -179,7 +179,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(90deg, rgba(249,246,228,.98) 0%, rgba(249,246,228,.94) 28%, rgba(249,246,228,.78) 52%, rgba(249,246,228,.38) 78%, transparent 100%)",
+                "linear-gradient(90deg, rgba(249,246,228,.99) 0%, rgba(249,246,228,.97) 22%, rgba(249,246,228,.90) 44%, rgba(249,246,228,.62) 68%, rgba(249,246,228,.22) 88%, transparent 100%)",
             }}
           />
 
@@ -192,7 +192,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(180deg, rgba(35,91,78,.06) 0%, rgba(35,91,78,.02) 60%, transparent 100%)",
+                "linear-gradient(180deg, rgba(35,91,78,.05) 0%, rgba(35,91,78,.02) 60%, transparent 100%)",
             }}
           />
 
@@ -205,7 +205,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(0deg, rgba(249,246,228,.55) 0%, rgba(249,246,228,.24) 32%, transparent 65%)",
+                "linear-gradient(0deg, rgba(249,246,228,.62) 0%, rgba(249,246,228,.30) 38%, transparent 72%)",
             }}
           />
 
