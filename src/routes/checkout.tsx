@@ -67,6 +67,26 @@ export const Route =
           content:
             "Revisa tu pedido y paga de forma segura con Wompi: tarjeta, PSE o Nequi.",
         },
+        {
+          property:
+            "og:title",
+          content:
+            "Pago seguro — Dalí Miel Orgánica",
+        },
+        {
+          property:
+            "og:description",
+          content:
+            "Revisa tu pedido y paga de forma segura con Wompi: tarjeta, PSE o Nequi.",
+        },
+        {
+          property: "og:type",
+          content: "website",
+        },
+        {
+          name: "twitter:card",
+          content: "summary_large_image",
+        },
       ],
     }),
 

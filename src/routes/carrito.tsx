@@ -383,6 +383,15 @@ function Carrito() {
             {pricesConfigured ? (
               <Link
                 to="/checkout"
+                search={{
+                  producto:
+                    undefined,
+                  cantidad:
+                    undefined,
+                  modo: undefined,
+                  presentacion:
+                    undefined,
+                }}
                 className="btn-primary mt-7 flex w-full items-center justify-center"
               >
                 Continuar a pago
