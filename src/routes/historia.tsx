@@ -223,25 +223,11 @@ function Historia() {
       [0, 34],
     );
 
-  const heroWordX =
-    useTransform(
-      heroScroll,
-      [0, 1],
-      [-20, 28],
-    );
-
   const philosophyImageY =
     useTransform(
       philosophyScroll,
       [0, 1],
       [-20, 24],
-    );
-
-  const philosophyWordX =
-    useTransform(
-      philosophyScroll,
-      [0, 1],
-      [-30, 28],
     );
 
   const animalY =

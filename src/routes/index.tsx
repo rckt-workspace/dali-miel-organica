@@ -390,58 +390,6 @@ function Index() {
             }}
           />
 
-          {/* ORINOQUIA */}
-
-          <motion.div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-
-              flex
-              items-center
-              justify-start
-
-              overflow-hidden
-
-              pl-8
-
-              lg:pl-12
-            "
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 0.8,
-              duration: 0.5,
-            }}
-          >
-            <div
-              className="
-                whitespace-nowrap
-
-                font-display
-
-                text-[100px]
-                leading-none
-
-                text-crema
-
-                opacity-[0.08]
-
-                lg:text-[150px]
-
-                xl:text-[180px]
-              "
-            >
-              ORINOQUIA
-            </div>
-          </motion.div>
-
           <div
             className="
               relative
