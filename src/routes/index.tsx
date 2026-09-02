@@ -197,23 +197,38 @@ function Index() {
           />
 
           <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+            "
+            style={{
+              background:
+                "linear-gradient(0deg, rgba(249,246,228,.62) 0%, rgba(249,246,228,.28) 24%, transparent 58%)",
+            }}
+          />
+
+          <div
             className="
               absolute
-              inset-x-0
-              top-0
+              inset-0
+              z-10
 
               flex
               w-full
               max-w-full
               flex-col
+              justify-between
 
               px-5
-              pt-5
+              py-6
 
               min-[420px]:px-6
-              min-[420px]:pt-7
+              min-[420px]:py-7
 
               sm:px-8
+              sm:py-8
             "
           >
             <motion.p
@@ -243,7 +258,6 @@ function Index() {
             <motion.h1
               className="
                 h1-display
-                mt-7
 
                 max-w-[94%]
 
@@ -272,7 +286,6 @@ function Index() {
             <motion.p
               className="
                 body-text
-                mt-8
 
                 max-w-[70%]
 
@@ -304,10 +317,7 @@ function Index() {
 
             <motion.div
               className="
-                mt-8
                 self-start
-
-                sm:mt-10
               "
               initial={{
                 opacity: 0,
