@@ -1,5 +1,6 @@
 import {
   Link,
+  useNavigate,
 } from "@tanstack/react-router";
 
 import {
@@ -47,6 +48,9 @@ export function ProductCard({
     add,
   } = useCart();
 
+  const navigate =
+    useNavigate();
+
   const picante =
     product.line ===
     "picante";
@@ -54,6 +58,15 @@ export function ProductCard({
   const cover =
     product.gallery?.[0] ??
     product.image;
+
+  const addToCart = () =>
+    add({
+      slug: product.slug,
+      name: product.name,
+      size: product.sizes[0],
+      image: cover,
+      price: product.price,
+    });
 
   const [
     isHovering,
@@ -378,52 +391,67 @@ export function ProductCard({
               </span>
             </div>
 
-            <motion.button
-              type="button"
-              className={`
-                w-full
+            <div className="flex flex-col gap-2">
+              <motion.button
+                type="button"
+                aria-label={`Comprar ahora ${product.name}`}
+                className={`
+                  w-full
 
-                ${
-                  picante
-                    ? "btn-picante"
-                    : "btn-primary"
+                  ${
+                    picante
+                      ? "btn-picante"
+                      : "btn-primary"
+                  }
+
+                  btn-sm
+                `}
+                whileHover={
+                  reducedMotion
+                    ? undefined
+                    : {
+                        y: -2,
+                        scale: 1.015,
+                      }
                 }
+                whileTap={{
+                  scale: 0.98,
+                }}
+                onClick={() => {
+                  addToCart();
+                  navigate({
+                    to: "/checkout",
+                  });
+                }}
+              >
+                Comprar ahora
+              </motion.button>
 
-                btn-sm
-              `}
-              whileHover={
-                reducedMotion
-                  ? undefined
-                  : {
-                      y: -2,
-                      scale: 1.015,
-                    }
-              }
-              whileTap={{
-                scale: 0.98,
-              }}
-              onClick={() =>
-                add({
-                  slug:
-                    product.slug,
+              <motion.button
+                type="button"
+                aria-label={`Añadir ${product.name} al carrito`}
+                className="
+                  btn-secondary
+                  btn-sm
 
-                  name:
-                    product.name,
-
-                  size:
-                    product
-                      .sizes[0],
-
-                  image:
-                    cover,
-
-                  price:
-                    product.price,
-                })
-              }
-            >
-              Comprar
-            </motion.button>
+                  w-full
+                "
+                whileHover={
+                  reducedMotion
+                    ? undefined
+                    : {
+                        y: -2,
+                        scale: 1.015,
+                      }
+                }
+                whileTap={{
+                  scale: 0.98,
+                }}
+                onClick={addToCart}
+              >
+                Añadir al carrito
+              </motion.button>
+            </div>
           </div>
         </div>
       </TiltCard>

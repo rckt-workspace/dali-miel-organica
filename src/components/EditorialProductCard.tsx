@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
 import type { Product } from "@/lib/products";
 import { ProductBadges } from "./ProductBadges";
 import { useCart } from "@/lib/cart";
@@ -15,8 +15,19 @@ export function EditorialProductCard({
   index,
 }: EditorialProductCardProps) {
   const { add } = useCart();
+  const navigate = useNavigate();
   const picante = product.line === "picante";
   const cover = product.gallery?.[0] ?? product.image;
+
+  const addToCart = () =>
+    add({
+      slug: product.slug,
+      name: product.name,
+      size: product.sizes[0],
+      image: cover,
+      price: product.price,
+    });
+
 
   const offsets = [0, 24, 12];
   const yOffset = offsets[index] || 0;
@@ -82,20 +93,27 @@ export function EditorialProductCard({
               </span>
             </div>
 
-            <button
-              className={`w-full mt-3 ${picante ? "btn-picante" : "btn-primary"} btn-sm transition-all hover:shadow-md`}
-              onClick={() =>
-                add({
-                  slug: product.slug,
-                  name: product.name,
-                  size: product.sizes[0],
-                  image: cover,
-                  price: product.price,
-                })
-              }
-            >
-              Comprar
-            </button>
+            <div className="flex flex-col gap-2 mt-3">
+              <button
+                type="button"
+                aria-label={`Comprar ahora ${product.name}`}
+                className={`w-full ${picante ? "btn-picante" : "btn-primary"} btn-sm transition-all hover:shadow-md`}
+                onClick={() => {
+                  addToCart();
+                  navigate({ to: "/checkout" });
+                }}
+              >
+                Comprar ahora
+              </button>
+              <button
+                type="button"
+                aria-label={`Añadir ${product.name} al carrito`}
+                className="btn-secondary btn-sm w-full transition-all hover:shadow-md"
+                onClick={addToCart}
+              >
+                Añadir al carrito
+              </button>
+            </div>
           </div>
         </div>
       </TiltCard>
