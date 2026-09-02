@@ -25,8 +25,8 @@ import {
 } from "@/components/ui/accordion";
 
 import {
-  ProductCard,
-} from "@/components/ProductCard";
+  FeaturedProductBlock,
+} from "@/components/FeaturedProductBlock";
 
 import {
   pureProducts,
@@ -836,51 +836,14 @@ function Index() {
             </div>
           </SectionReveal>
 
-          {/*
-           * IMPORTANTE:
-           *
-           * NO hay opacity:0 en toda la grid.
-           * Cada ProductCard maneja su propia
-           * entrada y su propio stagger.
-           */}
-
-          <div
-            className="
-              mt-9
-
-              grid
-              grid-cols-1
-
-              gap-7
-
-              sm:mt-11
-
-              md:mt-14
-              md:grid-cols-2
-
-              lg:grid-cols-3
-              lg:gap-8
-            "
-          >
-            {pureProducts.map(
-              (
-                product,
-                index,
-              ) => (
-                <ProductCard
-                  key={
-                    product.slug
-                  }
-                  product={
-                    product
-                  }
-                  delay={
-                    index *
-                    0.09
-                  }
-                />
-              ),
-            )}
+          <div className="mt-9 flex flex-col gap-10 sm:mt-11 md:mt-14 md:gap-14">
+            {pureProducts.map((product, index) => (
+              <FeaturedProductBlock
+                key={product.slug}
+                product={product}
+                reverse={index % 2 === 1}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -990,47 +953,10 @@ function Index() {
             </div>
           </SectionReveal>
 
-          <div
-            className="
-              mx-auto
-
-              mt-9
-
-              grid
-
-              max-w-[880px]
-
-              grid-cols-1
-
-              gap-7
-
-              sm:mt-11
-
-              md:mt-14
-              md:grid-cols-2
-
-              lg:gap-8
-            "
-          >
-            {spicyProducts.map(
-              (
-                product,
-                index,
-              ) => (
-                <ProductCard
-                  key={
-                    product.slug
-                  }
-                  product={
-                    product
-                  }
-                  delay={
-                    index *
-                    0.11
-                  }
-                />
-              ),
-            )}
+          <div className="mx-auto mt-9 flex max-w-[1000px] flex-col gap-10 sm:mt-11 md:mt-14">
+            {spicyProducts.map((product) => (
+              <FeaturedProductBlock key={product.slug} product={product} />
+            ))}
           </div>
 
           <SectionReveal
