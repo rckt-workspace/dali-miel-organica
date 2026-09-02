@@ -168,60 +168,77 @@ function Producto() {
               </motion.div>
 
               {/* Add to cart + Buy now */}
-              <motion.div
-                className="flex flex-col sm:flex-row gap-3"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <motion.button
-                  type="button"
-                  className={`${picante ? "btn-picante" : "btn-primary"} py-3 px-8`}
-                  onClick={() => {
-                    console.info(
-                      "[checkout] click en comprar ahora",
-                      product.slug,
-                    );
-                    navigate({
-                      to: "/checkout",
-                      search: {
-                        producto: product.slug,
-                        cantidad: 1,
-                        modo: "directo",
-                        presentacion: size,
-                      },
-                    });
-                  }}
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.985 }}
+              {product.available ? (
+                <motion.div
+                  className="flex flex-col sm:flex-row gap-3"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                  Comprar ahora
-                </motion.button>
+                  <motion.button
+                    type="button"
+                    className={`${picante ? "btn-picante" : "btn-primary"} py-3 px-8`}
+                    onClick={() => {
+                      console.info(
+                        "[checkout] click en comprar ahora",
+                        product.slug,
+                      );
+                      navigate({
+                        to: "/checkout",
+                        search: {
+                          producto: product.slug,
+                          cantidad: 1,
+                          modo: "directo",
+                          presentacion: size,
+                        },
+                      });
+                    }}
+                    whileHover={{ y: -3 }}
+                    whileTap={{ scale: 0.985 }}
+                  >
+                    Comprar ahora
+                  </motion.button>
 
-                <motion.button
-                  type="button"
-                  className="btn-secondary py-3 px-8"
-                  onClick={() => {
-                    console.info(
-                      "[carrito] click en añadir al carrito",
-                      product.slug,
-                    );
-                    add({
-                      slug: product.slug,
-                      name: product.name,
-                      size,
-                      image: product.image,
-                      price: product.price,
-                    });
-                    setAdded(true);
-                    setTimeout(() => setAdded(false), 2000);
-                  }}
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.985 }}
+                  <motion.button
+                    type="button"
+                    className="btn-secondary py-3 px-8"
+                    onClick={() => {
+                      console.info(
+                        "[carrito] click en añadir al carrito",
+                        product.slug,
+                      );
+                      add({
+                        slug: product.slug,
+                        name: product.name,
+                        size,
+                        image: product.image,
+                        price: product.price,
+                      });
+                      setAdded(true);
+                      setTimeout(() => setAdded(false), 2000);
+                    }}
+                    whileHover={{ y: -3 }}
+                    whileTap={{ scale: 0.985 }}
+                  >
+                    {added ? "Añadido ✓" : "Añadir al carrito"}
+                  </motion.button>
+                </motion.div>
+              ) : (
+                <motion.div
+                  className="max-w-[460px] rounded-2xl border border-verde/20 bg-verde/5 p-5"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
                 >
-                  {added ? "Añadido ✓" : "Añadir al carrito"}
-                </motion.button>
-              </motion.div>
+                  <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-verde/70">
+                    Próximamente
+                  </p>
+                  <p className="mt-2 text-[15px] leading-relaxed text-verde/70">
+                    Esta cosecha no está disponible por ahora. Escríbenos si
+                    quieres que te avisemos cuando vuelva.
+                  </p>
+                </motion.div>
+              )}
 
               {/* Badges */}
               <motion.div
@@ -405,7 +422,7 @@ function Producto() {
           <SectionReveal direction="up">
             <h2 className="h3-display text-verde">¿Cuál llevar?</h2>
             <p className="body-text mt-2 text-verde/70">
-              Compara nuestras tres variedades puras y elige la que más te acompañe.
+              Conoce nuestras mieles disponibles y elige la que más te acompañe.
             </p>
           </SectionReveal>
 

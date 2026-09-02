@@ -103,6 +103,18 @@ export type Product = {
   accent: string;
 
   line: ProductLine;
+
+  /*
+   * available:
+   * controla si el producto se
+   * ofrece a la venta. Los
+   * productos con available:false
+   * siguen en el catálogo (página
+   * individual accesible) pero no
+   * aparecen en las grids de compra
+   * ni pueden agregarse al carrito.
+   */
+  available: boolean;
 };
 
 export const products: Product[] = [
@@ -167,6 +179,8 @@ export const products: Product[] = [
     accent: "#FEAEBB",
 
     line: "pura",
+
+    available: false,
   },
 
   {
@@ -230,6 +244,8 @@ export const products: Product[] = [
     accent: "#9CDCED",
 
     line: "pura",
+
+    available: true,
   },
 
   {
@@ -293,6 +309,8 @@ export const products: Product[] = [
     accent: "#C0ADE7",
 
     line: "pura",
+
+    available: false,
   },
 
   {
@@ -354,6 +372,8 @@ export const products: Product[] = [
     accent: "#D98C6B",
 
     line: "picante",
+
+    available: true,
   },
 
   {
@@ -416,18 +436,33 @@ export const products: Product[] = [
     accent: "#D98C6B",
 
     line: "picante",
+
+    available: false,
   },
 ];
 
-export const pureProducts =
+/*
+ * Catálogo completo, incluidos los
+ * productos desactivados.
+ */
+export const allProducts =
+  products;
+
+export const availableProducts =
   products.filter(
+    (product) =>
+      product.available,
+  );
+
+export const pureProducts =
+  availableProducts.filter(
     (product) =>
       product.line ===
       "pura",
   );
 
 export const spicyProducts =
-  products.filter(
+  availableProducts.filter(
     (product) =>
       product.line ===
       "picante",
@@ -450,6 +485,10 @@ export function getProductPriceCop(
     getProduct(slug);
 
   if (!product) {
+    return null;
+  }
+
+  if (!product.available) {
     return null;
   }
 
