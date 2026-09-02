@@ -1,8 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Facebook, MessageCircle } from "lucide-react";
 import { motion } from "motion/react";
-import logo from "@/assets/dali-logo.png.asset.json";
-import colibries from "@/assets/colibries.png.asset.json";
 import { StaggerGroup } from "./motion";
 
 const socials = [
@@ -45,15 +43,6 @@ const footerLinks = [
 export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-verde px-6 py-16 text-crema md:px-[120px] md:py-20">
-      {/* Decorative colibries background */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{ backgroundImage: `url(${colibries.url})` }}
-        aria-hidden="true"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 0.06 }}
-        transition={{ duration: 0.8 }}
-      />
 
       {/* Upper branding section */}
       <motion.div
@@ -62,9 +51,6 @@ export function SiteFooter() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <motion.div className="flex justify-center mb-6">
-          <img src={colibries.url} alt="" className="w-16 opacity-30" aria-hidden="true" />
-        </motion.div>
         <h3 className="text-3xl md:text-4xl font-display text-crema mb-2">
           DALÍ
         </h3>
@@ -83,9 +69,6 @@ export function SiteFooter() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0 }}
           >
-            <span className="inline-flex rounded-lg bg-crema/10 px-3 py-2 mb-6">
-              <img src={logo.url} alt="Dalí" className="h-8 w-auto" />
-            </span>
             <div>
               <p className="eyebrow text-salvia mb-3">Síguenos</p>
               <div className="flex gap-2">
