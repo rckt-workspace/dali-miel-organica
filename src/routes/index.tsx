@@ -196,7 +196,7 @@ function Index() {
             }}
           />
 
-          <div
+          {/* <div
             aria-hidden="true"
             className="
               pointer-events-none
@@ -207,7 +207,7 @@ function Index() {
               background:
                 "linear-gradient(0deg, rgba(249,246,228,.78) 0%, rgba(249,246,228,.42) 26%, transparent 60%)",
             }}
-          />
+          /> */}
 
           <div
             className="
