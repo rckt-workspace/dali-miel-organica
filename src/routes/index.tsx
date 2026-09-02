@@ -45,7 +45,8 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import heroFoto from "@/assets/hero-banner-dali.png.asset.json";
+import heroDesktop from "@/assets/hero-banner-web.png.asset.json";
+import heroMobile from "@/assets/hero-banner-mobile.png.asset.json";
 
 export const Route =
   createFileRoute("/")({
@@ -141,7 +142,7 @@ function Index() {
         >
           <motion.img
             src={
-              heroFoto.url
+              heroMobile.url
             }
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco de miel Caucho"
             className="
@@ -178,7 +179,20 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(90deg, rgba(249,246,228,.93) 0%, rgba(249,246,228,.74) 42%, rgba(249,246,228,.15) 75%, transparent 100%)",
+                "linear-gradient(90deg, rgba(249,246,228,.97) 0%, rgba(249,246,228,.82) 38%, rgba(249,246,228,.35) 72%, transparent 100%)",
+            }}
+          />
+
+          <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+            "
+            style={{
+              background:
+                "linear-gradient(180deg, rgba(35,91,78,.12) 0%, rgba(35,91,78,.05) 60%, transparent 100%)",
             }}
           />
 
@@ -349,7 +363,7 @@ function Index() {
         >
           <motion.img
             src={
-              heroFoto.url
+              heroDesktop.url
             }
             alt="Pan con mantequilla y miel Dalí Caucho cayendo, junto al frasco"
             className="
@@ -386,7 +400,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.88) 33%, rgba(249,246,228,0.42) 57%, rgba(249,246,228,0) 76%)",
+                "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.94) 28%, rgba(249,246,228,0.72) 46%, rgba(249,246,228,0.28) 68%, rgba(249,246,228,0) 84%)",
             }}
           />
 
