@@ -248,13 +248,6 @@ function Checkout() {
 
   return (
     <section className="relative overflow-hidden bg-crema px-6 py-14 md:px-[120px] md:py-[90px]">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[-5vw] top-2 font-display text-[180px] leading-none text-verde/[0.025] md:text-[280px]"
-      >
-        PAGO
-      </div>
-
       <div className="relative mx-auto max-w-[1120px]">
         <Link
           to="/carrito"

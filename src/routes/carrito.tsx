@@ -120,10 +120,6 @@ function Carrito() {
 
   return (
     <section className="relative overflow-hidden bg-crema px-6 py-14 md:px-[120px] md:py-[90px]">
-      <div className="pointer-events-none absolute right-[-5vw] top-8 font-display text-[180px] leading-none text-verde/[0.025] md:text-[280px]">
-        CESTA
-      </div>
-
       <div className="relative mx-auto max-w-[1200px]">
         <p className="eyebrow text-verde/55">
           Tu selección
@@ -414,7 +410,7 @@ function Carrito() {
               <p className="text-[11px] leading-relaxed">
                 Pago procesado
                 de forma segura
-                por Stripe.
+                por Wompi.
               </p>
             </div>
           </motion.aside>
