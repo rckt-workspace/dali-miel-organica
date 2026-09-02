@@ -258,16 +258,6 @@ function Contacto() {
         />
 
         {/* Giant editorial typography */}
-        <motion.div
-          aria-hidden="true"
-          style={{
-            x: reducedMotion ? 0 : backgroundWordX,
-          }}
-          className="pointer-events-none absolute left-[-3vw] top-[8%] select-none whitespace-nowrap font-display text-[clamp(110px,18vw,280px)] leading-none tracking-[-0.06em] text-crema/[0.035]"
-        >
-          CONTACTO
-        </motion.div>
-
         {/* Fine botanical lines */}
         <svg
           aria-hidden="true"

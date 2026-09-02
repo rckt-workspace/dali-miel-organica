@@ -273,19 +273,6 @@ function Historia() {
         />
 
         {/* Palabra editorial */}
-        <motion.div
-          aria-hidden="true"
-          style={{
-            x:
-              reducedMotion
-                ? 0
-                : heroWordX,
-          }}
-          className="pointer-events-none absolute -left-[3vw] top-[7%] select-none whitespace-nowrap font-display text-[clamp(110px,17vw,270px)] leading-none tracking-[-0.065em] text-crema/[0.035]"
-        >
-          ORINOQUIA
-        </motion.div>
-
         {/* curvas botánicas */}
         <svg
           aria-hidden="true"
@@ -567,19 +554,6 @@ function Historia() {
               `url(${formas.url})`,
           }}
         />
-
-        <motion.div
-          aria-hidden="true"
-          style={{
-            x:
-              reducedMotion
-                ? 0
-                : philosophyWordX,
-          }}
-          className="pointer-events-none absolute right-[-4vw] top-[9%] select-none whitespace-nowrap font-display text-[clamp(110px,15vw,230px)] leading-none tracking-[-0.05em] text-verde/[0.045]"
-        >
-          VIDA
-        </motion.div>
 
         <div className="relative mx-auto grid max-w-[1220px] items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
 
