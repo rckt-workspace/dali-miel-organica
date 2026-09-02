@@ -82,11 +82,13 @@ export function FeaturedProductBlock({
 
           bg-crema
 
-          h-[280px]
+          aspect-[4/5]
 
-          sm:h-[380px]
+          max-h-[420px]
 
-          lg:h-[460px]
+          sm:max-h-[480px]
+
+          lg:max-h-[560px]
 
           ${reverse ? "lg:order-2" : ""}
         `}
@@ -104,7 +106,7 @@ export function FeaturedProductBlock({
           decoding="async"
           width={1024}
           height={1280}
-          className="size-full object-cover object-center"
+          className="size-full object-contain object-center p-4"
           animate={{
             scale: isHovering && !reducedMotion ? 1.055 : 1,
           }}
