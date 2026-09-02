@@ -309,8 +309,8 @@ function Checkout() {
                 icon={
                   CreditCard
                 }
-                title="Stripe"
-                text="El cobro se realiza en la plataforma segura de Stripe."
+                title="Wompi"
+                text="Tarjeta, PSE o Nequi en la plataforma segura de Wompi."
               />
 
               <TrustItem
@@ -500,6 +500,112 @@ function Checkout() {
       </div>
     </section>
   );
+}
+
+type WompiWidgetConstructor =
+  new (config: {
+    currency: string;
+    amountInCents: number;
+    reference: string;
+    publicKey: string;
+    redirectUrl: string;
+    signature?: {
+      integrity: string;
+    };
+  }) => {
+    open: (
+      onResult?: (
+        result: unknown,
+      ) => void,
+    ) => void;
+  };
+
+declare global {
+  interface Window {
+    WidgetCheckout?: WompiWidgetConstructor;
+  }
+}
+
+let wompiScriptPromise:
+  | Promise<WompiWidgetConstructor>
+  | null = null;
+
+function loadWompiWidget(): Promise<WompiWidgetConstructor> {
+  if (
+    typeof window !==
+      "undefined" &&
+    window.WidgetCheckout
+  ) {
+    return Promise.resolve(
+      window.WidgetCheckout,
+    );
+  }
+
+  wompiScriptPromise ??=
+    new Promise(
+      (
+        resolve,
+        reject,
+      ) => {
+        if (
+          typeof document ===
+          "undefined"
+        ) {
+          reject(
+            new Error(
+              "El widget de Wompi solo está disponible en el navegador.",
+            ),
+          );
+          return;
+        }
+
+        const script =
+          document.createElement(
+            "script",
+          );
+
+        script.src =
+          "https://checkout.wompi.co/widget.js";
+
+        script.async =
+          true;
+
+        script.onload =
+          () => {
+            if (
+              window.WidgetCheckout
+            ) {
+              resolve(
+                window.WidgetCheckout,
+              );
+            } else {
+              reject(
+                new Error(
+                  "Wompi cargó pero no expuso su widget.",
+                ),
+              );
+            }
+          };
+
+        script.onerror =
+          () => {
+            wompiScriptPromise =
+              null;
+
+            reject(
+              new Error(
+                "No pudimos cargar el widget de Wompi.",
+              ),
+            );
+          };
+
+        document.head.appendChild(
+          script,
+        );
+      },
+    );
+
+  return wompiScriptPromise;
 }
 
 function TrustItem({
