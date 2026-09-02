@@ -179,7 +179,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(90deg, rgba(249,246,228,.99) 0%, rgba(249,246,228,.97) 22%, rgba(249,246,228,.90) 44%, rgba(249,246,228,.62) 68%, rgba(249,246,228,.22) 88%, transparent 100%)",
+                "linear-gradient(90deg, rgba(249,246,228,.92) 0%, rgba(249,246,228,.68) 18%, rgba(249,246,228,.28) 42%, transparent 70%)",
             }}
           />
 
@@ -192,7 +192,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(180deg, rgba(35,91,78,.05) 0%, rgba(35,91,78,.02) 60%, transparent 100%)",
+                "linear-gradient(180deg, rgba(35,91,78,.04) 0%, rgba(35,91,78,.02) 60%, transparent 100%)",
             }}
           />
 
@@ -205,7 +205,7 @@ function Index() {
             "
             style={{
               background:
-                "linear-gradient(0deg, rgba(249,246,228,.62) 0%, rgba(249,246,228,.30) 38%, transparent 72%)",
+                "linear-gradient(0deg, rgba(249,246,228,.35) 0%, rgba(249,246,228,.12) 25%, transparent 55%)",
             }}
           />
 
@@ -220,16 +220,16 @@ function Index() {
               max-w-full
               flex-col
               justify-center
-              gap-7
+              gap-5
 
               px-5
-              py-8
+              py-6
 
               min-[420px]:px-6
-              min-[420px]:py-9
+              min-[420px]:py-7
 
               sm:px-8
-              sm:py-10
+              sm:py-8
             "
           >
             <motion.p
