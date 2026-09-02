@@ -1,4 +1,4 @@
-import { createFileRoute, notFound, Link } from "@tanstack/react-router";
+import { createFileRoute, notFound, Link, useNavigate } from "@tanstack/react-router";
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
 import { Sun, ChevronDown } from "lucide-react";
@@ -31,6 +31,7 @@ export const Route = createFileRoute("/producto/$slug")({
 function Producto() {
   const product = Route.useLoaderData();
   const { add } = useCart();
+  const navigate = useNavigate();
   const [size, setSize] = useState(product.sizes[0]);
   const [added, setAdded] = useState(false);
   const [showMore, setShowMore] = useState(false);
