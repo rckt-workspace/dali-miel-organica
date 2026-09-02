@@ -410,7 +410,7 @@ function Carrito() {
               <p className="text-[11px] leading-relaxed">
                 Pago procesado
                 de forma segura
-                por Stripe.
+                por Wompi.
               </p>
             </div>
           </motion.aside>
