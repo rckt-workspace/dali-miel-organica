@@ -43,15 +43,6 @@ const footerLinks = [
 export function SiteFooter() {
   return (
     <footer className="relative overflow-hidden bg-verde px-6 py-16 text-crema md:px-[120px] md:py-20">
-      {/* Decorative colibries background */}
-      <motion.div
-        className="pointer-events-none absolute inset-0 opacity-[0.06]"
-        style={{ backgroundImage: `url(${colibries.url})` }}
-        aria-hidden="true"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 0.06 }}
-        transition={{ duration: 0.8 }}
-      />
 
       {/* Upper branding section */}
       <motion.div
