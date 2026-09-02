@@ -63,10 +63,6 @@ function Carrito() {
   ) {
     return (
       <section className="relative min-h-[70vh] overflow-hidden bg-crema px-6 py-20 md:px-[120px] md:py-[120px]">
-        <div className="pointer-events-none absolute -right-20 top-10 font-display text-[180px] leading-none text-verde/[0.025] md:text-[300px]">
-          DALI
-        </div>
-
         <motion.div
           className="relative mx-auto flex max-w-[900px] flex-col items-start"
           initial={{

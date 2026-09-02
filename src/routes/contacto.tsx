@@ -258,16 +258,6 @@ function Contacto() {
         />
 
         {/* Giant editorial typography */}
-        <motion.div
-          aria-hidden="true"
-          style={{
-            x: reducedMotion ? 0 : backgroundWordX,
-          }}
-          className="pointer-events-none absolute left-[-3vw] top-[8%] select-none whitespace-nowrap font-display text-[clamp(110px,18vw,280px)] leading-none tracking-[-0.06em] text-crema/[0.035]"
-        >
-          CONTACTO
-        </motion.div>
-
         {/* Fine botanical lines */}
         <svg
           aria-hidden="true"
@@ -674,10 +664,6 @@ function Contacto() {
               aria-hidden="true"
               className="relative mt-12 hidden h-24 lg:block"
             >
-              <span className="absolute left-2 top-0 font-display text-[78px] leading-none text-verde/[0.045]">
-                DALI
-              </span>
-
               <span className="absolute bottom-3 left-3 size-2.5 rounded-full bg-miel shadow-[0_0_24px_rgba(252,214,114,.65)]" />
 
               <svg

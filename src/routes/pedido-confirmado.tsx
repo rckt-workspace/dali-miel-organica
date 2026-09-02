@@ -414,12 +414,6 @@ function StatusLayout({
 }) {
   return (
     <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-crema px-6 py-20 md:px-[120px]">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-[5vw] top-[8%] font-display text-[190px] leading-none text-verde/[0.025] md:text-[310px]"
-      >
-        DALI
-      </div>
 
       <motion.div
         initial={{

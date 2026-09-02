@@ -25,8 +25,8 @@ import {
 } from "@/components/ui/accordion";
 
 import {
-  ProductCard,
-} from "@/components/ProductCard";
+  FeaturedProductBlock,
+} from "@/components/FeaturedProductBlock";
 
 import {
   pureProducts,
@@ -59,7 +59,7 @@ export const Route =
           name:
             "description",
           content:
-            "Miel 100% orgánica con denominación de origen, cosechada en los bosques tropicales de la Orinoquia. Acacia, Multifloral y Caucho.",
+            "Miel 100% orgánica con denominación de origen, cosechada en los bosques tropicales de la Orinoquia. Multifloral y Dalí Picante Chile Morita.",
         },
         {
           property:
@@ -389,58 +389,6 @@ function Index() {
                 "linear-gradient(90deg, var(--color-crema) 0%, rgba(249,246,228,0.88) 33%, rgba(249,246,228,0.42) 57%, rgba(249,246,228,0) 76%)",
             }}
           />
-
-          {/* ORINOQUIA */}
-
-          <motion.div
-            aria-hidden="true"
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-
-              flex
-              items-center
-              justify-start
-
-              overflow-hidden
-
-              pl-8
-
-              lg:pl-12
-            "
-            initial={{
-              opacity: 0,
-            }}
-            animate={{
-              opacity: 1,
-            }}
-            transition={{
-              delay: 0.8,
-              duration: 0.5,
-            }}
-          >
-            <div
-              className="
-                whitespace-nowrap
-
-                font-display
-
-                text-[100px]
-                leading-none
-
-                text-crema
-
-                opacity-[0.08]
-
-                lg:text-[150px]
-
-                xl:text-[180px]
-              "
-            >
-              ORINOQUIA
-            </div>
-          </motion.div>
 
           <div
             className="
@@ -830,57 +778,20 @@ function Index() {
                   text-verde
                 "
               >
-                Tres variedades,
-                un mismo origen
+                Nuestra cosecha
+                disponible
               </h2>
             </div>
           </SectionReveal>
 
-          {/*
-           * IMPORTANTE:
-           *
-           * NO hay opacity:0 en toda la grid.
-           * Cada ProductCard maneja su propia
-           * entrada y su propio stagger.
-           */}
-
-          <div
-            className="
-              mt-9
-
-              grid
-              grid-cols-1
-
-              gap-7
-
-              sm:mt-11
-
-              md:mt-14
-              md:grid-cols-2
-
-              lg:grid-cols-3
-              lg:gap-8
-            "
-          >
-            {pureProducts.map(
-              (
-                product,
-                index,
-              ) => (
-                <ProductCard
-                  key={
-                    product.slug
-                  }
-                  product={
-                    product
-                  }
-                  delay={
-                    index *
-                    0.09
-                  }
-                />
-              ),
-            )}
+          <div className="mt-9 flex flex-col gap-10 sm:mt-11 md:mt-14 md:gap-14">
+            {pureProducts.map((product, index) => (
+              <FeaturedProductBlock
+                key={product.slug}
+                product={product}
+                reverse={index % 2 === 1}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -990,47 +901,10 @@ function Index() {
             </div>
           </SectionReveal>
 
-          <div
-            className="
-              mx-auto
-
-              mt-9
-
-              grid
-
-              max-w-[880px]
-
-              grid-cols-1
-
-              gap-7
-
-              sm:mt-11
-
-              md:mt-14
-              md:grid-cols-2
-
-              lg:gap-8
-            "
-          >
-            {spicyProducts.map(
-              (
-                product,
-                index,
-              ) => (
-                <ProductCard
-                  key={
-                    product.slug
-                  }
-                  product={
-                    product
-                  }
-                  delay={
-                    index *
-                    0.11
-                  }
-                />
-              ),
-            )}
+          <div className="mx-auto mt-9 flex max-w-[1000px] flex-col gap-10 sm:mt-11 md:mt-14">
+            {spicyProducts.map((product) => (
+              <FeaturedProductBlock key={product.slug} product={product} />
+            ))}
           </div>
 
           <SectionReveal
