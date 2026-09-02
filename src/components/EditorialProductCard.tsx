@@ -93,12 +93,20 @@ export function EditorialProductCard({
               </span>
             </div>
 
-            <div className="flex flex-col gap-2 mt-3">
+            <div
+              className="relative z-10 flex flex-col gap-2 mt-3"
+              data-no-tilt
+            >
               <button
                 type="button"
                 aria-label={`Comprar ahora ${product.name}`}
-                className={`w-full ${picante ? "btn-picante" : "btn-primary"} btn-sm transition-all hover:shadow-md`}
-                onClick={() => {
+                className={`pointer-events-auto w-full ${picante ? "btn-picante" : "btn-primary"} btn-sm transition-all hover:shadow-md`}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  console.info(
+                    "[carrito] click en comprar ahora",
+                    product.slug,
+                  );
                   addToCart();
                   navigate({ to: "/checkout" });
                 }}
@@ -108,8 +116,15 @@ export function EditorialProductCard({
               <button
                 type="button"
                 aria-label={`Añadir ${product.name} al carrito`}
-                className="btn-secondary btn-sm w-full transition-all hover:shadow-md"
-                onClick={addToCart}
+                className="btn-secondary btn-sm pointer-events-auto w-full transition-all hover:shadow-md"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  console.info(
+                    "[carrito] click en añadir al carrito",
+                    product.slug,
+                  );
+                  addToCart();
+                }}
               >
                 Añadir al carrito
               </button>

@@ -391,12 +391,17 @@ export function ProductCard({
               </span>
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div
+              className="relative z-10 flex flex-col gap-2"
+              data-no-tilt
+            >
               <motion.button
                 type="button"
                 aria-label={`Comprar ahora ${product.name}`}
                 className={`
                   w-full
+
+                  pointer-events-auto
 
                   ${
                     picante
@@ -406,18 +411,15 @@ export function ProductCard({
 
                   btn-sm
                 `}
-                whileHover={
-                  reducedMotion
-                    ? undefined
-                    : {
-                        y: -2,
-                        scale: 1.015,
-                      }
-                }
                 whileTap={{
                   scale: 0.98,
                 }}
-                onClick={() => {
+                onClick={(event) => {
+                  event.stopPropagation();
+                  console.info(
+                    "[carrito] click en comprar ahora",
+                    product.slug,
+                  );
                   addToCart();
                   navigate({
                     to: "/checkout",
@@ -435,19 +437,20 @@ export function ProductCard({
                   btn-sm
 
                   w-full
+
+                  pointer-events-auto
                 "
-                whileHover={
-                  reducedMotion
-                    ? undefined
-                    : {
-                        y: -2,
-                        scale: 1.015,
-                      }
-                }
                 whileTap={{
                   scale: 0.98,
                 }}
-                onClick={addToCart}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  console.info(
+                    "[carrito] click en añadir al carrito",
+                    product.slug,
+                  );
+                  addToCart();
+                }}
               >
                 Añadir al carrito
               </motion.button>
