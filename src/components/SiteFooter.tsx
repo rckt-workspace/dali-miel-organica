@@ -62,9 +62,6 @@ export function SiteFooter() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <motion.div className="flex justify-center mb-6">
-          <img src={colibries.url} alt="" className="w-16 opacity-30" aria-hidden="true" />
-        </motion.div>
         <h3 className="text-3xl md:text-4xl font-display text-crema mb-2">
           DALÍ
         </h3>
@@ -83,9 +80,6 @@ export function SiteFooter() {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0 }}
           >
-            <span className="inline-flex rounded-lg bg-crema/10 px-3 py-2 mb-6">
-              <img src={logo.url} alt="Dalí" className="h-8 w-auto" />
-            </span>
             <div>
               <p className="eyebrow text-salvia mb-3">Síguenos</p>
               <div className="flex gap-2">
