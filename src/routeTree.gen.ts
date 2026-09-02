@@ -17,6 +17,7 @@ import { Route as DevolucionesRouteImport } from './routes/devoluciones'
 import { Route as EnviosRouteImport } from './routes/envios'
 import { Route as HistoriaRouteImport } from './routes/historia'
 import { Route as MayoristasRouteImport } from './routes/mayoristas'
+import { Route as PedidoConfirmadoRouteImport } from './routes/pedido-confirmado'
 import { Route as PrivacidadRouteImport } from './routes/privacidad'
 import { Route as TerminosYCondicionesRouteImport } from './routes/terminos-y-condiciones'
 import { Route as TiendaRouteImport } from './routes/tienda'
@@ -25,6 +26,7 @@ import { Route as ApiCheckoutRouteImport } from './routes/api/checkout'
 import { Route as ApiCheckoutSessionRouteImport } from './routes/api/checkout-session'
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe-webhook'
+import { Route as ApiWompiCheckoutRouteImport } from './routes/api/wompi-checkout'
 import { Route as CheckoutExitoRouteImport } from './routes/checkout.exito'
 import { Route as ProductoSlugRouteImport } from './routes/producto.$slug'
 
@@ -68,6 +70,11 @@ const MayoristasRoute = MayoristasRouteImport.update({
   path: '/mayoristas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PedidoConfirmadoRoute = PedidoConfirmadoRouteImport.update({
+  id: '/pedido-confirmado',
+  path: '/pedido-confirmado',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacidadRoute = PrivacidadRouteImport.update({
   id: '/privacidad',
   path: '/privacidad',
@@ -108,6 +115,11 @@ const ApiStripeWebhookRoute = ApiStripeWebhookRouteImport.update({
   path: '/api/stripe-webhook',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWompiCheckoutRoute = ApiWompiCheckoutRouteImport.update({
+  id: '/api/wompi-checkout',
+  path: '/api/wompi-checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutExitoRoute = CheckoutExitoRouteImport.update({
   id: '/exito',
   path: '/exito',
@@ -128,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/pedido-confirmado': typeof PedidoConfirmadoRoute
   '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
@@ -136,6 +149,7 @@ export interface FileRoutesByFullPath {
   '/api/checkout-session': typeof ApiCheckoutSessionRoute
   '/api/health': typeof ApiHealthRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/api/wompi-checkout': typeof ApiWompiCheckoutRoute
   '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -148,6 +162,7 @@ export interface FileRoutesByTo {
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/pedido-confirmado': typeof PedidoConfirmadoRoute
   '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
@@ -156,6 +171,7 @@ export interface FileRoutesByTo {
   '/api/checkout-session': typeof ApiCheckoutSessionRoute
   '/api/health': typeof ApiHealthRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/api/wompi-checkout': typeof ApiWompiCheckoutRoute
   '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -169,6 +185,7 @@ export interface FileRoutesById {
   '/envios': typeof EnviosRoute
   '/historia': typeof HistoriaRoute
   '/mayoristas': typeof MayoristasRoute
+  '/pedido-confirmado': typeof PedidoConfirmadoRoute
   '/privacidad': typeof PrivacidadRoute
   '/terminos-y-condiciones': typeof TerminosYCondicionesRoute
   '/tienda': typeof TiendaRoute
@@ -177,6 +194,7 @@ export interface FileRoutesById {
   '/api/checkout-session': typeof ApiCheckoutSessionRoute
   '/api/health': typeof ApiHealthRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
+  '/api/wompi-checkout': typeof ApiWompiCheckoutRoute
   '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -191,6 +209,7 @@ export interface FileRouteTypes {
     | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/pedido-confirmado'
     | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
@@ -199,6 +218,7 @@ export interface FileRouteTypes {
     | '/api/checkout-session'
     | '/api/health'
     | '/api/stripe-webhook'
+    | '/api/wompi-checkout'
     | '/checkout/exito'
     | '/producto/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -211,6 +231,7 @@ export interface FileRouteTypes {
     | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/pedido-confirmado'
     | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
@@ -219,6 +240,7 @@ export interface FileRouteTypes {
     | '/api/checkout-session'
     | '/api/health'
     | '/api/stripe-webhook'
+    | '/api/wompi-checkout'
     | '/checkout/exito'
     | '/producto/$slug'
   id:
@@ -231,6 +253,7 @@ export interface FileRouteTypes {
     | '/envios'
     | '/historia'
     | '/mayoristas'
+    | '/pedido-confirmado'
     | '/privacidad'
     | '/terminos-y-condiciones'
     | '/tienda'
@@ -239,6 +262,7 @@ export interface FileRouteTypes {
     | '/api/checkout-session'
     | '/api/health'
     | '/api/stripe-webhook'
+    | '/api/wompi-checkout'
     | '/checkout/exito'
     | '/producto/$slug'
   fileRoutesById: FileRoutesById
@@ -252,6 +276,7 @@ export interface RootRouteChildren {
   EnviosRoute: typeof EnviosRoute
   HistoriaRoute: typeof HistoriaRoute
   MayoristasRoute: typeof MayoristasRoute
+  PedidoConfirmadoRoute: typeof PedidoConfirmadoRoute
   PrivacidadRoute: typeof PrivacidadRoute
   TerminosYCondicionesRoute: typeof TerminosYCondicionesRoute
   TiendaRoute: typeof TiendaRoute
@@ -260,6 +285,7 @@ export interface RootRouteChildren {
   ApiCheckoutSessionRoute: typeof ApiCheckoutSessionRoute
   ApiHealthRoute: typeof ApiHealthRoute
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
+  ApiWompiCheckoutRoute: typeof ApiWompiCheckoutRoute
   ProductoSlugRoute: typeof ProductoSlugRoute
 }
 
@@ -321,6 +347,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MayoristasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pedido-confirmado': {
+      id: '/pedido-confirmado'
+      path: '/pedido-confirmado'
+      fullPath: '/pedido-confirmado'
+      preLoaderRoute: typeof PedidoConfirmadoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacidad': {
       id: '/privacidad'
       path: '/privacidad'
@@ -377,6 +410,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiStripeWebhookRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/wompi-checkout': {
+      id: '/api/wompi-checkout'
+      path: '/api/wompi-checkout'
+      fullPath: '/api/wompi-checkout'
+      preLoaderRoute: typeof ApiWompiCheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout/exito': {
       id: '/checkout/exito'
       path: '/exito'
@@ -415,6 +455,7 @@ const rootRouteChildren: RootRouteChildren = {
   EnviosRoute: EnviosRoute,
   HistoriaRoute: HistoriaRoute,
   MayoristasRoute: MayoristasRoute,
+  PedidoConfirmadoRoute: PedidoConfirmadoRoute,
   PrivacidadRoute: PrivacidadRoute,
   TerminosYCondicionesRoute: TerminosYCondicionesRoute,
   TiendaRoute: TiendaRoute,
@@ -423,6 +464,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCheckoutSessionRoute: ApiCheckoutSessionRoute,
   ApiHealthRoute: ApiHealthRoute,
   ApiStripeWebhookRoute: ApiStripeWebhookRoute,
+  ApiWompiCheckoutRoute: ApiWompiCheckoutRoute,
   ProductoSlugRoute: ProductoSlugRoute,
 }
 export const routeTree = rootRouteImport

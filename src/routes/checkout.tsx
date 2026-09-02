@@ -42,7 +42,7 @@ export const Route =
           name:
             "description",
           content:
-            "Revisa tu pedido y continúa al pago seguro con Stripe.",
+            "Revisa tu pedido y paga de forma segura con Wompi: tarjeta, PSE o Nequi.",
         },
       ],
     }),
@@ -86,9 +86,17 @@ function Checkout() {
     setError(null);
 
     try {
+      /*
+       * El servidor valida el
+       * carrito y calcula el
+       * total desde el catálogo
+       * oficial. Nunca enviamos
+       * precios desde el
+       * cliente.
+       */
       const response =
         await fetch(
-          "/api/checkout",
+          "/api/wompi-checkout",
           {
             method:
               "POST",
@@ -101,14 +109,6 @@ function Checkout() {
             body:
               JSON.stringify(
                 {
-                  /*
-                   * No enviamos
-                   * precios.
-                   *
-                   * El servidor los
-                   * obtiene del
-                   * catálogo oficial.
-                   */
                   items:
                     items.map(
                       (
@@ -131,7 +131,11 @@ function Checkout() {
 
       const data =
         (await response.json()) as {
-          url?: string;
+          publicKey?: string;
+          reference?: string;
+          amountInCents?: number;
+          currency?: string;
+          redirectUrl?: string;
           error?: string;
         };
 
@@ -144,15 +148,66 @@ function Checkout() {
         );
       }
 
-      if (!data.url) {
+      if (
+        !data.publicKey ||
+        !data.reference ||
+        !data.amountInCents ||
+        !data.redirectUrl
+      ) {
         throw new Error(
-          "Stripe no devolvió una URL de pago.",
+          "Wompi no devolvió los datos del pago.",
         );
       }
 
-      window.location.assign(
-        data.url,
+      const WidgetCheckout =
+        await loadWompiWidget();
+
+      const checkout =
+        new WidgetCheckout(
+          {
+            currency:
+              data.currency ??
+              "COP",
+
+            amountInCents:
+              data.amountInCents,
+
+            reference:
+              data.reference,
+
+            publicKey:
+              data.publicKey,
+
+            redirectUrl:
+              data.redirectUrl,
+          },
+        );
+
+      checkout.open(
+        (result: unknown) => {
+          /*
+           * Wompi redirige a
+           * /pedido-confirmado?id=...
+           * al cerrar el widget.
+           * Si el usuario cierra
+           * sin pagar, simplemente
+           * habilitamos el botón
+           * de nuevo.
+           */
+          setLoading(
+            false,
+          );
+
+          void result;
+        },
       );
+
+      /*
+       * Dejamos el botón activo
+       * por si el usuario cierra
+       * el widget sin pagar.
+       */
+      setLoading(false);
     } catch (checkoutError) {
       setError(
         checkoutError instanceof
@@ -232,13 +287,12 @@ function Checkout() {
             </h1>
 
             <p className="body-text mt-6 max-w-[560px] text-verde/68">
-              En el siguiente
-              paso Stripe te
-              pedirá los datos
-              necesarios para
-              realizar el pago
-              y entregar tu
-              pedido.
+              Al continuar se
+              abrirá el widget
+              seguro de Wompi,
+              donde podrás pagar
+              con tarjeta, PSE o
+              Nequi.
             </p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
@@ -254,8 +308,8 @@ function Checkout() {
                 icon={
                   CreditCard
                 }
-                title="Stripe"
-                text="El cobro se realiza en la plataforma segura de Stripe."
+                title="Wompi"
+                text="Tarjeta, PSE o Nequi en la plataforma segura de Wompi."
               />
 
               <TrustItem
@@ -424,8 +478,8 @@ function Checkout() {
               className="btn-primary mt-7 flex w-full items-center justify-center disabled:cursor-not-allowed disabled:opacity-45"
             >
               {loading
-                ? "Conectando con Stripe…"
-                : "Pagar de forma segura"}
+                ? "Conectando con Wompi…"
+                : "Pagar con Wompi"}
 
               {!loading && (
                 <ArrowRight className="ml-2 size-4" />
@@ -437,7 +491,8 @@ function Checkout() {
 
               <span className="text-[10px] uppercase tracking-[0.12em]">
                 Procesado por
-                Stripe
+                Wompi — Tarjeta,
+                PSE, Nequi
               </span>
             </div>
           </motion.aside>
@@ -445,6 +500,112 @@ function Checkout() {
       </div>
     </section>
   );
+}
+
+type WompiWidgetConstructor =
+  new (config: {
+    currency: string;
+    amountInCents: number;
+    reference: string;
+    publicKey: string;
+    redirectUrl: string;
+    signature?: {
+      integrity: string;
+    };
+  }) => {
+    open: (
+      onResult?: (
+        result: unknown,
+      ) => void,
+    ) => void;
+  };
+
+declare global {
+  interface Window {
+    WidgetCheckout?: WompiWidgetConstructor;
+  }
+}
+
+let wompiScriptPromise:
+  | Promise<WompiWidgetConstructor>
+  | null = null;
+
+function loadWompiWidget(): Promise<WompiWidgetConstructor> {
+  if (
+    typeof window !==
+      "undefined" &&
+    window.WidgetCheckout
+  ) {
+    return Promise.resolve(
+      window.WidgetCheckout,
+    );
+  }
+
+  wompiScriptPromise ??=
+    new Promise(
+      (
+        resolve,
+        reject,
+      ) => {
+        if (
+          typeof document ===
+          "undefined"
+        ) {
+          reject(
+            new Error(
+              "El widget de Wompi solo está disponible en el navegador.",
+            ),
+          );
+          return;
+        }
+
+        const script =
+          document.createElement(
+            "script",
+          );
+
+        script.src =
+          "https://checkout.wompi.co/widget.js";
+
+        script.async =
+          true;
+
+        script.onload =
+          () => {
+            if (
+              window.WidgetCheckout
+            ) {
+              resolve(
+                window.WidgetCheckout,
+              );
+            } else {
+              reject(
+                new Error(
+                  "Wompi cargó pero no expuso su widget.",
+                ),
+              );
+            }
+          };
+
+        script.onerror =
+          () => {
+            wompiScriptPromise =
+              null;
+
+            reject(
+              new Error(
+                "No pudimos cargar el widget de Wompi.",
+              ),
+            );
+          };
+
+        document.head.appendChild(
+          script,
+        );
+      },
+    );
+
+  return wompiScriptPromise;
 }
 
 function TrustItem({

@@ -41,11 +41,11 @@ import arbolG3 from "@/assets/arbol-g3.png.asset.json";
  */
 
 export const PRODUCT_PRICES_COP = {
-  acacia: 0,
-  multifloral: 0,
-  caucho: 0,
-  "chile-morita": 0,
-  "chile-de-arbol": 0,
+  acacia: 45000,
+  multifloral: 38000,
+  caucho: 42000,
+  "chile-morita": 32000,
+  "chile-de-arbol": 32000,
 } as const;
 
 export function formatCop(amount: number): string {
