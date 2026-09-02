@@ -422,7 +422,7 @@ function Producto() {
           <SectionReveal direction="up">
             <h2 className="h3-display text-verde">¿Cuál llevar?</h2>
             <p className="body-text mt-2 text-verde/70">
-              Compara nuestras tres variedades puras y elige la que más te acompañe.
+              Conoce nuestras mieles disponibles y elige la que más te acompañe.
             </p>
           </SectionReveal>
 
