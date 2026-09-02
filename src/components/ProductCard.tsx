@@ -102,6 +102,7 @@ export function ProductCard({
       className="
         min-w-0
         w-full
+        h-full
       "
       initial={false}
       animate={
@@ -162,6 +163,7 @@ export function ProductCard({
           flex
           min-w-0
           w-full
+          h-full
           flex-col
 
           gap-4
@@ -188,6 +190,7 @@ export function ProductCard({
           className="
             flex
             min-w-0
+            flex-1
             flex-col
 
             gap-4
