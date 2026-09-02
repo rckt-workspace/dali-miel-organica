@@ -166,28 +166,52 @@ function Producto() {
                 </div>
               </motion.div>
 
-              {/* Add to cart */}
-              <motion.button
-                className={`self-start ${picante ? "btn-picante" : "btn-primary"} py-3 px-8`}
-                onClick={() => {
-                  add({
-                    slug: product.slug,
-                    name: product.name,
-                    size,
-                    image: product.image,
-                    price: product.price,
-                  });
-                  setAdded(true);
-                  setTimeout(() => setAdded(false), 2000);
-                }}
+              {/* Add to cart + Buy now */}
+              <motion.div
+                className="flex flex-col sm:flex-row gap-3"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                whileHover={{ y: -3 }}
-                whileTap={{ scale: 0.985 }}
               >
-                {added ? "Añadido ✓" : "Añadir al carrito"}
-              </motion.button>
+                <motion.button
+                  type="button"
+                  className={`${picante ? "btn-picante" : "btn-primary"} py-3 px-8`}
+                  onClick={() => {
+                    add({
+                      slug: product.slug,
+                      name: product.name,
+                      size,
+                      image: product.image,
+                      price: product.price,
+                    });
+                    navigate({ to: "/checkout" });
+                  }}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.985 }}
+                >
+                  Comprar ahora
+                </motion.button>
+
+                <motion.button
+                  type="button"
+                  className="btn-secondary py-3 px-8"
+                  onClick={() => {
+                    add({
+                      slug: product.slug,
+                      name: product.name,
+                      size,
+                      image: product.image,
+                      price: product.price,
+                    });
+                    setAdded(true);
+                    setTimeout(() => setAdded(false), 2000);
+                  }}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.985 }}
+                >
+                  {added ? "Añadido ✓" : "Añadir al carrito"}
+                </motion.button>
+              </motion.div>
 
               {/* Badges */}
               <motion.div

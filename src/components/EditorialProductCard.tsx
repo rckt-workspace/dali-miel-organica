@@ -15,8 +15,19 @@ export function EditorialProductCard({
   index,
 }: EditorialProductCardProps) {
   const { add } = useCart();
+  const navigate = useNavigate();
   const picante = product.line === "picante";
   const cover = product.gallery?.[0] ?? product.image;
+
+  const addToCart = () =>
+    add({
+      slug: product.slug,
+      name: product.name,
+      size: product.sizes[0],
+      image: cover,
+      price: product.price,
+    });
+
 
   const offsets = [0, 24, 12];
   const yOffset = offsets[index] || 0;
