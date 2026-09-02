@@ -220,16 +220,16 @@ function Index() {
               max-w-full
               flex-col
               justify-center
-              gap-6
+              gap-7
 
               px-5
-              py-6
+              py-8
 
               min-[420px]:px-6
-              min-[420px]:py-7
+              min-[420px]:py-9
 
               sm:px-8
-              sm:py-8
+              sm:py-10
             "
           >
             <motion.p
