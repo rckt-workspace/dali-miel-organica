@@ -42,7 +42,7 @@ export const Route =
           name:
             "description",
           content:
-            "Revisa tu pedido y continúa al pago seguro con Stripe.",
+            "Revisa tu pedido y paga de forma segura con Wompi: tarjeta, PSE o Nequi.",
         },
       ],
     }),
@@ -287,13 +287,12 @@ function Checkout() {
             </h1>
 
             <p className="body-text mt-6 max-w-[560px] text-verde/68">
-              En el siguiente
-              paso Stripe te
-              pedirá los datos
-              necesarios para
-              realizar el pago
-              y entregar tu
-              pedido.
+              Al continuar se
+              abrirá el widget
+              seguro de Wompi,
+              donde podrás pagar
+              con tarjeta, PSE o
+              Nequi.
             </p>
 
             <div className="mt-10 grid gap-4 sm:grid-cols-3">
