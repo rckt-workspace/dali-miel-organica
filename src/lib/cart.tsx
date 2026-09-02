@@ -10,6 +10,7 @@ import {
 import { toast } from "sonner";
 
 import {
+  getProduct,
   getProductPriceCop,
 } from "@/lib/products";
 
@@ -127,6 +128,20 @@ export function CartProvider({
       item,
       qty = 1,
     ) => {
+      const catalogProduct =
+        getProduct(item.slug);
+
+      if (
+        catalogProduct &&
+        !catalogProduct.available
+      ) {
+        toast.error(
+          `${catalogProduct.name} no está disponible por ahora.`,
+        );
+
+        return;
+      }
+
       const safeQty =
         Math.max(
           1,
