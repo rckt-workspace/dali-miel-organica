@@ -45,7 +45,8 @@ import perezoso from "@/assets/perezoso.png.asset.json";
 import osoHormiguero from "@/assets/oso-hormiguero.png.asset.json";
 import formas from "@/assets/formas-organicas.png.asset.json";
 import ocelote from "@/assets/ocelote.png.asset.json";
-import heroFoto from "@/assets/hero-banner-dali.png.asset.json";
+import heroDesktop from "@/assets/hero-banner-web.png.asset.json";
+import heroMobile from "@/assets/hero-banner-mobile.png.asset.json";
 
 export const Route =
   createFileRoute("/")({
