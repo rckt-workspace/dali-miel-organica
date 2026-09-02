@@ -830,8 +830,8 @@ function Index() {
                   text-verde
                 "
               >
-                Tres variedades,
-                un mismo origen
+                Nuestra cosecha
+                disponible
               </h2>
             </div>
           </SectionReveal>
