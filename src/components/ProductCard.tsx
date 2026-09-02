@@ -232,17 +232,7 @@ export function ProductCard({
 
               bg-crema
 
-              h-[220px]
-
-              min-[420px]:h-[250px]
-
-              sm:h-[280px]
-
-              md:h-[235px]
-
-              lg:h-[260px]
-
-              xl:h-[280px]
+              aspect-[4/5]
             "
           >
             <motion.img
