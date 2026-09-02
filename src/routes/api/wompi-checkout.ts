@@ -14,6 +14,7 @@ type CheckoutItem = {
 
 type CheckoutRequest = {
   items?: unknown;
+  direct?: unknown;
 };
 
 export const Route =
@@ -267,6 +268,11 @@ async function createWompiCheckout(
           )
         : requestOrigin;
 
+    const confirmationPath =
+      body.direct === true
+        ? "/pedido-confirmado?modo=directo"
+        : "/pedido-confirmado";
+
     return Response.json(
       {
         publicKey,
@@ -278,7 +284,7 @@ async function createWompiCheckout(
             .join(", ")
             .slice(0, 240),
         redirectUrl:
-          `${appUrl}/pedido-confirmado`,
+          `${appUrl}${confirmationPath}`,
       },
     );
   } catch (error) {

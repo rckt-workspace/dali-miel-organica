@@ -104,11 +104,18 @@ export function EditorialProductCard({
                 onClick={(event) => {
                   event.stopPropagation();
                   console.info(
-                    "[carrito] click en comprar ahora",
+                    "[checkout] click en comprar ahora",
                     product.slug,
                   );
-                  addToCart();
-                  navigate({ to: "/checkout" });
+                  navigate({
+                    to: "/checkout",
+                    search: {
+                      producto: product.slug,
+                      cantidad: 1,
+                      modo: "directo",
+                      presentacion: product.sizes[0],
+                    },
+                  });
                 }}
               >
                 Comprar ahora

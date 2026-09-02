@@ -45,6 +45,11 @@ export const Route =
         "string"
           ? search.id
           : "",
+      modo:
+        typeof search.modo ===
+        "string"
+          ? search.modo
+          : undefined,
     }),
 
     head: () => ({
@@ -91,7 +96,11 @@ const WOMPI_API_BASE =
 function PedidoConfirmado() {
   const {
     id,
+    modo,
   } = Route.useSearch();
+
+  const isDirect =
+    modo === "directo";
 
   const {
     clear,
@@ -185,6 +194,7 @@ function PedidoConfirmado() {
           if (
             status ===
               "APPROVED" &&
+            !isDirect &&
             !cleared.current
           ) {
             clear();
@@ -218,6 +228,7 @@ function PedidoConfirmado() {
   }, [
     clear,
     id,
+    isDirect,
   ]);
 
   if (

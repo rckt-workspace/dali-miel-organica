@@ -179,17 +179,18 @@ function Producto() {
                   className={`${picante ? "btn-picante" : "btn-primary"} py-3 px-8`}
                   onClick={() => {
                     console.info(
-                      "[carrito] click en comprar ahora",
+                      "[checkout] click en comprar ahora",
                       product.slug,
                     );
-                    add({
-                      slug: product.slug,
-                      name: product.name,
-                      size,
-                      image: product.image,
-                      price: product.price,
+                    navigate({
+                      to: "/checkout",
+                      search: {
+                        producto: product.slug,
+                        cantidad: 1,
+                        modo: "directo",
+                        presentacion: size,
+                      },
                     });
-                    navigate({ to: "/checkout" });
                   }}
                   whileHover={{ y: -3 }}
                   whileTap={{ scale: 0.985 }}
