@@ -197,6 +197,19 @@ function Index() {
           />
 
           <div
+            aria-hidden="true"
+            className="
+              pointer-events-none
+              absolute
+              inset-0
+            "
+            style={{
+              background:
+                "linear-gradient(0deg, rgba(249,246,228,.92) 0%, rgba(249,246,228,.55) 28%, transparent 62%)",
+            }}
+          />
+
+          <div
             className="
               absolute
               inset-0
