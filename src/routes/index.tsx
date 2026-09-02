@@ -199,21 +199,22 @@ function Index() {
           <div
             className="
               absolute
-              inset-x-0
-              top-0
+              inset-0
 
               flex
               w-full
               max-w-full
               flex-col
+              justify-between
 
               px-5
-              pt-5
+              py-6
 
               min-[420px]:px-6
-              min-[420px]:pt-7
+              min-[420px]:py-7
 
               sm:px-8
+              sm:py-8
             "
           >
             <motion.p
