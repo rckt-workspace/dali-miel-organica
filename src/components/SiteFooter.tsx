@@ -15,9 +15,9 @@ const footerLinks = [
   {
     section: "Tienda",
     links: [
-      { to: "/producto/acacia", label: "Acacia" },
       { to: "/producto/multifloral", label: "Multifloral" },
-      { to: "/producto/caucho", label: "Caucho" },
+      { to: "/producto/chile-morita", label: "Dalí Picante Chile Morita" },
+      { to: "/tienda", label: "Ver tienda" },
     ],
   },
   {
