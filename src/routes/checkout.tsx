@@ -129,6 +129,7 @@ function Checkout() {
 
       if (
         !product ||
+        !product.available ||
         !presentacion ||
         !product.sizes.includes(
           presentacion,
