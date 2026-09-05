@@ -27,6 +27,8 @@ import { Route as ApiCheckoutSessionRouteImport } from './routes/api/checkout-se
 import { Route as ApiHealthRouteImport } from './routes/api/health'
 import { Route as ApiStripeWebhookRouteImport } from './routes/api/stripe-webhook'
 import { Route as ApiWompiCheckoutRouteImport } from './routes/api/wompi-checkout'
+import { Route as ApiWompiStatusRouteImport } from './routes/api/wompi-status'
+import { Route as ApiWompiWebhookRouteImport } from './routes/api/wompi-webhook'
 import { Route as CheckoutExitoRouteImport } from './routes/checkout.exito'
 import { Route as ProductoSlugRouteImport } from './routes/producto.$slug'
 
@@ -120,6 +122,16 @@ const ApiWompiCheckoutRoute = ApiWompiCheckoutRouteImport.update({
   path: '/api/wompi-checkout',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiWompiStatusRoute = ApiWompiStatusRouteImport.update({
+  id: '/api/wompi-status',
+  path: '/api/wompi-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiWompiWebhookRoute = ApiWompiWebhookRouteImport.update({
+  id: '/api/wompi-webhook',
+  path: '/api/wompi-webhook',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutExitoRoute = CheckoutExitoRouteImport.update({
   id: '/exito',
   path: '/exito',
@@ -150,6 +162,8 @@ export interface FileRoutesByFullPath {
   '/api/health': typeof ApiHealthRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/wompi-checkout': typeof ApiWompiCheckoutRoute
+  '/api/wompi-status': typeof ApiWompiStatusRoute
+  '/api/wompi-webhook': typeof ApiWompiWebhookRoute
   '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -172,6 +186,8 @@ export interface FileRoutesByTo {
   '/api/health': typeof ApiHealthRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/wompi-checkout': typeof ApiWompiCheckoutRoute
+  '/api/wompi-status': typeof ApiWompiStatusRoute
+  '/api/wompi-webhook': typeof ApiWompiWebhookRoute
   '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -195,6 +211,8 @@ export interface FileRoutesById {
   '/api/health': typeof ApiHealthRoute
   '/api/stripe-webhook': typeof ApiStripeWebhookRoute
   '/api/wompi-checkout': typeof ApiWompiCheckoutRoute
+  '/api/wompi-status': typeof ApiWompiStatusRoute
+  '/api/wompi-webhook': typeof ApiWompiWebhookRoute
   '/checkout/exito': typeof CheckoutExitoRoute
   '/producto/$slug': typeof ProductoSlugRoute
 }
@@ -219,6 +237,8 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/stripe-webhook'
     | '/api/wompi-checkout'
+    | '/api/wompi-status'
+    | '/api/wompi-webhook'
     | '/checkout/exito'
     | '/producto/$slug'
   fileRoutesByTo: FileRoutesByTo
@@ -241,6 +261,8 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/stripe-webhook'
     | '/api/wompi-checkout'
+    | '/api/wompi-status'
+    | '/api/wompi-webhook'
     | '/checkout/exito'
     | '/producto/$slug'
   id:
@@ -263,6 +285,8 @@ export interface FileRouteTypes {
     | '/api/health'
     | '/api/stripe-webhook'
     | '/api/wompi-checkout'
+    | '/api/wompi-status'
+    | '/api/wompi-webhook'
     | '/checkout/exito'
     | '/producto/$slug'
   fileRoutesById: FileRoutesById
@@ -286,6 +310,8 @@ export interface RootRouteChildren {
   ApiHealthRoute: typeof ApiHealthRoute
   ApiStripeWebhookRoute: typeof ApiStripeWebhookRoute
   ApiWompiCheckoutRoute: typeof ApiWompiCheckoutRoute
+  ApiWompiStatusRoute: typeof ApiWompiStatusRoute
+  ApiWompiWebhookRoute: typeof ApiWompiWebhookRoute
   ProductoSlugRoute: typeof ProductoSlugRoute
 }
 
@@ -417,6 +443,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiWompiCheckoutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/wompi-status': {
+      id: '/api/wompi-status'
+      path: '/api/wompi-status'
+      fullPath: '/api/wompi-status'
+      preLoaderRoute: typeof ApiWompiStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/wompi-webhook': {
+      id: '/api/wompi-webhook'
+      path: '/api/wompi-webhook'
+      fullPath: '/api/wompi-webhook'
+      preLoaderRoute: typeof ApiWompiWebhookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout/exito': {
       id: '/checkout/exito'
       path: '/exito'
@@ -465,6 +505,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiHealthRoute: ApiHealthRoute,
   ApiStripeWebhookRoute: ApiStripeWebhookRoute,
   ApiWompiCheckoutRoute: ApiWompiCheckoutRoute,
+  ApiWompiStatusRoute: ApiWompiStatusRoute,
+  ApiWompiWebhookRoute: ApiWompiWebhookRoute,
   ProductoSlugRoute: ProductoSlugRoute,
 }
 export const routeTree = rootRouteImport

@@ -36,15 +36,12 @@ export const Route =
           unknown
         >,
     ) => ({
-      /*
-       * Wompi añade ?id=<transaction_id>
-       * a la URL de redirección.
-       */
       id:
         typeof search.id ===
         "string"
           ? search.id
           : "",
+
       modo:
         typeof search.modo ===
         "string"
@@ -58,9 +55,11 @@ export const Route =
           title:
             "Pedido confirmado — Dalí Miel Orgánica",
         },
+
         {
           name:
             "description",
+
           content:
             "Estado de tu pago con Wompi en Dalí Miel Orgánica.",
         },
@@ -83,28 +82,32 @@ type VerificationState =
   | TransactionStatus
   | "fetch-error";
 
-/*
- * La llave pub_test_* usa el
- * ambiente Sandbox de Wompi;
- * la pub_prod_* usará
- * production. Se detecta por
- * prefijo.
- */
-const WOMPI_API_BASE =
-  "https://sandbox.wompi.co/v1";
+type StatusResponse = {
+  id?: string;
+  reference?: string | null;
+  status?: TransactionStatus;
+  amountInCents?: number | null;
+  currency?: string | null;
+  paymentMethodType?: string | null;
+  statusMessage?: string | null;
+  error?: string;
+};
 
 function PedidoConfirmado() {
   const {
     id,
     modo,
-  } = Route.useSearch();
+  } =
+    Route.useSearch();
 
   const isDirect =
-    modo === "directo";
+    modo ===
+    "directo";
 
   const {
     clear,
-  } = useCart();
+  } =
+    useCart();
 
   const cleared =
     useRef(false);
@@ -136,71 +139,125 @@ function PedidoConfirmado() {
     let active =
       true;
 
+    let timer:
+      ReturnType<
+        typeof setTimeout
+      > | null =
+      null;
+
+    let attempts =
+      0;
+
+    const maxAttempts =
+      15;
+
     async function verify() {
+      attempts +=
+        1;
+
       try {
         const response =
           await fetch(
-            `${WOMPI_API_BASE}/transactions/${encodeURIComponent(id)}`,
+            `/api/wompi-status?id=${encodeURIComponent(
+              id,
+            )}`,
+            {
+              method:
+                "GET",
+
+              headers: {
+                Accept:
+                  "application/json",
+              },
+
+              cache:
+                "no-store",
+            },
           );
+
+        const data =
+          (await response.json()) as StatusResponse;
 
         if (
           !response.ok
         ) {
           throw new Error(
-            "Wompi no encontró la transacción.",
+            data.error ??
+              "No pudimos consultar la transacción.",
           );
         }
 
-        const data =
-          (await response.json()) as {
-            data?: {
-              status?: string;
-              reference?: string;
-            };
-          };
-
-        if (
-          !active
-        ) {
+        if (!active) {
           return;
         }
 
-        const status =
-          data.data
-            ?.status;
-
         setReference(
-          data.data
-            ?.reference ??
+          data.reference ??
             null,
+        );
+
+        const status =
+          data.status;
+
+        if (!status) {
+          throw new Error(
+            "Estado de pago inválido.",
+          );
+        }
+
+        setState(
+          status,
         );
 
         if (
           status ===
-            "APPROVED" ||
-          status ===
-            "PENDING" ||
-          status ===
-            "DECLINED" ||
-          status ===
-            "VOIDED" ||
-          status ===
-            "ERROR"
+            "APPROVED" &&
+          !isDirect &&
+          !cleared.current
         ) {
-          setState(
-            status,
-          );
+          clear();
 
-          if (
-            status ===
-              "APPROVED" &&
-            !isDirect &&
-            !cleared.current
-          ) {
-            clear();
-            cleared.current =
-              true;
-          }
+          cleared.current =
+            true;
+        }
+
+        /*
+         * Algunos medios como
+         * PSE pueden permanecer
+         * PENDING algunos
+         * segundos.
+         */
+        if (
+          status ===
+            "PENDING" &&
+          attempts <
+            maxAttempts &&
+          active
+        ) {
+          timer =
+            setTimeout(
+              () => {
+                void verify();
+              },
+              4000,
+            );
+        }
+      } catch {
+        if (!active) {
+          return;
+        }
+
+        if (
+          attempts <
+          maxAttempts
+        ) {
+          timer =
+            setTimeout(
+              () => {
+                void verify();
+              },
+              4000,
+            );
 
           return;
         }
@@ -208,14 +265,6 @@ function PedidoConfirmado() {
         setState(
           "fetch-error",
         );
-      } catch {
-        if (
-          active
-        ) {
-          setState(
-            "fetch-error",
-          );
-        }
       }
     }
 
@@ -224,6 +273,12 @@ function PedidoConfirmado() {
     return () => {
       active =
         false;
+
+      if (timer) {
+        clearTimeout(
+          timer,
+        );
+      }
     };
   }, [
     clear,
@@ -239,12 +294,16 @@ function PedidoConfirmado() {
       <StatusLayout>
         <motion.div
           animate={{
-            rotate: 360,
+            rotate:
+              360,
           }}
           transition={{
-            duration: 1,
+            duration:
+              1,
+
             repeat:
               Infinity,
+
             ease:
               "linear",
           }}
@@ -260,6 +319,14 @@ function PedidoConfirmado() {
         <h1 className="mt-3 font-display text-[clamp(50px,7vw,86px)] leading-[0.95] text-verde">
           Un momento…
         </h1>
+
+        <p className="body-text mt-5 max-w-[560px] text-verde/60">
+          Estamos consultando
+          directamente a Wompi
+          para confirmar el
+          estado de tu
+          transacción.
+        </p>
       </StatusLayout>
     );
   }
@@ -274,20 +341,24 @@ function PedidoConfirmado() {
           initial={{
             scale:
               0.45,
+
             rotate:
               -12,
           }}
           animate={{
             scale:
               1,
+
             rotate:
               0,
           }}
           transition={{
             type:
               "spring",
+
             stiffness:
               240,
+
             damping:
               16,
           }}
@@ -301,7 +372,8 @@ function PedidoConfirmado() {
         </p>
 
         <h1 className="mt-3 max-w-[800px] font-display text-[clamp(50px,7vw,88px)] leading-[0.94] tracking-[-0.045em] text-verde">
-          ¡Gracias por tu compra!
+          ¡Gracias por tu
+          compra!
         </h1>
 
         <p className="body-text mt-6 max-w-[600px] text-verde/68">
@@ -312,7 +384,7 @@ function PedidoConfirmado() {
         </p>
 
         {reference && (
-          <p className="mt-5 text-[12px] uppercase tracking-[0.14em] text-verde/45">
+          <p className="mt-5 break-all text-[12px] uppercase tracking-[0.14em] text-verde/45">
             Referencia:{" "}
             {reference}
           </p>
@@ -323,6 +395,7 @@ function PedidoConfirmado() {
           className="btn-primary mt-9"
         >
           <ShoppingBag className="mr-2 size-4" />
+
           Seguir explorando
         </Link>
       </StatusLayout>
@@ -349,16 +422,17 @@ function PedidoConfirmado() {
         </h1>
 
         <p className="body-text mt-6 max-w-[580px] text-verde/68">
-          Algunos medios de pago
-          (como PSE) tardan unos
-          minutos en confirmarse.
-          Te notificaremos cuando
-          Wompi confirme la
-          transacción.
+          Algunos medios de
+          pago, como PSE,
+          pueden tardar unos
+          minutos en
+          confirmarse. Estamos
+          consultando el estado
+          automáticamente.
         </p>
 
         {reference && (
-          <p className="mt-5 text-[12px] uppercase tracking-[0.14em] text-verde/45">
+          <p className="mt-5 break-all text-[12px] uppercase tracking-[0.14em] text-verde/45">
             Referencia:{" "}
             {reference}
           </p>
@@ -392,8 +466,14 @@ function PedidoConfirmado() {
       <p className="body-text mt-6 max-w-[580px] text-verde/68">
         {state ===
         "DECLINED"
-          ? "Wompi rechazó la transacción. Tu carrito sigue intacto, puedes intentarlo de nuevo."
-          : "Tu carrito sigue intacto. Puedes volver y comprobar el pedido antes de intentarlo nuevamente."}
+          ? "Wompi rechazó la transacción. Tu carrito sigue intacto y puedes intentarlo nuevamente."
+          : state ===
+              "VOIDED"
+            ? "La transacción fue anulada. Tu carrito sigue intacto."
+            : state ===
+                "ERROR"
+              ? "Wompi reportó un error procesando la transacción. Tu carrito sigue intacto."
+              : "No pudimos verificar el estado definitivo del pago. Tu carrito sigue intacto."}
       </p>
 
       <Link
@@ -413,16 +493,25 @@ function StatusLayout({
     React.ReactNode;
 }) {
   return (
-    <section className="relative flex min-h-[70vh] items-center overflow-hidden bg-crema px-6 py-20 md:px-[120px]">
-
+    <section className="page-gutter relative flex min-h-[70vh] items-center overflow-hidden bg-crema py-16 md:py-20 lg:py-[100px]">
       <motion.div
         initial={{
-          opacity: 0,
-          y: 24,
+          opacity:
+            0,
+
+          y:
+            24,
         }}
         animate={{
-          opacity: 1,
-          y: 0,
+          opacity:
+            1,
+
+          y:
+            0,
+        }}
+        transition={{
+          duration:
+            0.5,
         }}
         className="relative mx-auto w-full max-w-[1100px]"
       >

@@ -38,24 +38,15 @@ async function createWompiCheckout(
   request: Request,
 ): Promise<Response> {
   try {
-    /*
-     * Llave pública de Wompi.
-     *
-     * Modo pruebas (Sandbox):
-     * pub_test_*
-     *
-     * Cuando Wompi apruebe la
-     * cuenta, basta reemplazar
-     * el valor de WOMPI_PUBLIC_KEY
-     * por la llave pub_prod_*
-     * (o editar el fallback aquí).
-     * Nada más cambia.
-     */
-    const publicKey =
-      process.env[
-        "WOMPI_PUBLIC_KEY"
-      ]?.trim() ??
-      "pub_test_5DJjXHhA7bZzAEuymUyQIr3986NFJpTX";
+    const config =
+      getWompiCheckoutConfig();
+
+    if (!config.ok) {
+      return jsonError(
+        config.error,
+        503,
+      );
+    }
 
     let body:
       CheckoutRequest;
@@ -74,8 +65,7 @@ async function createWompiCheckout(
       !Array.isArray(
         body.items,
       ) ||
-      body.items.length ===
-        0
+      body.items.length === 0
     ) {
       return jsonError(
         "El carrito está vacío.",
@@ -84,8 +74,7 @@ async function createWompiCheckout(
     }
 
     if (
-      body.items.length >
-      30
+      body.items.length > 30
     ) {
       return jsonError(
         "Demasiados productos en el carrito.",
@@ -104,7 +93,8 @@ async function createWompiCheckout(
       >();
 
     for (
-      const raw of body.items as CheckoutItem[]
+      const raw of
+        body.items as CheckoutItem[]
     ) {
       if (
         typeof raw.slug !==
@@ -142,7 +132,9 @@ async function createWompiCheckout(
       }
 
       const product =
-        getProduct(slug);
+        getProduct(
+          slug,
+        );
 
       if (!product) {
         return jsonError(
@@ -151,7 +143,9 @@ async function createWompiCheckout(
         );
       }
 
-      if (!product.available) {
+      if (
+        !product.available
+      ) {
         return jsonError(
           `${product.name} no está disponible por ahora.`,
           409,
@@ -192,7 +186,9 @@ async function createWompiCheckout(
         (previous?.qty ??
           0) + qty;
 
-      if (nextQty > 10) {
+      if (
+        nextQty > 10
+      ) {
         return jsonError(
           `Máximo 10 unidades de ${product.name}.`,
           400,
@@ -204,25 +200,26 @@ async function createWompiCheckout(
         {
           slug,
           size,
-          qty: nextQty,
+          qty:
+            nextQty,
         },
       );
     }
 
     /*
-     * Autoridad de precios:
-     * el total se calcula aquí,
-     * en el servidor, desde el
-     * catálogo oficial. El
-     * cliente jamás envía
-     * precios.
+     * El servidor es la única
+     * autoridad sobre precios.
      */
-    let totalCop = 0;
+    let totalCop =
+      0;
 
-    const summary: string[] =
-      [];
+    const summary:
+      string[] = [];
 
-    for (const item of merged.values()) {
+    for (
+      const item of
+        merged.values()
+    ) {
       const product =
         getProduct(
           item.slug,
@@ -235,7 +232,8 @@ async function createWompiCheckout(
       }
 
       totalCop +=
-        product.priceAmountCop *
+        product
+          .priceAmountCop *
         item.qty;
 
       summary.push(
@@ -243,19 +241,78 @@ async function createWompiCheckout(
       );
     }
 
+    if (
+      totalCop <= 0 ||
+      !Number.isSafeInteger(
+        totalCop,
+      )
+    ) {
+      return jsonError(
+        "El total del pedido no es válido.",
+        409,
+      );
+    }
+
     /*
-     * Wompi espera el monto en
-     * centavos: $45.000 COP ->
-     * 4.500.000.
+     * Wompi usa centavos.
+     *
+     * $38.000 COP
+     * =
+     * 3.800.000 centavos
      */
     const amountInCents =
       totalCop * 100;
 
+    if (
+      !Number.isSafeInteger(
+        amountInCents,
+      )
+    ) {
+      return jsonError(
+        "El total del pedido excede el límite permitido.",
+        400,
+      );
+    }
+
+    /*
+     * Referencia única.
+     */
+    const randomPart =
+      crypto
+        .randomUUID()
+        .replace(
+          /-/g,
+          "",
+        )
+        .slice(
+          0,
+          12,
+        )
+        .toUpperCase();
+
     const reference =
-      `DALI-${Date.now().toString(36).toUpperCase()}-${Math.random()
+      `DALI-${Date.now()
         .toString(36)
-        .slice(2, 8)
-        .toUpperCase()}`;
+        .toUpperCase()}-${randomPart}`;
+
+    const currency =
+      "COP";
+
+    /*
+     * Firma oficial de integridad:
+     *
+     * reference
+     * + amountInCents
+     * + currency
+     * + integritySecret
+     */
+    const integrityString =
+      `${reference}${amountInCents}${currency}${config.integritySecret}`;
+
+    const integritySignature =
+      await sha256Hex(
+        integrityString,
+      );
 
     const requestOrigin =
       new URL(
@@ -268,36 +325,88 @@ async function createWompiCheckout(
       ]?.trim();
 
     const appUrl =
-      configuredUrl
-        ? configuredUrl.replace(
-            /\/+$/,
-            "",
-          )
-        : requestOrigin;
+      normalizeAppUrl(
+        configuredUrl ??
+          requestOrigin,
+      );
 
-    const confirmationPath =
+    if (!appUrl) {
+      return jsonError(
+        "APP_PUBLIC_URL no es válida.",
+        503,
+      );
+    }
+
+    const redirect =
+      new URL(
+        "/pedido-confirmado",
+        appUrl,
+      );
+
+    if (
       body.direct === true
-        ? "/pedido-confirmado?modo=directo"
-        : "/pedido-confirmado";
+    ) {
+      redirect.searchParams.set(
+        "modo",
+        "directo",
+      );
+    }
+
+    /*
+     * Wompi rechaza redirectUrl
+     * con localhost/http.
+     * En dev local, omitimos.
+     */
+    const isLocalhost =
+      appUrl.includes(
+        "localhost",
+      ) ||
+      appUrl.includes(
+        "127.0.0.1",
+      );
 
     return Response.json(
       {
-        publicKey,
+        publicKey:
+          config.publicKey,
+
         reference,
+
         amountInCents,
-        currency: "COP",
+
+        currency,
+
         description:
           summary
             .join(", ")
-            .slice(0, 240),
+            .slice(
+              0,
+              240,
+            ),
+
+        integritySignature,
+
         redirectUrl:
-          `${appUrl}${confirmationPath}`,
+          isLocalhost
+            ? undefined
+            : redirect.toString(),
+
+        environment:
+          config.environment,
+      },
+      {
+        headers: {
+          "Cache-Control":
+            "no-store",
+        },
       },
     );
   } catch (error) {
     console.error(
       "[Wompi Checkout]",
-      error,
+      error instanceof Error
+        ? error.message
+        : "Unknown error",
     );
 
     return jsonError(
@@ -305,6 +414,144 @@ async function createWompiCheckout(
       500,
     );
   }
+}
+
+function getWompiCheckoutConfig():
+  | {
+      ok: true;
+      publicKey: string;
+      integritySecret: string;
+      environment:
+        | "sandbox"
+        | "production";
+    }
+  | {
+      ok: false;
+      error: string;
+    } {
+  const environment =
+    process.env[
+      "WOMPI_ENV"
+    ]?.trim() ===
+    "production"
+      ? "production"
+      : "sandbox";
+
+  const publicKey =
+    process.env[
+      "WOMPI_PUBLIC_KEY"
+    ]?.trim();
+
+  const integritySecret =
+    process.env[
+      "WOMPI_INTEGRITY_SECRET"
+    ]?.trim();
+
+  if (
+    !publicKey ||
+    !integritySecret
+  ) {
+    return {
+      ok: false,
+
+      error:
+        "Wompi no está configurado correctamente.",
+    };
+  }
+
+  if (
+    environment ===
+      "sandbox" &&
+    !publicKey.startsWith(
+      "pub_test_",
+    )
+  ) {
+    return {
+      ok: false,
+
+      error:
+        "La llave pública de Wompi no corresponde al ambiente Sandbox.",
+    };
+  }
+
+  if (
+    environment ===
+      "production" &&
+    !publicKey.startsWith(
+      "pub_prod_",
+    )
+  ) {
+    return {
+      ok: false,
+
+      error:
+        "La llave pública de Wompi no corresponde al ambiente de producción.",
+    };
+  }
+
+  return {
+    ok: true,
+    publicKey,
+    integritySecret,
+    environment,
+  };
+}
+
+function normalizeAppUrl(
+  value: string,
+): string | null {
+  try {
+    const url =
+      new URL(value);
+
+    if (
+      url.protocol !==
+        "http:" &&
+      url.protocol !==
+        "https:"
+    ) {
+      return null;
+    }
+
+    return url
+      .toString()
+      .replace(
+        /\/+$/,
+        "",
+      );
+  } catch {
+    return null;
+  }
+}
+
+async function sha256Hex(
+  value: string,
+): Promise<string> {
+  const encoded =
+    new TextEncoder().encode(
+      value,
+    );
+
+  const digest =
+    await crypto.subtle.digest(
+      "SHA-256",
+      encoded,
+    );
+
+  return Array.from(
+    new Uint8Array(
+      digest,
+    ),
+  )
+    .map((byte) =>
+      byte
+        .toString(16)
+        .padStart(
+          2,
+          "0",
+        ),
+    )
+    .join("");
 }
 
 function jsonError(
@@ -318,6 +565,11 @@ function jsonError(
     },
     {
       status,
+
+      headers: {
+        "Cache-Control":
+          "no-store",
+      },
     },
   );
 }

@@ -1,6 +1,7 @@
 import {
   createFileRoute,
   Link,
+  useNavigate,
 } from "@tanstack/react-router";
 
 import {
@@ -95,6 +96,9 @@ export const Route =
   });
 
 function Checkout() {
+  const navigate =
+    useNavigate();
+
   const {
     items: cartItems,
     subtotalCop: cartSubtotalCop,
@@ -262,7 +266,8 @@ function Checkout() {
           reference?: string;
           amountInCents?: number;
           currency?: string;
-          redirectUrl?: string;
+          redirectUrl?: string | null;
+          integritySignature?: string;
           error?: string;
         };
 
@@ -279,7 +284,7 @@ function Checkout() {
         !data.publicKey ||
         !data.reference ||
         !data.amountInCents ||
-        !data.redirectUrl
+        !data.integritySignature
       ) {
         throw new Error(
           "Wompi no devolvió los datos del pago.",
@@ -289,43 +294,84 @@ function Checkout() {
       const WidgetCheckout =
         await loadWompiWidget();
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const widgetConfig: any = {
+        currency:
+          data.currency ??
+          "COP",
+
+        amountInCents:
+          data.amountInCents,
+
+        reference:
+          data.reference,
+
+        publicKey:
+          data.publicKey,
+
+        signature: {
+          integrity:
+            data.integritySignature,
+        },
+      };
+
+      if (
+        data.redirectUrl
+      ) {
+        widgetConfig.redirectUrl =
+          data.redirectUrl;
+      }
+
       const checkout =
         new WidgetCheckout(
-          {
-            currency:
-              data.currency ??
-              "COP",
-
-            amountInCents:
-              data.amountInCents,
-
-            reference:
-              data.reference,
-
-            publicKey:
-              data.publicKey,
-
-            redirectUrl:
-              data.redirectUrl,
-          },
+          widgetConfig,
         );
 
       checkout.open(
         (result: unknown) => {
-          /*
-           * Wompi redirige a
-           * /pedido-confirmado?id=...
-           * al cerrar el widget.
-           * Si el usuario cierra
-           * sin pagar, simplemente
-           * habilitamos el botón
-           * de nuevo.
-           */
-          setLoading(
-            false,
-          );
+          setLoading(false);
 
-          void result;
+          /*
+           * Si no hay redirectUrl,
+           * navegamos localmente
+           * usando transaction.id
+           * del callback.
+           */
+          if (
+            !data.redirectUrl &&
+            result &&
+            typeof result ===
+              "object"
+          ) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const transaction = (result as any)
+              .transaction;
+
+            const transactionId =
+              typeof transaction
+                ?.id === "string"
+                ? transaction.id
+                : undefined;
+
+            if (
+              transactionId
+            ) {
+              void navigate({
+                to: "/pedido-confirmado",
+                search: {
+                  id:
+                    transactionId,
+
+                  modo:
+                    isDirect
+                      ? "directo"
+                      : undefined,
+                },
+              });
+
+              return;
+            }
+          }
         },
       );
 
@@ -626,7 +672,7 @@ type WompiWidgetConstructor =
     amountInCents: number;
     reference: string;
     publicKey: string;
-    redirectUrl: string;
+    redirectUrl?: string;
     signature?: {
       integrity: string;
     };
